@@ -1,0 +1,26 @@
+[{
+    "_id": {
+      "$oid": "588935f57546a2daea44de7c"
+    },
+    "name": "pop",
+    "enabled": true,
+    "nouns": [{
+        "word": "here",
+        "forms": ["there"]
+      }
+    ],
+    "verbs": [],
+    "adjectives": [],
+    "misc": []
+  },
+  {
+    "_id": {
+      "$oid": "588935f57546a2daea44de7c"
+    },
+    "enabled": true,
+    "nouns": [],
+    "verbs": [],
+    "adjectives": [],
+    "misc": []
+  }
+]
