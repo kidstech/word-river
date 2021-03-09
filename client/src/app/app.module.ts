@@ -32,6 +32,12 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { UserCardComponent } from './users/user-card.component';
 import { UserProfileComponent } from './users/user-profile.component';
 import { AddUserComponent } from './users/add-user.component';
+import { AddWordlistComponent } from './wordlists/add-wordlist/add-wordlist.component';
+import { DisplayWordlistComponent } from './wordlists/display-wordlist/display-wordlist.component';
+import { ImportWordlistComponent } from './wordlists/import-wordlist/import-wordlist.component';
+import { WordCardComponent } from './words/word-card/word-card.component';
+import { EditWordComponent } from './words/edit-word/edit-word.component';
+import { AddWordComponent } from './words/add-word/add-word.component';
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -60,6 +66,12 @@ const MATERIAL_MODULES: any[] = [
     UserCardComponent,
     UserProfileComponent,
     AddUserComponent,
+    AddWordlistComponent,
+    DisplayWordlistComponent,
+    ImportWordlistComponent,
+    WordCardComponent,
+    EditWordComponent,
+    AddWordComponent,
   ],
   imports: [
     BrowserModule,

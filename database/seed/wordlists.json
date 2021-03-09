@@ -1,0 +1,22 @@
+[
+  {
+    "name": "pop",
+    "enabled": true,
+    "nouns": [{
+        "word": "here",
+        "forms": ["there"]
+      }
+    ],
+    "verbs": [],
+    "adjectives": [],
+    "misc": []
+  },
+  {
+    "name": "snap",
+    "enabled": true,
+    "nouns": [],
+    "verbs": [],
+    "adjectives": [],
+    "misc": []
+  }
+]
