@@ -12,6 +12,7 @@ import io.javalin.Javalin;
 import io.javalin.core.util.RouteOverviewPlugin;
 
 import umm3601.user.UserController;
+import umm3601.wordlists.WordListController;
 
 public class Server {
 
@@ -36,6 +37,8 @@ public class Server {
 
     // Initialize dependencies
     UserController userController = new UserController(database);
+    WordListController wordListController = new WordListController(database);
+
 
     Javalin server = Javalin.create(config -> {
       config.registerPlugin(new RouteOverviewPlugin("/api"));
@@ -60,15 +63,31 @@ public class Server {
     // List users, filtered using query parameters
     server.get("/api/users", userController::getUsers);
 
+
     // Get the specified user
     server.get("/api/users/:id", userController::getUser);
+
+    // Get the specified wordlist
+    server.get("/api/wordlists/:name", userController::getUser);
 
     // Delete the specified user
     server.delete("/api/users/:id", userController::deleteUser);
 
     // Add new user with the user info being in the JSON body
     // of the HTTP request
-    server.post("/api/users", userController::addNewUser);
+    server.post("/api/user", userController::addNewUser);
+
+    // Fetch wordlists
+    server.get("/api/wordlists/:listId/words/:wordId", wordListController::getWordLists);
+
+    // Delete the specified wordlist
+    server.delete("/api/wordlists/:name", wordListController::deleteWordList);
+
+    // Add new wordlist
+    server.post("/api/wordlists", wordListController::addWordList);
+
+    // Edit new wordlist
+    server.put("/api/wordlists/:name", wordListController::editWordList);
 
     server.exception(Exception.class, (e, ctx) -> {
       ctx.status(500);
