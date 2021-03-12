@@ -7,6 +7,7 @@ import { UserProfileComponent } from './users/user-profile.component';
 import { AddUserComponent } from './users/add-user.component';
 import { ViewWordlistComponent } from './wordlists/view-wordlist/view-wordlist.component';
 import { EditWordComponent } from './words/edit-word/edit-word.component';
+import { AddWordlistComponent } from './wordlists/add-wordlist/add-wordlist.component';
 
 
 const routes: Routes = [
@@ -14,8 +15,10 @@ const routes: Routes = [
   {path: 'users', component: UserListComponent},
   {path: 'users/new', component: AddUserComponent},
   {path: 'users/:id', component: UserProfileComponent},
+  {path: 'word/:name', component: EditWordComponent},
+  {path: 'wordlist/new', component: AddWordlistComponent},
   {path: 'wordlist/:name', component: ViewWordlistComponent},
-  {path: 'word/:name', component: EditWordComponent}
+
 ];
 
 @NgModule({

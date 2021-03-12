@@ -1,1 +1,27 @@
-<p>add-wordlist works!</p>
+<div>
+
+
+
+  <div class="content">
+    <div class="left">
+      <mat-card style="margin-bottom: 20px;">
+        <div class="top">
+          <div class="title-container">
+            <mat-form-field class="new-word">
+              <mat-label>Enter Wordlist Name</mat-label>
+              <input matInput data-test="newWord" placeholder="Name">
+            </mat-form-field>
+            <mat-checkbox class="enabled" [checked]="true" (change)="enable($event.checked)">Enabled</mat-checkbox>
+          </div>
+        </div>
+      </mat-card>
+      <app-add-word></app-add-word>
+      <br>
+      <button mat-raised-button class="export" style="padding:20px;" color="primary">Save wordlist</button>
+    </div>
+    <div class="right">
+      <h3 *ngIf="words.length === 0">Nothing added here yet.</h3>
+      <app-word-card *ngFor="let word of words"></app-word-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+.content {
+  display: flex;
+}
+
+.left {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 24px;
+}
+
+.right {
+  flex: 1;
+}
+.top{
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+}
+.title-container{
+  flex: 1;
+}
+.enabled{
+  margin-left: 20px;
+}
+.title-container{
+  display: flex;
+  align-items: center;
+}
+.title{
+  margin: 0px;
+}
