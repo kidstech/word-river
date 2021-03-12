@@ -1,0 +1,40 @@
+.content {
+  display: flex;
+}
+
+.left {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 24px;
+}
+
+.right {
+  flex: 1;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+}
+
+.top>button {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.bottom {
+  flex: 1;
+}
+
+.bottom {
+  height: 300px;
+}
+.search{
+  width: 100%;
+}
+.search,.search-btn{
+  display: inline-block;
+}
+
