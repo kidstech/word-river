@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.ImmutableMap;
-
+import com.mongodb.MongoClientSettings;
+import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
 import org.bson.Document;
@@ -19,21 +22,51 @@ import org.mongojack.JacksonMongoCollection;
 import io.javalin.http.BadRequestResponse;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
+import umm3601.contextpacks.ContextPack;
+import umm3601.contextpacks.ContextPackController;
+
+import java.util.Arrays;
+
 
 /**
  * Controller that manages requests for info about word lists.
  */
 public class WordListController {
 
-  private final JacksonMongoCollection<WordList> wordListCollection;
+  private final JacksonMongoCollection<ContextPack> contextPackCollection;
 
+  String mongoAddr = System.getenv().getOrDefault("MONGO_ADDR", "localhost");
+  String databaseName = System.getenv().getOrDefault("MONGO_DB", "dev");
+  ContextPackController contextPackController;
+
+  ContextPack contextPack;
+
+  MongoClient mongoClient
+  = MongoClients.create(MongoClientSettings
+    .builder()
+    .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress(mongoAddr))))
+    .build());
   /**
    * Construct a controller for word lists.
    *
    * @param database the database containing word list data
    */
-  public WordListController(MongoDatabase database) {
-    wordListCollection = JacksonMongoCollection.builder().build(database, "wordlists", WordList.class);
+  public WordListController() {
+
+
+
+    // Setup the MongoDB client object with the information we set earlier
+
+
+    //  GET /api/contextpacks/:cpname/wordlists/:wlname
+
+    // Get the database
+    MongoDatabase database = mongoClient.getDatabase(databaseName);
+
+    contextPackController = new ContextPackController(database);
+    contextPack = contextPackController.getContextPack("the father");
+  }
+  public WordListController(String contextPack){
   }
 
   /**
@@ -42,12 +75,10 @@ public class WordListController {
    * @param ctx a Javalin HTTP context
    */
   public void addWordList(Context ctx) {
-
     WordList newWordList = ctx.bodyValidator(WordList.class).get();
 
-    wordListCollection.insertOne(newWordList);
-    ctx.status(201);
-    ctx.json(ImmutableMap.of("name", newWordList.name));
+    contextPack.setName(name);
+    contextPack.updatePack(contextPack)
   }
 
   /**

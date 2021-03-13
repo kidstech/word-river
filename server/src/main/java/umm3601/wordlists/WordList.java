@@ -3,10 +3,10 @@ package umm3601.wordlists;
 
 public class WordList {
 
-  String name;
-  boolean enabled;
-  Word[] nouns;
-  Word[] verbs;
-  Word[] adjectives;
-  Word[] misc;
+  public String name;
+  public boolean enabled;
+  public Word[] nouns;
+  public Word[] verbs;
+  public Word[] adjectives;
+  public Word[] misc;
 }
