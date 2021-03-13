@@ -1,1 +1,16 @@
-<p>import-wordlist works!</p>
+<div class="container">
+  <mat-card class="import-wordlist-card">
+    <h1>Import a Wordlist</h1>
+    <input type="file" id="file" />
+    <label for="file" class="btn-2">Upload JSON</label>
+
+
+    <h3 class="success">Valid JSON file!</h3>
+    <h3 class="failure">Invalid JSON file!</h3>
+
+    <div class="btn-container">
+      <button mat-raised-button class="save-btn" color="primary">Import</button>
+      <button mat-raised-button class="cancel-btn" color="warn">Cancel</button>
+    </div>
+  </mat-card>
+</div>

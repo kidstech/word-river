@@ -12,4 +12,7 @@ export class ImportWordlistComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  importFile(file){
+
+  }
 }
