@@ -19,7 +19,7 @@ public class ContextPackController {
    * @param database the database containing ContextPack data
    */
   public ContextPackController(MongoDatabase database) {
-    ContextPackCollection = JacksonMongoCollection.builder().build(database, "contextpacks", ContextPack.class);
+    ContextPackCollection = JacksonMongoCollection.builder().build(database, "contextpacks", umm3601.contextpacks.ContextPack.class);
   }
 
   /**

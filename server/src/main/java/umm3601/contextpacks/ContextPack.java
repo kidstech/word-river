@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.google.common.collect.Lists;
 
 import org.mongojack.ObjectId;
@@ -18,7 +19,7 @@ public class ContextPack {
   @Id
   String id;
   String name;
-  String icon;
+  // String icon;
   boolean enabled;
   WordList[] wordlists;
 
