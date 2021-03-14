@@ -54,17 +54,10 @@ public class WordListController {
   public WordListController() {
 
 
-
-    // Setup the MongoDB client object with the information we set earlier
-
-
-    //  GET /api/contextpacks/:cpname/wordlists/:wlname
-
-    // Get the database
     MongoDatabase database = mongoClient.getDatabase(databaseName);
 
     contextPackController = new ContextPackController(database);
-    contextPack = contextPackController.getContextPack();
+    contextPack = contextPackController.getDefaultContextPack();
   }
   /**
    * add a new word list
@@ -75,7 +68,7 @@ public class WordListController {
     WordList newWordList = ctx.bodyValidator(WordList.class).get();
 
     contextPack.addWordList(newWordList);
-    // TODO: add update
+    update();
   }
 
   /**
@@ -99,8 +92,9 @@ public class WordListController {
    * Delete a specified word list by the `name` parameter in the request.
    */
   public void deleteWordList(Context ctx) {
-    String id = ctx.pathParam("id");
-    wordListCollection.deleteOne(eq("_id", new ObjectId(id)));
+    String name = ctx.pathParam("name");
+    contextPack.deleteWordList(name);
+    update();
   }
 
   /**
@@ -109,18 +103,19 @@ public class WordListController {
    * @param ctx a Javalin HTTP context
    */
   public void editWordList(Context ctx) {
-    // String name = ctx.pathParam("name");
-    // WordList newList = ctx.bodyValidator(WordList.class)
-    //   .check(list -> list.name.length() > 0) //Verify that the user has a name that is not blank
-    //   .get();
-    //   JSON jsonObject = new JSONObject(newList);
-    //   String inputJson = jsonObject.toString();
-    //   Document inpDoc = Document.parse(inputJson);
-    // wordListCollection.updateById(name,inpDoc);
-    //TODO: FINISH
+    String name = ctx.pathParam("name");
+    WordList newList = ctx.bodyValidator(WordList.class)
+      .check(list -> list.name.length() > 0) //Verify that the user has a name that is not blank
+      .get();
+    contextPack.editWordList(name, newList);
+    update();
   }
 
   public void getWordLists(Context ctx) {
     ctx.json(contextPack.getWordLists());
+  }
+
+  public void update(){
+    contextPackController.updateContextPack(contextPack);
   }
 }

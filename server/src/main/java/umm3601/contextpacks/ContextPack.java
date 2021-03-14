@@ -2,6 +2,7 @@ package umm3601.contextpacks;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Id;
 
@@ -9,6 +10,7 @@ import com.google.common.collect.Lists;
 
 import org.mongojack.ObjectId;
 
+import io.javalin.http.NotFoundResponse;
 import umm3601.wordlists.WordList;
 
 public class ContextPack {
@@ -32,8 +34,10 @@ public class ContextPack {
 
   public void deleteWordList(String name) {
     List<WordList> temp = Arrays.asList(wordlists);
-    if (temp.stream().anyMatch(list->list.name.equals(name))
-      temp.remove(temp.indexOf(wordList));
+    WordList w = getWordListByName(name);
+
+    temp.remove(w);
+
     wordlists = (WordList[]) temp.toArray();
   }
 
@@ -43,16 +47,20 @@ public class ContextPack {
     temp.stream().filter(list -> list.name.equals(name)).findFirst().ifPresent(list -> {
       result[0] = list;
     });
-    if(result[0] == null) throw new NotFoundResponse("The requested word list was not found");
-    else return result[0];
+    if (result[0] == null)
+      throw new NotFoundResponse("The requested word list was not found");
+    else
+      return result[0];
   }
-  public void editWordList(String name,WordList wordList) {
+
+  public void editWordList(String name, WordList wordList) {
     List<WordList> temp = Arrays.asList(wordlists);
     WordList original = getWordListByName(name);
     if (temp.contains(original))
-      temp.set(temp.indexOf(original),wordList);
+      temp.set(temp.indexOf(original), wordList);
     wordlists = (WordList[]) temp.toArray();
   }
+
   public WordList[] getWordLists() {
     return wordlists;
   }
