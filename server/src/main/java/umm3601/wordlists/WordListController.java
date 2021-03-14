@@ -33,7 +33,7 @@ import java.util.Arrays;
  */
 public class WordListController {
 
-  private final JacksonMongoCollection<ContextPack> contextPackCollection;
+  // private final JacksonMongoCollection<ContextPack> contextPackCollection;
 
   String mongoAddr = System.getenv().getOrDefault("MONGO_ADDR", "localhost");
   String databaseName = System.getenv().getOrDefault("MONGO_DB", "dev");
@@ -64,11 +64,8 @@ public class WordListController {
     MongoDatabase database = mongoClient.getDatabase(databaseName);
 
     contextPackController = new ContextPackController(database);
-    contextPack = contextPackController.getContextPack("the father");
+    contextPack = contextPackController.getContextPack();
   }
-  public WordListController(String contextPack){
-  }
-
   /**
    * add a new word list
    *
@@ -77,8 +74,7 @@ public class WordListController {
   public void addWordList(Context ctx) {
     WordList newWordList = ctx.bodyValidator(WordList.class).get();
 
-    contextPack.setName(name);
-    contextPack.updatePack(contextPack)
+    contextPack.addWordList(newWordList);
   }
 
   /**

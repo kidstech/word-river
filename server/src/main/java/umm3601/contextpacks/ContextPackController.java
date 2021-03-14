@@ -41,11 +41,9 @@ public class ContextPackController {
    *
    * @param ctx a Javalin HTTP context
    */
-  public void getContextPack(Context ctx) {
-    String id = ctx.pathParam("id");
+  public ContextPack getContextPack() {
+    String id = "604c11a46f45325d0d1f34fb";
     ContextPack ContextPack;
-
-    if (id == null) id = "SOME ID"; //TODO: Change this later.
 
     try {
       ContextPack = ContextPackCollection.find(eq("_id", new ObjectId(id))).first();
@@ -55,7 +53,7 @@ public class ContextPackController {
     if (ContextPack == null) {
       throw new NotFoundResponse("The requested ContextPack was not found");
     } else {
-      ctx.json(ContextPack);
+      return ContextPack;
     }
   }
 
