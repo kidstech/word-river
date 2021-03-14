@@ -38,6 +38,7 @@ import { ImportWordlistComponent } from './wordlists/import-wordlist/import-word
 import { WordCardComponent } from './words/word-card/word-card.component';
 import { EditWordComponent } from './words/edit-word/edit-word.component';
 import { AddWordComponent } from './words/add-word/add-word.component';
+import { WordListService } from './services/wordlist.service';
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -85,7 +86,8 @@ const MATERIAL_MODULES: any[] = [
     LayoutModule,
   ],
   providers: [
-    UserService
+    UserService,
+    WordListService,
   ],
   bootstrap: [AppComponent]
 })
