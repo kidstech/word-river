@@ -75,6 +75,7 @@ public class WordListController {
     WordList newWordList = ctx.bodyValidator(WordList.class).get();
 
     contextPack.addWordList(newWordList);
+    // TODO: add update
   }
 
   /**
@@ -87,15 +88,11 @@ public class WordListController {
     WordList wordList;
 
     try {
-      wordList = wordListCollection.find(eq("name", name)).first();
-    } catch (IllegalArgumentException e) {
+      wordList = contextPack.getWordListByName(name);
+    } catch (Exception e) {
       throw new BadRequestResponse("The requested word list name wasn't a legal name.");
     }
-    if (wordList == null) {
-      throw new NotFoundResponse("The requested word list was not found");
-    } else {
-      ctx.json(wordList);
-    }
+    ctx.json(wordList);
   }
 
   /**
@@ -124,7 +121,6 @@ public class WordListController {
   }
 
   public void getWordLists(Context ctx) {
-
-    ctx.json(wordListCollection.find(new Document()).into(new ArrayList<>()));
+    ctx.json(contextPack.getWordLists());
   }
 }

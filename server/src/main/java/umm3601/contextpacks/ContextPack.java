@@ -9,7 +9,6 @@ import com.google.common.collect.Lists;
 
 import org.mongojack.ObjectId;
 
-import io.javalin.http.NotFoundResponse;
 import umm3601.wordlists.WordList;
 
 public class ContextPack {
@@ -31,9 +30,9 @@ public class ContextPack {
     wordlists = (WordList[]) temp.toArray();
   }
 
-  public void deleteWordList(WordList wordList) {
+  public void deleteWordList(String name) {
     List<WordList> temp = Arrays.asList(wordlists);
-    if (temp.contains(wordList))
+    if (temp.stream().anyMatch(list->list.name.equals(name))
       temp.remove(temp.indexOf(wordList));
     wordlists = (WordList[]) temp.toArray();
   }
@@ -44,7 +43,7 @@ public class ContextPack {
     temp.stream().filter(list -> list.name.equals(name)).findFirst().ifPresent(list -> {
       result[0] = list;
     });
-    if(result[0] == null) throw new NotFoundResponse("The given wordlist was not found.");
+    if(result[0] == null) throw new NotFoundResponse("The requested word list was not found");
     else return result[0];
   }
   public void editWordList(String name,WordList wordList) {
