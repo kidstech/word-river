@@ -24,6 +24,7 @@ import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
 import umm3601.contextpacks.ContextPack;
 import umm3601.contextpacks.ContextPackController;
+import umm3601.contextpacks.ContextPackUtils;
 
 import java.util.Arrays;
 
@@ -37,6 +38,7 @@ public class WordListController {
   String mongoAddr = System.getenv().getOrDefault("MONGO_ADDR", "localhost");
   String databaseName = System.getenv().getOrDefault("MONGO_DB", "dev");
   ContextPackController contextPackController;
+  ContextPackUtils utils;
 
   ContextPack contextPack;
 
@@ -54,6 +56,7 @@ public class WordListController {
 
     contextPackController = new ContextPackController(database);
     contextPack = contextPackController.getDefaultContextPack();
+    utils = new ContextPackUtils(contextPack);
   }
 
   /**
@@ -65,7 +68,7 @@ public class WordListController {
     WordList newWordList = ctx.bodyValidator(WordList.class).check(w -> w.name.length() > 0).get();
 
     try {
-      contextPack.addWordList(newWordList);
+      utils.addWordList(newWordList);
     } catch (Exception e) {
       throw new BadRequestResponse("The wordlist with that name already exists.");
     }
@@ -83,7 +86,7 @@ public class WordListController {
     WordList wordList;
 
     try {
-      wordList = contextPack.getWordListByName(name);
+      wordList = utils.getWordListByName(name);
     } catch (Exception e) {
       throw new BadRequestResponse("The requested word list name wasn't a legal name.");
     }
@@ -95,7 +98,7 @@ public class WordListController {
    */
   public void deleteWordList(Context ctx) {
     String name = ctx.pathParam("name");
-    contextPack.deleteWordList(name);
+    utils.deleteWordList(name);
     update();
     ctx.json(name);
   }
@@ -111,17 +114,17 @@ public class WordListController {
                                                                                                // has a name that is not
                                                                                                // blank
         .get();
-    contextPack.editWordList(name, newList);
+    utils.editWordList(name, newList);
     update();
 
     ctx.json(newList);
   }
 
   public void getWordLists(Context ctx) {
-    ctx.json(contextPack.getWordLists());
+    ctx.json(utils.getWordLists());
   }
 
   public void update() {
-    contextPackController.updateContextPack(contextPack);
+    contextPackController.updateContextPack(utils.getContextPack());
   }
 }
