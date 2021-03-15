@@ -1,5 +1,6 @@
 package umm3601.contextpacks;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.google.common.collect.Lists;
 
+import org.eclipse.jetty.util.ajax.JSONPojoConvertor;
 import org.mongojack.ObjectId;
 
 import io.javalin.http.NotFoundResponse;
@@ -17,11 +19,11 @@ import umm3601.wordlists.WordList;
 public class ContextPack {
   @ObjectId
   @Id
-  String id;
-  String name;
-  // String icon;
-  boolean enabled;
-  WordList[] wordlists;
+  public String id;
+  public String name;
+  public String icon;
+  public boolean enabled;
+  public WordList[] wordlists;
 
   public void setName(String name) {
     this.name = name;
@@ -35,9 +37,12 @@ public class ContextPack {
 
   public void deleteWordList(String name) {
     List<WordList> temp = Arrays.asList(wordlists);
-    WordList w = getWordListByName(name);
 
-    temp.remove(w);
+    System.out.println();
+
+    if (temp.stream().anyMatch(i -> i.name.equals(name)))
+      temp.removeIf(i -> i.name.equals(name));
+    else throw new NotFoundResponse("The requested word list was not found");
 
     wordlists = (WordList[]) temp.toArray();
   }

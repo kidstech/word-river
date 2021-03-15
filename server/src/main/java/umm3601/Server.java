@@ -60,25 +60,15 @@ public class Server {
 
     server.start(4567);
 
-    // List users, filtered using query parameters
-    server.get("/api/users", userController::getUsers);
 
 
-    // Get the specified user
-    server.get("/api/users/:id", userController::getUser);
 
     // Get the specified wordlist
-    server.get("/api/wordlists/:name", userController::getUser);
+    server.get("/api/wordlists/:name", wordListController::getWordListByName);
 
-    // Delete the specified user
-    server.delete("/api/users/:id", userController::deleteUser);
-
-    // Add new user with the user info being in the JSON body
-    // of the HTTP request
-    server.post("/api/user", userController::addNewUser);
 
     // Fetch wordlists
-    server.get("/api/wordlists/:listId/words/:wordId", wordListController::getWordLists);
+    server.get("/api/wordlists/", wordListController::getWordLists);
 
     // Delete the specified wordlist
     server.delete("/api/wordlists/:name", wordListController::deleteWordList);

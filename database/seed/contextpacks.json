@@ -3,7 +3,7 @@
   "icon": "birthday.png",
   "enabled": true,
 
-  "wordpacks": [{
+  "wordlists": [{
     "name": "birthday",
     "enabled": true,
 

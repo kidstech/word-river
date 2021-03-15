@@ -95,6 +95,7 @@ public class WordListController {
     String name = ctx.pathParam("name");
     contextPack.deleteWordList(name);
     update();
+    ctx.json(name);
   }
 
   /**
