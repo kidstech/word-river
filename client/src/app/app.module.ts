@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -39,6 +40,9 @@ import { WordCardComponent } from './words/word-card/word-card.component';
 import { EditWordComponent } from './words/edit-word/edit-word.component';
 import { AddWordComponent } from './words/add-word/add-word.component';
 import { WordListService } from './services/wordlist.service';
+import { ViewWordlistComponent } from './wordlists/view-wordlist/view-wordlist.component';
+import { WordlistCardComponent } from './wordlists/wordlist-card/wordlist-card.component';
+import { WordFormComponent } from './words/word-form/word-form.component';
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -56,6 +60,7 @@ const MATERIAL_MODULES: any[] = [
   MatFormFieldModule,
   MatDividerModule,
   MatRadioModule,
+  MatCheckboxModule,
   MatSnackBarModule
 ];
 
@@ -73,6 +78,9 @@ const MATERIAL_MODULES: any[] = [
     WordCardComponent,
     EditWordComponent,
     AddWordComponent,
+    ViewWordlistComponent,
+    WordlistCardComponent,
+    WordFormComponent,
   ],
   imports: [
     BrowserModule,

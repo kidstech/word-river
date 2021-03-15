@@ -1,4 +1,4 @@
-export interface Word {
-    name: string;
-    forms: string[];
-  }
+export class Word {
+  word: string;
+  forms: string[];
+}

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./display-wordlist.component.scss']
 })
 export class DisplayWordlistComponent implements OnInit {
-
+  title = 'Word Lists';
   constructor() { }
 
   ngOnInit(): void {

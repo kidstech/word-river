@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-word.component.scss']
 })
 export class EditWordComponent implements OnInit {
-
+  forms = [''];
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  add(val) { this.forms.push(val);}
 }

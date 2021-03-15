@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddWordComponent implements OnInit {
 
+  forms = [''];
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  add(val) { this.forms.push(val); }
 }

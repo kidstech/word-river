@@ -1,0 +1,35 @@
+<mat-card class="wordList-card">
+  <div>
+    <div class="card-header">
+      <h1 class="wordList-name">WordList X</h1>
+      <mat-icon matListIcon>done</mat-icon>
+    </div>
+  </div>
+  <mat-card-content>
+    <div class= "list-detail">
+        <div class="nounsList">
+            <!--display:flex-->
+            <p class="title-section" element="nouns">Nouns:</p>
+            <p *ngFor=""></p>
+          </div>
+          <div class="verbsList">
+            <!--display:flex-->
+            <p class="title-section" element="verbs">Verbs:</p>
+            <p *ngFor=""></p>
+          </div>
+          <div class="adjectivesList">
+            <!--display:flex-->
+            <p class="title-section" element="adjectives">Adjectives:</p>
+            <p *ngFor=""></p>
+          </div>
+          <div class="miscList">
+            <!--display:flex-->
+            <p class="title-section" element="misc">Misc:</p>
+            <p *ngFor=""></p>
+          </div>
+    </div>
+  </mat-card-content>
+  <div>
+    <button mat-button  routerLink="/wordlist/:name" class="btn">View WordList</button>
+  </div>
+</mat-card>

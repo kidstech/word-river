@@ -1,0 +1,19 @@
+<div>
+
+  <div class="top">
+    <div class="title-container">
+      <h1 class="title">Name of Word List</h1>
+      <mat-checkbox class="enabled" [checked]="true" (change)="enable($event.checked)">Enabled</mat-checkbox>
+    </div>
+    <button mat-raised-button class="export" color="primary">Export</button>
+  </div>
+
+  <div class="content">
+    <div class="left">
+      <app-add-word></app-add-word>
+    </div>
+    <div class="right">
+      <app-word-card *ngFor="let i of [1,2,3,4,5]"></app-word-card>
+    </div>
+  </div>
+</div>
