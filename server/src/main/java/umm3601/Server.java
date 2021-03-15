@@ -37,7 +37,7 @@ public class Server {
 
     // Initialize dependencies
     UserController userController = new UserController(database);
-    WordListController wordListController = new WordListController();
+    WordListController wordListController = new WordListController(database);
 
 
     Javalin server = Javalin.create(config -> {

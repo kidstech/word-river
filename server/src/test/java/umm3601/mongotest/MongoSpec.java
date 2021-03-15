@@ -3,9 +3,6 @@ package umm3601.mongotest;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.*;
-import com.mongodb.client.model.Accumulators;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Sorts;
 import org.bson.Document;
 
 import java.util.ArrayList;

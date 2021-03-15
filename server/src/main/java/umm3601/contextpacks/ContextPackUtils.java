@@ -1,5 +1,6 @@
 package umm3601.contextpacks;
 
+import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class ContextPackUtils {
   }
 
   public WordList getWordListByName(String name) {
+    if(name.length() == 0) throw new InvalidParameterException();
     List<WordList> temp = Arrays.asList(contextPack.wordlists);
     WordList[] result = new WordList[] { null };
     temp.stream().filter(list -> list.name.equals(name)).findFirst().ifPresent(list -> {
