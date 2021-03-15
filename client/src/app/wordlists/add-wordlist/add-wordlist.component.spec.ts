@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddWordlistComponent } from './add-wordlist.component';
+import { AddWordListComponent } from './add-wordlist.component';
 
-describe('AddWordlistComponent', () => {
-  let component: AddWordlistComponent;
-  let fixture: ComponentFixture<AddWordlistComponent>;
+describe('AddWordListComponent', () => {
+  let component: AddWordListComponent;
+  let fixture: ComponentFixture<AddWordListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddWordlistComponent ]
+      declarations: [ AddWordListComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddWordlistComponent);
+    fixture = TestBed.createComponent(AddWordListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
