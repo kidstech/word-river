@@ -36,15 +36,15 @@ public class ContextPack {
   }
 
   public void deleteWordList(String name) {
-    List<WordList> temp = Arrays.asList(wordlists);
+    WordList[] copy = new WordList[1];
 
-    System.out.println();
+    for (int i = 0, j = 0; i < wordlists.length; i++) {
+      if (i != 0) {
+        copy[j++] = wordlists[i];
+      }
+    }
 
-    if (temp.stream().anyMatch(i -> i.name.equals(name)))
-      temp.removeIf(i -> i.name.equals(name));
-    else throw new NotFoundResponse("The requested word list was not found");
-
-    wordlists = (WordList[]) temp.toArray();
+    wordlists = copy;
   }
 
   public WordList getWordListByName(String name) {
