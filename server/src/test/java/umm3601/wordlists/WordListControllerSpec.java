@@ -68,26 +68,9 @@ public class WordListControllerSpec {
     MongoCollection<Document> contextPacks = db.getCollection("contextpacks");
     contextPacks.drop();
 
-
-    Word[] verbs1 = new Word[]{new Word("Run", new String[]{"Ran", "Runs"}), new Word("Jump", new String[]{"Jumped", "Jumping"})};
-    Word[] nouns1 = new Word[]{new Word("Runner", new String[]{"Running", "Runners"}), new Word("Jumper", new String[]{"Jumping", "Jumpers"})};
-    Word[] adj1 = new Word[]{new Word("Pretty", new String[]{"Prettier", "Prettiest"}), new Word("Ugly", new String[]{"Uglier", "Ugliest"})};
-    Word[] misc1 = new Word[]{new Word("Quickly", new String[]{"Quicker", "Quickest"}), new Word("Under", new String[]{"Unders", "Undri"})};
-
-    WordList wordList1 = new WordList("list1",true,nouns1,verbs1,adj1,misc1);
-
-    Word[] verbs2 = new Word[]{new Word("Jog", new String[]{"jag", "jogs"}), new Word("slide", new String[]{"slid", "sliding"})};
-    Word[] nouns2 = new Word[]{new Word("bunny", new String[]{"bunnies", "bunny"}), new Word("Ton", new String[]{"Tons", "Toning"})};
-    Word[] adj2 = new Word[]{new Word("Swift", new String[]{"Swifting", "Swifter"}), new Word("Old", new String[]{"Older", "Oldest"})};
-    Word[] misc2 = new Word[]{new Word("Run", new String[]{"Ran", "Runs"}), new Word("Jump", new String[]{"Jumped", "Jumping"})};
-
-    WordList wordList2 = new WordList("list2",true,nouns2,verbs2,adj2,misc2);
-
-    Document t = Document.parse("{\r\n\"name\":\"Birthday Pack\",\r\n\"enabled\":true,\r\n\"icon\":\"testicon1\",\r\n\"wordlists\":[\r\n{\r\n\"name\":\"birthday\",\r\n\"enabled\":true,\r\n\"nouns\":[\r\n{\r\n\"word\":\"somestuff\",\r\n\"forms\":[\r\n\"cake\",\r\n\"cakes\"\r\n]\r\n}\r\n],\r\n\"verbs\":[\r\n{\r\n\"word\":\"blow\",\r\n\"forms\":[\r\n\"blow\",\r\n\"blows\",\r\n\"blew\",\r\n\"blown\",\r\n\"blowing\"\r\n]\r\n}\r\n],\r\n\"adjectives\":[\r\n{\r\n\"word\":\"fun\",\r\n\"forms\":[\r\n\"fun\"\r\n]\r\n}\r\n],\r\n\"misc\":[]\r\n}\r\n]\r\n}");
-    // t.put("name", "Basic Words I");
-    // t.put("enabled", true);
-    // t.put("icon", "testicon1");
-    // t.put("wordlists", Arrays.asList(wordList1,wordList2));
+    Document t = Document.parse("{\r\n\"name\":\"Birthday Pack\",\r\n\"enabled\":true,\r\n\"icon\":\"testicon1\",\r\n\"wordlists\":[\r\n{\r\n\"name\":\"birthday\",\r\n\"enabled\""
+    + ":true,\r\n\"nouns\":[\r\n{\r\n\"word\":\"somestuff\",\r\n\"forms\":[\r\n\"cake\",\r\n\"cakes\"\r\n]\r\n}\r\n],\r\n\"verbs\":[\r\n{\r\n\"word\":\"blow\",\r\n\"forms\":[\r\n\""
+    + "blow\",\r\n\"blows\",\r\n\"blew\",\r\n\"blown\",\r\n\"blowing\"\r\n]\r\n}\r\n],\r\n\"adjectives\":[\r\n{\r\n\"word\":\"fun\",\r\n\"forms\":[\r\n\"fun\"\r\n]\r\n}\r\n],\r\n\"misc\":[]\r\n}\r\n]\r\n}");
 
 
     contextPacks.insertOne(t);
@@ -154,6 +137,41 @@ public class WordListControllerSpec {
     String testNewUser = "{\n\"name\":\"birthday21\",\n\"enabled\":true,\n\"nouns\":[\n{\n\"word\":\"somestuff\",\n\"forms\":[\n\"cake\",\n\"cakes\"\n]\n}\n],\n\"verbs\":[\n{\n\"word\":\"blow\",\n\"forms\":[\n\"blow\",\n\"blows\",\n\"blew\",\n\"blown\",\n\"blowing\"\n]\n}\n],\n\"adjectives\":[\n{\n\"word\":\"fun\",\n\"forms\":[\n\"fun\"\n]\n}\n],\n\"misc\":[]\n}";
 
     mockReq.setBodyContent(testNewUser);
+    mockReq.setMethod("POST");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/wordlists");
+
+    wordListController.addWordList(ctx);
+
+    assertEquals(200, mockRes.getStatus());
+
+    String result = ctx.resultString();
+    WordList wordlist = jsonMapper.readValue(result, WordList.class);
+    assertNotNull(wordlist);
+    String name = wordlist.name;
+    assertNotEquals("", name);
+    System.out.println(name);
+
+    assertEquals(name,"birthday21");
+
+  }
+
+  @Test
+  public void AddWordListFailsIfAlreadyExists() throws IOException {
+
+    String testNewUser1 = "{\n\"name\":\"birthday21\",\n\"enabled\":true,\n\"nouns\":[\n{\n\"word\":\"somestuff\",\n\"forms\":[\n\"cake\",\n\"cakes\"\n]\n}\n],\n\"verbs\":[\n{\n\"word\":\"blow\",\n\"forms\":[\n\"blow\",\n\"blows\",\n\"blew\",\n\"blown\",\n\"blowing\"\n]\n}\n],\n\"adjectives\":[\n{\n\"word\":\"fun\",\n\"forms\":[\n\"fun\"\n]\n}\n],\n\"misc\":[]\n}";
+    String testNewUser2 = "{\n\"name\":\"birthday21\",\n\"enabled\":true,\n\"nouns\":[\n{\n\"word\":\"somestuff\",\n\"forms\":[\n\"cake\",\n\"cakes\"\n]\n}\n],\n\"verbs\":[\n{\n\"word\":\"blow\",\n\"forms\":[\n\"blow\",\n\"blows\",\n\"blew\",\n\"blown\",\n\"blowing\"\n]\n}\n],\n\"adjectives\":[\n{\n\"word\":\"fun\",\n\"forms\":[\n\"fun\"\n]\n}\n],\n\"misc\":[]\n}";
+
+    mockReq.setBodyContent(testNewUser1);
+    mockReq.setMethod("POST");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/wordlists");
+
+    wordListController.addWordList(ctx);
+
+    mockReq.resetAll();
+
+    mockReq.setBodyContent(testNewUser1);
     mockReq.setMethod("POST");
 
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/wordlists");

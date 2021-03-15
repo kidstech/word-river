@@ -1,19 +1,15 @@
 package umm3601.wordlists;
 
-import com.mongodb.MongoClientSettings;
-import com.mongodb.ServerAddress;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
 import io.javalin.http.BadRequestResponse;
 import io.javalin.http.Context;
+import io.javalin.http.NotFoundResponse;
 import umm3601.contextpacks.ContextPack;
 import umm3601.contextpacks.ContextPackController;
 import umm3601.contextpacks.ContextPackUtils;
 
 import java.security.InvalidParameterException;
-import java.util.Arrays;
 
 /**
  * Controller that manages requests for info about word lists.
@@ -75,7 +71,11 @@ public class WordListController {
    */
   public void deleteWordList(Context ctx) {
     String name = ctx.pathParam("name");
-    utils.deleteWordList(name);
+    try {
+      utils.deleteWordList(name);
+    } catch (UnsupportedOperationException e) {
+      throw new BadRequestResponse("Could not delete " + name);
+    }
     update();
     ctx.json(name);
   }
@@ -91,7 +91,11 @@ public class WordListController {
                                                                                                // has a name that is not
                                                                                                // blank
         .get();
-    utils.editWordList(name, newList);
+    try {
+      utils.editWordList(name, newList);
+    } catch (Exception e) {
+      throw new NotFoundResponse("Could not edit " + name);
+    }
     update();
 
     ctx.json(newList);

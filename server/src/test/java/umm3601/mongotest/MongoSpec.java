@@ -3,7 +3,6 @@ package umm3601.mongotest;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.*;
-import com.mongodb.client.model.Sorts;
 
 import org.bson.Document;
 
@@ -18,8 +17,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import umm3601.wordlists.Word;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -9,9 +9,11 @@ import umm3601.wordlists.WordList;
 
 public class ContextPackUtils {
   ContextPack contextPack;
-  public ContextPackUtils(ContextPack cp){
+
+  public ContextPackUtils(ContextPack cp) {
     contextPack = cp;
   }
+
   public void addWordList(WordList wordList) {
     if (wordListsContain(wordList.name))
       throw new RuntimeException();
@@ -23,20 +25,25 @@ public class ContextPackUtils {
 
   public void deleteWordList(String name) {
     if (contextPack.wordlists.length == 0)
-      throw new RuntimeException();
+      throw new UnsupportedOperationException();
     WordList[] copy = new WordList[contextPack.wordlists.length - 1];
+    boolean notFound = true;
 
     for (int i = 0, j = 0; i < contextPack.wordlists.length; i++) {
       if (!contextPack.wordlists[i].name.equals(name)) {
         copy[j++] = contextPack.wordlists[i];
-      }
+      } else notFound = false;
     }
+
+    if (notFound)
+      throw new UnsupportedOperationException();
 
     contextPack.wordlists = copy;
   }
 
   public WordList getWordListByName(String name) {
-    if(name.length() == 0) throw new InvalidParameterException();
+    if (name.length() == 0)
+      throw new InvalidParameterException();
     List<WordList> temp = Arrays.asList(contextPack.wordlists);
     WordList[] result = new WordList[] { null };
     temp.stream().filter(list -> list.name.equals(name)).findFirst().ifPresent(list -> {
