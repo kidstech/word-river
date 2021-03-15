@@ -6,7 +6,7 @@ import { Word } from 'src/app/datatypes/word';
   templateUrl: './add-wordlist.component.html',
   styleUrls: ['./add-wordlist.component.scss']
 })
-export class AddWordlistComponent implements OnInit {
+export class AddWordListComponent implements OnInit {
 
   words: Word[] = [
     { word: 'sample word', forms: ['form1,form2'] },
