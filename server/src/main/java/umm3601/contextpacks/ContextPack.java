@@ -8,12 +8,14 @@ import java.util.Optional;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.google.common.collect.Lists;
 
 import org.eclipse.jetty.util.ajax.JSONPojoConvertor;
 import org.mongojack.ObjectId;
 
 import io.javalin.http.NotFoundResponse;
+import io.javalin.http.HttpResponseException;
 import umm3601.wordlists.WordList;
 
 public class ContextPack {
@@ -25,21 +27,23 @@ public class ContextPack {
   public boolean enabled;
   public WordList[] wordlists;
 
-  public void setName(String name) {
-    this.name = name;
-  }
 
   public void addWordList(WordList wordList) {
-    List<WordList> temp = Arrays.asList(wordlists);
-    temp.add(wordList);
-    wordlists = (WordList[]) temp.toArray();
+    if (wordListsContain(wordList.name))
+      throw new RuntimeException();
+
+    WordList[] result = Arrays.copyOf(wordlists, wordlists.length + 1);
+    result[wordlists.length] = wordList;
+    wordlists = result;
   }
 
   public void deleteWordList(String name) {
-    WordList[] copy = new WordList[1];
+    if (wordlists.length == 0)
+      throw new RuntimeException();
+    WordList[] copy = new WordList[wordlists.length - 1];
 
     for (int i = 0, j = 0; i < wordlists.length; i++) {
-      if (i != 0) {
+      if (!wordlists[i].name.equals(name)) {
         copy[j++] = wordlists[i];
       }
     }
@@ -60,11 +64,24 @@ public class ContextPack {
   }
 
   public void editWordList(String name, WordList wordList) {
-    List<WordList> temp = Arrays.asList(wordlists);
-    WordList original = getWordListByName(name);
-    if (temp.contains(original))
-      temp.set(temp.indexOf(original), wordList);
-    wordlists = (WordList[]) temp.toArray();
+    if (!wordListsContain(name))
+      throw new RuntimeException();
+
+    WordList[] copy = new WordList[wordlists.length];
+
+    for (int i = 0, j = 0; i < wordlists.length; i++) {
+      if (!wordlists[i].name.equals(name)) {
+        copy[j++] = wordlists[i];
+      } else {
+        copy[j++] = wordList;
+      }
+    }
+
+    wordlists = copy;
+  }
+
+  public boolean wordListsContain(String name) {
+    return Arrays.asList(wordlists).stream().anyMatch(i -> i.name.equals(name));
   }
 
   public WordList[] getWordLists() {

@@ -27,7 +27,6 @@ import umm3601.contextpacks.ContextPackController;
 
 import java.util.Arrays;
 
-
 /**
  * Controller that manages requests for info about word lists.
  */
@@ -41,11 +40,9 @@ public class WordListController {
 
   ContextPack contextPack;
 
-  MongoClient mongoClient
-  = MongoClients.create(MongoClientSettings
-    .builder()
-    .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress(mongoAddr))))
-    .build());
+  MongoClient mongoClient = MongoClients.create(MongoClientSettings.builder()
+      .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress(mongoAddr)))).build());
+
   /**
    * Construct a controller for word lists.
    *
@@ -53,22 +50,27 @@ public class WordListController {
    */
   public WordListController() {
 
-
     MongoDatabase database = mongoClient.getDatabase(databaseName);
 
     contextPackController = new ContextPackController(database);
     contextPack = contextPackController.getDefaultContextPack();
   }
+
   /**
    * add a new word list
    *
    * @param ctx a Javalin HTTP context
    */
   public void addWordList(Context ctx) {
-    WordList newWordList = ctx.bodyValidator(WordList.class).get();
+    WordList newWordList = ctx.bodyValidator(WordList.class).check(w -> w.name.length() > 0).get();
 
-    contextPack.addWordList(newWordList);
+    try {
+      contextPack.addWordList(newWordList);
+    } catch (Exception e) {
+      throw new BadRequestResponse("The wordlist with that name already exists.");
+    }
     update();
+    ctx.json(newWordList);
   }
 
   /**
@@ -105,18 +107,21 @@ public class WordListController {
    */
   public void editWordList(Context ctx) {
     String name = ctx.pathParam("name");
-    WordList newList = ctx.bodyValidator(WordList.class)
-      .check(list -> list.name.length() > 0) //Verify that the user has a name that is not blank
-      .get();
+    WordList newList = ctx.bodyValidator(WordList.class).check(list -> list.name.length() > 0) // Verify that the user
+                                                                                               // has a name that is not
+                                                                                               // blank
+        .get();
     contextPack.editWordList(name, newList);
     update();
+
+    ctx.json(newList);
   }
 
   public void getWordLists(Context ctx) {
     ctx.json(contextPack.getWordLists());
   }
 
-  public void update(){
+  public void update() {
     contextPackController.updateContextPack(contextPack);
   }
 }
