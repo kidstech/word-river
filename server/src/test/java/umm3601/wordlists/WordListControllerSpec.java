@@ -172,18 +172,4 @@ public class WordListControllerSpec {
     assertEquals(name,"birthday21");
 
   }
-
-  private Document pojoToDoc(WordList pojo){
-    Document doc = new Document();
-
-    doc.put("name",pojo.name);
-    doc.put("enabled",pojo.enabled);
-    doc.put("nouns",pojo.nouns);
-    doc.put("verbs",pojo.verbs);
-    doc.put("adjectives",pojo.adjectives);
-    doc.put("misc",pojo.misc);
-
-
-    return doc;
-}
 }

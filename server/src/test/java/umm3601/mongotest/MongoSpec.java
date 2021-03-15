@@ -3,6 +3,8 @@ package umm3601.mongotest;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.*;
+import com.mongodb.client.model.Sorts;
+
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -21,25 +23,10 @@ import umm3601.wordlists.Word;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Some simple "tests" that demonstrate our ability to
- * connect to a Mongo database and run some basic queries
- * against it.
- * <p>
- * Note that none of these are actually tests of any of our
- * code; they are mostly demonstrations of the behavior of
- * the MongoDB Java libraries. Thus if they test anything,
- * they test that code, and perhaps our understanding of it.
- * <p>
- * To test "our" code we'd want the tests to confirm that
- * the behavior of methods in things like the UserController
- * do the "right" thing.
- * <p>
- * Created by mcphee on 20/2/17.
- */
+
 public class MongoSpec {
 
-  private MongoCollection<Document> wordListDocuments;
+  private MongoCollection<Document> contextPackDocuments;
 
   static MongoClient mongoClient;
   static MongoDatabase db;
@@ -65,80 +52,77 @@ public class MongoSpec {
 
   @BeforeEach
   public void clearAndPopulateDB() {
-    wordListDocuments = db.getCollection("wordlists");
-    wordListDocuments.drop();
-    List<Document> testWordLists = new ArrayList<>();
-    testWordLists.add(
-      new Document()
-        .append("name", "Chris")
-        .append("enabled", true)
-        .append("nouns", Arrays.asList(new Word("Tuna",new String[]{"Tunas, Tunae"}),new Word("Dog",new String[]{"Doge, Doggo"})))
-        .append("verbs", Arrays.asList(new Word("Run", new String[]{"Ran", "Runs"}), new Word("Jump", new String[]{"Jumped", "Jumping"})))
-        .append("adjectives", Arrays.asList(new Word("Fluffy", new String[]{"Fluffier", "Fluffiest"})))
-        .append("misc", Arrays.asList(new Word("Over", new String[]{"Overs"}), new Word("Above", new String[]{"Aboved"}))));
-    testWordLists.add(
-      new Document()
-        .append("name", "Ann")
-        .append("enabled", false)
-        .append("nouns", Arrays.asList(new Word("Store",new String[]{"Stores"}),new Word("Cat",new String[]{"Cats"})))
-        .append("verbs", Arrays.asList(new Word("Hit", new String[]{"Hits", "Hitting"}), new Word("Spin", new String[]{"Spun", "Spinning"}) ))
-        .append("adjectives", Arrays.asList())
-        .append("misc", Arrays.asList(new Word("Under", new String[]{"Undering"}))));
-    testWordLists.add(
-      new Document()
-        .append("name", "Mary")
-        .append("enabled", false)
-        .append("nouns", Arrays.asList(new Word("Fish",new String[]{"Fishes, Fishy"}),new Word("Garbage",new String[]{"Garbages, Garbaged"})))
-        .append("verbs", Arrays.asList(new Word("Skip", new String[]{"Skipped", "Skipped"}), new Word("Swirl", new String[]{"Swirled", "Swirls"})))
-        .append("adjectives", Arrays.asList(new Word("Hurl", new String[]{"Hurled", "Hurling"}), new Word("Skim", new String[]{"Skimmed", "Skimming"})))
-        .append("misc", Arrays.asList(new Word("Around", new String[]{"Arounded"}))));
+    contextPackDocuments = db.getCollection("ContextPacks");
+    contextPackDocuments.drop();
+    List<Document> testContextPacks = new ArrayList<>();
+    Document t = Document.parse("{\r\n\"name\":\"Farm Pack\",\r\n\"enabled\":true,\r\n\"icon\":\"\",\r\n\"wordlists\":[\r\n{\r\n\"name\":\"farm\",\r\n\"enabled\":true,\r\n\"nouns\":[\r\n{\r\n\"word\":\"somestuff\",\r\n\"forms\":[\r\n\"cake\",\r\n\"cakes\"\r\n]\r\n}\r\n],\r\n\"verbs\":[\r\n{\r\n\"word\":\"blow\",\r\n\"forms\":[\r\n\"blow\",\r\n\"blows\",\r\n\"blew\",\r\n\"blown\",\r\n\"blowing\"\r\n]\r\n}\r\n],\r\n\"adjectives\":[\r\n{\r\n\"word\":\"fun\",\r\n\"forms\":[\r\n\"fun\"\r\n]\r\n}\r\n],\r\n\"misc\":[]\r\n}\r\n]\r\n}");
+    Document t1 = Document.parse("{\r\n\"name\":\"Sad Pack\",\r\n\"enabled\":false,\r\n\"icon\":\"\",\r\n\"wordlists\":[\r\n{\r\n\"name\":\"sad\",\r\n\"enabled\":false,\r\n\"nouns\":[\r\n{\r\n\"word\":\"somestuff\",\r\n\"forms\":[\r\n\"cake\",\r\n\"cakes\"\r\n]\r\n}\r\n],\r\n\"verbs\":[\r\n{\r\n\"word\":\"cry\",\r\n\"forms\":[\r\n\"cried\",\r\n\"crying\",\r\n\"blew\",\r\n\"blown\",\r\n\"blowing\"\r\n]\r\n}\r\n],\r\n\"adjectives\":[\r\n{\r\n\"word\":\"sad\",\r\n\"forms\":[\r\n\"sad\"\r\n]\r\n}\r\n],\r\n\"misc\":[]\r\n}\r\n]\r\n}");
+    Document t2 = Document.parse("{\r\n\"name\":\"Fun Pack\",\r\n\"enabled\":true,\r\n\"icon\":\"testicon3\",\r\n\"wordlists\":[\r\n{\r\n\"name\":\"fun\",\r\n\"enabled\":true,\r\n\"nouns\":[\r\n{\r\n\"word\":\"somestuff\",\r\n\"forms\":[\r\n\"cake\",\r\n\"cakes\"\r\n]\r\n}\r\n],\r\n\"verbs\":[\r\n{\r\n\"word\":\"blow\",\r\n\"forms\":[\r\n\"blow\",\r\n\"blows\",\r\n\"blew\",\r\n\"blown\",\r\n\"blowing\"\r\n]\r\n}\r\n],\r\n\"adjectives\":[\r\n{\r\n\"word\":\"Sad\",\r\n\"forms\":[\r\n\"sad\"\r\n]\r\n}\r\n],\r\n\"misc\":[]\r\n}\r\n]\r\n}");
 
-    wordListDocuments.insertMany(testWordLists);
+    testContextPacks.add(t);
+    testContextPacks.add(t1);
+    testContextPacks.add(t2);
+
+    contextPackDocuments.insertMany(testContextPacks);
   }
 
   private List<Document> intoList(MongoIterable<Document> documents) {
-    List<Document> WordLists = new ArrayList<>();
-    documents.into(WordLists);
-    return WordLists;
+    List<Document> ContextPacks = new ArrayList<>();
+    documents.into(ContextPacks);
+    return ContextPacks;
   }
 
-  private int countWordLists(FindIterable<Document> documents) {
-    List<Document> WordLists = intoList(documents);
-    return WordLists.size();
-  }
-
-  @Test
-  public void shouldBeThreeWordLists() {
-    FindIterable<Document> documents = wordListDocuments.find();
-    int numberOfWordLists = countWordLists(documents);
-    assertEquals(3, numberOfWordLists, "Should be 3 total WordLists");
+  private int countContextPacks(FindIterable<Document> documents) {
+    List<Document> ContextPacks = intoList(documents);
+    return ContextPacks.size();
   }
 
   @Test
-  public void shouldBeOneChris() {
-    FindIterable<Document> documents = wordListDocuments.find(eq("name", "Chris"));
-    int numberOfWordLists = countWordLists(documents);
-    assertEquals(1, numberOfWordLists, "Should be 1 Chris");
+  public void shouldBeThreeContextPacks() {
+    FindIterable<Document> documents = contextPackDocuments.find();
+    int numberOfContextPacks = countContextPacks(documents);
+    assertEquals(3, numberOfContextPacks, "Should be 3 total ContextPacks");
   }
 
   @Test
-  public void shouldBeTwoDisabled() {
-    FindIterable<Document> documents = wordListDocuments.find(gt("enabled", false));
-    int numberOfWordLists = countWordLists(documents);
-    assertEquals(2, numberOfWordLists, "Should be disabled");
+  public void shouldBeOneFarmPack() {
+    FindIterable<Document> documents = contextPackDocuments.find(eq("name", "Farm Pack"));
+    int numberOfContextPacks = countContextPacks(documents);
+    assertEquals(1, numberOfContextPacks, "Should be 1 Chris");
   }
 
   @Test
-  public void justNameAndNouns() {
+  public void shouldBeTwoEnabled() {
+    FindIterable<Document> documents = contextPackDocuments.find(eq("enabled", true));
+    int numberOfContextPacks = countContextPacks(documents);
+    assertEquals(2, numberOfContextPacks, "Should be 2 enabled");
+  }
+
+  @Test
+  public void hasIcon() {
+    FindIterable<Document> documents = contextPackDocuments.find(ne("icon", ""));
+    int numberOfContextPacks = countContextPacks(documents);
+    assertEquals(1, numberOfContextPacks, "Should be 1 with icon");
+  }//(* ￣︿￣)
+
+  @Test
+  public void enabledAndHasIcon() {
     FindIterable<Document> documents
-      = wordListDocuments.find()
-      .projection(fields(include("name", "nouns")));
+      = contextPackDocuments.find(and(eq("enabled", true),
+      ne("icon", "")));
     List<Document> docs = intoList(documents);
-    assertNotNull(docs.get(0).get("name"));
-    assertNotNull(docs.get(0).get("nouns"));
-    assertNull(docs.get(0).get("adjectives"));
-    assertNull(docs.get(0).get("adverbs"));
-    assertNull(docs.get(0).get("misc"));
-  }
+    assertEquals(1, docs.size(), "Should be 1");
+    assertEquals("Fun Pack", docs.get(0).get("name"), "Name should be Fun Pack");
+  }// ლ(╹◡╹ლ) <
 
+  @Test
+  public void justNameAndEnabled() {
+    FindIterable<Document> documents
+      = contextPackDocuments.find().projection(fields(include("name", "enabled")));
+    List<Document> docs = intoList(documents);
+    assertEquals(3, docs.size(), "Should be 3");
+    assertEquals("Sad Pack", docs.get(1).get("name"), "Second pack should be Sad Pack");
+    assertNotNull(docs.get(1).get("enabled"), "Second pack should not have enabled field");
+    assertNull(docs.get(1).get("icon"), "Second pack shouldn't have 'icon'");
+  } //(●'◡'●)（＾∀＾●）ﾉｼ
 }
