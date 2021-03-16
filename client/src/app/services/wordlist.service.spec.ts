@@ -8,52 +8,52 @@ describe('WordListService', () => {
   let service: WordListService;
   const testWordLists = [
     {
-      "name": "birthday",
-      "enabled": true,
+      name: 'birthday',
+      enabled: true,
 
-      "nouns": [
-        { "word": "cake", "forms": ["cake", "cakes"] },
-        { "word": "parent", "forms": ["parent", "parents"] }
+      nouns: [
+        { word: 'cake', forms: ['cake', 'cakes'] },
+        { word: 'parent', forms: ['parent', 'parents'] }
       ],
 
-      "verbs": [
+      verbs: [
         {
-          "word": "blow",
-          "forms": ["blow", "blows", "blew", "blown", "blowing"]
+          word: 'blow',
+          forms: ['blow', 'blows', 'blew', 'blown', 'blowing']
         },
-        { "word": "wish", "forms": ["wish", "wishes", "wished", "wishing"] },
-        { "word": "laugh", "forms": ["laugh", "laughs", "laughed", "laughing"] }
+        { word: 'wish', forms: ['wish', 'wishes', 'wished', 'wishing'] },
+        { word: 'laugh', forms: ['laugh', 'laughs', 'laughed', 'laughing'] }
       ],
 
-      "adjectives": [
-        { "word": "fun", "forms": ["fun"] },
-        { "word": "impressive", "forms": ["impressive"] }
+      adjectives: [
+        { word: 'fun', forms: ['fun'] },
+        { word: 'impressive', forms: ['impressive'] }
       ],
 
-      "misc": []
+      misc: []
     },
     {
-      "name": "farm_animals",
-      "enabled": true,
-      "nouns": [
-        { "word": "cat", "forms": ["cat", "cats"] },
-        { "word": "chicken", "forms": ["chicken", "chickens"] }
+      name: 'farm_animals',
+      enabled: true,
+      nouns: [
+        { word: 'cat', forms: ['cat', 'cats'] },
+        { word: 'chicken', forms: ['chicken', 'chickens'] }
       ],
 
-      "verbs": [
-        { "word": "moo", "forms": ["moo", "moos", "mooed", "mooing"] },
-        { "word": "oink", "forms": ["oink", "oinks", "oinked", "oinking"] },
+      verbs: [
+        { word: 'moo', forms: ['moo', 'moos', 'mooed', 'mooing'] },
+        { word: 'oink', forms: ['oink', 'oinks', 'oinked', 'oinking'] },
         {
-          "word": "cluck",
-          "forms": ["cluck", "clucks", "clucking", "clucked"]
+          word: 'cluck',
+          forms: ['cluck', 'clucks', 'clucking', 'clucked']
         },
-        { "word": "baa", "forms": ["baa", "baas", "baaed", "baaing"] },
-        { "word": "meow", "forms": ["meow", "meows", "meowing", "meowed"] },
+        { word: 'baa', forms: ['baa', 'baas', 'baaed', 'baaing'] },
+        { word: 'meow', forms: ['meow', 'meows', 'meowing', 'meowed'] },
       ],
 
-      "adjectives": [],
+      adjectives: [],
 
-      "misc": []
+      misc: []
     }
   ];
   let wordListService: WordListService;
@@ -127,5 +127,5 @@ describe('WordListService', () => {
     expect(req.request.body).toEqual(testWordLists[1]);
 
     req.flush(testWordLists[1]);
-  })
+  });
 });

@@ -18,7 +18,7 @@ export class WordListService {
   }
 
   getWordList(): Observable<WordList[]> {
-    let httpParams: HttpParams = new HttpParams();
+    const httpParams: HttpParams = new HttpParams();
     return this.httpClient.get<WordList[]>(this.wordListUrl, {
       params: httpParams,
     });
@@ -37,5 +37,8 @@ export class WordListService {
     return this.httpClient.put<WordList>(this.wordListUrl, wordList).pipe(map(res => res));
   }
 
+  deleteWordList(name: string): Observable<string> {
+    return this.httpClient.delete<string>(this.wordListUrl + '/' + name).pipe(map(res => res));
+  }
 
 }
