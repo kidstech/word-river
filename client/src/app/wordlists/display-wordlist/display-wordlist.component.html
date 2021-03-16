@@ -21,8 +21,8 @@
           <h2 class="bottom-title">Details</h2>
           <mat-divider></mat-divider>
           <br>
-          <p><strong>Number of wordlists: </strong>24</p>
-          <p><strong>Number of words: </strong>622</p>
+          <p><strong>Number of wordlists: </strong>{{list ? list.length : 0}}</p>
+          <p><strong>Number of words: </strong>Finish this</p>
 
           <!-- Could include information about the wordlists-->
           <!-- ex. #of wordlists, # of words, etc.-->
@@ -31,7 +31,7 @@
     </div>
     <div class="right">
       <!--List of wordlists goes here!-->
-      <app-wordlist-card *ngFor="let i of [1,2,3,4,5]">
+      <app-wordlist-card *ngFor="let wordlist of list" [wordlist]="wordlist">
 
       </app-wordlist-card>
     </div>

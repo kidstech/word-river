@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { WordListService } from 'src/app/services/wordlist.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Word } from 'src/app/datatypes/word';
+import { WordList } from 'src/app/datatypes/wordlist';
 
 @Component({
   selector: 'app-word-card',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WordCardComponent implements OnInit {
 
-  constructor() { }
+  @Input() word: Word;
+  @Input() type: string;
+  @Input() wordList: WordList;
+
+  @Output() delete = new EventEmitter();
+
+  constructor(private service: WordListService) {}
 
   ngOnInit(): void {
+
+  }
+
+  deleteWord(){
+
   }
 
 }

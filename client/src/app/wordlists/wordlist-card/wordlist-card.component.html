@@ -1,8 +1,8 @@
 <mat-card class="wordList-card">
   <div>
     <div class="card-header">
-      <h1 class="wordList-name">WordList X</h1>
-      <mat-icon matListIcon>done</mat-icon>
+      <h1 class="wordList-name">wordlist.name</h1>
+      <mat-icon matListIcon>{{wordlist.enabled ? 'done' : ''}}</mat-icon>
     </div>
   </div>
   <mat-card-content>
@@ -10,26 +10,28 @@
         <div class="nounsList">
             <!--display:flex-->
             <p class="title-section" element="nouns">Nouns:</p>
-            <p *ngFor=""></p>
+            <mat-chip color="primary" *ngFor="let noun of wordlist.nouns">noun.word</mat-chip>
           </div>
           <div class="verbsList">
             <!--display:flex-->
             <p class="title-section" element="verbs">Verbs:</p>
-            <p *ngFor=""></p>
+            <mat-chip color="primary" *ngFor="let verb of wordlist.verbs">verb.word</mat-chip>
           </div>
           <div class="adjectivesList">
             <!--display:flex-->
             <p class="title-section" element="adjectives">Adjectives:</p>
-            <p *ngFor=""></p>
+            <mat-chip color="primary" *ngFor="let ad of wordlist.adjectives">ad.word</mat-chip>
+
           </div>
           <div class="miscList">
             <!--display:flex-->
             <p class="title-section" element="misc">Misc:</p>
-            <p *ngFor=""></p>
+            <mat-chip color="primary" *ngFor="let m of wordlist.misc">m.word</mat-chip>
+
           </div>
     </div>
   </mat-card-content>
   <div>
-    <button mat-button  routerLink="/wordlist/:name" class="btn">View WordList</button>
+    <button mat-button [routerLink]="['/wordlist', this.wordlist.name]" class="btn">View WordList</button>
   </div>
 </mat-card>

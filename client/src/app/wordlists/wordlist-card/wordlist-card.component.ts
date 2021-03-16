@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { WordList } from './../../datatypes/wordlist';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-wordlist-card',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./wordlist-card.component.scss']
 })
 export class WordlistCardComponent implements OnInit {
+
+  @Input() wordlist: WordList;
 
   constructor() { }
 

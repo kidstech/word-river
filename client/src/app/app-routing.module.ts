@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'users', component: UserListComponent},
   {path: 'users/new', component: AddUserComponent},
   {path: 'users/:id', component: UserProfileComponent},
-  {path: 'word/:name', component: EditWordComponent},
+  {path: 'wordlist/:name/:word', component: EditWordComponent},
   {path: 'wordlist/new', component: AddWordListComponent},
   {path: 'wordlist/import', component: ImportWordlistComponent},
   {path: 'wordlist/:name', component: ViewWordlistComponent},
