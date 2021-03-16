@@ -1,5 +1,6 @@
 .content {
   display: flex;
+  margin-top: -16px;
 }
 
 .left {
@@ -29,4 +30,8 @@
 }
 .title{
   margin: 0px;
+  font-size: large;
+}
+.export{
+  height: 40px;
 }

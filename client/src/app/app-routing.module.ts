@@ -14,6 +14,7 @@ import { ImportWordlistComponent } from './wordlists/import-wordlist/import-word
 const routes: Routes = [
   {path: '', component: DisplayWordlistComponent},
   {path: 'users', component: UserListComponent},
+  {path: 'wordlist', component: DisplayWordlistComponent},
   {path: 'users/new', component: AddUserComponent},
   {path: 'users/:id', component: UserProfileComponent},
   {path: 'wordlist/:name/:word', component: EditWordComponent},

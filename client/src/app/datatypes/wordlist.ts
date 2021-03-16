@@ -8,18 +8,20 @@ export class WordList {
   adjectives: Word[];
   misc: Word[];
 
-  getWordType(wordname: string) {
-    [this.nouns, this.verbs, this.adjectives, this.misc].forEach(i => i.forEach(word => {
-      if (word.word === wordname) {
-        return Object.keys(i);
+  static getWordType(list: WordList,wordname: string ) {
+    let result = '';
+    [list.nouns, list.verbs, list.adjectives, list.misc].forEach(i => i.forEach(word => {
+      if (word.word === wordname && result.length===0) {
+        result = i === list.nouns ? 'Noun' : i === list.verbs ? 'Verb' : i === list.adjectives ? 'Adjective' : 'Misc';
       }
     }));
-    return null;
+    return result;
   }
-  getWord(name): Word {
-    [this.nouns,this.verbs,this.adjectives,this.misc].forEach(i => i.forEach(word => {
-      if(word.word === name) {return word;}
+  static getWord(list: WordList,name: string ): Word {
+    let result: Word;
+    [list.nouns,list.verbs,list.adjectives,list.misc].forEach(i => i.forEach(word => {
+      if(word.word === name) {result = word;}
     }));
-    return null;
+    return result;
   }
 }

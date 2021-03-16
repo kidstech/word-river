@@ -2,8 +2,13 @@
 
   <div class="top">
     <div class="title-container">
-      <h1 class="title">{{name}}</h1>
-      <mat-checkbox class="enabled" [checked]="true" (change)="enable($event.checked)">Enabled</mat-checkbox>
+      <!-- <h1 class="title">{{name}}</h1> -->
+
+      <mat-form-field class="title">
+        <mat-label>Edit Word List Name</mat-label>
+        <input matInput name="name" [(ngModel)]="name">
+      </mat-form-field>
+      <mat-checkbox class="enabled" [(ngModel)]="enabled" [checked]="true" (change)="enable($event.checked)">Enabled</mat-checkbox>
     </div>
     <button mat-raised-button class="export" color="primary">Export</button>
   </div>
@@ -13,7 +18,8 @@
       <app-add-word></app-add-word>
     </div>
     <div class="right">
-      <app-word-card (delete)="deleteWord(i)" [word]="w" [type]="types[i]" [wordList]="wordlist" *ngFor="let w of words;index as i;"></app-word-card>
+      <app-word-card (delete)="deleteWord(i)" [word]="w" [type]="types[i]" [wordList]="wordlist"
+        *ngFor="let w of words;index as i;"></app-word-card>
     </div>
   </div>
 </div>

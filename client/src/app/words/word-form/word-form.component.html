@@ -4,6 +4,12 @@
       <mat-label>Enter word form</mat-label>
       <input matInput [(ngModel)]="wordForm">
     </mat-form-field>
-    <button mat-raised-button color="accent" class="add" (click)="add()">+</button>
+    <button *ngIf="added" mat-raised-button color="primary" class="add" (click)="add()">
+      Added!
+    </button>
+    <button *ngIf="!added" mat-raised-button color="accent" class="add" (click)="add()">
+      <mat-icon *ngIf="!added" color="white">add</mat-icon>
+    </button>
   </div>
+  <mat-error *ngIf="err">Please enter some text before adding.</mat-error>
 </div>

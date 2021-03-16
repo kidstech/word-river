@@ -13,6 +13,7 @@ import { Word } from 'src/app/datatypes/word';
 export class ViewWordlistComponent implements OnInit {
 
   name = '';
+  enabled: boolean;
   wordlist: WordList;
   words: Word[];
   types: string[];
@@ -26,7 +27,13 @@ export class ViewWordlistComponent implements OnInit {
       if (this.getUserSub) {
         this.getUserSub.unsubscribe();
       }
-      this.getUserSub = this.service.getWordListByName(this.name).subscribe(i => {this.wordlist = i;this.getAllWords();});
+      this.getUserSub = this.service.getWordListByName(this.name).subscribe(i => {
+        this.wordlist = i;
+        this.getAllWords();
+        this.enabled = i.enabled;
+        console.log(this.enabled);
+
+      });
     });
   }
 

@@ -11,7 +11,7 @@
 
   </mat-card-content>
   <div>
-    <button mat-button [routerLink]="['/wordlist', this.wordList,this.word.word]" class="btn">Edit Word</button>
+    <button mat-button [routerLink]="['/wordlist', this.wordList.name,this.word.word]" class="btn">Edit Word</button>
     <button mat-button (click)="deleteWord()" class="btn">Delete Word</button>
   </div>
 </mat-card>
