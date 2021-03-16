@@ -6,7 +6,7 @@ import { WordListService } from './wordlist.service';
 
 describe('WordListService', () => {
   let service: WordListService;
-  const testWordLists = [
+  const testWordLists: any = [
     {
       name: 'birthday',
       enabled: true,
