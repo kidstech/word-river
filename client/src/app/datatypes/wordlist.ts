@@ -1,6 +1,6 @@
-import { Word } from "./word";
+import { Word } from './word';
 
-export interface WordList {
+export class WordList {
     name: string;
     enabled: boolean;
     nouns: Word[];
