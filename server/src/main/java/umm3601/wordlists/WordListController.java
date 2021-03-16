@@ -39,7 +39,7 @@ public class WordListController {
    * @param ctx a Javalin HTTP context
    */
   public void addWordList(Context ctx) {
-    WordList newWordList = ctx.bodyValidator(WordList.class).check(w -> w.name.length() > 0).get();
+    WordList newWordList = ctx.bodyValidator(WordList.class).get();
     try {
       utils.addWordList(newWordList);
     } catch (Exception e) {
@@ -87,10 +87,7 @@ public class WordListController {
    */
   public void editWordList(Context ctx) {
     String name = ctx.pathParam("name");
-    WordList newList = ctx.bodyValidator(WordList.class).check(list -> list.name.length() > 0) // Verify that the user
-                                                                                               // has a name that is not
-                                                                                               // blank
-        .get();
+    WordList newList = ctx.bodyValidator(WordList.class).get();
     try {
       utils.editWordList(name, newList);
     } catch (Exception e) {

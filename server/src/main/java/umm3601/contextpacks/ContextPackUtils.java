@@ -24,15 +24,19 @@ public class ContextPackUtils {
   }
 
   public void deleteWordList(String name) {
-    if (contextPack.wordlists.length == 0)
-      throw new UnsupportedOperationException();
-    WordList[] copy = new WordList[contextPack.wordlists.length - 1];
     boolean notFound = true;
+    WordList[] copy = new WordList[]{};
 
-    for (int i = 0, j = 0; i < contextPack.wordlists.length; i++) {
-      if (!contextPack.wordlists[i].name.equals(name)) {
-        copy[j++] = contextPack.wordlists[i];
-      } else notFound = false;
+    if (contextPack.wordlists.length > 0) {
+      copy = new WordList[contextPack.wordlists.length - 1];
+
+      for (int i = 0, j = 0; i < contextPack.wordlists.length; i++) {
+        if (!contextPack.wordlists[i].name.equals(name)) {
+          System.out.println(i + " " + j + Arrays.toString(contextPack.wordlists));
+          copy[j++] = contextPack.wordlists[i];
+        } else
+          notFound = false;
+      }
     }
 
     if (notFound)

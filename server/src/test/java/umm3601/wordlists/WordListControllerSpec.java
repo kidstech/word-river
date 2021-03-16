@@ -30,6 +30,7 @@ import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
 import io.javalin.http.util.ContextUtil;
 import io.javalin.plugin.json.JavalinJson;
+import umm3601.contextpacks.ContextPack;
 
 public class WordListControllerSpec {
 
@@ -58,8 +59,7 @@ public class WordListControllerSpec {
   public void setupEach() throws IOException {
 
     // Reset our mock request and response objects
-    mockReq.resetAll();
-    mockRes.resetAll();
+    clearAll();
 
 
 
@@ -134,9 +134,9 @@ public class WordListControllerSpec {
   @Test
   public void AddWordList() throws IOException {
 
-    String testNewUser = "{\n\"name\":\"birthday21\",\n\"enabled\":true,\n\"nouns\":[\n{\n\"word\":\"somestuff\",\n\"forms\":[\n\"cake\",\n\"cakes\"\n]\n}\n],\n\"verbs\":[\n{\n\"word\":\"blow\",\n\"forms\":[\n\"blow\",\n\"blows\",\n\"blew\",\n\"blown\",\n\"blowing\"\n]\n}\n],\n\"adjectives\":[\n{\n\"word\":\"fun\",\n\"forms\":[\n\"fun\"\n]\n}\n],\n\"misc\":[]\n}";
+    String testWordList = "{\n\"name\":\"birthday21\",\n\"enabled\":true,\n\"nouns\":[\n{\n\"word\":\"somestuff\",\n\"forms\":[\n\"cake\",\n\"cakes\"\n]\n}\n],\n\"verbs\":[\n{\n\"word\":\"blow\",\n\"forms\":[\n\"blow\",\n\"blows\",\n\"blew\",\n\"blown\",\n\"blowing\"\n]\n}\n],\n\"adjectives\":[\n{\n\"word\":\"fun\",\n\"forms\":[\n\"fun\"\n]\n}\n],\n\"misc\":[]\n}";
 
-    mockReq.setBodyContent(testNewUser);
+    mockReq.setBodyContent(testWordList);
     mockReq.setMethod("POST");
 
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/wordlists");
@@ -156,38 +156,151 @@ public class WordListControllerSpec {
 
   }
 
+
   @Test
-  public void AddWordListFailsIfAlreadyExists() throws IOException {
+  public void EditWordList() throws IOException {
 
-    String testNewUser1 = "{\n\"name\":\"birthday21\",\n\"enabled\":true,\n\"nouns\":[\n{\n\"word\":\"somestuff\",\n\"forms\":[\n\"cake\",\n\"cakes\"\n]\n}\n],\n\"verbs\":[\n{\n\"word\":\"blow\",\n\"forms\":[\n\"blow\",\n\"blows\",\n\"blew\",\n\"blown\",\n\"blowing\"\n]\n}\n],\n\"adjectives\":[\n{\n\"word\":\"fun\",\n\"forms\":[\n\"fun\"\n]\n}\n],\n\"misc\":[]\n}";
-    String testNewUser2 = "{\n\"name\":\"birthday21\",\n\"enabled\":true,\n\"nouns\":[\n{\n\"word\":\"somestuff\",\n\"forms\":[\n\"cake\",\n\"cakes\"\n]\n}\n],\n\"verbs\":[\n{\n\"word\":\"blow\",\n\"forms\":[\n\"blow\",\n\"blows\",\n\"blew\",\n\"blown\",\n\"blowing\"\n]\n}\n],\n\"adjectives\":[\n{\n\"word\":\"fun\",\n\"forms\":[\n\"fun\"\n]\n}\n],\n\"misc\":[]\n}";
-
-    mockReq.setBodyContent(testNewUser1);
-    mockReq.setMethod("POST");
-
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/wordlists");
-
-    wordListController.addWordList(ctx);
-
-    mockReq.resetAll();
-
-    mockReq.setBodyContent(testNewUser1);
-    mockReq.setMethod("POST");
-
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/wordlists");
-
-    wordListController.addWordList(ctx);
+    addMockUser(1);
 
     assertEquals(200, mockRes.getStatus());
 
+    String testWordList = "{\n\"name\":\"birthday21\",\n\"enabled\":false,\n\"nouns\":[\n{\n\"word\":\"somestuff\",\n\"forms\":[\n\"cake\",\n\"cakes\"\n]\n}\n],\n\"verbs\":[\n{\n\"word\":\"blow\",\n\"forms\":[\n\"blow\",\n\"blows\",\n\"blew\",\n\"blown\",\n\"blowing\"\n]\n}\n],\n\"adjectives\":[\n{\n\"word\":\"fun\",\n\"forms\":[\n\"fun\"\n]\n}\n],\n\"misc\":[]\n}";
+    mockReq.setBodyContent(testWordList);
+
+    mockReq.setMethod("PUT");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/wordlists/:name", ImmutableMap.of("name", "birthday21"));
+
+    wordListController.editWordList(ctx);
+
+    clearAll();
+
+    Context ctx2 = ContextUtil.init(mockReq, mockRes, "api/wordlists/:name", ImmutableMap.of("name", "birthday"));
+    wordListController.getWordListByName(ctx);
+
     String result = ctx.resultString();
-    WordList wordlist = jsonMapper.readValue(result, WordList.class);
-    assertNotNull(wordlist);
-    String name = wordlist.name;
-    assertNotEquals("", name);
-    System.out.println(name);
+    WordList resultWordList = JavalinJson.fromJson(result, WordList.class);
 
-    assertEquals(name,"birthday21");
+    assertEquals(resultWordList.enabled, false);
+  }
 
+  @Test
+  public void EditWordFailsWithNonExistentName() throws IOException {
+
+    addMockUser(1);
+
+    assertEquals(200, mockRes.getStatus());
+
+    String testWordList = "{\n\"name\":\"birthday22\",\n\"enabled\":false,\n\"nouns\":[\n{\n\"word\":\"somestuff\",\n\"forms\":[\n\"cake\",\n\"cakes\"\n]\n}\n],\n\"verbs\":[\n{\n\"word\":\"blow\",\n\"forms\":[\n\"blow\",\n\"blows\",\n\"blew\",\n\"blown\",\n\"blowing\"\n]\n}\n],\n\"adjectives\":[\n{\n\"word\":\"fun\",\n\"forms\":[\n\"fun\"\n]\n}\n],\n\"misc\":[]\n}";
+    mockReq.setBodyContent(testWordList);
+
+    mockReq.setMethod("PUT");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/wordlists/:name", ImmutableMap.of("name", "birthday22"));
+    assertThrows(NotFoundResponse.class, () -> {
+      wordListController.editWordList(ctx);
+    });
+  }
+
+
+  @Test
+  public void AddWordListFailsIfAlreadyExists() throws IOException {
+
+    String testWordList1 = "{\n\"name\":\"birthday21\",\n\"enabled\":true,\n\"nouns\":[\n{\n\"word\":\"somestuff\",\n\"forms\":[\n\"cake\",\n\"cakes\"\n]\n}\n],\n\"verbs\":[\n{\n\"word\":\"blow\",\n\"forms\":[\n\"blow\",\n\"blows\",\n\"blew\",\n\"blown\",\n\"blowing\"\n]\n}\n],\n\"adjectives\":[\n{\n\"word\":\"fun\",\n\"forms\":[\n\"fun\"\n]\n}\n],\n\"misc\":[]\n}";
+    String testWordList2 = "{\n\"name\":\"birthday21\",\n\"enabled\":true,\n\"nouns\":[\n{\n\"word\":\"somestuff\",\n\"forms\":[\n\"cake\",\n\"cakes\"\n]\n}\n],\n\"verbs\":[\n{\n\"word\":\"blow\",\n\"forms\":[\n\"blow\",\n\"blows\",\n\"blew\",\n\"blown\",\n\"blowing\"\n]\n}\n],\n\"adjectives\":[\n{\n\"word\":\"fun\",\n\"forms\":[\n\"fun\"\n]\n}\n],\n\"misc\":[]\n}";
+
+    mockReq.setBodyContent(testWordList1);
+    mockReq.setMethod("POST");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/wordlists");
+
+    wordListController.addWordList(ctx);
+
+    clearAll();
+
+
+    mockReq.setBodyContent(testWordList2);
+    mockReq.setMethod("POST");
+
+    Context ctx2 = ContextUtil.init(mockReq, mockRes, "api/wordlists");
+
+    assertThrows(BadRequestResponse.class, ()->{
+      wordListController.addWordList(ctx2);
+    });
+
+  }
+  @Test
+  public void DeleteWordList() throws IOException {
+
+    addMockUser(1);
+
+    assertEquals(200, mockRes.getStatus());
+
+    clearAll();
+
+
+    mockReq.setMethod("DELETE");
+
+    Context ctx2 = ContextUtil.init(mockReq, mockRes, "api/wordlists/:name", ImmutableMap.of("name", "birthday21"));
+
+    wordListController.deleteWordList(ctx2);
+
+    assertEquals(200, mockRes.getStatus());
+
+    assertThrows(BadRequestResponse.class, ()->{
+      wordListController.deleteWordList(ctx2);
+    });
+
+    clearAll();
+
+    mockReq.setMethod("GET");
+    Context ctx3 = ContextUtil.init(mockReq, mockRes, "api/wordlists/:name", ImmutableMap.of("name", "birthday21"));
+
+
+    assertThrows(NotFoundResponse.class, ()->{
+      wordListController.getWordListByName(ctx3);
+    });
+
+  }
+
+  @Test
+  public void DeleteWordListFailsWithNonExistentName() throws IOException {
+
+    addMockUser(1);
+
+    assertEquals(200, mockRes.getStatus());
+
+    clearAll();
+
+
+    mockReq.setMethod("DELETE");
+
+    Context ctx2 = ContextUtil.init(mockReq, mockRes, "api/wordlists/:name", ImmutableMap.of("name", "birthday221"));
+
+
+    assertThrows(BadRequestResponse.class, ()->{
+      wordListController.deleteWordList(ctx2);
+    });
+  }
+
+
+  public void addMockUser(int type){
+    if(type==1){
+      String testWordList = "{\n\"name\":\"birthday21\",\n\"enabled\":true,\n\"nouns\":[\n{\n\"word\":\"somestuff\",\n\"forms\":[\n\"cake\",\n\"cakes\"\n]\n}\n],\n\"verbs\":[\n{\n\"word\":\"blow\",\n\"forms\":[\n\"blow\",\n\"blows\",\n\"blew\",\n\"blown\",\n\"blowing\"\n]\n}\n],\n\"adjectives\":[\n{\n\"word\":\"fun\",\n\"forms\":[\n\"fun\"\n]\n}\n],\n\"misc\":[]\n}";
+      mockReq.setBodyContent(testWordList);
+      mockReq.setMethod("POST");
+      Context ctx = ContextUtil.init(mockReq, mockRes, "api/wordlists");
+      wordListController.addWordList(ctx);
+    } else {
+      String testWordList = "{\n\"name\":\"birthday22\",\n\"enabled\":false,\n\"nouns\":[\n{\n\"word\":\"somestuff\",\n\"forms\":[\n\"cake\",\n\"cakes\"\n]\n}\n],\n\"verbs\":[\n{\n\"word\":\"blow\",\n\"forms\":[\n\"blow\",\n\"blows\",\n\"blew\",\n\"blown\",\n\"blowing\"\n]\n}\n],\n\"adjectives\":[\n{\n\"word\":\"fun\",\n\"forms\":[\n\"fun\"\n]\n}\n],\n\"misc\":[]\n}";
+      mockReq.setBodyContent(testWordList);
+      mockReq.setMethod("POST");
+      Context ctx = ContextUtil.init(mockReq, mockRes, "api/wordlists");
+      wordListController.addWordList(ctx);
+    }
+  }
+  public void clearAll(){
+    mockReq.resetAll();
+    mockRes.resetAll();
   }
 }
