@@ -1,14 +1,17 @@
 <mat-card class="word-card">
-    <div class="card-header">
-        <h1 class="word-name">{{word.word}}</h1>
-        <mat-card-subtitle class="word-type">{{type}}</mat-card-subtitle>
+  <div class="card-header">
+    <h1 class="word-name">{{word.word}}</h1>
+    <mat-card-subtitle class="word-type">{{type}}</mat-card-subtitle>
+  </div>
+  <mat-card-content>
+    <div class="holder">
+      <p class="forms">Forms: </p>
+      <p color="primary" class="bubble" *ngFor="let form of word.forms">{{form}}</p>
     </div>
-    <mat-card-content>
-        <p class="forms">Forms: </p>
-        <mat-chip color="primary" *ngFor="let form of word.forms">{{form}}</mat-chip>
-    </mat-card-content>
-    <div>
-        <button mat-button  routerLink="/word/:name" class="btn">Edit Word</button>
-        <button mat-button (click)="deleteWord()" class="btn">Delete Word</button>
-      </div>
+
+  </mat-card-content>
+  <div>
+    <button mat-button [routerLink]="['/wordlist', this.wordList,this.word.word]" class="btn">Edit Word</button>
+    <button mat-button (click)="deleteWord()" class="btn">Delete Word</button>
+  </div>
 </mat-card>

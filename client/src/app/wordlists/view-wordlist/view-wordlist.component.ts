@@ -14,6 +14,7 @@ export class ViewWordlistComponent implements OnInit {
 
   name = '';
   wordlist: WordList;
+  words: Word[];
   types: string[];
   getUserSub: Subscription;
 
@@ -25,27 +26,29 @@ export class ViewWordlistComponent implements OnInit {
       if (this.getUserSub) {
         this.getUserSub.unsubscribe();
       }
-      this.getUserSub = this.service.getWordListByName(this.name).subscribe(i => this.wordlist = i);
+      this.getUserSub = this.service.getWordListByName(this.name).subscribe(i => {this.wordlist = i;this.getAllWords();});
     });
   }
 
   enable(val: any) {
 
   }
-  getAllWords(): Word[] {
-    let temp: Word[] = [];
+  getAllWords() {
+    const temp: Word[] = [];
     if (this.wordlist) {
-      temp = [...this.wordlist.nouns];
-      temp = [...this.wordlist.verbs];
-      temp = [...this.wordlist.adjectives];
-      temp = [...this.wordlist.misc];
+      temp.push(...this.wordlist.nouns);
+      temp.push(...this.wordlist.verbs);
+      temp.push(...this.wordlist.adjectives);
+      temp.push(...this.wordlist.misc);
+      console.log(temp);
+      this.words = temp;
       this.types = temp.map(w =>
         this.wordlist.nouns.includes(w) ? 'Noun' :
           this.wordlist.verbs.includes(w) ? 'Verb' :
             this.wordlist.adjectives.includes(w) ? 'Adjective' : 'Misc'
       );
     }
-    return temp;
+
   }
 
   deleteWord(i: number) {

@@ -1,20 +1,20 @@
 <div class="container">
   <mat-card class="edit-word-card">
     <mat-form-field class="current-word">
-      <mat-label>Current Word</mat-label>
-      <input matInput data-test="currentWord" placeholder="current word">
+      <mat-label>{{word}}</mat-label>
+      <input matInput [(ngModel)]="wordname" data-test="currentWord" placeholder="current word">
     </mat-form-field>
     <div class="word-type">
       <!--drop down list for word-types-->
       <h4>Word Type</h4>
       <mat-form-field appearance="fill">
         <mat-label>Select a type</mat-label>
-        <mat-select>
+        <mat-select [(ngModel)]="editedType">
           <mat-option>None</mat-option>
-          <mat-option value="noun">Noun</mat-option>
-          <mat-option value="verb">Verb</mat-option>
-          <mat-option value="adjective">Adjective</mat-option>
-          <mat-option value="misc">Misc</mat-option>
+          <mat-option value="Noun">Noun</mat-option>
+          <mat-option value="Verb">Verb</mat-option>
+          <mat-option value="Adjective">Adjective</mat-option>
+          <mat-option value="Misc">Misc</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -22,8 +22,8 @@
       <app-word-form *ngFor="let i of forms" (form)="add($event)"></app-word-form>
     </div>
     <div class="btn-container">
-      <button mat-raised-button class="save-btn" color="primary">Save</button>
-      <button mat-raised-button class="cancel-btn" color="warn">Cancel</button>
+      <button mat-raised-button (click)="save()" class="save-btn" color="primary">Save</button>
+      <button mat-raised-button [routerLink]="['/wordlist', this.wordlistname]" class="cancel-btn" color="warn">Cancel</button>
     </div>
 
   </mat-card>

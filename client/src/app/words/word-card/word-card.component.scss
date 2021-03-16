@@ -16,3 +16,23 @@
 .forms{
     margin-left: 15px;
 }
+.bubble{
+  padding: 5px 10px 5px 10px;
+  background-color: #2196f3;
+  color: white;
+  border-radius: 10px;
+  // box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  margin: 10px;
+}
+.holder{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, 0.185);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px 0px 20px 0px;
+}
+.forms{
+  margin: 0px;
+}
