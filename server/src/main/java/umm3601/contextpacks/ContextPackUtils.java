@@ -24,25 +24,18 @@ public class ContextPackUtils {
   }
 
   public void deleteWordList(String name) {
-    boolean notFound = true;
-    WordList[] copy = new WordList[]{};
 
-    if (contextPack.wordlists.length > 0) {
-      copy = new WordList[contextPack.wordlists.length - 1];
+    boolean[] found = new boolean[] { false };
+    contextPack.wordlists = Arrays.stream(contextPack.wordlists).filter(x -> {
+      boolean current = x.name.equals(name);
+      if (current)
+        found[0] = true;
+      return !current;
+    }).toArray(WordList[]::new);
 
-      for (int i = 0, j = 0; i < contextPack.wordlists.length; i++) {
-        if (!contextPack.wordlists[i].name.equals(name)) {
-          System.out.println(i + " " + j + Arrays.toString(contextPack.wordlists));
-          copy[j++] = contextPack.wordlists[i];
-        } else
-          notFound = false;
-      }
-    }
-
-    if (notFound)
+    if (!found[0])
       throw new UnsupportedOperationException();
 
-    contextPack.wordlists = copy;
   }
 
   public WordList getWordListByName(String name) {
