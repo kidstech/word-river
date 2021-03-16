@@ -12,6 +12,7 @@ import io.javalin.Javalin;
 import io.javalin.core.util.RouteOverviewPlugin;
 
 import umm3601.user.UserController;
+import umm3601.wordlists.WordListController;
 
 public class Server {
 
@@ -25,27 +26,24 @@ public class Server {
     String databaseName = System.getenv().getOrDefault("MONGO_DB", "dev");
 
     // Setup the MongoDB client object with the information we set earlier
-    MongoClient mongoClient
-      = MongoClients.create(MongoClientSettings
-        .builder()
-        .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress(mongoAddr))))
-        .build());
+    MongoClient mongoClient = MongoClients.create(MongoClientSettings.builder()
+        .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress(mongoAddr)))).build());
 
     // Get the database
     MongoDatabase database = mongoClient.getDatabase(databaseName);
 
     // Initialize dependencies
     UserController userController = new UserController(database);
+    WordListController wordListController = new WordListController(database);
 
     Javalin server = Javalin.create(config -> {
       config.registerPlugin(new RouteOverviewPlugin("/api"));
     });
     /*
-     * We want to shut the `mongoClient` down if the server either
-     * fails to start, or when it's shutting down for whatever reason.
-     * Since the mongClient needs to be available throughout the
-     * life of the server, the only way to do this is to wait for
-     * these events and close it then.
+     * We want to shut the `mongoClient` down if the server either fails to start,
+     * or when it's shutting down for whatever reason. Since the mongClient needs to
+     * be available throughout the life of the server, the only way to do this is to
+     * wait for these events and close it then.
      */
     server.events(event -> {
       event.serverStartFailed(mongoClient::close);
@@ -69,6 +67,25 @@ public class Server {
     // Add new user with the user info being in the JSON body
     // of the HTTP request
     server.post("/api/users", userController::addNewUser);
+
+
+
+
+
+    // Get the specified wordlist
+    server.get("/api/wordlists/:name", wordListController::getWordListByName);
+
+    // Fetch wordlists
+    server.get("/api/wordlists/", wordListController::getWordLists);
+
+    // Delete the specified wordlist
+    server.delete("/api/wordlists/:name", wordListController::deleteWordList);
+
+    // Add new wordlist
+    server.post("/api/wordlists", wordListController::addWordList);
+
+    // Edit new wordlist
+    server.put("/api/wordlists/:name", wordListController::editWordList);
 
     server.exception(Exception.class, (e, ctx) -> {
       ctx.status(500);
