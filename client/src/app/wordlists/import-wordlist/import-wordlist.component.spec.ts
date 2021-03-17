@@ -31,13 +31,5 @@ describe('ImportWordlistComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  // it('only saves when valid', () => {
-  //   component.wordlist = undefined;
-  //   expect(component.save()).toBe(false);
-  // });
-  // it('saves when valid', () => {
-  //   component.wordlist = {name:'s',enabled:true,nouns:[],verbs:[],adjectives:[],misc:[]}
-  //   expect(component.save()).toBe(true);
-  // });
 
 });
