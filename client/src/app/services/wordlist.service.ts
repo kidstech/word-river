@@ -33,8 +33,8 @@ export class WordListService {
     return this.httpClient.post<WordList>(this.wordListUrl, newWordList).pipe(map(res => res));
   }
 
-  editWordList(wordList: WordList): Observable<WordList> {
-    return this.httpClient.put<WordList>(this.wordListUrl, wordList).pipe(map(res => res));
+  editWordList(name: string,wordList: WordList): Observable<WordList> {
+    return this.httpClient.put<WordList>(this.wordListUrl + '/' + name, wordList).pipe(map(res => res));
   }
 
   deleteWordList(deleteWordList: WordList): Observable<WordList> {

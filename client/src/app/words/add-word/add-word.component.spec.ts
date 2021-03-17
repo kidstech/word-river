@@ -43,4 +43,19 @@ describe('AddWordComponent', () => {
     component.check();
     expect(component.finished).toBe(component.check());
   });
+  it('check() should work', () => {
+    component.wordName = 'sda';
+    component.type = 'Noun';
+    expect(component.check()).toBe(true);
+  });
+  it('save() clears all fields', () => {
+    component.wordName = 'sda';
+    component.type = 'Noun';
+    component.forms = ['','',''];
+    component.save();
+    expect(component.wordName).toBe('');
+    expect(component.type).toBe('Noun');
+    expect(component.forms).toEqual([]);
+
+  });
 });

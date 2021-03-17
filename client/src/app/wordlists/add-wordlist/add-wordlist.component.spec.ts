@@ -61,17 +61,29 @@ describe('AddWordListComponent', () => {
   });
 
   it('addWord() should work with nouns', () => {
-    expect(component.addWord({name:'',type:'Noun',forms:[]})).toBe('Noun');
+    expect(component.addWord({name:'',type:'nouns',forms:[]})).toBe('nouns');
   });
   it('addWord() should work with verbs', () => {
-    expect(component.addWord({name:'',type:'Verb',forms:[]})).toBe('Verb');
+    expect(component.addWord({name:'',type:'verbs',forms:[]})).toBe('verbs');
   });
   it('addWord() should work with adj', () => {
-    expect(component.addWord({name:'',type:'Adjective',forms:[]})).toBe('Adjective');
+    expect(component.addWord({name:'',type:'adjectives',forms:[]})).toBe('adjectives');
   });
   it('addWord() should work with misc', () => {
-    expect(component.addWord({name:'',type:'Misc',forms:[]})).toBe('Misc');
+    expect(component.addWord({name:'',type:'misc',forms:[]})).toBe('misc');
   });
+  it('enable() should work', () => {
+    component.enable(true);
+    expect(component.enabled).toBe(true);
+    component.enable(false);
+    expect(component.enabled).toBe(false);
+  });
+  it('save() should work', () => {
+    component.save();
+    expect(component.wordList.name).toBe(component.wordlistname);
+    expect(component.wordList.enabled).toBe(component.enabled);
+  });
+
 });
 
 

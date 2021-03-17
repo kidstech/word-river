@@ -10,7 +10,7 @@
       </mat-form-field>
       <mat-checkbox class="enabled" [(ngModel)]="enabled" [checked]="true">Enabled</mat-checkbox>
     </div>
-    <button mat-raised-button class="export" color="primary">Export</button>
+    <button mat-raised-button (click)="export()" class="export" color="primary">Export</button>
     <button mat-raised-button class="delete" (click)="deleteWordList()" color="accent">Delete</button>
   </div>
 
@@ -18,7 +18,7 @@
     <div class="left">
       <app-add-word (addWord)="addWord($event)"></app-add-word>
       <button mat-raised-button [disabled]="!true" class="save" style="padding:20px;margin-top: 20px;" color="primary"
-      (click)="true"
+      (click)="save()"
       data-test="confirmAddWordListButton">Save word list</button>
     </div>
     <div class="right">

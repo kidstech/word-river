@@ -42,6 +42,7 @@ export class AddWordListComponent implements OnInit {
 
   save() {
     this.wordList.name = this.wordlistname;
+    this.wordList.enabled = this.enabled;
     console.log(this.wordList);
     this.service.addWordList(this.wordList).subscribe();
     this.router.navigate(['wordlist']);

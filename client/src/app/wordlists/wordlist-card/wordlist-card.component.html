@@ -2,6 +2,7 @@
   <div>
     <div class="card-header">
       <h1 class="wordList-name">{{wordlist.name}}</h1>
+      {{wordlist.enabled ? 'Enabled' : 'Disabled'}}
       <mat-icon matListIcon>{{wordlist.enabled ? 'done' : ''}}</mat-icon>
     </div>
   </div>
@@ -32,6 +33,6 @@
     </div>
   </mat-card-content>
   <div>
-    <button *ngIf="!disableButton" mat-button [routerLink]="['/wordlist', this.wordlist.name]" class="btn">View WordList</button>
+    <button *ngIf="!disableButton" data-test="viewWordListButton" mat-button [routerLink]="['/wordlist', this.wordlist.name]" class="btn">View WordList</button>
   </div>
 </mat-card>

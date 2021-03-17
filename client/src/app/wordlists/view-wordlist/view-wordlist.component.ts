@@ -15,11 +15,12 @@ export class ViewWordlistComponent implements OnInit {
   name = '';
   enabled: boolean;
   wordlist: WordList;
+  originalName: string;
   words: Word[];
   types: string[];
   getUserSub: Subscription;
 
-  constructor(private route: ActivatedRoute, private service: WordListService,private router: Router) { }
+  constructor(private route: ActivatedRoute, private service: WordListService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((pmap) => {
@@ -28,15 +29,16 @@ export class ViewWordlistComponent implements OnInit {
     });
   }
 
-  addWord(word){
+  addWord(word) {
     console.log(this.wordlist);
-    this.wordlist[word.type].unshift({word:word.name,forms:word.forms});
-    this.words.unshift({word:word.name,forms:word.forms});
+    this.wordlist[word.type].unshift({ word: word.name, forms: word.forms });
+    this.words.unshift({ word: word.name, forms: word.forms });
   }
 
-  loadWords(){
+  loadWords() {
     this.getUserSub = this.service.getWordListByName(this.name).subscribe(i => {
       this.wordlist = i;
+      this.originalName = i.name;
       this.getAllWords();
       this.enabled = i.enabled;
     });
@@ -46,20 +48,20 @@ export class ViewWordlistComponent implements OnInit {
 
   getAllWords() {
     const temp: Word[] = [];
-      temp.push(...this.wordlist.nouns);
-      temp.push(...this.wordlist.verbs);
-      temp.push(...this.wordlist.adjectives);
-      temp.push(...this.wordlist.misc);
-      console.log(temp);
-      this.words = temp;
-      this.types = temp.map(w =>
-        this.wordlist.nouns.includes(w) ? 'Noun' :
-          this.wordlist.verbs.includes(w) ? 'Verb' :
-            this.wordlist.adjectives.includes(w) ? 'Adjective' : 'Misc'
-      );
+    temp.push(...this.wordlist.nouns);
+    temp.push(...this.wordlist.verbs);
+    temp.push(...this.wordlist.adjectives);
+    temp.push(...this.wordlist.misc);
+    console.log(temp);
+    this.words = temp;
+    this.types = temp.map(w =>
+      this.wordlist.nouns.includes(w) ? 'Noun' :
+        this.wordlist.verbs.includes(w) ? 'Verb' :
+          this.wordlist.adjectives.includes(w) ? 'Adjective' : 'Misc'
+    );
   }
 
-  deleteWordList(){
+  deleteWordList() {
     const c = this.service.deleteWordList(this.wordlist).subscribe();
     this.router.navigate(['wordlist']);
     return c;
@@ -71,7 +73,7 @@ export class ViewWordlistComponent implements OnInit {
       this.wordlist.verbs,
       this.wordlist.adjectives,
       this.wordlist.misc]) {
-      console.log(current + " " + this.words[i]);
+      console.log(current + ' ' + this.words[i]);
 
       if (current.includes(this.words[i])) {
         current.splice(current.indexOf(this.words[i]), 1);
@@ -79,9 +81,21 @@ export class ViewWordlistComponent implements OnInit {
       }
     }
   }
-  save(){
+  save() {
     this.wordlist.name = this.name;
+    this.wordlist.enabled = this.enabled;
     console.log(this.wordlist);
-    // this.service.editWordList(this.wordlist);
+    this.service.editWordList(this.originalName, this.wordlist).subscribe();
+    this.router.navigate(['wordlist']);
+  }
+  export() {
+    this.wordlist.name = this.name;
+    const blob = new Blob([JSON.stringify(this.wordlist)], { type: 'text/csv' });
+    const a = document.createElement('a');
+    document.body.appendChild(a);
+    const url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = 'export.json';
+    a.click();
   }
 }
