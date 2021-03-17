@@ -19,7 +19,7 @@ export class WordListPage {
         return card.find<HTMLButtonElement>('[importWordListButton]').click();
     }
 
-    saveWordListButton() {
-        return cy.get('[data-test=confirmAddWordListButton]');
+    addWordListButton() {
+        return cy.get('[data-test=addWordListButton]');
       }
 }

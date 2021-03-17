@@ -28,7 +28,8 @@ describe('WordList', () => {
         });
        });
 
-       it('Should click add wordlist and go to the right URL', () => {
+
+    it('Should click add wordlist and go to the right URL', () => {
         // Click on the button for adding a new wordlist
         page.addWordListButton().click();
 
