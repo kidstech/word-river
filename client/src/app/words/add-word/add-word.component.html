@@ -4,7 +4,7 @@
     <div class="fields">
         <mat-form-field class="new-word">
             <mat-label>New word</mat-label>
-            <input matInput data-test="newWord" placeholder="enter a new word">
+            <input matInput (input)="check()" data-test="newWord" [(ngModel)]="wordName" name="name" placeholder="enter a new word">
         </mat-form-field>
 
         <div class="word-type">
@@ -12,7 +12,7 @@
                 <h4>Word Type</h4>
                 <mat-form-field appearance="fill">
                   <mat-label>Select a type</mat-label>
-                  <mat-select >
+                  <mat-select (selectionChange)="check()" [(ngModel)]="type">
                     <mat-option>None</mat-option>
                     <mat-option value="noun">Noun</mat-option>
                     <mat-option value="verb">Verb</mat-option>
@@ -26,7 +26,7 @@
     <div class="word-forms">
         <app-word-form *ngFor="let i of forms" (form)="add($event)"></app-word-form>
     </div>
-    <button mat-raised-button class="add-word-btn" color="primary">Add Word</button>
+    <button [disabled]="!finished" (click)="save()" mat-raised-button class="add-word-btn" color="primary">Add Word</button>
 </div>
 </mat-card>
 

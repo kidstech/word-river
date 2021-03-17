@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -37,8 +37,8 @@ export class WordListService {
     return this.httpClient.put<WordList>(this.wordListUrl, wordList).pipe(map(res => res));
   }
 
-  deleteWordList(name: string): Observable<string> {
-    return this.httpClient.delete<string>(this.wordListUrl + '/' + name).pipe(map(res => res));
+  deleteWordList(deleteWordList: WordList): Observable<WordList> {
+    return this.httpClient.delete<WordList>(this.wordListUrl + '/' + deleteWordList.name).pipe(map(res => res));
   }
 
 }

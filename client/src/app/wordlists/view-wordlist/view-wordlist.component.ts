@@ -2,7 +2,7 @@ import { WordList } from './../../datatypes/wordlist';
 import { Subscription } from 'rxjs';
 import { WordListService } from 'src/app/services/wordlist.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Word } from 'src/app/datatypes/word';
 
 @Component({
@@ -19,21 +19,24 @@ export class ViewWordlistComponent implements OnInit {
   types: string[];
   getUserSub: Subscription;
 
-  constructor(private route: ActivatedRoute, private service: WordListService) { }
+  constructor(private route: ActivatedRoute, private service: WordListService,private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((pmap) => {
-      this.name = pmap.get('name');
+      this.name = pmap ? pmap.get('name') : '';
       if (this.getUserSub) {
         this.getUserSub.unsubscribe();
       }
-      this.getUserSub = this.service.getWordListByName(this.name).subscribe(i => {
-        this.wordlist = i;
-        this.getAllWords();
-        this.enabled = i.enabled;
-        console.log(this.enabled);
+      this.loadWords();
+    });
+  }
 
-      });
+  loadWords(){
+    this.getUserSub = this.service.getWordListByName(this.name).subscribe(i => {
+      this.wordlist = i;
+      this.getAllWords();
+      this.enabled = i.enabled;
+      console.log(this.enabled);
     });
   }
 
@@ -57,6 +60,14 @@ export class ViewWordlistComponent implements OnInit {
       );
     }
 
+  }
+
+  deleteWordList(){
+    this.service.deleteWordList(this.wordlist).subscribe(res=>{
+      if(res){
+        this.router.navigate(['wordlist']);
+      }
+    });
   }
 
   deleteWord(i: number) {

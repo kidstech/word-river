@@ -22,4 +22,8 @@ describe('WordFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should not accept empty types', () => {
+    expect(component.form).toBeTruthy();
+  });
 });

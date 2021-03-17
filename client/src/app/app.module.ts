@@ -38,12 +38,12 @@ import { AddWordListComponent } from './wordlists/add-wordlist/add-wordlist.comp
 import { DisplayWordlistComponent } from './wordlists/display-wordlist/display-wordlist.component';
 import { ImportWordlistComponent } from './wordlists/import-wordlist/import-wordlist.component';
 import { WordCardComponent } from './words/word-card/word-card.component';
-import { EditWordComponent } from './words/edit-word/edit-word.component';
 import { AddWordComponent } from './words/add-word/add-word.component';
 import { WordListService } from './services/wordlist.service';
 import { ViewWordlistComponent } from './wordlists/view-wordlist/view-wordlist.component';
 import { WordlistCardComponent } from './wordlists/wordlist-card/wordlist-card.component';
 import { WordFormComponent } from './words/word-form/word-form.component';
+
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -63,6 +63,7 @@ const MATERIAL_MODULES: any[] = [
   MatRadioModule,
   MatCheckboxModule,
   MatChipsModule,
+  MatFormFieldModule,
   MatSnackBarModule
 ];
 
@@ -78,7 +79,6 @@ const MATERIAL_MODULES: any[] = [
     DisplayWordlistComponent,
     ImportWordlistComponent,
     WordCardComponent,
-    EditWordComponent,
     AddWordComponent,
     ViewWordlistComponent,
     WordlistCardComponent,

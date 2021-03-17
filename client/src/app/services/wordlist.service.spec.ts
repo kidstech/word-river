@@ -135,10 +135,9 @@ describe('WordListService', () => {
       wordList => expect(wordList).toBe(testWordLists[1])
     );
 
-    const req = httpTestingController.expectOne(service.wordListUrl);
+    const req = httpTestingController.expectOne(service.wordListUrl + '/farm_animals');
 
     expect(req.request.method).toEqual('DELETE');
-    expect(req.request.body).toEqual(testWordLists[1]);
 
     req.flush(testWordLists[1]);
   });

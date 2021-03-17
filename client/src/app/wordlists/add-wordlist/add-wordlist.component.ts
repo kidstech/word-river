@@ -28,7 +28,7 @@ export class AddWordListComponent implements OnInit, OnChanges {
   }
 
   add(val) {
-    this.forms.push(val);
+    this.words.push(val);
    }
 
   check() {
@@ -43,10 +43,18 @@ export class AddWordListComponent implements OnInit, OnChanges {
   }
 
   save() {
+    if(this.check()){
+      this.service.addWordList(this.wordList);
+    }
   }
 
   enable(val) {
     this.enabled = val;
   }
 
+  addWord(word){
+    const type: string = word.type === 'Noun' ? 'noun' : 'Verb' ? 'verb' : 'Adjective' ? 'adjective' :'misc';
+    this.wordList[type].push(new Word(word.name,word.forms));
+    console.log(this.wordList);
+  }
 }

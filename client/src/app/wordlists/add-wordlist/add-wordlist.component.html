@@ -12,15 +12,15 @@
           </div>
         </div>
       </mat-card>
-      <app-add-word></app-add-word>
+      <app-add-word (addWord)="addWord($event)"></app-add-word>
       <br>
       <button mat-raised-button [disabled]="!finished" class="save" style="padding:20px;" color="primary"
-      type="submit"
-      data-test="confirmAddWorListButton">Save word list</button>
+      (click)="save()"
+      data-test="confirmAddWordListButton">Save word list</button>
     </div>
     <div class="right">
       <h3 *ngIf="words.length === 0">Nothing added here yet.</h3>
-      <app-word-card *ngFor="let word of words"></app-word-card>
+      <app-word-card (addWord)="add($event)" *ngFor="let word of words"></app-word-card>
     </div>
   </div>
 </div>

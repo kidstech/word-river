@@ -19,7 +19,12 @@ export class WordFormComponent implements OnInit {
   ngOnInit(): void {
   }
   add() {
-    if(this.wordForm && this.wordForm.length > 0) {this.form.emit(this.wordForm);this.added = true;this.err=false;}
+    if(this.wordForm && this.wordForm.length > 0) {
+      this.form.emit(this.wordForm);
+      this.added = true;
+      this.err=false;
+      console.log(this.wordForm);
+    }
     else {this.err = true;}
   }
 }
