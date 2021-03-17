@@ -62,10 +62,25 @@ export class MockWordListService extends WordListService {
     // filters are passed in.
     return of(MockWordListService.testWordLists);
   }
+  addWordList(w): Observable<WordList>{
+    MockWordListService.testWordLists.push(w);
+    return of(w);
+  }
   getWordListByName(name): Observable<WordList> {
     // Our goal here isn't to test (and thus rewrite) the service, so we'll
     // keep it simple and just return the test WordLists regardless of what
     // filters are passed in.
+    return of(MockWordListService.testWordLists[0]);
+  }
+  editWordList(name,wordlist): Observable<WordList>{
+    MockWordListService.testWordLists = MockWordListService.testWordLists.map(w=>{
+      if(w.name === name) {return wordlist;}
+      else {return w;}
+    });
     return of(MockWordListService.testWordLists.filter(e=>e.name === name)[0]);
+  }
+  deleteWordList(wordlist): Observable<WordList>{
+    MockWordListService.testWordLists = MockWordListService.testWordLists.filter(w=> w!==wordlist);
+    return of(wordlist);
   }
 }

@@ -35,11 +35,4 @@ describe('DisplayWordlistComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('initial wordlist should be 23', () => {
-    expect(component.wordcount).toBe(23);
-  });
-
-  // it('should count the number of words', () => {
-  //   expect(testWordList.wordcount).toBe(3);
-  // });
 });

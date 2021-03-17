@@ -117,11 +117,11 @@ describe('WordListService', () => {
 
   it('editWordList() puts to api/wordLists', () => {
 
-    service.editWordList(testWordLists[1]).subscribe(
+    service.editWordList(testWordLists[1].name,testWordLists[1]).subscribe(
       wordList => expect(wordList).toBe(testWordLists[1])
     );
 
-    const req = httpTestingController.expectOne(service.wordListUrl);
+    const req = httpTestingController.expectOne(service.wordListUrl + '/farm_animals');
 
     expect(req.request.method).toEqual('PUT');
     expect(req.request.body).toEqual(testWordLists[1]);

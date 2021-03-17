@@ -27,6 +27,7 @@ describe('ViewWordlistComponent', () => {
       component = fixture.componentInstance;
       fixture.detectChanges();
       component.name = 'animal';
+      component.loadWords();
     });
   }));
 
@@ -34,23 +35,18 @@ describe('ViewWordlistComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should get the words', () => {
-  //   component.wordlist = new WordList();
-  //   expect(component.words.length).toBeGreaterThan(0);
-  // });
-
-  // it('should delete a word', () => {
-  //   component.words = [{word:'',forms:[]}];
-  //   component.wordlist = {
-  //     name:'',enabled:false,nouns:[component.words[0]],
-  //     verbs:[],adjectives:[],misc:[]
-  //   };
-  //   expect(component.words.length).toBe(1);
-  //   component.deleteWord(0);
-  // });
-
-
-  // it('should delete a wordlist', () => {
-  //   expect(component.deleteWordList()).toBeTruthy();
-  // });
+  it('should delete a wordlist', () => {
+    expect(component.deleteWordList()).toBeTruthy();
+  });
+  it('should save', () => {
+    component.wordlist = {name:'',enabled:false,nouns:[],verbs:[],adjectives:[],misc:[]};
+    component.enabled = false;
+    component.save();
+    expect(component).toBeTruthy();
+  });
+  it('should export', () => {
+    component.wordlist = {name:'',enabled:false,nouns:[],verbs:[],adjectives:[],misc:[]};
+    component.export();
+    expect(component).toBeTruthy();
+  });
 });
