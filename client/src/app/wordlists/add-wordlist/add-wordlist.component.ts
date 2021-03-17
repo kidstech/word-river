@@ -11,24 +11,22 @@ import { WordListService } from 'src/app/services/wordlist.service';
   templateUrl: './add-wordlist.component.html',
   styleUrls: ['./add-wordlist.component.scss']
 })
-export class AddWordListComponent implements OnInit, OnChanges {
+export class AddWordListComponent implements OnInit {
   forms = [''];
-  wordList: WordList;
+  wordList: WordList = {name:'',enabled:false,nouns:[],verbs:[],adjectives:[],misc:[]};
   wordlistname = '';
   wordType = '';
-  finished = true;
+  finished = false;
 
   words: Word[] = [];
   enabled = true;
 
-  constructor(private route: ActivatedRoute, private service: WordListService) { }
-
-  ngOnChanges(): void {
-    this.check();
-  }
+  constructor(private route: ActivatedRoute, private service: WordListService,private router: Router) { }
 
   add(val) {
     this.words.push(val);
+    console.log(this.words);
+
    }
 
   check() {
@@ -43,9 +41,10 @@ export class AddWordListComponent implements OnInit, OnChanges {
   }
 
   save() {
-    if(this.check()){
-      this.service.addWordList(this.wordList);
-    }
+    this.wordList.name = this.wordlistname;
+    console.log(this.wordList);
+    this.service.addWordList(this.wordList).subscribe();
+    this.router.navigate(['wordlist']);
   }
 
   enable(val) {
@@ -53,8 +52,12 @@ export class AddWordListComponent implements OnInit, OnChanges {
   }
 
   addWord(word){
-    const type: string = word.type === 'Noun' ? 'noun' : 'Verb' ? 'verb' : 'Adjective' ? 'adjective' :'misc';
-    this.wordList[type].push(new Word(word.name,word.forms));
-    console.log(this.wordList);
+
+
+    const type: string = word.type;
+    this.wordList[type].push({word:word.name,forms:word.forms});
+    this.words.push({word:word.name,forms:word.forms});
+    console.log(this.words);
+    return word.type;
   }
 }

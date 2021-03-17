@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { COMMON_IMPORTS } from 'src/app/app-routing.module';
+import { Word } from 'src/app/datatypes/word';
 import { WordListService } from 'src/app/services/wordlist.service';
 import { MockWordListService } from 'src/testing/wordlist.service.mock';
 
@@ -35,6 +36,11 @@ describe('AddWordListComponent', () => {
     component.check();
     expect(component.finished).toBe(false);
   });
+  it('adds a word', () => {
+    expect(component.words.length).toBe(0);
+    component.add({name:'',forms:[]});
+    expect(component.words.length).toBe(1);
+  });
 
   it('should not accept a one character name', () => {
     component.wordlistname = 'k';
@@ -52,6 +58,19 @@ describe('AddWordListComponent', () => {
     component.wordlistname = '1234';
     component.check();
     expect(component.finished).toBe(true);
+  });
+
+  it('addWord() should work with nouns', () => {
+    expect(component.addWord({name:'',type:'Noun',forms:[]})).toBe('Noun');
+  });
+  it('addWord() should work with verbs', () => {
+    expect(component.addWord({name:'',type:'Verb',forms:[]})).toBe('Verb');
+  });
+  it('addWord() should work with adj', () => {
+    expect(component.addWord({name:'',type:'Adjective',forms:[]})).toBe('Adjective');
+  });
+  it('addWord() should work with misc', () => {
+    expect(component.addWord({name:'',type:'Misc',forms:[]})).toBe('Misc');
   });
 });
 

@@ -23,7 +23,6 @@ export class WordFormComponent implements OnInit {
       this.form.emit(this.wordForm);
       this.added = true;
       this.err=false;
-      console.log(this.wordForm);
     }
     else {this.err = true;}
   }

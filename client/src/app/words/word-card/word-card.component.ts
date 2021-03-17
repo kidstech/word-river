@@ -14,16 +14,19 @@ export class WordCardComponent implements OnInit {
   @Input() type: string;
   @Input() wordList: WordList;
 
+  @Input() viewing: boolean;
+
   @Output() delete = new EventEmitter();
 
   constructor(private service: WordListService) {}
 
   ngOnInit(): void {
+    console.log(this.word);
 
   }
 
   deleteWord(){
-
+    this.delete.emit();
   }
 
 }

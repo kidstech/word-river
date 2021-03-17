@@ -2,6 +2,9 @@
 #h3 {
 font-family: "Ubuntu", sans-serif;
 }
-.add-word-btn {
-    margin-left: 36%;
+.word-forms{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

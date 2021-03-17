@@ -20,7 +20,7 @@
     </div>
     <div class="right">
       <h3 *ngIf="words.length === 0">Nothing added here yet.</h3>
-      <app-word-card (addWord)="add($event)" *ngFor="let word of words"></app-word-card>
+      <app-word-card  *ngFor="let word of words" [word]="word" [viewing]="true"></app-word-card>
     </div>
   </div>
 </div>

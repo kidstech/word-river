@@ -20,9 +20,6 @@ export class ImportWordlistComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  importFile() {
-
-  }
   onFileAdded(file) {
     this.file = file.target.files[0];
     const fileReader = new FileReader();
@@ -43,9 +40,10 @@ export class ImportWordlistComponent implements OnInit {
 
   save(){
     if(this.wordlist){
-      this.service.addWordList(this.wordlist).subscribe(res=>{
-        if(res) {this.router.navigate(['wordlist']);}
-      });
+      this.service.addWordList(this.wordlist).subscribe();
+      this.router.navigate(['wordlist']);
+      return true;
     }
+    else {return false;}
   }
 }

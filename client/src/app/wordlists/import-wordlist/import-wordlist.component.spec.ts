@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { COMMON_IMPORTS } from 'src/app/app-routing.module';
+import { WordList } from 'src/app/datatypes/wordlist';
 import { WordListService } from 'src/app/services/wordlist.service';
 import { MockWordListService } from 'src/testing/wordlist.service.mock';
 
@@ -30,4 +31,17 @@ describe('ImportWordlistComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('only saves when valid', () => {
+    component.wordlist = undefined;
+    expect(component.save()).toBe(false);
+  });
+  it('saves when valid', () => {
+    component.wordlist = new WordList();
+    expect(component.save()).toBe(false);
+  });
+  it('onFileAdded works', () => {
+    component.onFileAdded('');
+    expect(component.save()).toBe(false);
+  });
+
 });
