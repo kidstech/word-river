@@ -24,11 +24,14 @@ export class ViewWordlistComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((pmap) => {
       this.name = pmap ? pmap.get('name') : '';
-      if (this.getUserSub) {
-        this.getUserSub.unsubscribe();
-      }
       this.loadWords();
     });
+  }
+
+  addWord(word){
+    console.log(this.wordlist);
+    this.wordlist[word.type].unshift({word:word.name,forms:word.forms});
+    this.words.unshift({word:word.name,forms:word.forms});
   }
 
   loadWords(){
@@ -36,17 +39,13 @@ export class ViewWordlistComponent implements OnInit {
       this.wordlist = i;
       this.getAllWords();
       this.enabled = i.enabled;
-      console.log(this.enabled);
     });
   }
 
-  enable(val: any) {
-  }
 
 
   getAllWords() {
     const temp: Word[] = [];
-    if (this.wordlist) {
       temp.push(...this.wordlist.nouns);
       temp.push(...this.wordlist.verbs);
       temp.push(...this.wordlist.adjectives);
@@ -58,16 +57,12 @@ export class ViewWordlistComponent implements OnInit {
           this.wordlist.verbs.includes(w) ? 'Verb' :
             this.wordlist.adjectives.includes(w) ? 'Adjective' : 'Misc'
       );
-    }
-
   }
 
   deleteWordList(){
-    this.service.deleteWordList(this.wordlist).subscribe(res=>{
-      if(res){
-        this.router.navigate(['wordlist']);
-      }
-    });
+    const c = this.service.deleteWordList(this.wordlist).subscribe();
+    this.router.navigate(['wordlist']);
+    return c;
   }
 
   deleteWord(i: number) {
@@ -76,10 +71,17 @@ export class ViewWordlistComponent implements OnInit {
       this.wordlist.verbs,
       this.wordlist.adjectives,
       this.wordlist.misc]) {
-      if (current.includes(this.wordlist[i])) {
-        current.splice(i, 1);
-        this.service.editWordList(this.wordlist);
+      console.log(current + " " + this.words[i]);
+
+      if (current.includes(this.words[i])) {
+        current.splice(current.indexOf(this.words[i]), 1);
+        this.words.splice(i, 1);
       }
     }
+  }
+  save(){
+    this.wordlist.name = this.name;
+    console.log(this.wordlist);
+    // this.service.editWordList(this.wordlist);
   }
 }

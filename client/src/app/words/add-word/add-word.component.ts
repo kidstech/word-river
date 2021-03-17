@@ -10,10 +10,12 @@ import { Word } from 'src/app/datatypes/word';
 export class AddWordComponent implements OnInit {
   @Output() addWord = new EventEmitter();
 
-  forms = [''];
+  forms = [];
   wordName = '';
-  finished = true;
+  finished = false;
   type: string;
+
+  added = false;
 
   valid: boolean;
 
@@ -32,14 +34,19 @@ export class AddWordComponent implements OnInit {
   ngOnInit(): void {
   }
   add(val) {
-    if (this.forms.length === 1 && this.forms[0] === '') {
-      this.forms = [];
+    if (!this.added) {
+      this.forms.push('');
+      this.added = true;
     }
-    this.forms.push(val);
-    console.log(this.forms);
+    else { this.forms.push(val); }
   }
 
   save() {
-    this.addWord.emit(new Word(this.wordName, this.forms, this.type || undefined));
+    this.addWord.emit({name:this.wordName,forms: this.forms.slice(1),type: this.type});
+    console.log(this.forms + this.wordName + this.type);
+    this.wordName = '';
+    this.forms = [];
+    this.added = false;
+    this.finished = false;
   }
 }
