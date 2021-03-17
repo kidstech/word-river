@@ -7,7 +7,7 @@
     <button *ngIf="added" mat-raised-button color="primary" class="add" (click)="add()">
       Added!
     </button>
-    <button *ngIf="!added" mat-raised-button color="accent" class="add" (click)="add()">
+    <button *ngIf="!added" mat-raised-button color="accent" id="add-form-button" class="add" (click)="add()">
       <mat-icon *ngIf="!added" color="white">add</mat-icon>
     </button>
   </div>

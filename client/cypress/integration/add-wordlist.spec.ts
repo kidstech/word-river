@@ -39,15 +39,16 @@ describe('Add Wordlist', () => {
     page.getFormItems().should('have.length', '1');
   });
   it('Add form button does not work for empty input', () => {
+    page.getInitialButton().click();
     page.getAddFormButton().click();
     page.getFormItems().should('have.length', '1');
   });
   it('Add form works for valid input', () => {
-    page.getAddFormButton().click();
+    page.getInitialButton().click();
     page.getFormItems().should('have.length', '1');
     page.getFormField().type('sdas');
     page.getAddFormButton().last().click();
-    page.getAddFormButton().should('have.length', '2');
+    page.getFormItems().should('have.length', '2');
   });
 
 });

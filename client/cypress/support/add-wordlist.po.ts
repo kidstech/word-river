@@ -8,7 +8,7 @@ export class AddWordListPage {
   }
 
   addWordListButton() {
-    return cy.get('[data-test=confirmAddWordlistButton]');
+    return cy.get('[data-test=confirmAddWordListButton]');
   }
   addWordButton() {
     return cy.get('[data-test=confirmAddWordButton]');
@@ -30,10 +30,10 @@ export class AddWordListPage {
   }
 
   getInitialButton() {
-    return cy.get('.add-word-btn');
+    return cy.get('.add-form-btn');
   }
   getAddFormButton() {
-    return cy.get('.add');
+    return cy.get('#add-form-button');
   }
   getFormField() {
     return cy.get('.formfield');
@@ -42,7 +42,7 @@ export class AddWordListPage {
     return cy.get('.wordcard');
   }
   addWordList(newWordlist: WordList) {
-    this.wordTextField().type(newWordlist.name);
+    this.getWordListName().type(newWordlist.name);
     this.addWord({ word: 'gg', type: 'nouns' });
     return this.addWordListButton().click();
   }
