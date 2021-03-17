@@ -32,6 +32,6 @@
     </div>
   </mat-card-content>
   <div>
-    <button mat-button [routerLink]="['/wordlist', this.wordlist.name]" class="btn">View WordList</button>
+    <button *ngIf="!disableButton" mat-button [routerLink]="['/wordlist', this.wordlist.name]" class="btn">View WordList</button>
   </div>
 </mat-card>

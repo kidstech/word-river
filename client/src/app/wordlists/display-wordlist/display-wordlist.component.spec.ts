@@ -22,4 +22,8 @@ describe('DisplayWordlistComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should count number of words', () => {
+
+  });
 });

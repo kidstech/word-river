@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ViewWordlistComponent } from './view-wordlist.component';
 
 describe('ViewWordlistComponent', () => {

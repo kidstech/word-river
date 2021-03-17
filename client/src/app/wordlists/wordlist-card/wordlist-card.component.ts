@@ -9,6 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class WordlistCardComponent implements OnInit {
 
   @Input() wordlist: WordList;
+  @Input() disableButton = false;
 
   constructor() { }
 

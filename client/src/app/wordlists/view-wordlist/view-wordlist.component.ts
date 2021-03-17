@@ -38,8 +38,9 @@ export class ViewWordlistComponent implements OnInit {
   }
 
   enable(val: any) {
-
   }
+
+
   getAllWords() {
     const temp: Word[] = [];
     if (this.wordlist) {

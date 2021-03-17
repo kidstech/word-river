@@ -52,23 +52,24 @@ export class EditWordComponent implements OnInit, OnChanges {
   check() {
     this.finished =
       this.wordname.length > 0 &&
-      (['Noun', 'Adjective', 'Verb', 'Noun']).includes(this.editedType);
+      (['Noun', 'Adjective', 'Verb', 'Misc']).includes(this.editedType);
     console.log(this.wordname.length);
 
     return this.finished;
   }
 
   save() {
-    const t: string = this.editedType === 'Noun' ? 'nouns' : this.editedType === 'Verb' ?
+    const tedited: string = this.editedType === 'Noun' ? 'nouns' : this.editedType === 'Verb' ?
       'verbs' : this.editedType === 'Adjective' ? 'adjectives' : 'misc';
-    const t2: string = this.originalType === 'Noun' ? 'nouns' : this.editedType === 'Verb' ?
-      'verbs' : this.editedType === 'Adjective' ? 'adjectives' : 'misc';
-    const list: Word[] = this.wordList[t];
+    const toriginal: string = this.originalType === 'Noun' ? 'nouns' : this.originalType === 'Verb' ?
+      'verbs' : this.originalType === 'Adjective' ? 'adjectives' : 'misc';
+    const loriginal: Word[] = this.wordList[tedited];
+    const ledited: Word[] = this.wordList[toriginal];
 
-    const index = list.indexOf(this.word);
+    const index = loriginal.indexOf(this.word);
     if(index === -1){
-      list.push({word:this.wordname,forms:this.forms});
-      // this.wordList[].splice(,1);
+      ledited.push({word:this.wordname,forms:this.forms});
+      // loriginal.splice(,1);
     }
     // this.service.editWordList()
     // TODO: FINISH LATER

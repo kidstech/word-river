@@ -1,7 +1,4 @@
 <div>
-
-
-
   <div class="content">
     <div class="left">
       <mat-card style="margin-bottom: 20px;">
@@ -9,14 +6,7 @@
           <div class="title-container">
             <mat-form-field class="new-word">
               <mat-label>Enter Word List Name</mat-label>
-            <input matInput placeholder="Name" formControlName="name"
-                  required>
-            <mat-error *ngFor="let validation of addWordListValidationMessages.name">
-              <mat-error class="error-message" data-test="nameError"
-                        *ngIf="addWordListForm.get('name').hasError(validation.type) && (addWordListForm.get('name').dirty || addWordListForm.get('name').touched)">
-                {{validation.message}}
-              </mat-error>
-            </mat-error>
+              <input matInput chan (input)="check()" [(ngModel)]="wordlistname" data-test="currentName" placeholder="name">
             </mat-form-field>
             <mat-checkbox class="enabled" [checked]="true" (change)="enable($event.checked)">Enabled</mat-checkbox>
           </div>
@@ -24,7 +14,7 @@
       </mat-card>
       <app-add-word></app-add-word>
       <br>
-      <button mat-raised-button class="export" style="padding:20px;" color="primary"[disabled]="!addWordListForm.valid"
+      <button mat-raised-button [disabled]="!finished" class="save" style="padding:20px;" color="primary"
       type="submit"
       data-test="confirmAddWorListButton">Save word list</button>
     </div>

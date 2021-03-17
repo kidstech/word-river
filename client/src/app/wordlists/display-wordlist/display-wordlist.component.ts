@@ -10,13 +10,14 @@ import { WordList } from 'src/app/datatypes/wordlist';
 export class DisplayWordlistComponent implements OnInit {
   title = 'Word Lists';
   list: WordList[] = [];
-  wordCount = this.countWords();
+  wordcount = 0;
 
   constructor(private service: WordListService) { }
 
   ngOnInit(): void {
     this.service.getWordList().subscribe(list=>{
       this.list = list;
+      this.countWords();
     });
   }
 
@@ -27,7 +28,7 @@ export class DisplayWordlistComponent implements OnInit {
         count += w.adjectives.length + w.nouns.length + w.verbs.length + w.misc.length;
       });
     }
-    return count;
+    this.wordcount = count;
   }
 
 }

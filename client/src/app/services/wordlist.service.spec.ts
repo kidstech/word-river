@@ -128,4 +128,18 @@ describe('WordListService', () => {
 
     req.flush(testWordLists[1]);
   });
+
+  it('deleteWordList() puts to api/wordLists', () => {
+
+    service.deleteWordList(testWordLists[1]).subscribe(
+      wordList => expect(wordList).toBe(testWordLists[1])
+    );
+
+    const req = httpTestingController.expectOne(service.wordListUrl);
+
+    expect(req.request.method).toEqual('DELETE');
+    expect(req.request.body).toEqual(testWordLists[1]);
+
+    req.flush(testWordLists[1]);
+  });
 });
