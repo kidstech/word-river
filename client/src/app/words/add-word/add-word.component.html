@@ -13,7 +13,7 @@
         <h4>Word Type</h4>
         <mat-form-field appearance="fill">
           <mat-label>Select a type</mat-label>
-          <mat-select (selectionChange)="check()" [(ngModel)]="type">
+          <mat-select (selectionChange)="check()" id="select" [(ngModel)]="type">
             <mat-option>None</mat-option>
             <mat-option value="nouns">Noun</mat-option>
             <mat-option value="verbs">Verb</mat-option>
@@ -26,10 +26,10 @@
     </div>
     <button *ngIf="!added" (click)="add('')" mat-raised-button class="add-word-btn" style="margin-bottom: 40px;" color="accent">Add a word
       form</button>
-      <app-word-form  *ngFor="let i of forms" (form)="add($event)"></app-word-form>
+      <app-word-form class="form_item"  *ngFor="let i of forms" (form)="add($event)"></app-word-form>
 
     <div class="word-forms">
-      <button [disabled]="!finished" (click)="save()" mat-raised-button class="add-word-btn" color="primary">Add
+      <button data-test="confirmAddWordButton" [disabled]="!finished" (click)="save()" mat-raised-button class="add-word-btn" color="primary">Add
         Word</button>
     </div>
 

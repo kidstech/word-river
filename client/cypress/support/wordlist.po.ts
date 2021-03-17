@@ -22,4 +22,8 @@ export class WordListPage {
     addWordListButton() {
         return cy.get('[data-test=addWordListButton]');
       }
+
+    importWordListButton() {
+        return cy.get('[data-test=importWordListButton]');
+      }
 }

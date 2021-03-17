@@ -2,7 +2,7 @@
   <div class="outer">
     <mat-form-field class="field">
       <mat-label>Enter word form</mat-label>
-      <input matInput [(ngModel)]="wordForm">
+      <input matInput class="formfield" [(ngModel)]="wordForm">
     </mat-form-field>
     <button *ngIf="added" mat-raised-button color="primary" class="add" (click)="add()">
       Added!

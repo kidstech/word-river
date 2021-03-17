@@ -9,8 +9,8 @@
     <h3 *ngIf="validFile  === false"class="failure">Invalid JSON file!</h3>
 
     <div class="btn-container">
-      <button mat-raised-button [disabled]="!validFile" (click)="save()" class="save-btn" color="primary">Import</button>
-      <button mat-raised-button routerLink="/wordlist" class="cancel-btn" color="warn">Cancel</button>
+      <button mat-raised-button [disabled]="!validFile" data-test='confirmImportButton' (click)="save()" class="save-btn" color="primary">Import</button>
+      <button mat-raised-button data-test='confirmCancelImportButton' routerLink="/wordlist" class="cancel-btn" color="warn">Cancel</button>
     </div>
   </mat-card>
   <app-wordlist-card [disableButton]="true" style="margin-top: 50px;" *ngIf="validFile" [wordlist]="wordlist">

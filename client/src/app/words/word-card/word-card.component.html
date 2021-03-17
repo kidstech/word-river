@@ -11,6 +11,6 @@
 
   </mat-card-content>
   <div>
-    <button *ngIf="!viewing" mat-button (click)="deleteWord()" class="btn">Delete Word</button>
+    <button data-test= "deleteWordButton" *ngIf="!viewing" mat-button (click)="deleteWord()" class="btn">Delete Word</button>
   </div>
 </mat-card>

@@ -28,6 +28,11 @@ describe('App', () => {
     cy.url().should('match', /^https?:\/\/[^\/]+\/?$/);
     page.getSidenav()
       .should('be.hidden');
+
+    page.getNavLink('Wordlists').click();
+    cy.url().should('match', /\/wordlist$/);
+    page.getSidenav()
+      .should('be.hidden');
   });
 
 });
