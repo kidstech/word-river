@@ -39,12 +39,17 @@ public class ContextPackController {
    */
   public ContextPack getDefaultContextPack() {
     String name = "Birthday Pack";
-    ContextPack ContextPack;
+    ContextPack ContextPack = new ContextPack();
 
     try {
       ContextPack = ContextPackCollection.find(eq("name", name)).first();
     } catch (IllegalArgumentException e) {
-      throw new BadRequestResponse("The requested ContextPack id wasn't a legal Mongo Object ID.");
+      ObjectMapper objectMapper = new ObjectMapper();
+      try {
+        ContextPack = objectMapper.readValue(def, umm3601.contextpacks.ContextPack.class);
+      } catch (JsonProcessingException e1) {
+
+      }
     }
       return ContextPack;
     }
