@@ -1,1 +1,39 @@
-<p>display-wordlist works!</p>
+<div>
+  <div class="content">
+    <div class="left">
+
+      <div class="top">
+        <button data-test="addWordListButton" mat-stroked-button routerLink="/wordlist/new" color="primary">Add wordlist</button>
+        <button data-test="importWordListButton" mat-stroked-button routerLink="/wordlist/import" color="accent">Import wordlist</button>
+      </div>
+      <!-- <mat-card class="search-card" style="margin-bottom: 20px;">
+        <mat-form-field class="search">
+          <mat-label>Name of the wordlist</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <button mat-raised-button class="search-btn" color="primary">Search</button>
+
+      </mat-card> -->
+
+      <div class="bottom">
+        <mat-card class="bottom-card">
+
+          <h2 class="bottom-title">Details</h2>
+          <mat-divider></mat-divider>
+          <br>
+          <p><strong>Number of wordlists: </strong>{{list ? list.length : 0}}</p>
+          <p><strong>Number of words: </strong>{{wordcount}}</p>
+
+          <!-- Could include information about the wordlists-->
+          <!-- ex. #of wordlists, # of words, etc.-->
+        </mat-card>
+      </div>
+    </div>
+    <div class="right">
+      <!--List of wordlists goes here!-->
+      <app-wordlist-card class="wordlist-cards" *ngFor="let wordlist of list" [wordlist]="wordlist">
+
+      </app-wordlist-card>
+    </div>
+  </div>
+</div>

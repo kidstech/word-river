@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,6 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatChipsModule} from '@angular/material/chips';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { UserListComponent } from './users/user-list.component';
@@ -32,12 +34,16 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { UserCardComponent } from './users/user-card.component';
 import { UserProfileComponent } from './users/user-profile.component';
 import { AddUserComponent } from './users/add-user.component';
-import { AddWordlistComponent } from './wordlists/add-wordlist/add-wordlist.component';
+import { AddWordListComponent } from './wordlists/add-wordlist/add-wordlist.component';
 import { DisplayWordlistComponent } from './wordlists/display-wordlist/display-wordlist.component';
 import { ImportWordlistComponent } from './wordlists/import-wordlist/import-wordlist.component';
 import { WordCardComponent } from './words/word-card/word-card.component';
-import { EditWordComponent } from './words/edit-word/edit-word.component';
 import { AddWordComponent } from './words/add-word/add-word.component';
+import { WordListService } from './services/wordlist.service';
+import { ViewWordlistComponent } from './wordlists/view-wordlist/view-wordlist.component';
+import { WordlistCardComponent } from './wordlists/wordlist-card/wordlist-card.component';
+import { WordFormComponent } from './words/word-form/word-form.component';
+
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -55,6 +61,9 @@ const MATERIAL_MODULES: any[] = [
   MatFormFieldModule,
   MatDividerModule,
   MatRadioModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatFormFieldModule,
   MatSnackBarModule
 ];
 
@@ -66,12 +75,14 @@ const MATERIAL_MODULES: any[] = [
     UserCardComponent,
     UserProfileComponent,
     AddUserComponent,
-    AddWordlistComponent,
+    AddWordListComponent,
     DisplayWordlistComponent,
     ImportWordlistComponent,
     WordCardComponent,
-    EditWordComponent,
     AddWordComponent,
+    ViewWordlistComponent,
+    WordlistCardComponent,
+    WordFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +96,8 @@ const MATERIAL_MODULES: any[] = [
     LayoutModule,
   ],
   providers: [
-    UserService
+    UserService,
+    WordListService,
   ],
   bootstrap: [AppComponent]
 })
