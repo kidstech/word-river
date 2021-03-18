@@ -40,11 +40,11 @@ jobs:
       with:
         node-version: 14
 
-    - name: Run e2e tests
-      uses: cypress-io/github-action@v2
-      with:
-        start: ${{ github.workspace }}/server/gradlew run -p ${{ github.workspace }}/server/
-        command: npm run e2e
-        working-directory: ./client
+    # - name: Run e2e tests
+    #   uses: cypress-io/github-action@v2
+    #   with:
+    #     start: ${{ github.workspace }}/server/gradlew run -p ${{ github.workspace }}/server/
+    #     command: npm run e2e
+    #     working-directory: ./client
 
 
