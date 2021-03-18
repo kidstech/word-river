@@ -16,7 +16,7 @@ export class ViewWordlistComponent implements OnInit {
   enabled: boolean;
   wordlist: WordList;
   originalName: string;
-  words: Word[];
+  words;
   types: string[];
   getUserSub: Subscription;
 
@@ -32,7 +32,8 @@ export class ViewWordlistComponent implements OnInit {
   addWord(word) {
     console.log(this.wordlist);
     this.wordlist[word.type].unshift({ word: word.name, forms: word.forms });
-    this.words.unshift({ word: word.name, forms: word.forms });
+    this.words.unshift({ word: word.name, forms: word.forms,type: word.type});
+    this.types = this.refreshTypes(this.words);
   }
 
   loadWords() {
@@ -54,7 +55,11 @@ export class ViewWordlistComponent implements OnInit {
     temp.push(...this.wordlist.misc);
     console.log(temp);
     this.words = temp;
-    this.types = temp.map(w =>
+    this.types = this.refreshTypes(temp);
+  }
+
+  refreshTypes(temp){
+    return temp.map(w =>
       this.wordlist.nouns.includes(w) ? 'Noun' :
         this.wordlist.verbs.includes(w) ? 'Verb' :
           this.wordlist.adjectives.includes(w) ? 'Adjective' : 'Misc'

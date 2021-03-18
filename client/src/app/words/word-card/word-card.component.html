@@ -1,7 +1,7 @@
 <mat-card class="word-card">
   <div class="card-header">
     <h1 class="word-name">{{word ? word.word : ''}}</h1>
-    <mat-card-subtitle class="word-type">{{type}}</mat-card-subtitle>
+    <mat-card-subtitle class="word-type">{{type === 'nouns' ? 'Noun' : type === 'verbs' ? 'Verb' :type === 'adjectives' ? 'Adjective' :type === 'misc' ? 'Misc' : type }}</mat-card-subtitle>
   </div>
   <mat-card-content>
     <div class="holder">
