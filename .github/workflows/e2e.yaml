@@ -40,12 +40,6 @@ jobs:
       with:
         node-version: 14
 
-    - name: Seed database
-      uses: cypress-io/github-action@v2
-      with:
-        start: ${{ github.workspace }}/database/mongoseed.bat
-        working-directory: ./server
-
     - name: Run e2e tests
       uses: cypress-io/github-action@v2
       with:
