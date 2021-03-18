@@ -4,19 +4,19 @@ export class WordListPage {
     }
 
     getWordListCards() {
-        return cy.get('.wordlist-cards-container app-wordlist-card');
+        return cy.get('.wordlist-cards');
     }
 
     clickViewWordList(card: Cypress.Chainable<JQuery<HTMLElement>>) {
-        return card.find<HTMLButtonElement>('[viewWordListButton]').click();
+        return card.find<HTMLButtonElement>('[data-test=viewWordListButton]').click();
     }
 
     clickAddWordList(card: Cypress.Chainable<JQuery<HTMLElement>>) {
-        return card.find<HTMLButtonElement>('[addWordListButton]').click();
+        return card.find<HTMLButtonElement>('[data-test=addWordListButton]').click();
     }
 
     clickImportWordList(card: Cypress.Chainable<JQuery<HTMLElement>>) {
-        return card.find<HTMLButtonElement>('[importWordListButton]').click();
+        return card.find<HTMLButtonElement>('[data-test=importWordListButton]').click();
     }
 
     addWordListButton() {

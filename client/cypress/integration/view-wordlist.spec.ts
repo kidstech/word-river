@@ -10,16 +10,14 @@ describe('View WordList', () => {
 
     beforeEach(() => {
         page.navigateTo();
+        cy.task('seed:database');
     });
 
     it('Should load wordlists', () => {
-        page.getWordCards().should('have.length', '1');
+        page.getWordCards().should('have.length', '45');
     });
 
-    it('Should click delete and return to main page', () => {
-        page.deleteWordListButton().click();
-        cy.url().should(url => expect(url.endsWith('/wordlist')).to.be.true);
-    });
+
 
     it('Should delete a word and then save wordlist', () => {
         page.getWordCards().first().then((card) => {
@@ -28,12 +26,9 @@ describe('View WordList', () => {
         });
     });
 
-    it('Should add a word and then click add word button', () => {
-        page.getWordCards().should('have.length', '1');
-        page.addWord({ word: 'Boo', forms: [], type: 'nouns' });
-        page.addWordButton().click();
-        page.getWordCards().should('have.length', '2');
+    it('Should add a word and then click add word button, showing right amount of words', () => {
+        page.getWordCards().should('have.length', '45');
+        page.addWord({ word: 'Boo', forms: [], type: 'misc' });
+        page.getWordCards().should('have.length', '46');
     });
-
-
 });

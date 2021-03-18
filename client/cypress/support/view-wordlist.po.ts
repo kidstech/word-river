@@ -9,7 +9,7 @@ export class ViewWordListPage {
   }
 
   getWordCards() {
-      return cy.get('.word-cards-container app-word-card');
+      return cy.get('.wordcards');
   }
 
   deleteWordListButton() {
@@ -37,7 +37,7 @@ export class ViewWordListPage {
   }
 
   addWordButton() {
-      return cy.get('[data-test=addWordButton]');
+      return cy.get('[data-test=confirmAddWordButton]');
     }
   getWordName() {
       return cy.get(`[data-test=newWord]`);

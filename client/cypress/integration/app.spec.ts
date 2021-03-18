@@ -6,7 +6,7 @@ describe('App', () => {
   beforeEach(() => page.navigateTo());
 
   it('Should have the correct title', () => {
-    page.getAppTitle().should('contain', 'CSCI 3601 Iteration Template');
+    page.getAppTitle().should('contain', 'WordRiver');
   });
 
   it('The sidenav should open, navigate to "Users" and back to "Home"', () => {
@@ -18,16 +18,6 @@ describe('App', () => {
     page.getSidenavButton().click()
       .should('be.visible');
 
-    page.getNavLink('Users').click();
-    cy.url().should('match', /\/users$/);
-    page.getSidenav()
-      .should('be.hidden');
-
-    page.getSidenavButton().click();
-    page.getNavLink('Home').click();
-    cy.url().should('match', /^https?:\/\/[^\/]+\/?$/);
-    page.getSidenav()
-      .should('be.hidden');
 
     page.getNavLink('Wordlists').click();
     cy.url().should('match', /\/wordlist$/);
