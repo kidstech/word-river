@@ -14,7 +14,7 @@ describe('View WordList', () => {
     });
 
     it('Should load wordlists', () => {
-        page.getWordCards().should('have.length', '45');
+        page.getWordCards().should('have.length', '3');
     });
 
 
@@ -27,8 +27,8 @@ describe('View WordList', () => {
     });
 
     it('Should add a word and then click add word button, showing right amount of words', () => {
-        page.getWordCards().should('have.length', '45');
+        page.getWordCards().should('have.length', '3');
         page.addWord({ word: 'Boo', forms: [], type: 'misc' });
-        page.getWordCards().should('have.length', '46');
+        page.getWordCards().should('have.length', '4');
     });
 });
