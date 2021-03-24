@@ -10,8 +10,9 @@ import { WordList } from '../datatypes/wordlist';
   providedIn: 'root'
 })
 export class WordListService {
+  readonly defaultPack: string = '605bc9d893b2d94300a98753';
 
-  readonly wordListUrl: string = environment.apiUrl + 'wordlists';
+  readonly wordListUrl: string = `${environment.apiUrl}packs/${this.defaultPack}`;
 
   constructor(private httpClient: HttpClient) {
 
@@ -19,7 +20,7 @@ export class WordListService {
 
   getWordList(): Observable<WordList[]> {
     const httpParams: HttpParams = new HttpParams();
-    return this.httpClient.get<WordList[]>(this.wordListUrl, {
+    return this.httpClient.get<WordList[]>(this.wordListUrl + '/wordlists', {
       params: httpParams,
     });
   }
