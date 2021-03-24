@@ -6,6 +6,7 @@ import { COMMON_IMPORTS } from 'src/app/app-routing.module';
 import { WordList } from 'src/app/datatypes/wordlist';
 import { WordListService } from 'src/app/services/wordlist.service';
 import { MockWordListService } from 'src/testing/wordlist.service.mock';
+import { DisplayWordlistComponent } from '../display-wordlist/display-wordlist.component';
 
 import { ImportWordlistComponent } from './import-wordlist.component';
 
@@ -24,7 +25,9 @@ describe('ImportWordlistComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ImportWordlistComponent ],
-      imports: [HttpClientTestingModule,RouterTestingModule,RouterModule.forRoot([]),COMMON_IMPORTS],
+      imports: [HttpClientTestingModule,RouterTestingModule.withRoutes([
+        { path: 'wordlist', component: DisplayWordlistComponent }
+      ]),COMMON_IMPORTS],
       providers: [{ provide: WordListService, useValue: new MockWordListService() }]
     })
     .compileComponents();
