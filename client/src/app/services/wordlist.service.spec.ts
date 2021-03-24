@@ -83,7 +83,7 @@ describe('WordListService', () => {
       wordLists => expect(wordLists).toBe(testWordLists)
     );
 
-    const req = httpTestingController.expectOne(service.wordListUrl);
+    const req = httpTestingController.expectOne(service.wordListUrl + '/wordlists');
     expect(req.request.method).toEqual('GET');
     req.flush(testWordLists);
   });
