@@ -12,6 +12,14 @@ import { ImportWordlistComponent } from './import-wordlist.component';
 describe('ImportWordlistComponent', () => {
   let component: ImportWordlistComponent;
   let fixture: ComponentFixture<ImportWordlistComponent>;
+  const ex = {
+    name: 'animal',
+    enabled: true,
+    nouns:[{word:'pig',forms:['pig','pigs']}],
+    verbs:[{word:'sniff',forms:['sniffs','sniffing']}],
+    adjectives:[{word:'round',forms:['rounder','round']}],
+    misc:[{word:'to',forms:['to']}]
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -30,6 +38,12 @@ describe('ImportWordlistComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should save', () => {
+    component.wordlist = ex;
+    expect(component.save()).toBe(true);
+    component.wordlist = undefined;
+    expect(component.save()).toBe(false);
   });
 
 });

@@ -15,9 +15,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { UserListComponent } from './users/user-list.component';
-import { UserProfileComponent } from './users/user-profile.component';
-import { AddUserComponent } from './users/add-user.component';
 import { ViewWordlistComponent } from './wordlists/view-wordlist/view-wordlist.component';
 import { AddWordListComponent } from './wordlists/add-wordlist/add-wordlist.component';
 import { ImportWordlistComponent } from './wordlists/import-wordlist/import-wordlist.component';
@@ -42,10 +39,7 @@ export const COMMON_IMPORTS = [
 
 const routes: Routes = [
   {path: '', component: DisplayWordlistComponent},
-  {path: 'users', component: UserListComponent},
   {path: 'wordlist', component: DisplayWordlistComponent},
-  {path: 'users/new', component: AddUserComponent},
-  {path: 'users/:id', component: UserProfileComponent},
   {path: 'wordlist/new', component: AddWordListComponent},
   {path: 'wordlist/import', component: ImportWordlistComponent},
   {path: 'wordlist/:name', component: ViewWordlistComponent},
