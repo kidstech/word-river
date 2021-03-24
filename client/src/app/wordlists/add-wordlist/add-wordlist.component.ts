@@ -1,7 +1,5 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Word } from 'src/app/datatypes/word';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WordList } from 'src/app/datatypes/wordlist';
 import { WordListService } from 'src/app/services/wordlist.service';

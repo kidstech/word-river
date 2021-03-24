@@ -1,6 +1,4 @@
-import { FnParam } from '@angular/compiler/src/output/output_ast';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Word } from 'src/app/datatypes/word';
 
 @Component({
   selector: 'app-add-word',
