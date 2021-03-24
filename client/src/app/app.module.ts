@@ -1,12 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -25,13 +23,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
-
 import { HomeComponent } from './home/home.component';
-
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
-
 import { AddWordListComponent } from './wordlists/add-wordlist/add-wordlist.component';
 import { DisplayWordlistComponent } from './wordlists/display-wordlist/display-wordlist.component';
 import { ImportWordlistComponent } from './wordlists/import-wordlist/import-wordlist.component';
