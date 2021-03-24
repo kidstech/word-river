@@ -1,6 +1,5 @@
 import { Router } from '@angular/router';
 import { WordListService } from './../../services/wordlist.service';
-import { JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { WordList } from 'src/app/datatypes/wordlist';
 

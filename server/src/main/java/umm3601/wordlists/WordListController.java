@@ -22,7 +22,7 @@ public class WordListController {
   /**
    * Construct a controller for word lists.
    *
-   * @param database the database containing word list data
+   * @param db the database containing word list data
    */
   public WordListController(MongoDatabase db) {
 

@@ -1,6 +1,3 @@
-import { Word } from 'src/app/datatypes/word';
-import { WordList } from 'src/app/datatypes/wordlist';
-
 
 
 export class ViewWordListPage {

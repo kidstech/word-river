@@ -28,10 +28,6 @@ public class ContextPackController {
 
   /**
    * Get the default contextpack
-   *
-   * @param ctx a Javalin HTTP context
-   * @throws JsonProcessingException
-   * @throws JsonMappingException
    */
   public ContextPack getDefaultContextPack() {
     String name = "Birthday Pack";

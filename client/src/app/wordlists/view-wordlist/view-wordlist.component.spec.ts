@@ -1,12 +1,11 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ViewWordlistComponent } from './view-wordlist.component';
-import { WordList } from './../../datatypes/wordlist';
 import { COMMON_IMPORTS } from 'src/app/app-routing.module';
 import { WordListService } from 'src/app/services/wordlist.service';
 import { MockWordListService } from 'src/testing/wordlist.service.mock';
+import { DisplayWordlistComponent } from '../display-wordlist/display-wordlist.component';
 
 describe('ViewWordlistComponent', () => {
   let component: ViewWordlistComponent;
@@ -15,7 +14,9 @@ describe('ViewWordlistComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ViewWordlistComponent ],
-      imports: [HttpClientTestingModule,RouterTestingModule,RouterModule.forRoot([]),COMMON_IMPORTS],
+      imports: [HttpClientTestingModule,RouterTestingModule.withRoutes([
+        { path: 'wordlist', component: DisplayWordlistComponent }
+      ]),COMMON_IMPORTS],
       providers: [{ provide: WordListService, useValue: new MockWordListService() }]
     })
     .compileComponents();
