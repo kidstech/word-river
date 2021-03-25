@@ -12,7 +12,7 @@ import { WordList } from '../datatypes/wordlist';
 export class WordListService {
   readonly defaultPack: string = '605bc9d893b2d94300a98753';
 
-  readonly wordListUrl: string = `${environment.apiUrl}packs/${this.defaultPack}`;
+  readonly wordListUrl: string = `${environment.apiUrl}packs`;
 
   constructor(private httpClient: HttpClient) {
 
@@ -20,22 +20,35 @@ export class WordListService {
 
   getWordList(): Observable<WordList[]> {
     const httpParams: HttpParams = new HttpParams();
-    return this.httpClient.get<WordList[]>(this.wordListUrl + '/wordlists', {
+    const url: string[] = location.href.split('/');
+    const id: string = url[4];
+    return this.httpClient.get<WordList[]>(this.wordListUrl  + '/' + id + '/wordlists', {
       params: httpParams,
     });
   }
 
   getWordListByName(word: string): Observable<WordList> {
-    return this.httpClient.get<WordList>(this.wordListUrl + '/' + word);
+    const httpParams: HttpParams = new HttpParams();
+    const url: string[] = location.href.split('/');
+    const id: string = url[4];
+    const name: string = url[5];
+    return this.httpClient.get<WordList>(this.wordListUrl + '/' + id + '/' + word);
   }
 
   addWordList(newWordList: WordList) {
     // Send post request to add a new word list with the word list data as the body.
-    return this.httpClient.post<WordList>(this.wordListUrl, newWordList).pipe(map(res => res));
+    const httpParams: HttpParams = new HttpParams();
+    const url: string[] = location.href.split('/');
+    const id: string = url[4];
+    return this.httpClient.post<WordList>(this.wordListUrl + '/' + id, newWordList).pipe(map(res => res));
   }
 
   editWordList(name: string,wordList: WordList): Observable<WordList> {
-    return this.httpClient.put<WordList>(this.wordListUrl + '/' + name, wordList).pipe(map(res => res));
+    const httpParams: HttpParams = new HttpParams();
+    const url: string[] = location.href.split('/');
+    const id: string = url[4];
+    const name1: string = url[5];
+    return this.httpClient.put<WordList>(this.wordListUrl + '/' + id + '/' + name1, wordList).pipe(map(res => res));
   }
 
   deleteWordList(deleteWordList: WordList): Observable<WordList> {

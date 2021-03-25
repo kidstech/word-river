@@ -43,7 +43,7 @@ export class AddWordListComponent implements OnInit {
     this.wordList.enabled = this.enabled;
     console.log(this.wordList);
     this.service.addWordList(this.wordList).subscribe();
-    this.router.navigate(['wordlist']);
+    this.router.navigate(['packs', this.getId()]);
   }
 
   enable(val) {
@@ -58,5 +58,11 @@ export class AddWordListComponent implements OnInit {
     this.words.push({word:word.name,forms:word.forms});
     console.log(this.words);
     return word.type;
+  }
+
+  getId() {
+    const url: string[] = location.href.split('/');
+    const id: string = url[4];
+    return id;
   }
 }

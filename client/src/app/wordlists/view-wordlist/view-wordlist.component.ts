@@ -91,7 +91,7 @@ export class ViewWordlistComponent implements OnInit {
     this.wordlist.enabled = this.enabled;
     console.log(this.wordlist);
     this.service.editWordList(this.originalName, this.wordlist).subscribe();
-    this.router.navigate(['wordlist']);
+    this.router.navigate(['packs', this.getId() ]);
   }
   export() {
     this.wordlist.name = this.name;
@@ -102,5 +102,11 @@ export class ViewWordlistComponent implements OnInit {
     a.href = url;
     a.download = 'export.json';
     a.click();
+  }
+
+  getId() {
+    const url: string[] = location.href.split('/');
+    const id: string = url[4];
+    return id;
   }
 }

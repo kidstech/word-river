@@ -31,4 +31,12 @@ export class DisplayWordlistComponent implements OnInit {
     this.wordcount = count;
   }
 
+  getId(): string {
+    const url: string[] = location.href.split('/');
+    const id: string = url[4];
+    return id;
+  }
+
+
+
 }

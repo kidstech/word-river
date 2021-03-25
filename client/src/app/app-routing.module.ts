@@ -42,9 +42,9 @@ const routes: Routes = [
   {path: '', component: DisplayContextPacksComponent},
   {path: 'packs/new', component: AddContextPackComponent},
   {path: 'packs/:id', component: DisplayWordlistComponent},
-  {path: 'wordlist/new', component: AddWordListComponent},
   {path: 'wordlist/import', component: ImportWordlistComponent},
-  {path: 'wordlist/:name', component: ViewWordlistComponent},
+  {path: 'packs/:id/new', component: AddWordListComponent},
+  {path: 'packs/:id/:name', component: ViewWordlistComponent},
 
 ];
 
