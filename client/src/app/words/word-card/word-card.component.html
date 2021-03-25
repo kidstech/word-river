@@ -1,6 +1,9 @@
 <mat-card class="word-card">
   <div class="card-header">
-    <h1 class="word-name">{{word ? word.word : ''}}</h1>
+    <div class="top">
+      <h1 class="word-name">{{word ? word.word : ''}}</h1>
+      <button data-test= "deleteWordButton" *ngIf="!viewing" mat-button (click)="deleteWord()" class="btn"><mat-icon>delete</mat-icon></button>
+    </div>
     <mat-card-subtitle class="word-type">{{type === 'nouns' ? 'Noun' : type === 'verbs' ? 'Verb' :type === 'adjectives' ? 'Adjective' :type === 'misc' ? 'Misc' : type }}</mat-card-subtitle>
   </div>
   <mat-card-content>
@@ -10,7 +13,4 @@
     </div>
 
   </mat-card-content>
-  <div>
-    <button data-test= "deleteWordButton" *ngIf="!viewing" mat-button (click)="deleteWord()" class="btn">Delete Word</button>
-  </div>
 </mat-card>
