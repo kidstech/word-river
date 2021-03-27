@@ -2,7 +2,7 @@ import { WordList } from 'src/app/datatypes/wordlist';
 
 export class AddWordListPage {
   navigateTo() {
-    return cy.visit('/wordlist/new');
+    return cy.visit('/packs/605bc9d893b2d94300a98753/new');
   }
 
   addWordListButton() {

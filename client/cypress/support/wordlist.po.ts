@@ -1,6 +1,6 @@
 export class WordListPage {
     navigateTo() {
-      return cy.visit('/wordlist');
+      return cy.visit('/packs/605bc9d893b2d94300a98753');
     }
 
     getWordListCards() {
