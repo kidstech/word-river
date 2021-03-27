@@ -10,16 +10,11 @@ export class WordlistCardComponent implements OnInit {
 
   @Input() wordlist: WordList;
   @Input() disableButton = false;
+  @Input() id;
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  getId(): string {
-    const url: string[] = location.href.split('/');
-    const id: string = url[4];
-    return id;
   }
 
 }

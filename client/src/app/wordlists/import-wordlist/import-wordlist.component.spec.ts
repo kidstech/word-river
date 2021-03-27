@@ -1,7 +1,8 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
 import { COMMON_IMPORTS } from 'src/app/app-routing.module';
 import { WordList } from 'src/app/datatypes/wordlist';
 import { WordListService } from 'src/app/services/wordlist.service';
@@ -13,6 +14,8 @@ import { ImportWordlistComponent } from './import-wordlist.component';
 describe('ImportWordlistComponent', () => {
   let component: ImportWordlistComponent;
   let fixture: ComponentFixture<ImportWordlistComponent>;
+  const paramMap = new Map();
+  paramMap.set('id','meow');
   const ex = {
     name: 'animal',
     enabled: true,
@@ -28,7 +31,12 @@ describe('ImportWordlistComponent', () => {
       imports: [HttpClientTestingModule,RouterTestingModule.withRoutes([
         { path: 'wordlist', component: DisplayWordlistComponent }
       ]),COMMON_IMPORTS],
-      providers: [{ provide: WordListService, useValue: new MockWordListService() }]
+      providers: [{ provide: WordListService, useValue: new MockWordListService() },  {
+        provide: ActivatedRoute,
+        useValue: {
+          paramMap: of(paramMap)
+        }
+      }]
     })
     .compileComponents();
   });

@@ -1,7 +1,7 @@
 import { DisplayWordlistComponent } from './../display-wordlist/display-wordlist.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, convertToParamMap, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { COMMON_IMPORTS } from 'src/app/app-routing.module';
 import { Word } from 'src/app/datatypes/word';
@@ -9,18 +9,27 @@ import { WordListService } from 'src/app/services/wordlist.service';
 import { MockWordListService } from 'src/testing/wordlist.service.mock';
 
 import { AddWordListComponent } from './add-wordlist.component';
+import { Observable, of } from 'rxjs';
 
 describe('AddWordListComponent', () => {
   let component: AddWordListComponent;
   let fixture: ComponentFixture<AddWordListComponent>;
+  const paramMap = new Map();
+  paramMap.set('id','meow');
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AddWordListComponent],
       imports: [HttpClientTestingModule, RouterTestingModule.withRoutes([
-        { path: 'wordlist', component: DisplayWordlistComponent }
+        { path: 'packs/:id', component: DisplayWordlistComponent }
       ]), COMMON_IMPORTS],
-      providers: [{ provide: WordListService, useValue: new MockWordListService() }]
+      providers: [{ provide: WordListService, useValue: new MockWordListService()}, {
+        provide: ActivatedRoute,
+        useValue: {
+          paramMap: of(paramMap)
+        }
+      }
+      ]
     })
       .compileComponents();
   });

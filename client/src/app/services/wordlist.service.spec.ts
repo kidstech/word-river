@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { MockWordListService } from 'src/testing/wordlist.service.mock';
 import { WordList } from '../datatypes/wordlist';
 import { WordListService } from './wordlist.service';
 
 describe('WordListService', () => {
   let service: WordListService;
+  const  id = 'meow';
   const testWordLists: any = [
     {
       name: 'birthday',
@@ -56,7 +58,6 @@ describe('WordListService', () => {
       misc: []
     }
   ];
-  let wordListService: WordListService;
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
 
@@ -78,12 +79,12 @@ describe('WordListService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('getWordList() calls api/wordLists', () => {
-    service.getWordList().subscribe(
+  it('getWordList() calls api/packs/:id/wordlists', () => {
+    service.getWordList(id).subscribe(
       wordLists => expect(wordLists).toBe(testWordLists)
     );
 
-    const req = httpTestingController.expectOne(service.wordListUrl + '/wordlists');
+    const req = httpTestingController.expectOne(service.wordListUrl + id + '/wordlists');
     expect(req.request.method).toEqual('GET');
     req.flush(testWordLists);
   });
@@ -91,11 +92,11 @@ describe('WordListService', () => {
   it('getWordListByName() calls api/wordLists/name', () => {
     const targetWordList: WordList = testWordLists[1];
     const targetName: string = targetWordList.name;
-    service.getWordListByName(targetName).subscribe(
+    service.getWordListByName(targetName, id).subscribe(
       wordList => expect(wordList).toBe(targetWordList)
     );
 
-    const expectedUrl: string = service.wordListUrl + '/' + targetName;
+    const expectedUrl: string = service.wordListUrl + id + '/' + targetName;
     const req = httpTestingController.expectOne(expectedUrl);
     expect(req.request.method).toEqual('GET');
     req.flush(targetWordList);
@@ -103,11 +104,11 @@ describe('WordListService', () => {
 
   it('addWordList() posts to api/wordLists', () => {
 
-    service.addWordList(testWordLists[1]).subscribe(
+    service.addWordList(testWordLists[1], id).subscribe(
       name => expect(name).toBe(testWordLists[1].name)
     );
 
-    const req = httpTestingController.expectOne(service.wordListUrl);
+    const req = httpTestingController.expectOne(service.wordListUrl + id);
 
     expect(req.request.method).toEqual('POST');
     expect(req.request.body).toEqual(testWordLists[1]);
@@ -117,11 +118,11 @@ describe('WordListService', () => {
 
   it('editWordList() puts to api/wordLists', () => {
 
-    service.editWordList(testWordLists[1].name,testWordLists[1]).subscribe(
+    service.editWordList(testWordLists[1].name,testWordLists[1], id).subscribe(
       wordList => expect(wordList).toBe(testWordLists[1])
     );
 
-    const req = httpTestingController.expectOne(service.wordListUrl + '/farm_animals');
+    const req = httpTestingController.expectOne(service.wordListUrl + id + '/farm_animals');
 
     expect(req.request.method).toEqual('PUT');
     expect(req.request.body).toEqual(testWordLists[1]);
@@ -131,11 +132,11 @@ describe('WordListService', () => {
 
   it('deleteWordList() puts to api/wordLists', () => {
 
-    service.deleteWordList(testWordLists[1]).subscribe(
+    service.deleteWordList(testWordLists[1], id).subscribe(
       wordList => expect(wordList).toBe(testWordLists[1])
     );
 
-    const req = httpTestingController.expectOne(service.wordListUrl + '/farm_animals');
+    const req = httpTestingController.expectOne(service.wordListUrl + id + '/farm_animals');
 
     expect(req.request.method).toEqual('DELETE');
 

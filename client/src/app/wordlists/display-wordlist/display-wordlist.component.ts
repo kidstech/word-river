@@ -1,6 +1,7 @@
 import { WordListService } from 'src/app/services/wordlist.service';
 import { Component, OnInit } from '@angular/core';
 import { WordList } from 'src/app/datatypes/wordlist';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-display-wordlist',
@@ -11,13 +12,18 @@ export class DisplayWordlistComponent implements OnInit {
   title = 'Word Lists';
   list: WordList[] = [];
   wordcount = 0;
+  id: string;
 
-  constructor(private service: WordListService) { }
+  constructor(private route: ActivatedRoute, private service: WordListService,  private router: Router) { }
 
   ngOnInit(): void {
-    this.service.getWordList().subscribe(list=>{
+    this.route.paramMap.subscribe((pmap) => {
+      this.id = pmap ? pmap.get('id') : '';
+    });
+    this.service.getWordList(this.id).subscribe(list=>{
       this.list = list;
       this.countWords();
+      console.log(list);
     });
   }
 
@@ -31,11 +37,6 @@ export class DisplayWordlistComponent implements OnInit {
     this.wordcount = count;
   }
 
-  getId(): string {
-    const url: string[] = location.href.split('/');
-    const id: string = url[4];
-    return id;
-  }
 
 
 
