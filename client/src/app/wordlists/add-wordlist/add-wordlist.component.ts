@@ -15,6 +15,7 @@ export class AddWordListComponent implements OnInit {
   wordlistname = '';
   wordType = '';
   finished = false;
+  id: string;
 
   words: Word[] = [];
   enabled = true;
@@ -36,14 +37,17 @@ export class AddWordListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.paramMap.subscribe((pmap) => {
+      this.id =  pmap.get('id');
+    });
   }
 
   save() {
     this.wordList.name = this.wordlistname;
     this.wordList.enabled = this.enabled;
     console.log(this.wordList);
-    this.service.addWordList(this.wordList).subscribe();
-    this.router.navigate(['wordlist']);
+    this.service.addWordList(this.wordList, this.id).subscribe();
+    this.router.navigate(['packs', this.id]);
   }
 
   enable(val) {
@@ -59,4 +63,5 @@ export class AddWordListComponent implements OnInit {
     console.log(this.words);
     return word.type;
   }
+
 }

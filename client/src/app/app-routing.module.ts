@@ -18,6 +18,8 @@ import { ViewWordlistComponent } from './wordlists/view-wordlist/view-wordlist.c
 import { AddWordListComponent } from './wordlists/add-wordlist/add-wordlist.component';
 import { ImportWordlistComponent } from './wordlists/import-wordlist/import-wordlist.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DisplayContextPacksComponent } from './context-packs/display-contextPacks/display-context-packs.component';
+import { AddContextPackComponent } from './context-packs/add-contextPacks/add-contextPacks.component';
 
 export const COMMON_IMPORTS = [
   MatButtonModule,
@@ -37,11 +39,12 @@ export const COMMON_IMPORTS = [
 ];
 
 const routes: Routes = [
-  {path: '', component: DisplayWordlistComponent},
-  {path: 'wordlist', component: DisplayWordlistComponent},
-  {path: 'wordlist/new', component: AddWordListComponent},
-  {path: 'wordlist/import', component: ImportWordlistComponent},
-  {path: 'wordlist/:name', component: ViewWordlistComponent},
+  {path: '', component: DisplayContextPacksComponent},
+  {path: 'packs/new', component: AddContextPackComponent},
+  {path: 'packs/:id', component: DisplayWordlistComponent},
+  {path: 'packs/:id/import', component: ImportWordlistComponent},
+  {path: 'packs/:id/new', component: AddWordListComponent},
+  {path: 'packs/:id/:name', component: ViewWordlistComponent},
 
 ];
 

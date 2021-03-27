@@ -152,7 +152,7 @@ public class WordRiverController {
       throw new BadRequestResponse("The requested context pack id wasn't a legal Mongo Object ID.");
     }
     if (wordlists == null) {
-      throw new NotFoundResponse("The requested word list was not found");
+      throw new NotFoundResponse("The requested word lists were not found");
     } else {
       ctx.json(wordlists);
     }

@@ -2,7 +2,7 @@
 
 export class ViewWordListPage {
   navigateTo() {
-    return cy.visit('/wordlist/birthday');
+    return cy.visit('/packs/604cdf3cbb468a7463ad4d85/Woods');
   }
 
   getWordCards() {

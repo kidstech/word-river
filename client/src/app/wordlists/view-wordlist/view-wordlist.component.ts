@@ -12,6 +12,7 @@ import { Word } from 'src/app/datatypes/word';
 })
 export class ViewWordlistComponent implements OnInit {
 
+  id: string;
   name = '';
   enabled: boolean;
   wordlist: WordList;
@@ -24,7 +25,8 @@ export class ViewWordlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((pmap) => {
-      this.name = pmap ? pmap.get('name') : '';
+      this.name = pmap.get('name');
+      this.id =  pmap.get('id');
       this.loadWords();
     });
   }
@@ -37,7 +39,7 @@ export class ViewWordlistComponent implements OnInit {
   }
 
   loadWords() {
-    this.getUserSub = this.service.getWordListByName(this.name).subscribe(i => {
+    this.getUserSub = this.service.getWordListByName(this.name, this.id).subscribe(i => {
       this.wordlist = i;
       this.originalName = i.name;
       this.getAllWords();
@@ -67,8 +69,8 @@ export class ViewWordlistComponent implements OnInit {
   }
 
   deleteWordList() {
-    const c = this.service.deleteWordList(this.wordlist).subscribe();
-    this.router.navigate(['wordlist']);
+    const c = this.service.deleteWordList(this.wordlist, this.id).subscribe();
+    this.router.navigate(['packs', this.id]);
     return c;
   }
 
@@ -90,8 +92,8 @@ export class ViewWordlistComponent implements OnInit {
     this.wordlist.name = this.name;
     this.wordlist.enabled = this.enabled;
     console.log(this.wordlist);
-    this.service.editWordList(this.originalName, this.wordlist).subscribe();
-    this.router.navigate(['wordlist']);
+    this.service.editWordList(this.originalName, this.wordlist, this.id).subscribe();
+    this.router.navigate(['packs', this.id ]);
   }
   export() {
     this.wordlist.name = this.name;
@@ -103,4 +105,5 @@ export class ViewWordlistComponent implements OnInit {
     a.download = 'export.json';
     a.click();
   }
+
 }

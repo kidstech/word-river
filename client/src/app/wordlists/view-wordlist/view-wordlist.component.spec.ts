@@ -6,18 +6,28 @@ import { COMMON_IMPORTS } from 'src/app/app-routing.module';
 import { WordListService } from 'src/app/services/wordlist.service';
 import { MockWordListService } from 'src/testing/wordlist.service.mock';
 import { DisplayWordlistComponent } from '../display-wordlist/display-wordlist.component';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('ViewWordlistComponent', () => {
   let component: ViewWordlistComponent;
   let fixture: ComponentFixture<ViewWordlistComponent>;
+  const paramMap = new Map();
+  paramMap.set('name','animal');
+  paramMap.set('id','meow');
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ViewWordlistComponent ],
       imports: [HttpClientTestingModule,RouterTestingModule.withRoutes([
-        { path: 'wordlist', component: DisplayWordlistComponent }
+        { path: 'packs/meow', component: DisplayWordlistComponent }
       ]),COMMON_IMPORTS],
-      providers: [{ provide: WordListService, useValue: new MockWordListService() }]
+      providers: [{ provide: WordListService, useValue: new MockWordListService() }, {
+        provide: ActivatedRoute,
+        useValue: {
+          paramMap: of(paramMap)
+        }
+      }]
     })
     .compileComponents();
   });

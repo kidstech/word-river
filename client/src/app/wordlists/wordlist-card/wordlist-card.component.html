@@ -1,4 +1,4 @@
-<mat-card class="wordList-card">
+  <mat-card class="wordList-card">
   <div>
     <div class="card-header">
       <h1 class="wordList-name">{{wordlist.name}}</h1>
@@ -33,6 +33,6 @@
     </div>
   </mat-card-content>
   <div>
-    <button *ngIf="!disableButton" data-test="viewWordListButton" mat-button [routerLink]="['/wordlist', this.wordlist.name]" class="btn">View WordList</button>
+    <button *ngIf="!disableButton" data-test="viewWordListButton" mat-button [routerLink]="['/packs', id, this.wordlist.name]" class="btn">View WordList</button>
   </div>
 </mat-card>

@@ -10,6 +10,7 @@ export class WordlistCardComponent implements OnInit {
 
   @Input() wordlist: WordList;
   @Input() disableButton = false;
+  @Input() id;
 
   constructor() { }
 

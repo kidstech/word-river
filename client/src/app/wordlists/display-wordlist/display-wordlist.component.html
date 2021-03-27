@@ -3,8 +3,8 @@
     <div class="left">
 
       <div class="top">
-        <button data-test="addWordListButton" mat-stroked-button routerLink="/wordlist/new" color="primary">Add wordlist</button>
-        <button data-test="importWordListButton" mat-stroked-button routerLink="/wordlist/import" color="accent">Import wordlist</button>
+        <button data-test="addWordListButton" mat-stroked-button [routerLink]="['/packs', id, 'new']" color="primary">Add wordlist</button>
+        <button data-test="importWordListButton" mat-stroked-button [routerLink]="['/packs', id, 'import']" color="accent">Import wordlist</button>
       </div>
       <!-- <mat-card class="search-card" style="margin-bottom: 20px;">
         <mat-form-field class="search">
@@ -31,7 +31,7 @@
     </div>
     <div class="right">
       <!--List of wordlists goes here!-->
-      <app-wordlist-card class="wordlist-cards" *ngFor="let wordlist of list" [wordlist]="wordlist">
+      <app-wordlist-card class="wordlist-cards" *ngFor="let wordlist of list" [wordlist]="wordlist" [id] = 'this.id'>
 
       </app-wordlist-card>
     </div>
