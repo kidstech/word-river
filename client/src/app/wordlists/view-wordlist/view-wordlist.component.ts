@@ -25,8 +25,8 @@ export class ViewWordlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((pmap) => {
-      this.name = pmap ? pmap.get('name') : '';
-      this.id = pmap ? pmap.get('id') : '';
+      this.name = pmap.get('name');
+      this.id =  pmap.get('id');
       this.loadWords();
     });
   }
