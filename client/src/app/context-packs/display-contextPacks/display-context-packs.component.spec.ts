@@ -40,7 +40,7 @@ const COMMON_IMPORTS: any[] = [
   RouterTestingModule,
 ];
 
-describe('CpListComponent', () => {
+describe('Display Context-Packs component', () => {
   let dpContextPacks: DisplayContextPacksComponent;
   let fixture: ComponentFixture<DisplayContextPacksComponent>;
 
