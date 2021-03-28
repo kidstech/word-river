@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ContextPackService } from 'src/app/services/contextPack-service/contextpack.service';
 import { ContextPack } from '../../datatypes/contextPacks';
 
 @Component({
@@ -11,9 +12,14 @@ export class ContextPackCardComponent implements OnInit {
   @Input() contextPack: ContextPack;
   @Input() simple ? = false;
 
-  constructor() { }
+  constructor(private packService: ContextPackService) { }
 
   ngOnInit(): void {
+  }
+
+  deletePack() {
+    this.packService.deletePack(this.contextPack._id).subscribe();
+    location.reload();
   }
 
 }
