@@ -30,7 +30,7 @@ export class ContextPackService {
     return this.httpClient.post<{id: string}>(this.contextPackUrl, newPack).pipe(map(res => res.id));
   }
 
-  deletePack(id: string) {
+  deletePack(id: string): Observable<string> {
     return this.httpClient.delete<{id: string}>(this.contextPackUrl + '/' + id).pipe(map(res=>res.id));
   }
 

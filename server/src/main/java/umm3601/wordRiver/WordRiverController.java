@@ -108,7 +108,7 @@ public class WordRiverController {
     try {
       if (ctxCollection.findOne(eq("_id", new ObjectId(id))) == null)
         throw new NotFoundResponse("That context pack does not exist.");
-        System.out.println("Hello");
+      ctx.json(ImmutableMap.of("id", ctxCollection.findOneById(id)._id));
       ctxCollection.deleteOne(eq("_id", new ObjectId(id)));
     } catch (IllegalArgumentException e) {
       throw new BadRequestResponse("The requested context pack id wasn't a legal Mongo Object ID.");
