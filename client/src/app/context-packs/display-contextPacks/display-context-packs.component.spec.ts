@@ -57,18 +57,27 @@ describe('Display Context-Packs component', () => {
       fixture = TestBed.createComponent(DisplayContextPacksComponent);
       dpContextPacks = fixture.componentInstance;
       fixture.detectChanges();
+      dpContextPacks.ngOnInit();
     });
   }));
 
-  it('should delete a context pack and then have 1 fewer context pack', () => {
-    const idToDelete = 'meow';
+  it('contains all the packs', () => {
     expect(dpContextPacks.contextPacks.length).toBe(3);
-    dpContextPacks.removeCP(idToDelete);
-    expect(dpContextPacks.contextPacks.length).toBe(2);
   });
 
-  it('contains all the packs', () => {
-    expect(dpContextPacks.contextPacks.length).toBe(2);
+  it('should delete a context pack and then have 1 fewer context pack', () => {
+    dpContextPacks.contextPacks.push({
+      _id: 'panda',
+      schema: 'https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json',
+      name: 'Pandas',
+      icon: 'panda.png',
+      enabled: false,
+      wordlist: MockCPService.testList,
+  });
+    const idToDelete = 'panda';
+    expect(dpContextPacks.contextPacks.length).toBe(4);
+    dpContextPacks.removeCP(idToDelete);
+    expect(dpContextPacks.contextPacks.length).toBe(3);
   });
 
   it('contains a pack named "canines"', () => {
