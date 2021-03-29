@@ -49,6 +49,7 @@ export class DisplayContextPacksComponent implements OnInit, OnDestroy {
     this.packService.deletePack(id).subscribe(e=>{
       this.contextPacks = this.contextPacks.filter(cp=>cp._id !== id);
     });
+    return id;
   }
 
 }

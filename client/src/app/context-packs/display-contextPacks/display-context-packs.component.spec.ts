@@ -60,8 +60,15 @@ describe('Display Context-Packs component', () => {
     });
   }));
 
-  it('contains all the packs', () => {
+  it('should delete a context pack and then have 1 fewer context pack', () => {
+    const idToDelete = 'meow';
     expect(dpContextPacks.contextPacks.length).toBe(3);
+    dpContextPacks.removeCP(idToDelete);
+    expect(dpContextPacks.contextPacks.length).toBe(2);
+  });
+
+  it('contains all the packs', () => {
+    expect(dpContextPacks.contextPacks.length).toBe(2);
   });
 
   it('contains a pack named "canines"', () => {
@@ -80,6 +87,7 @@ describe('Display Context-Packs component', () => {
   it('should create', () => {
     expect(dpContextPacks).toBeTruthy();
   });
+
 });
 
 describe('Misbehaving Context Pack List', () => {

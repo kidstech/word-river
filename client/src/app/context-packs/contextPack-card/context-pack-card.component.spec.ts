@@ -51,6 +51,7 @@ describe('CpCardComponent', () => {
   });
 
   it('should delete a context pack', () => {
-    expect(cpCard.deletePack()).toBeTruthy();
+    expect(cpCard).toBeTruthy();
+    expect(cpCard.deletePack()).toBeUndefined();
   });
 });
