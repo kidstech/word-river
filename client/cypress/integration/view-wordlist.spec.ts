@@ -4,8 +4,6 @@ const page = new ViewWordListPage();
 
 describe('View WordList', () => {
 
-  const t = '4';
-
     before(() => {
         cy.task('seed:database');
     });
