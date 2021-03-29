@@ -198,4 +198,287 @@
 
     "misc": []
   }]
-}]
+},
+{
+  "_id": {
+    "$oid": "604cdf3c63292e16753345f8"
+  },
+  "schema": "https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json",
+  "name": "Candy",
+  "icon": "https://png.pngtree.com/png-vector/20190121/ourmid/pngtree-sweets-snack-cartoon-candy-png-image_519737.jpg",
+  "enabled": false,
+  "wordlists": [
+    {
+      "name": "Hard Candy",
+      "enabled": false,
+      "nouns": [
+        {
+          "word": "Skittles",
+          "forms": [
+            "Skittles",
+            "Skittle"
+          ]
+        },
+        {
+          "word": "Nerds",
+          "forms": [
+            "Nerds",
+            "Nerd"
+          ]
+        }
+      ],
+      "verbs": [
+        {
+          "word": "taste",
+          "forms": [
+            "taste",
+            "tastes",
+            "tasted"
+          ]
+        },
+        {
+          "word": "stain",
+          "forms": [
+            "stain",
+            "stains",
+            "stained"
+          ]
+        },
+        {
+          "word": "steal",
+          "forms": [
+            "steal",
+            "stole"
+          ]
+        },
+        {
+          "word": "giggle",
+          "forms": [
+            "giggle",
+            "giggles",
+            "giggled"
+          ]
+        },
+        {
+          "word": "hide",
+          "forms": [
+            "hide",
+            "hid",
+            "hiding"
+          ]
+        }
+      ],
+      "adjectives": [
+        {
+          "word": "tasty",
+          "forms": [
+            "tasty",
+            "tastiest"
+          ]
+        },
+        {
+          "word": "sour",
+          "forms": [
+            "sour"
+          ]
+        }
+      ],
+      "misc": [
+        {
+          "word": "the",
+          "forms": [
+            "the"
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "604cdf3cbb468a7463ad4d85"
+  },
+  "schema": "https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json",
+  "name": "Brady",
+  "icon": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/2330.png",
+  "enabled": false,
+  "wordlists": [
+    {
+      "name": "Woods",
+      "enabled": false,
+      "nouns": [
+        {
+          "word": "Joker",
+          "forms": [
+            "Joker"
+          ]
+        },
+        {
+          "word": "villain",
+          "forms": [
+            "villain",
+            "villains"
+          ]
+        }
+      ],
+      "verbs": [
+        {
+          "word": "fly",
+          "forms": [
+            "fly",
+            "flown",
+            "flew"
+          ]
+        },
+        {
+          "word": "dance",
+          "forms": [
+            "dance",
+            "danced"
+          ]
+        },
+        {
+          "word": "steal",
+          "forms": [
+            "steal",
+            "stole"
+          ]
+        },
+        {
+          "word": "laugh",
+          "forms": [
+            "laugh",
+            "laughed",
+            "laughing"
+          ]
+        },
+        {
+          "word": "hide",
+          "forms": [
+            "hide",
+            "hid",
+            "hiding"
+          ]
+        }
+      ],
+      "adjectives": [
+        {
+          "word": "evil",
+          "forms": [
+            "evil"
+          ]
+        },
+        {
+          "word": "sad",
+          "forms": [
+            "sad"
+          ]
+        }
+      ],
+      "misc": [
+        {
+          "word": "the",
+          "forms": [
+            "the"
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "604cdf3c6e9fddd6dd231502"
+  },
+  "schema": "https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json",
+  "name": "Computers",
+  "icon": "https://image.flaticon.com/icons/png/512/2933/2933245.png",
+  "enabled": false,
+  "wordlists": [
+    {
+      "name": "Types",
+      "enabled": true,
+      "nouns": [
+        {
+          "word": "laptop",
+          "forms": [
+            "laptop",
+            "laptops"
+          ]
+        },
+        {
+          "word": "desktop",
+          "forms": [
+            "desktop",
+            "desktops"
+          ]
+        }
+      ],
+      "verbs": [
+        {
+          "word": "buy",
+          "forms": [
+            "buy",
+            "buys",
+            "bought"
+          ]
+        },
+        {
+          "word": "crash",
+          "forms": [
+            "crash",
+            "crashes",
+            "crashed"
+          ]
+        },
+        {
+          "word": "hack",
+          "forms": [
+            "hack",
+            "hacks",
+            "hacked"
+          ]
+        },
+        {
+          "word": "laugh",
+          "forms": [
+            "laugh",
+            "laughed",
+            "laughing"
+          ]
+        },
+        {
+          "word": "build",
+          "forms": [
+            "build",
+            "builds",
+            "built"
+          ]
+        }
+      ],
+      "adjectives": [
+        {
+          "word": "32-bit",
+          "forms": [
+            "32-bit"
+          ]
+        },
+        {
+          "word": "64-bit",
+          "forms": [
+            "64-bit"
+          ]
+        }
+      ],
+      "misc": [
+        {
+          "word": "the",
+          "forms": [
+            "the"
+          ]
+        }
+      ]
+    }
+  ]
+}
+]

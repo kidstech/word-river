@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { WordList } from 'src/app/datatypes/wordlist';
 import { WordListService } from 'src/app/services/wordlist.service';
+import { WordlistCardComponent } from 'src/app/wordlists/wordlist-card/wordlist-card.component';
 
 /**
  * A 'mock' version of the `WordListService` that can be used to test components
@@ -56,30 +57,30 @@ export class MockWordListService extends WordListService {
     super(null);
   }
 
-  getWordList(): Observable<WordList[]> {
+  getWordList(id: string): Observable<WordList[]> {
     // Our goal here isn't to test (and thus rewrite) the service, so we'll
     // keep it simple and just return the test WordLists regardless of what
     // filters are passed in.
     return of(MockWordListService.testWordLists);
   }
-  addWordList(w): Observable<WordList>{
+  addWordList(w: WordList, id: string): Observable<WordList>{
     MockWordListService.testWordLists.push(w);
     return of(w);
   }
-  getWordListByName(name): Observable<WordList> {
+  getWordListByName(word: string, id: string): Observable<WordList> {
     // Our goal here isn't to test (and thus rewrite) the service, so we'll
     // keep it simple and just return the test WordLists regardless of what
     // filters are passed in.
     return of(MockWordListService.testWordLists[0]);
   }
-  editWordList(name,wordlist): Observable<WordList>{
+  editWordList(name: string, wordlist: WordList, id: string): Observable<WordList>{
     MockWordListService.testWordLists = MockWordListService.testWordLists.map(w=>{
       if(w.name === name) {return wordlist;}
       else {return w;}
     });
     return of(MockWordListService.testWordLists.filter(e=>e.name === name)[0]);
   }
-  deleteWordList(wordlist): Observable<WordList>{
+  deleteWordList(wordlist: WordList, id: string): Observable<WordList>{
     MockWordListService.testWordLists = MockWordListService.testWordLists.filter(w=> w!==wordlist);
     return of(wordlist);
   }

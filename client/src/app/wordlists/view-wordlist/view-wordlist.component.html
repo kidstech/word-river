@@ -22,8 +22,8 @@
       data-test="saveWordListButton">Save word list</button>
     </div>
     <div class="right">
-      <app-word-card class="wordcards" (delete)="deleteWord(i)" [word]="w" [type]="w.type ? w.type : types[i]" [wordList]="wordlist"
-        *ngFor="let w of words;index as i;" data-test="deleteWordButton"></app-word-card>
+      <app-word-card data-test="deleteWordButton" class="wordcards" (delete)="deleteWord(i)" [word]="w" [type]="w.type ? w.type : types[i]" [wordList]="wordlist"
+        *ngFor="let w of words;index as i;"></app-word-card>
     </div>
   </div>
 </div>

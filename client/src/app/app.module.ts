@@ -11,7 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
@@ -35,6 +35,10 @@ import { WordListService } from './services/wordlist.service';
 import { ViewWordlistComponent } from './wordlists/view-wordlist/view-wordlist.component';
 import { WordlistCardComponent } from './wordlists/wordlist-card/wordlist-card.component';
 import { WordFormComponent } from './words/word-form/word-form.component';
+import { DisplayContextPacksComponent } from './context-packs/display-contextPacks/display-context-packs.component';
+import { ContextPackCardComponent } from './context-packs/contextPack-card/context-pack-card.component';
+import { AddContextPackComponent } from './context-packs/add-contextPacks/add-contextPacks.component';
+import { ContextPackService } from './services/contextPack-service/contextpack.service';
 
 
 const MATERIAL_MODULES: any[] = [
@@ -71,6 +75,9 @@ const MATERIAL_MODULES: any[] = [
     ViewWordlistComponent,
     WordlistCardComponent,
     WordFormComponent,
+    DisplayContextPacksComponent,
+    ContextPackCardComponent,
+    AddContextPackComponent
   ],
   imports: [
     BrowserModule,
@@ -85,6 +92,7 @@ const MATERIAL_MODULES: any[] = [
   ],
   providers: [
     WordListService,
+    ContextPackService
   ],
   bootstrap: [AppComponent]
 })

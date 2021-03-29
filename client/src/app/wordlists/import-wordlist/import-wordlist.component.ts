@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WordListService } from './../../services/wordlist.service';
 import { Component, OnInit } from '@angular/core';
 import { WordList } from 'src/app/datatypes/wordlist';
@@ -13,10 +13,14 @@ export class ImportWordlistComponent implements OnInit {
   validFile;
   file: any;
   wordlist: WordList;
+  id: string;
 
-  constructor(private service: WordListService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private service: WordListService, private router: Router) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((pmap) => {
+      this.id = pmap ? pmap.get('id') : '';
+    });
   }
 
   onFileAdded(file) {
@@ -39,8 +43,8 @@ export class ImportWordlistComponent implements OnInit {
 
   save(){
     if(this.wordlist){
-      this.service.addWordList(this.wordlist).subscribe();
-      this.router.navigate(['wordlist']);
+      this.service.addWordList(this.wordlist, this.id).subscribe();
+      this.router.navigate(['packs', this.id]);
       return true;
     }
     else {return false;}

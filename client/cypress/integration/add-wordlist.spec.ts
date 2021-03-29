@@ -32,7 +32,7 @@ describe('Add Wordlist', () => {
       verbs: [{ word: 'laugh', forms: ['laugh', 'laughing', 'laughed'] }],
       misc: [{ word: 'to', forms: [] }]
     });
-    cy.url().should(url => expect(url.endsWith('/wordlist')).to.be.true);
+    cy.url().should(url => expect(url.endsWith('/packs/605bc9d893b2d94300a98753')).to.be.true);
   });
   it('Should add a field initially', () => {
     page.getInitialButton().click();

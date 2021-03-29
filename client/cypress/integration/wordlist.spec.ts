@@ -25,13 +25,13 @@ describe('WordList', () => {
 
     it('Should click add wordlist and go to the right URL', () => {
         page.addWordListButton().click();
-        cy.url().should(url => expect(url.endsWith('/wordlist/new')).to.be.true);
+        cy.url().should(url => expect(url.endsWith('/packs/605bc9d893b2d94300a98753/new')).to.be.true);
 
     });
 
     it('Should click import wordlist and go to the right URL', () => {
         page.importWordListButton().click();
-        cy.url().should(url => expect(url.endsWith('/wordlist/import')).to.be.true);
+        cy.url().should(url => expect(url.endsWith('/packs/605bc9d893b2d94300a98753/import')).to.be.true);
     });
 
 });
