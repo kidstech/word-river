@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContextPackService } from 'src/app/services/contextPack-service/contextpack.service';
 import { ContextPack } from '../../datatypes/contextPacks';
@@ -12,6 +12,7 @@ export class ContextPackCardComponent implements OnInit {
 
   @Input() contextPack: ContextPack;
   @Input() simple ? = false;
+  @Output() delete = new EventEmitter();
 
   constructor(private router: Router, private packService: ContextPackService) { }
 
@@ -19,8 +20,7 @@ export class ContextPackCardComponent implements OnInit {
   }
 
   deletePack() {
-   const id = this.packService.deletePack(this.contextPack._id).subscribe();
-    return id;
+   this.delete.emit();
   }
 
 }
