@@ -27,8 +27,6 @@ describe('Display Context Pack', () => {
 
     it('Should click "View Context Pack" on a context pack and have one word list', () => {
       page.getCpCards().first().then((card) => {
-          const cpName = card.find('.cp-card-name').text();
-          const cpEnabled = card.find('.cp-card-enabled').text();
 
           page.clickViewCp(page.getCpCards().first());
 
@@ -42,5 +40,10 @@ describe('Display Context Pack', () => {
         page.addCpButton().click();
         cy.url().should(url => expect(url.endsWith('/packs/new')).to.be.true);
         cy.get('.add-cp-title').should('have.text', 'New Context Pack');
+    });
+
+    it('Should click Delete Context Pack and remove the context pack from the page',() => {
+        page.clickDeleteCp(page.getCpCards().first());
+        page.getCpCards().should('have.length', 3);
     });
 });

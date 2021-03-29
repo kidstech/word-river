@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+import { ContextPackService } from 'src/app/services/contextPack-service/contextpack.service';
 import { ContextPack } from '../../datatypes/contextPacks';
 
 @Component({
@@ -10,10 +12,15 @@ export class ContextPackCardComponent implements OnInit {
 
   @Input() contextPack: ContextPack;
   @Input() simple ? = false;
+  @Output() delete = new EventEmitter();
 
-  constructor() { }
+  constructor(private router: Router, private packService: ContextPackService) { }
 
   ngOnInit(): void {
+  }
+
+  deletePack() {
+   this.delete.emit();
   }
 
 }

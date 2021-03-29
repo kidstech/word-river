@@ -121,4 +121,9 @@ export class MockCPService extends ContextPackService {
         return of(MockCPService.testCPs);
     }
 
+    deletePack(id: string): Observable<string>{
+      MockCPService.testCPs= MockCPService.testCPs.filter(cp=> cp._id!==id);
+      return of(id);
+    }
+
 }
