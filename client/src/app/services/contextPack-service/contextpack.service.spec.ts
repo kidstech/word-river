@@ -175,8 +175,5 @@ it('deletePack calls api/packs/:id', () => {
   expect(req.request.method).toEqual('DELETE');
 
   req.flush({id: 'moo'});
-
 });
-
-
 });
