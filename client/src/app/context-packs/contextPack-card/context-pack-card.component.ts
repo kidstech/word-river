@@ -23,4 +23,7 @@ export class ContextPackCardComponent implements OnInit {
    this.delete.emit();
   }
 
+  setDefaultIcon() {
+    this.contextPack.icon = 'https://i.redd.it/awbsnq5xefy41.png';
+  }
 }
