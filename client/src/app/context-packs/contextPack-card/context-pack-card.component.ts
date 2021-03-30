@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
-import { ContextPackService } from 'src/app/services/contextPack-service/contextpack.service';
 import { ContextPack } from '../../datatypes/contextPacks';
 
 @Component({
@@ -14,7 +12,7 @@ export class ContextPackCardComponent implements OnInit {
   @Input() simple ? = false;
   @Output() delete = new EventEmitter();
 
-  constructor(private router: Router, private packService: ContextPackService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { WordList } from 'src/app/datatypes/wordlist';
 import { WordListService } from 'src/app/services/wordlist.service';
-import { WordlistCardComponent } from 'src/app/wordlists/wordlist-card/wordlist-card.component';
 
 /**
  * A 'mock' version of the `WordListService` that can be used to test components
