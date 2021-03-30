@@ -1,4 +1,4 @@
-<mat-card class="word-card" (mouseover)="hovering=true" (mouseout)="hovering=false">
+<mat-card (mouseover)="hovering=true" (mouseout)="hovering=false" [ngClass]="{'noun': type==='Noun', 'verb': type==='Verb','adjective': type==='Adjective','misc': type==='Misc' }">
 
   <div class="card-header">
     <div class="top">

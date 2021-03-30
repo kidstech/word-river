@@ -8,6 +8,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class WordFormComponent implements OnInit {
 
   @Output() form = new EventEmitter();
+  @Output() removeForm = new EventEmitter();
   wordForm = '';
 
   added = false;
@@ -25,5 +26,8 @@ export class WordFormComponent implements OnInit {
       this.err=false;
     }
     else {this.err = true;}
+  }
+  remove(){
+    this.removeForm.emit();
   }
 }

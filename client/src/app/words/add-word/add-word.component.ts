@@ -8,7 +8,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class AddWordComponent implements OnInit {
   @Output() addWord = new EventEmitter();
 
-  forms = [];
+  forms = [''];
   wordName = '';
   finished = false;
   type: string;
@@ -31,16 +31,18 @@ export class AddWordComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   add(val) {
-    if (!this.added) {
-      this.forms.push('');
-      this.added = true;
-    }
-    else { this.forms.push(val); }
+    this.forms.push(val);
+  }
+
+  removeForm(i: number) {
+    console.log(i);
+    this.forms.splice(i, 1);
   }
 
   save() {
-    this.addWord.emit({name:this.wordName,forms: this.forms.slice(1),type: this.type});
+    this.addWord.emit({ name: this.wordName, forms: this.forms.filter(e => e.length !== 0), type: this.type });
     console.log(this.forms + this.wordName + this.type);
     this.wordName = '';
     this.forms = [];

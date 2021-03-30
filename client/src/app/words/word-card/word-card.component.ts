@@ -21,7 +21,6 @@ export class WordCardComponent implements OnInit {
 
   hovering = false;
 
-
   constructor(private service: WordListService) {}
 
   ngOnInit(): void {

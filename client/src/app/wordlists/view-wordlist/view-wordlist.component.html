@@ -2,9 +2,9 @@
   <div class="content">
     <div class="left">
 
-      <mat-card class="wordlist-details">
-        <h2 class="bottom-title">Details</h2>
-          <mat-divider></mat-divider>
+      <mat-card class="wordlist-details" style="margin-bottom: 20px;">
+        <h2 class="bottom-title">Wordlist Details</h2>
+
         <div class="title-container">
           <mat-form-field class="title">
             <mat-label>Edit Word List Name</mat-label>
@@ -23,7 +23,7 @@
         </div>
 
       </mat-card>
-      <br>
+
       <app-add-word (addWord)="addWord($event)" data-test="addWordButton"></app-add-word>
       <button mat-raised-button [disabled]="!true" class="save" style="padding:20px;margin-top: 20px;" color="primary"
         (click)="save()" data-test="saveWordListButton">Save word list</button>
