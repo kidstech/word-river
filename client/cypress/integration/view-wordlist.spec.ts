@@ -26,7 +26,8 @@ describe('View WordList', () => {
 
     it('Should delete a word and then save wordlist', () => {
         page.getWordCards().should('have.length', '10');
-        page.deleteWordButton().eq(1).click();
+        cy.get('.word-card').first().trigger('mouseover');
+        page.deleteWordButton().eq(1).click({force: true});
         page.saveWordListButton().click({force: true});
         page.navigateTo();
         cy.wait(1000);
