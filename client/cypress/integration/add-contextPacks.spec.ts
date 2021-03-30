@@ -54,13 +54,6 @@ describe('Add Context Pack', () => {
      page.getFormField('name').clear().type('Iron Man').blur();
      cy.get('[data-test=nameError]').should('not.exist');
 
-     //Tests for icon field
-      //Before doing anything there shouldn't be an error
-     cy.get('[data-test=iconError]').should('not.exist');
-
-     // Just clicking the icon field without entering anything should cause an error message
-     page.getFormField('icon').click().blur();
-     cy.get('[data-test=iconError]').should('exist').and('be.visible');
 
      //Some more tests for various invalid icon inputs
      page.getFormField('icon').type('image.notanimage').blur();

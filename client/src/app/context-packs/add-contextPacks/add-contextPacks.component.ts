@@ -27,7 +27,7 @@ export class AddContextPackComponent implements OnInit {
     ],
 
     icon: [
-      { type: 'pattern', message: 'The file must be a valid type (.png or .jpg)' }
+      { type: 'pattern', message: 'Image must be a .jpg,.png or .gif' }
     ],
 
     enabled: [
@@ -44,22 +44,19 @@ export class AddContextPackComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router) { }
 
-  // edit based on what we decide as a team
   createForms() {
     this.addContextPackForm = this.fb.group({
       name: new FormControl('', Validators.compose([
         Validators.required,
         Validators.maxLength(50),
-        // insert check for whether the name already exists
       ])),
 
       icon: new FormControl('', Validators.compose([
-        // Validators.required,
-        // Validators.pattern('.+\.(png|jpg)$')
+        Validators.pattern('.+\.(png|jpg|jpeg|gif)$')
       ])),
 
       enabled: new FormControl('', Validators.compose([
-        Validators.required, // decide how we want to display this option
+        Validators.required,
         Validators.pattern('^(true|false)$'),
       ]))
     });

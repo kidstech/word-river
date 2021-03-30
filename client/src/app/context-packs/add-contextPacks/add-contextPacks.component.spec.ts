@@ -1,3 +1,4 @@
+import { AngularFireStorage } from '@angular/fire/storage';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormGroup, AbstractControl } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -11,6 +12,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AddContextPackComponent } from './add-contextPacks.component';
 import { MockCPService } from 'src/testing/context-pack.service.mock';
 import { ContextPackService } from '../../services/contextPack-service/contextpack.service';
+import { FireStorageMock } from 'src/testing/angular-fire-storage-mock';
 
 describe('AddCpComponent', () => {
   let addContextPack: AddContextPackComponent;
@@ -31,7 +33,9 @@ describe('AddCpComponent', () => {
         RouterTestingModule
       ],
       declarations: [ AddContextPackComponent ],
-      providers: [{ provide: ContextPackService, useValue: new MockCPService() }]
+      providers: [{ provide: ContextPackService, useValue: new MockCPService() },
+        { provide: AngularFireStorage, useValue: new FireStorageMock() }
+      ]
     })
     .compileComponents().catch(error => {
       expect(error).toBeNull();
@@ -93,9 +97,9 @@ describe('AddCpComponent', () => {
       iconControl = addContextPack.addContextPackForm.controls.icon;
     });
 
-    it('should not allow empty icons', () => {
+    it('should allow empty icons', () => {
       iconControl.setValue('');
-      expect(iconControl.valid).toBeFalsy();
+      expect(iconControl.valid).toBeTruthy();
     });
 
     it('should be fine with "image.png"', () => {
@@ -107,6 +111,36 @@ describe('AddCpComponent', () => {
       iconControl.setValue('image.notanimage');
       expect(iconControl.valid).toBeFalsy();
     });
+    it('should default to empty string when provided no image"', () => {
+      iconControl.setValue(undefined);
+      addContextPack.addContextPackForm.controls.name.setValue('boo');
+      addContextPack.addContextPackForm.controls.enabled.setValue(true);
+      addContextPack.submitForm();
+      expect(addContextPack.addContextPackForm.value.icon).toBe('');
+    });
+    it('should use downloadURL when downloadUrl exists"', () => {
+      iconControl.setValue(undefined);
+      addContextPack.addContextPackForm.controls.name.setValue('boo');
+      addContextPack.addContextPackForm.controls.enabled.setValue(true);
+      addContextPack.downloadURL = 'phub.com';
+      addContextPack.submitForm();
+      expect(addContextPack.addContextPackForm.value.icon).toBe('phub.com');
+    });
+    it('should upload images"', () => {
+    const mockFile = new File([''], 'filename', { type: 'text/html' });
+    //// const mockFormGroup = new FormGroup({});
+    const mockEvt = { target: { files: [mockFile] } };
+    const mockReader: FileReader = jasmine.createSpyObj('FileReader', ['readAsDataURL', 'onload']);
+    spyOn(window as any, 'FileReader').and.returnValue(mockReader);
+    // spyOn(addContextPack, 'getUploadFormGroup').and.returnValue(mockFormGroup);
+    // spyOn(addContextPack, 'getLoadCallback').and.callThrough();
+
+    addContextPack.onFileAdded(mockEvt as any);
+
+    // expect((window as any).FileReader).toHaveBeenCalled();
+    // expect(mockReader.readAsDataURL).toHaveBeenCalledWith(mockFile);
+    });
+
   });
 
   describe('The enabled field', () => {
