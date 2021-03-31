@@ -13,6 +13,7 @@ import { AddContextPackComponent } from './add-contextPacks.component';
 import { MockCPService } from 'src/testing/context-pack.service.mock';
 import { ContextPackService } from '../../services/contextPack-service/contextpack.service';
 import { FireStorageMock } from 'src/testing/angular-fire-storage-mock';
+import { DisplayWordlistComponent } from 'src/app/wordlists/display-wordlist/display-wordlist.component';
 
 describe('AddCpComponent', () => {
   let addContextPack: AddContextPackComponent;
@@ -30,7 +31,9 @@ describe('AddCpComponent', () => {
         MatSelectModule,
         MatInputModule,
         BrowserAnimationsModule,
-        RouterTestingModule
+        RouterTestingModule.withRoutes([
+          { path: 'packs/fakeid', component: DisplayWordlistComponent }
+        ])
       ],
       declarations: [ AddContextPackComponent ],
       providers: [{ provide: ContextPackService, useValue: new MockCPService() },
@@ -122,23 +125,17 @@ describe('AddCpComponent', () => {
       iconControl.setValue(undefined);
       addContextPack.addContextPackForm.controls.name.setValue('boo');
       addContextPack.addContextPackForm.controls.enabled.setValue(true);
-      addContextPack.downloadURL = 'phub.com';
+      addContextPack.downloadURL = 'umm.com';
       addContextPack.submitForm();
-      expect(addContextPack.addContextPackForm.value.icon).toBe('phub.com');
+      expect(addContextPack.addContextPackForm.value.icon).toBe('umm.com');
     });
     it('should upload images"', () => {
     const mockFile = new File([''], 'filename', { type: 'text/html' });
-    //// const mockFormGroup = new FormGroup({});
     const mockEvt = { target: { files: [mockFile] } };
     const mockReader: FileReader = jasmine.createSpyObj('FileReader', ['readAsDataURL', 'onload']);
     spyOn(window as any, 'FileReader').and.returnValue(mockReader);
-    // spyOn(addContextPack, 'getUploadFormGroup').and.returnValue(mockFormGroup);
-    // spyOn(addContextPack, 'getLoadCallback').and.callThrough();
 
     addContextPack.onFileAdded(mockEvt as any);
-
-    // expect((window as any).FileReader).toHaveBeenCalled();
-    // expect(mockReader.readAsDataURL).toHaveBeenCalledWith(mockFile);
     });
 
   });
