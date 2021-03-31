@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "wordriver-57fe8": {
+      "hosting": {
+        "client": [
+          "wordriver-57fe8"
+        ]
+      }
+    }
+  }
+}

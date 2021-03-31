@@ -19,7 +19,7 @@ export class ImportWordlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((pmap) => {
-      this.id = pmap ? pmap.get('id') : '';
+      this.id = pmap.get('id');
     });
   }
 

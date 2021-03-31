@@ -28,6 +28,7 @@
       form</button>
       <app-word-form class="form_item"  *ngFor="let i of forms" (form)="add($event)"></app-word-form>
 
+
     <div class="word-forms">
       <button style="margin-top: 0px;" data-test="confirmAddWordButton" [disabled]="!finished" (click)="save()" mat-raised-button class="add-word-btn" color="primary">Add
         Word</button>
