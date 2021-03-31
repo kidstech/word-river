@@ -1,6 +1,6 @@
-<mat-card (mouseover)="hovering=true" (mouseout)="hovering=false" [ngClass]="{'noun': type==='Noun', 'verb': type==='Verb','adjective': type==='Adjective','misc': type==='Misc' }">
+<mat-card (mouseover)="hovering=true" (mouseout)="hovering=false" [ngClass]="{'noun': type.includes('oun'), 'verb': type.includes('erb'),'adjective': type.includes('djective'),'misc': type.includes('isc') }">
 
-  <div class="card-header">
+  <div class="card-header word-card">
     <div class="top">
       <h1 class="word-name">{{word ? word.word : ''}}</h1>
       <div class="box" [ngClass]="{'visible': hovering, 'invisible': !hovering }">
@@ -21,7 +21,7 @@
   <mat-card-content>
     <div class="holder">
       <p class="forms">Forms: </p>
-      <p color="primary" class="bubble" *ngFor="let form of word ? word.forms : []">{{form ? form : ''}}</p>
+      <p color="primary" [ngClass]="{'nounf': type.includes('oun'), 'verbf': type.includes('erb'),'adjectivef': type.includes('djective'),'miscf': type.includes('isc') }" *ngFor="let form of word ? word.forms : []">{{form ? form : ''}}</p>
     </div>
 
   </mat-card-content>

@@ -17,9 +17,19 @@
           <h1><b>{{wordCount}}</b></h1>
         </div>
         <div class="top">
-          <button mat-raised-button (click)="export()" class="export" color="primary">Export</button>
-          <button data-test="deleteWordListButton" mat-raised-button class="delete" (click)="deleteWordList()"
-            color="accent">Delete</button>
+          <div *ngIf="!deleteClicked">
+            <button mat-raised-button (click)="export()" class="export" color="primary">Export</button>
+            <button mat-raised-button data-test="toggle-delete" (click)="toggleConfirmation()" class="delete"
+              color="accent">Delete</button>
+          </div>
+          <div class="confirmation" *ngIf="deleteClicked">
+            <h3 style="flex: 1;">Are you sure you want to delete? </h3>
+            <button data-test="deleteWordListButton" style="margin-bottom: 5px;" mat-raised-button (click)="deleteWordList()"
+              color="accent">Delete</button>
+            <button data-test="cancel-delete" mat-raised-button class="cancel" (click)="toggleConfirmation()"
+              color="link">Cancel</button>
+          </div>
+
         </div>
 
       </mat-card>
@@ -30,7 +40,7 @@
     </div>
     <div class="right">
       <app-word-card data-test="deleteWordButton" class="wordcards" (delete)="deleteWord(i)" [word]="w"
-        [type]="w.type ? w.type : types[i]" [wordList]="wordlist" *ngFor="let w of words;index as i;"></app-word-card>
+        [type]="types[i]" [wordList]="wordlist" *ngFor="let w of words;index as i;"></app-word-card>
     </div>
   </div>
 </div>

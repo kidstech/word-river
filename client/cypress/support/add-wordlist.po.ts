@@ -39,6 +39,14 @@ export class AddWordListPage {
   getWordCards() {
     return cy.get('.wordcard');
   }
+
+  getForms() {
+    return cy.get('.word-form');
+  }
+
+  getRemoveButton() {
+    return cy.get('.remove-form');
+  }
   addWordList(newWordlist: WordList) {
     this.getWordListName().type(newWordlist.name);
     this.addWord({ word: 'gg', type: 'nouns' });

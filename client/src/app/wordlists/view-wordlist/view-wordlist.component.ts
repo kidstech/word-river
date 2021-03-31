@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Word } from 'src/app/datatypes/word';
 
+
 @Component({
   selector: 'app-view-wordlist',
   templateUrl: './view-wordlist.component.html',
@@ -21,8 +22,10 @@ export class ViewWordlistComponent implements OnInit {
   types: string[];
   getUserSub: Subscription;
   wordCount: number;
+  deleteClicked: boolean;
 
-  constructor(private route: ActivatedRoute, private service: WordListService, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute, private service: WordListService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((pmap) => {
@@ -31,7 +34,6 @@ export class ViewWordlistComponent implements OnInit {
       this.loadWords();
     });
   }
-
   addWord(word) {
     console.log(this.wordlist);
     this.wordlist[word.type].unshift({ word: word.name, forms: word.forms });
@@ -61,18 +63,25 @@ export class ViewWordlistComponent implements OnInit {
     this.types = this.refreshTypes(temp);
   }
 
-  refreshTypes(temp) {
-    return temp.map(w =>
-      this.wordlist.nouns.includes(w) ? 'Noun' :
-        this.wordlist.verbs.includes(w) ? 'Verb' :
-          this.wordlist.adjectives.includes(w) ? 'Adjective' : 'Misc'
+  refreshTypes(temp: any[]) {
+    const l = temp.map(w =>
+      this.wordlist.nouns.some(i => i.word === w.word) ? 'Noun' :
+        this.wordlist.verbs.some(i => i.word === w.word) ? 'Verb' :
+          this.wordlist.adjectives.some(i => i.word === w.word) ? 'Adjective' : 'Misc'
     );
+    console.log(this.wordlist);
+    console.log(temp);
+    return l;
   }
 
   deleteWordList() {
     const c = this.service.deleteWordList(this.wordlist, this.id).subscribe();
     this.router.navigate(['packs', this.id]);
     return c;
+  }
+
+  toggleConfirmation() {
+    this.deleteClicked = !this.deleteClicked;
   }
 
   deleteWord(i: number) {

@@ -1,4 +1,4 @@
-.word-card {
+.word-cardd {
   padding: 25px;
   margin-bottom: 30px;
   font-family: "Ubuntu", sans-serif;
@@ -19,12 +19,9 @@
 }
 #editbutton,
 #delbutton {
-  // width: 35px!important;
-  // min-width: unset!important;
   height: 35px;
   aspect-ratio: 1;
   border: none;
-  // padding: 8px;
 }
 #editbutton:focus,
 #delbutton:focus {
@@ -46,7 +43,6 @@
   background-color: rgba(0, 0, 0, 0.116);
   border: 2px solid #2196f3;
   border-radius: 10px;
-  // box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   margin: 7px;
 }
 
@@ -83,7 +79,6 @@
   font-family: "Ubuntu", sans-serif;
   width: 290px;
   height: 200px;
-  // min-width: 300px;
   margin-right: 20px;
   border-top: 4px solid #2196f3;
 }
@@ -93,7 +88,6 @@
   font-family: "Ubuntu", sans-serif;
   width: 290px;
   height: 200px;
-  // min-width: 300px;
   margin-right: 20px;
   border-top: 4px solid #21f3bf;
 }
@@ -103,7 +97,6 @@
   font-family: "Ubuntu", sans-serif;
   width: 290px;
   height: 200px;
-  // min-width: 300px;
   margin-right: 20px;
   border-top: 4px solid #8321f3;
 }
@@ -113,7 +106,34 @@
   font-family: "Ubuntu", sans-serif;
   width: 290px;
   height: 200px;
-  // min-width: 300px;
   margin-right: 20px;
   border-top: 4px solid #f3218a;
+}
+.nounf{
+  padding: 5px 10px 5px 10px;
+  background-color: rgba(0, 0, 0, 0.116);
+  border: 2px solid #2196f3;
+  border-radius: 10px;
+  margin: 7px;
+}
+.verbf{
+  padding: 5px 10px 5px 10px;
+  background-color: rgba(0, 0, 0, 0.116);
+  border: 2px solid #21f3bf;
+  border-radius: 10px;
+  margin: 7px;
+}
+.adjectivef{
+  padding: 5px 10px 5px 10px;
+  background-color: rgba(0, 0, 0, 0.116);
+  border: 2px solid #8321f3;
+  border-radius: 10px;
+  margin: 7px;
+}
+.miscf{
+  padding: 5px 10px 5px 10px;
+  background-color: rgba(0, 0, 0, 0.116);
+  border: 2px solid #f3218a;
+  border-radius: 10px;
+  margin: 7px;
 }

@@ -46,6 +46,7 @@ export class AddWordComponent implements OnInit {
     console.log(this.forms + this.wordName + this.type);
     this.wordName = '';
     this.forms = [];
+    this.forms.push('');
     this.added = false;
     this.finished = false;
   }
