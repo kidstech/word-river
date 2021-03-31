@@ -73,6 +73,9 @@ describe('Add Context Pack', () => {
     });
 
     it('Should go to the right page, and have the right info', () => {
+      page.navigateToHome();
+      page.getCpCards().should('have.length', '4');
+
         const testList: Array<WordList> = [];
         const contextPack: ContextPack = {
             _id: 'meow',
@@ -82,8 +85,10 @@ describe('Add Context Pack', () => {
             enabled: false,
             wordlist: testList
         };
-        page.addContextPack(contextPack);
 
+        page.navigateTo();
+
+        page.addContextPack(contextPack);
         //We should see the confirmation message at the bottom of the screen
         cy.get('.mat-simple-snackbar').should('contain',`Added the ${contextPack.name} context pack successfully`);
 
@@ -91,7 +96,16 @@ describe('Add Context Pack', () => {
             .should('match', /\/packs\/[0-9a-fA-F]{24}$/)
             .should('not.match', /\/packs\/new$/);
 
+        page.navigateToHome();
+        page.getCpCards().should('have.length', '5');
+   });
 
+    it('Should add a valid name and enable field and then click the upload image button', () => {
+      page.getFormField('name').type('Testing Pack');
+      page.getFormField('enabled').click().then(() => {
+        cy.get('#true').click();
+      });
+      cy.get('.btn-2').click();
    });
   });
 
