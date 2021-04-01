@@ -1,7 +1,11 @@
-<div fxLayout="row wrap" fxLayoutGap="10px" class="context-pack-display">
-    <app-cp-card simple="true" (delete)="removeCP(pack._id)"  *ngFor="let pack of contextPacks" class="cp-card" [contextPack]="pack" fxFlex="1 1 280px"></app-cp-card>
+<div>
+  <h1>Context Packs</h1>
+  <div class="context-pack-display">
+    <app-cp-card simple="true" (delete)="removeCP(pack._id)"  *ngFor="let pack of contextPacks" class="cp-card" [contextPack]="pack"></app-cp-card>
     </div>
 
 <button mat-fab class="add-cp" matTooltip="Add Context Pack" matTooltipPosition="left" routerLink="/packs/new" data-test="addCpButton">
     <mat-icon class="logo" aria-label="Add Context Pack">add</mat-icon>
 </button>
+</div>
+

@@ -61,10 +61,14 @@
 
         </mat-card-content>
         <mat-card-actions align="end">
-          <button mat-button type="button" color="primary" [disabled]="!addContextPackForm.valid" type="submit"
-            data-test="addCpButton">
-            ADD CONTEXT PACK
+          <button mat-button type="button" color="accent" routerLink="packs"
+            data-test="cancelCpButton">
+            Cancel
           </button>
+          <button mat-button type="button" color="primary" [disabled]="!addContextPackForm.valid" type="submit"
+          data-test="addCpButton">
+          ADD CONTEXT PACK
+        </button>
         </mat-card-actions>
       </mat-card>
     </form>

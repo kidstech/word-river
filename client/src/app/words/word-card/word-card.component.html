@@ -4,7 +4,7 @@
     <div class="top">
       <h1 class="word-name">{{word ? word.word : ''}}</h1>
       <div class="box" [ngClass]="{'visible': hovering, 'invisible': !hovering }">
-        <button data-test="editWordButton" *ngIf="!viewing" mat-button (click)="deleteWord()" class="btn"
+        <button data-test="editWordButton" *ngIf="!viewing" mat-button  class="btn"
           id="editbutton">
           <mat-icon>create</mat-icon>
         </button>

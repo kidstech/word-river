@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { ContextPack } from '../../datatypes/contextPacks';
 
 @Component({
@@ -12,7 +13,7 @@ export class ContextPackCardComponent implements OnInit {
   @Input() simple ? = false;
   @Output() delete = new EventEmitter();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,5 +24,9 @@ export class ContextPackCardComponent implements OnInit {
 
   setDefaultIcon() {
     this.contextPack.icon = 'https://i.redd.it/awbsnq5xefy41.png';
+  }
+
+  openContextPack(){
+    this.router.navigate(['packs',this.contextPack._id]);
   }
 }
