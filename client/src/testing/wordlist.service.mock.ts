@@ -62,7 +62,7 @@ export class MockWordListService extends WordListService {
     // filters are passed in.
     return of(this.testWordLists);
   }
-  addWordList(w: WordList, id: string): Observable<WordList>{
+  addWordList(w: WordList): Observable<WordList>{
     this.testWordLists.push(w);
     return of(w);
   }
