@@ -8,5 +8,7 @@
   "video": true,
   "videosFolder": "cypress/videos",
   "screenshotsFolder": "cypress/screenshots",
-  "chromeWebSecurity": true
+  "chromeWebSecurity": true,
+  "viewportWidth": 1000,
+  "viewportHeight": 1000
 }

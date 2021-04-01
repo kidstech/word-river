@@ -1,6 +1,6 @@
 .content {
   display: flex;
-  margin-top: -16px;
+  margin-top: 30px;
 }
 
 .left {
@@ -8,15 +8,31 @@
   display: flex;
   flex-direction: column;
   margin-right: 24px;
+  position: fixed;
 }
-
+.wordlist-details{
+  padding: 30px;
+}
+.confirmation{
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
 .right {
   flex: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 100%;
+  margin-left: 374px;
 }
 .top{
   width: 100%;
   display: flex;
   margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
 }
 .title-container{
   flex: 1;
@@ -32,7 +48,7 @@
   margin: 0px;
   font-size: large;
 }
-.export,.delete{
+.delete{
   height: 40px;
   margin-left: 20px;
 }

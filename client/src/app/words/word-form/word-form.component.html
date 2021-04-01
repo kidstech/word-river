@@ -1,14 +1,14 @@
-<div class="card">
+<div class="card word-form">
   <div class="outer">
     <mat-form-field class="field">
       <mat-label>Enter word form</mat-label>
       <input matInput class="formfield" [(ngModel)]="wordForm">
     </mat-form-field>
-    <button *ngIf="added" mat-raised-button color="primary" class="add" (click)="add()">
-      Added!
+    <button *ngIf="added" mat-raised-button color="accent" class="remove-form remove" (click)="remove()">
+      Remove
     </button>
-    <button *ngIf="!added" mat-raised-button color="accent" id="add-form-button" class="add" (click)="add()">
-      <mat-icon *ngIf="!added" color="white">add</mat-icon>
+    <button *ngIf="!added" mat-raised-button color="primary" id="add-form-button" class="add-form-btn add" (click)="add()">
+      Add
     </button>
   </div>
   <mat-error *ngIf="err">Please enter some text before adding.</mat-error>

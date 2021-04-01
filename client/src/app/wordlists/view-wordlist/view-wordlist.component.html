@@ -1,29 +1,46 @@
 <div>
-
-  <div class="top">
-    <div class="title-container">
-      <!-- <h1 class="title">{{name}}</h1> -->
-
-      <mat-form-field class="title">
-        <mat-label>Edit Word List Name</mat-label>
-        <input matInput name="name" [(ngModel)]="name">
-      </mat-form-field>
-      <mat-checkbox class="enabled" [(ngModel)]="enabled" [checked]="true">Enabled</mat-checkbox>
-    </div>
-    <button mat-raised-button (click)="export()" class="export" color="primary">Export</button>
-    <button data-test= "deleteWordListButton" mat-raised-button class="delete" (click)="deleteWordList()" color="accent">Delete</button>
-  </div>
-
   <div class="content">
     <div class="left">
+
+      <mat-card class="wordlist-details" style="margin-bottom: 20px;">
+        <h2 class="bottom-title">Wordlist Details</h2>
+
+        <div class="title-container">
+          <mat-form-field class="title">
+            <mat-label>Edit Word List Name</mat-label>
+            <input matInput name="name" [(ngModel)]="name">
+          </mat-form-field>
+          <mat-checkbox class="enabled" [(ngModel)]="enabled" [checked]="true">Enabled</mat-checkbox>
+        </div>
+        <div>
+          <p style="opacity: 0.8;margin-bottom: 5px;">Number of words</p>
+          <h1><b>{{wordCount}}</b></h1>
+        </div>
+        <div class="top">
+          <div *ngIf="!deleteClicked">
+            <button mat-raised-button (click)="export()" class="export" color="primary">Export</button>
+            <button mat-raised-button data-test="toggle-delete" (click)="toggleConfirmation()" class="delete"
+              color="accent">Delete</button>
+          </div>
+          <div class="confirmation" *ngIf="deleteClicked">
+            <h3 style="flex: 1;">Are you sure you want to delete? </h3>
+            <button data-test="deleteWordListButton" style="margin-bottom: 5px;" mat-raised-button (click)="deleteWordList()"
+              color="accent">Delete</button>
+            <button data-test="cancel-delete" mat-raised-button class="cancel" (click)="toggleConfirmation()"
+              color="link">Cancel</button>
+          </div>
+
+        </div>
+
+      </mat-card>
+
       <app-add-word (addWord)="addWord($event)" data-test="addWordButton"></app-add-word>
       <button mat-raised-button [disabled]="!true" class="save" style="padding:20px;margin-top: 20px;" color="primary"
-      (click)="save()"
-      data-test="saveWordListButton">Save word list</button>
+        (click)="save()" data-test="saveWordListButton">Save word list</button>
     </div>
     <div class="right">
-      <app-word-card data-test="deleteWordButton" class="wordcards" (delete)="deleteWord(i)" [word]="w" [type]="w.type ? w.type : types[i]" [wordList]="wordlist"
-        *ngFor="let w of words;index as i;"></app-word-card>
+      <app-word-card data-test="deleteWordButton" class="wordcards" (delete)="deleteWord(i)" [word]="w"
+        [type]="types[i]" [wordList]="wordlist" *ngFor="let w of words;index as i;"></app-word-card>
     </div>
   </div>
 </div>
