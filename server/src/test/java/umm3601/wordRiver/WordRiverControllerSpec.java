@@ -180,6 +180,24 @@ public class WordRiverControllerSpec {
         .contains("Document{{name=Test Wordlist, enabled=true, nouns=[], verbs=[], adjectives=[], misc=[]}}"));
   }
 
+
+  @Test
+  public void AddDuplicateWordList() throws IOException {
+
+    String testNewWordList = "{" + "\"name\": \"Iron Man\"," + "\"enabled\": true," + "\"nouns\": [],"
+        + "\"verbs\": []," + "\"adjectives\": []," + "\"misc\": []" + "}";
+
+    String testID = batmanId.toHexString();
+    mockReq.setBodyContent(testNewWordList);
+    mockReq.setMethod("POST");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/packs/:id", ImmutableMap.of("id", testID));
+
+    assertThrows(BadRequestResponse.class, () -> {
+      wordRiverController.addNewWordList(ctx);
+    });
+  }
+
   @Test
   public void AddInvalidName() throws IOException {
 
