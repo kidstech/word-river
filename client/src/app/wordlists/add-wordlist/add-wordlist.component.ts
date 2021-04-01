@@ -50,7 +50,7 @@ export class AddWordListComponent implements OnInit {
     this.router.navigate(['packs', this.id]);
   }
 
-  enable(val) {
+  enable(val: boolean) {
     this.enabled = val;
   }
 

@@ -4,6 +4,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { WordList } from 'src/app/datatypes/wordlist';
 import { ContextPackCardComponent } from './context-pack-card.component';
+import { ContextPackService } from 'src/app/services/contextPack-service/contextpack.service';
+import { MockCPService } from 'src/testing/context-pack.service.mock';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { DisplayContextPacksComponent } from '../display-contextPacks/display-context-packs.component';
 
 
 describe('CpCardComponent', () => {
@@ -14,10 +19,13 @@ describe('CpCardComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
-        MatCardModule
-      ],
-      declarations: [ ContextPackCardComponent ]
-    })
+        MatCardModule,
+        HttpClientTestingModule,RouterTestingModule.withRoutes([
+          { path: '', component: DisplayContextPacksComponent }
+            ])],
+      declarations: [ ContextPackCardComponent ],
+      providers: [{ provide: ContextPackService, useValue: new MockCPService() }]
+      })
     .compileComponents();
   });
 
@@ -26,9 +34,9 @@ describe('CpCardComponent', () => {
     fixture = TestBed.createComponent(ContextPackCardComponent);
     cpCard = fixture.componentInstance;
     cpCard.contextPack = {
-      _id: 'woof',
+      _id: 'computer',
       schema: 'https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json',
-      name: 'canines',
+      name: 'Iron Man',
       icon: 'image.png',
       enabled: true,
       wordlist: testList
@@ -36,8 +44,14 @@ describe('CpCardComponent', () => {
     fixture.detectChanges();
   });
 
+
+
   it('should create', () => {
     expect(cpCard).toBeTruthy();
-  })
-;
+  });
+
+  it('should delete a context pack', () => {
+    expect(cpCard).toBeTruthy();
+    expect(cpCard.deletePack()).toBeUndefined();
+  });
 });

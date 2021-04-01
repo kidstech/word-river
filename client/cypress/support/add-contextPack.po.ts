@@ -1,3 +1,4 @@
+import { count } from 'console';
 import {ContextPack} from 'src/app/datatypes/contextPacks';
 
 export class AddContextPackPage {
@@ -28,6 +29,17 @@ export class AddContextPackPage {
     this.getFormField('icon').type(newContextPack.icon);
     this.selectMatSelectValue(this.getFormField('enabled'), newContextPack.enabled.toString());
     return this.addContextPackButton().click();
+  }
 
+  navigateToHome() {
+    return cy.visit('');
+  }
+
+  getCpCards() {
+   return cy.get('.context-pack-display app-cp-card');
+  }
+
+  getUploadButton() {
+    return cy.get('[data-test=upload-image]');
   }
 }

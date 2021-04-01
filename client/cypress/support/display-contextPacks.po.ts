@@ -22,4 +22,8 @@ export class DisplayContextPacksComponent {
     clickViewCp(pack: Cypress.Chainable<JQuery<HTMLElement>>) {
         return pack.find<HTMLButtonElement>('[data-test=viewContextPackButton]').click();
     }
+
+    clickDeleteCp(pack: Cypress.Chainable<JQuery<HTMLElement>>) {
+        return pack.find<HTMLButtonElement>('[data-test=deleteContextPackButton]').click();
+    }
 }

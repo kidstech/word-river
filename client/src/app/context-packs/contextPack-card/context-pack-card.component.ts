@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ContextPack } from '../../datatypes/contextPacks';
 
 @Component({
@@ -10,10 +10,18 @@ export class ContextPackCardComponent implements OnInit {
 
   @Input() contextPack: ContextPack;
   @Input() simple ? = false;
+  @Output() delete = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  deletePack() {
+   this.delete.emit();
+  }
+
+  setDefaultIcon() {
+    this.contextPack.icon = 'https://i.redd.it/awbsnq5xefy41.png';
+  }
 }

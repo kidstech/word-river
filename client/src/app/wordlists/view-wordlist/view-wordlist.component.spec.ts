@@ -20,7 +20,7 @@ describe('ViewWordlistComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ViewWordlistComponent ],
       imports: [HttpClientTestingModule,RouterTestingModule.withRoutes([
-        { path: 'packs/meow', component: DisplayWordlistComponent }
+        { path: 'packs/meow', component: DisplayWordlistComponent}
       ]),COMMON_IMPORTS],
       providers: [{ provide: WordListService, useValue: new MockWordListService() }, {
         provide: ActivatedRoute,

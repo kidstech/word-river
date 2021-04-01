@@ -19,14 +19,14 @@ export class ImportWordlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((pmap) => {
-      this.id = pmap ? pmap.get('id') : '';
+      this.id = pmap.get('id');
     });
   }
 
   onFileAdded(file) {
     this.file = file.target.files[0];
     const fileReader = new FileReader();
-    fileReader.onload = (e) => {
+    fileReader.onload = () => {
       const result = fileReader.result;
       // console.log(result);
       try {

@@ -1,7 +1,7 @@
 <mat-card class="cp-card" *ngIf="this.contextPack">
     <mat-card-header>
       <mat-card-title class="cp-card-name">
-        <img mat-card-avatar id ="icon" src={{this.contextPack.icon}}>
+        <img mat-card-avatar id ="icon" src={{this.contextPack.icon}} (error)="setDefaultIcon()">
         <h5 id="name">{{this.contextPack.name}}</h5>
       </mat-card-title>
     </mat-card-header>
@@ -10,5 +10,8 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-button data-test="viewContextPackButton" *ngIf="this.simple" [routerLink]="['/packs', this.contextPack._id]">View Context Pack</button>
+    </mat-card-actions>
+    <mat-card-actions>
+      <button mat-button data-test="deleteContextPackButton" (click)="deletePack()" *ngIf="this.simple" >Delete</button>
     </mat-card-actions>
   </mat-card>

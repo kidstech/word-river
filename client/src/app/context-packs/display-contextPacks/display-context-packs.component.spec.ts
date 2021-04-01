@@ -40,7 +40,7 @@ const COMMON_IMPORTS: any[] = [
   RouterTestingModule,
 ];
 
-describe('CpListComponent', () => {
+describe('Display Context-Packs component', () => {
   let dpContextPacks: DisplayContextPacksComponent;
   let fixture: ComponentFixture<DisplayContextPacksComponent>;
 
@@ -57,10 +57,26 @@ describe('CpListComponent', () => {
       fixture = TestBed.createComponent(DisplayContextPacksComponent);
       dpContextPacks = fixture.componentInstance;
       fixture.detectChanges();
+      dpContextPacks.ngOnInit();
     });
   }));
 
   it('contains all the packs', () => {
+    expect(dpContextPacks.contextPacks.length).toBe(3);
+  });
+
+  it('should delete a context pack and then have 1 fewer context pack', () => {
+    dpContextPacks.contextPacks.push({
+      _id: 'panda',
+      schema: 'https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json',
+      name: 'Pandas',
+      icon: 'panda.png',
+      enabled: false,
+      wordlist: MockCPService.testList,
+  });
+    const idToDelete = 'panda';
+    expect(dpContextPacks.contextPacks.length).toBe(4);
+    dpContextPacks.removeCP(idToDelete);
     expect(dpContextPacks.contextPacks.length).toBe(3);
   });
 
@@ -80,6 +96,7 @@ describe('CpListComponent', () => {
   it('should create', () => {
     expect(dpContextPacks).toBeTruthy();
   });
+
 });
 
 describe('Misbehaving Context Pack List', () => {

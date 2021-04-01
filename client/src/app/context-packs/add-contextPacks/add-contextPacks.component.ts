@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { ContextPack } from '../../datatypes/contextPacks';
 import { ContextPackService } from '../../services/contextPack-service/contextpack.service';
 
@@ -19,39 +21,42 @@ export class AddContextPackComponent implements OnInit {
 
   addCpValidationMessages = {
     name: [
-      {type: 'required', message: 'A name is required'},
-      {type: 'maxlength', message: 'The name cannot exceed 50 characters'},
-      {type: 'existingName', message: 'This name has already been taken'}
+      { type: 'required', message: 'A name is required' },
+      { type: 'maxlength', message: 'The name cannot exceed 50 characters' },
+      { type: 'existingName', message: 'This name has already been taken' }
     ],
 
     icon: [
-      {type: 'required', message: 'An icon is required'},
-      {type: 'pattern', message: 'The file must be a valid type (.png or .jpg)'}
+      { type: 'pattern', message: 'Image must be a .jpg,.png or .gif' }
     ],
 
     enabled: [
-      {type: 'required', message: 'You must specify whether the pack is enabled or disabled'},
+      { type: 'required', message: 'You must specify whether the pack is enabled or disabled' },
     ]
   };
+  downloadURL: any;
+  uploaded = false;
 
-  constructor(private fb: FormBuilder, private cpService: ContextPackService, private snackBar: MatSnackBar, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private storage: AngularFireStorage,
+    private cpService: ContextPackService,
+    private snackBar: MatSnackBar,
+    private router: Router) { }
 
-  // edit based on what we decide as a team
   createForms() {
     this.addContextPackForm = this.fb.group({
       name: new FormControl('', Validators.compose([
         Validators.required,
         Validators.maxLength(50),
-        // insert check for whether the name already exists
       ])),
 
       icon: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('.+\.(png|jpg)$')
+        Validators.pattern('.+\.(png|jpg|jpeg|gif)$')
       ])),
 
       enabled: new FormControl('', Validators.compose([
-        Validators.required, // decide how we want to display this option
+        Validators.required,
         Validators.pattern('^(true|false)$'),
       ]))
     });
@@ -62,6 +67,9 @@ export class AddContextPackComponent implements OnInit {
   }
 
   submitForm() {
+    if(!this.addContextPackForm.value.icon){
+      this.addContextPackForm.value.icon = this.downloadURL ? this.downloadURL : '';
+    }
     this.cpService.addPack(this.addContextPackForm.value).subscribe(newID => {
       this.snackBar.open('Added the ' + this.addContextPackForm.value.name + ' context pack successfully', null, {
         duration: 2000,
@@ -73,5 +81,22 @@ export class AddContextPackComponent implements OnInit {
         duration: 5000,
       });
     });
+  }
+  onFileAdded(event) {
+
+    const file = event.target.files[0];
+    const filePath = `${Math.floor(Math.random() * 100000000)}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        this.downloadURL = fileRef.getDownloadURL().subscribe(link=>{
+          this.downloadURL = link;
+          this.uploaded = true;
+        });
+      })
+    )
+      .subscribe();
   }
 }
