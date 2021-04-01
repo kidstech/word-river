@@ -55,6 +55,11 @@ describe('ViewWordlistComponent', () => {
   it('should delete a wordlist', () => {
     expect(component.deleteWordList()).toBeTruthy();
   });
+  it('should delete a word', () => {
+    expect(component.words.length).toBe(4);
+    component.deleteWord(1);
+    expect(component.words.length).toBe(1);
+  });
   it('should save', () => {
     component.wordlist = {name:'',enabled:false,nouns:[],verbs:[],adjectives:[],misc:[]};
     component.enabled = false;

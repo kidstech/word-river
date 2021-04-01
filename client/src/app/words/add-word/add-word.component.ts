@@ -12,6 +12,7 @@ export class AddWordComponent implements OnInit {
   wordName = '';
   finished = false;
   type: string;
+  cleared = false;
 
   added = false;
 
@@ -34,20 +35,22 @@ export class AddWordComponent implements OnInit {
 
   add(val) {
     this.forms.push(val);
+    this.cleared = false;
   }
 
   removeForm(i: number) {
     console.log(i);
     this.forms.splice(i, 1);
+    if(this.forms.length === 0) {this.forms = [''];}
   }
 
   save() {
     this.addWord.emit({ name: this.wordName, forms: this.forms.filter(e => e.length !== 0), type: this.type });
     console.log(this.forms + this.wordName + this.type);
     this.wordName = '';
-    this.forms = [];
-    this.forms.push('');
+    this.forms = [''];
     this.added = false;
     this.finished = false;
+    this.cleared = true;
   }
 }

@@ -55,7 +55,7 @@ describe('AddWordComponent', () => {
     component.save();
     expect(component.wordName).toBe('');
     expect(component.type).toBe('Noun');
-    expect(component.forms).toEqual([]);
+    expect(component.forms).toEqual(['']);
 
   });
 });

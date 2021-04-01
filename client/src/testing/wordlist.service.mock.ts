@@ -10,7 +10,7 @@ import { WordlistCardComponent } from 'src/app/wordlists/wordlist-card/wordlist-
  */
 @Injectable()
 export class MockWordListService extends WordListService {
-  static testWordLists: WordList[] = [
+  testWordLists: WordList[] = [
     {
       name: 'animal',
       enabled: true,
@@ -61,27 +61,27 @@ export class MockWordListService extends WordListService {
     // Our goal here isn't to test (and thus rewrite) the service, so we'll
     // keep it simple and just return the test WordLists regardless of what
     // filters are passed in.
-    return of(MockWordListService.testWordLists);
+    return of(this.testWordLists);
   }
   addWordList(w: WordList, id: string): Observable<WordList>{
-    MockWordListService.testWordLists.push(w);
+    this.testWordLists.push(w);
     return of(w);
   }
   getWordListByName(word: string, id: string): Observable<WordList> {
     // Our goal here isn't to test (and thus rewrite) the service, so we'll
     // keep it simple and just return the test WordLists regardless of what
     // filters are passed in.
-    return of(MockWordListService.testWordLists[0]);
+    return of(this.testWordLists[0]);
   }
   editWordList(name: string, wordlist: WordList, id: string): Observable<WordList>{
-    MockWordListService.testWordLists = MockWordListService.testWordLists.map(w=>{
+    this.testWordLists = this.testWordLists.map(w=>{
       if(w.name === name) {return wordlist;}
       else {return w;}
     });
-    return of(MockWordListService.testWordLists.filter(e=>e.name === name)[0]);
+    return of(this.testWordLists.filter(e=>e.name === name)[0]);
   }
   deleteWordList(wordlist: WordList, id: string): Observable<WordList>{
-    MockWordListService.testWordLists = MockWordListService.testWordLists.filter(w=> w!==wordlist);
+    this.testWordLists = this.testWordLists.filter(w=> w!==wordlist);
     return of(wordlist);
   }
 }

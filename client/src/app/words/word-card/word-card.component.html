@@ -1,4 +1,4 @@
-<mat-card (mouseover)="hovering=true" (mouseout)="hovering=false" [ngClass]="{'noun': type.includes('oun'), 'verb': type.includes('erb'),'adjective': type.includes('djective'),'misc': type.includes('isc') }">
+<mat-card (mouseover)="hovering=true" (mouseout)="hovering=false" [ngClass]="type ? {'noun': type.includes('oun'), 'verb': type.includes('erb'),'adjective': type.includes('djective'),'misc': type.includes('isc') }: 'misc'">
 
   <div class="card-header word-card">
     <div class="top">

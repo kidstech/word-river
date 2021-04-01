@@ -1,3 +1,4 @@
+import { SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WordFormComponent } from './word-form.component';
@@ -8,9 +9,9 @@ describe('WordFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WordFormComponent ]
+      declarations: [WordFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -34,6 +35,15 @@ describe('WordFormComponent', () => {
   it('adding doesnt work for valid values', () => {
     component.wordForm = '';
     component.add();
+    expect(component.added).toBe(false);
+  });
+  it('should detect changes and clear component', () => {
+    component.cleared = true;
+    component.ngOnChanges({
+      cleared: new SimpleChange(false, component.cleared, false)
+    });
+    fixture.detectChanges();
+    expect(component.wordForm).toBe('');
     expect(component.added).toBe(false);
   });
 });
