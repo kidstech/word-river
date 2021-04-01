@@ -1,15 +1,14 @@
 import { DisplayWordlistComponent } from './../display-wordlist/display-wordlist.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, convertToParamMap, RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { COMMON_IMPORTS } from 'src/app/app-routing.module';
-import { Word } from 'src/app/datatypes/word';
 import { WordListService } from 'src/app/services/wordlist.service';
 import { MockWordListService } from 'src/testing/wordlist.service.mock';
 
 import { AddWordListComponent } from './add-wordlist.component';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 
 describe('AddWordListComponent', () => {
   let component: AddWordListComponent;
@@ -68,6 +67,12 @@ describe('AddWordListComponent', () => {
 
   it('should accept names with numbers', () => {
     component.wordlistname = '1234';
+    component.check();
+    expect(component.finished).toBe(true);
+  });
+
+  it('should not accept a duplicate name', () => {
+    component.wordlistname = 'animal';
     component.check();
     expect(component.finished).toBe(true);
   });
