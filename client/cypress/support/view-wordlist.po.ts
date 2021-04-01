@@ -6,11 +6,18 @@ export class ViewWordListPage {
   }
 
   getWordCards() {
-      return cy.get('.wordcards');
+    return cy.get('.wordcards');
   }
 
   deleteWordListButton() {
     return cy.get('[data-test=deleteWordListButton]');
+  }
+
+  toggleConfirmationButton() {
+    return cy.get('[data-test=toggle-delete]');
+  }
+  cancelConfirmationButton() {
+    return cy.get('[data-test=cancel-delete]');
   }
 
   deleteWordButton() {
@@ -22,33 +29,33 @@ export class ViewWordListPage {
   }
 
   clickViewWordList(card: Cypress.Chainable<JQuery<HTMLElement>>) {
-      return card.find<HTMLButtonElement>('[viewWordListButton]').click();
+    return card.find<HTMLButtonElement>('[viewWordListButton]').click();
   }
 
   clickAddWordList(card: Cypress.Chainable<JQuery<HTMLElement>>) {
-      return card.find<HTMLButtonElement>('[addWordListButton]').click();
+    return card.find<HTMLButtonElement>('[addWordListButton]').click();
   }
 
   clickImportWordList(card: Cypress.Chainable<JQuery<HTMLElement>>) {
-      return card.find<HTMLButtonElement>('[importWordListButton]').click();
+    return card.find<HTMLButtonElement>('[importWordListButton]').click();
   }
 
   addWordButton() {
-      return cy.get('[data-test=confirmAddWordButton]');
-    }
+    return cy.get('[data-test=confirmAddWordButton]');
+  }
   getWordName() {
-      return cy.get(`[data-test=newWord]`);
-    }
+    return cy.get(`[data-test=newWord]`);
+  }
 
   selectMatSelectType(type: string) {
-      // Find and click the drop down
-      return cy.get('#select').click()
-        // Select and click the desired value from the resulting menu
-        .get(`mat-option[value="${type}"]`).click();
-    }
+    // Find and click the drop down
+    return cy.get('#select').click()
+      // Select and click the desired value from the resulting menu
+      .get(`mat-option[value="${type}"]`).click();
+  }
   addWord(newWord) {
-      this.getWordName().type(newWord.word);
-      this.selectMatSelectType(newWord.type);
-      return this.addWordButton().click();
-    }
+    this.getWordName().type(newWord.word);
+    this.selectMatSelectType(newWord.type);
+    return this.addWordButton().click();
+  }
 }

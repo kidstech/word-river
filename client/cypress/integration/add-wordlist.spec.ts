@@ -46,9 +46,31 @@ describe('Add Wordlist', () => {
   it('Add form works for valid input', () => {
     page.getInitialButton().click();
     page.getFormItems().should('have.length', '1');
-    page.getFormField().type('sdas');
+    page.getFormField().last().type('sdas');
     page.getAddFormButton().last().click();
     page.getFormItems().should('have.length', '2');
+  });
+  it('Should remove a form', () => {
+    page.getFormField().last().type('sdas');
+    page.getAddFormButton().last().click();
+    page.getForms().should('have.length', '2');
+    page.getRemoveButton().last().click();
+    page.getForms().should('have.length', '1');
+  });
+  it('Should remove multiple forms', () => {
+    page.getFormField().last().type('sample text 1');
+    page.getAddFormButton().last().click();
+    page.getFormField().last().type('sample text 2');
+    page.getAddFormButton().last().click();
+    page.getFormField().last().type('sample text 3');
+    page.getAddFormButton().last().click();
+    page.getForms().should('have.length', '4');
+    page.getRemoveButton().last().click();
+    page.getForms().should('have.length', '3');
+    page.getRemoveButton().last().click();
+    page.getForms().should('have.length', '2');
+    page.getRemoveButton().last().click();
+    page.getForms().should('have.length', '1');
   });
 
 });

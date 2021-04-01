@@ -60,12 +60,10 @@ export class AddWordListComponent implements OnInit {
     this.enabled = val;
   }
 
-  addWord(word) {
-
-
+  addWord(word){
     const type: string = word.type;
-    this.wordList[type].push({ word: word.name, forms: word.forms });
-    this.words.push({ word: word.name, forms: word.forms });
+    this.wordList[type].push({word:word.name,forms:word.forms});
+    this.words.push({word:word.name,forms:word.forms,type});
     console.log(this.words);
     return word.type;
   }

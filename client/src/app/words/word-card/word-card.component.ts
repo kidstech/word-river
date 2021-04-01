@@ -16,7 +16,10 @@ export class WordCardComponent implements OnInit {
 
   @Input() viewing: boolean;
 
+
   @Output() delete = new EventEmitter();
+
+  hovering = false;
 
   constructor(private service: WordListService) {}
 
