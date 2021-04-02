@@ -62,9 +62,20 @@ export class MockWordListService extends WordListService {
     // filters are passed in.
     return of(this.testWordLists);
   }
-  addWordList(w: WordList): Observable<WordList>{
-    this.testWordLists.push(w);
-    return of(w);
+  addWordList(newWordlist: WordList,id: string): Observable<WordList>{
+    const observable = new Observable<WordList>(observer=>{
+      if(newWordlist.name === 'animal'){
+        observer.error({statusText:'Bad Request'});
+     }
+     else if(newWordlist.name === null){
+      observer.error({statusText:'Server error'});
+   }
+     else{
+        this.testWordLists.push(newWordlist);
+       observer.next(newWordlist);
+      }
+    });
+    return observable;
   }
   getWordListByName(word: string, id: string): Observable<WordList> {
     // Our goal here isn't to test (and thus rewrite) the service, so we'll

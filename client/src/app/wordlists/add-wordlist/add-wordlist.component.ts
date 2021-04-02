@@ -17,12 +17,12 @@ export class AddWordListComponent implements OnInit {
   wordType = '';
   finished = false;
   id: string;
-  valid = true;
 
   words: Word[] = [];
   enabled = true;
+  status: string;
 
-  constructor(private route: ActivatedRoute, private service: WordListService,private router: Router, private snackBar: MatSnackBar) { }
+  constructor(private route: ActivatedRoute, private service: WordListService,private router: Router, public snackBar: MatSnackBar) { }
 
   add(val) {
     this.words.push(val);
@@ -55,13 +55,18 @@ export class AddWordListComponent implements OnInit {
               },
        err => {
         console.log(err);
-        this.valid = false;
-        console.log(this.valid);
-        this.snackBar.open('There is already a Word List with the name ' + this.wordList.name + ' in the context pack', 'OK', {
-        duration: 90000,
+        this.status = err.statusText;
+        if(this.status === 'Bad Request'){
+          this.snackBar.open('There is already a Word List with the name ' + this.wordList.name + ' in the context pack', 'OK', {
+          duration: 90000,
       });
-    });
-
+     }
+       else {
+        this.snackBar.open('Failed to add the word list', 'OK', {
+        duration: 90000,
+     });
+    };
+   });
   }
 
   enable(val: boolean) {
