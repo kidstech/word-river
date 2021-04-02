@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WordList } from 'src/app/datatypes/wordlist';
 import { WordListService } from 'src/app/services/wordlist.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DictionaryService } from 'src/app/services/dictionary-service/dictionary.service';
 
 @Component({
   selector: 'app-add-wordlist',
@@ -12,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AddWordListComponent implements OnInit {
   forms = [''];
-  wordList: WordList = {name:'',enabled:false,nouns:[],verbs:[],adjectives:[],misc:[]};
+  wordList: WordList = { name: '', enabled: false, nouns: [], verbs: [], adjectives: [], misc: [] };
   wordlistname = '';
   wordType = '';
   finished = false;
@@ -22,13 +23,17 @@ export class AddWordListComponent implements OnInit {
   enabled = true;
   status: string;
 
-  constructor(private route: ActivatedRoute, private service: WordListService,private router: Router, public snackBar: MatSnackBar) { }
+  constructor(
+    private route: ActivatedRoute, private service: WordListService,
+    private dictService: DictionaryService, private router: Router, public snackBar: MatSnackBar
+  ) { }
+
 
   add(val) {
     this.words.push(val);
     console.log(this.words);
 
-   }
+  }
 
   check() {
     this.finished =
@@ -40,8 +45,10 @@ export class AddWordListComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((pmap) => {
-      this.id =  pmap.get('id');
+      this.id = pmap.get('id');
     });
+    this.dictService.getType('run', type => console.log(type), error=>{
+    }); // temporary spot to test
   }
 
   save() {
