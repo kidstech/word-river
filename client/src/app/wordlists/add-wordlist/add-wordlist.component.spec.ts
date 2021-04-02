@@ -73,9 +73,18 @@ describe('AddWordListComponent', () => {
 
   it('should not accept a duplicate name', () => {
     component.wordlistname = 'animal';
-    component.check();
-    expect(component.finished).toBe(true);
+    component.wordList.name = 'animal';
+    component.save();
+    expect(component.status).toBe('Bad Request');
   });
+
+  it('should not accept a null name', () => {
+    component.wordlistname = null;
+    component.wordList.name = null;
+    component.save();
+    expect(component.status).toBe('Server error');
+  });
+
 
   it('addWord() should work with nouns', () => {
     expect(component.addWord({ name: '', type: 'nouns', forms: [] })).toBe('nouns');

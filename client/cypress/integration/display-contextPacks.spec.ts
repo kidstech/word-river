@@ -10,6 +10,7 @@ describe('Display Context Pack', () => {
 
     beforeEach(() => {
         page.navigateTo();
+        cy.task('seed:database');
     });
 
     it('Should have 4 context packs', () => {

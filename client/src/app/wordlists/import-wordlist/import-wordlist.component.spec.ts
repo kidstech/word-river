@@ -15,7 +15,7 @@ describe('ImportWordlistComponent', () => {
   const paramMap = new Map();
   paramMap.set('id','meow');
   const ex = {
-    name: 'animal',
+    name: 'test',
     enabled: true,
     nouns:[{word:'pig',forms:['pig','pigs']}],
     verbs:[{word:'sniff',forms:['sniffs','sniffing']}],
@@ -50,6 +50,7 @@ describe('ImportWordlistComponent', () => {
   });
   it('should save', () => {
     component.wordlist = ex;
+    component.id = 'meow';
     expect(component.save()).toBe(true);
     component.wordlist = undefined;
     expect(component.save()).toBe(false);

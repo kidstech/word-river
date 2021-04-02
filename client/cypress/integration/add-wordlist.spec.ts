@@ -46,6 +46,8 @@ describe('Add Wordlist', () => {
     });
     cy.get('.mat-simple-snackbar').should('contain',`There is already a Word List with the name birthday in the context pack`);
   });
+
+
   it('Should add a field initially', () => {
     page.getInitialButton().click();
     page.getFormItems().should('have.length', '1');
