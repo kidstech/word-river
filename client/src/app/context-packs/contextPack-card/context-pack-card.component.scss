@@ -3,6 +3,10 @@
   cursor: pointer;
 }
 
+.container {
+  width: 100%;
+}
+
 #name {
   font-size: large;
   flex: 1;
@@ -53,4 +57,58 @@
 .disabled {
   // background-color: rgba(241, 49, 43, 0.329);
   color: rgb(218, 38, 26);
+}
+
+.placeholder {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.placeholder>mat-icon {
+  font-size: 50px;
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+
+.placeholder>h2 {
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
+.details-container {
+  display: flex;
+  flex: 1;
+}
+
+.cp-icon {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.cp-profile {
+  flex: 1;
+  padding-left: 20px;
+  width: 100%;
+
+}
+
+.cp-profile>h2 {
+  margin: 0px 0px 0px 0px;
+}
+
+.cp-profile>h5 {
+  margin: 0px 0px 0px 0px;
+  opacity: 0.7;
+}
+
+.cp-profile h2 {
+  white-space: nowrap;
+  overflow:hidden;
+  width: 270px;
+  text-overflow: ellipsis;
 }

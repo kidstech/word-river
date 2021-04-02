@@ -18,7 +18,8 @@ export class ContextPackCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  deletePack() {
+  deletePack(event) {
+    event.stopPropagation();
    this.delete.emit();
   }
 

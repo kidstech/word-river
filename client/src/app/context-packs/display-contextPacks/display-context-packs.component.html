@@ -1,11 +1,18 @@
 <div>
-  <h1>Context Packs</h1>
+  <div class="top">
+    <h1 style="margin-bottom: 0px;">Context Packs</h1>
+    <a class="add-cp-button" routerLink="/packs/new">
+      <mat-icon>add</mat-icon>
+      <span>Add</span>
+    </a>
+  </div>
   <div class="context-pack-display">
-    <app-cp-card simple="true" (delete)="removeCP(pack._id)"  *ngFor="let pack of contextPacks" class="cp-card" [contextPack]="pack"></app-cp-card>
-    </div>
+    <app-cp-card simple="true" (delete)="removeCP(pack._id)" *ngFor="let pack of contextPacks" class="cp-card"
+      [contextPack]="pack"></app-cp-card>
+  </div>
 
-<button mat-fab class="add-cp" matTooltip="Add Context Pack" matTooltipPosition="left" routerLink="/packs/new" data-test="addCpButton">
+  <button mat-fab class="add-cp" matTooltip="Add Context Pack" matTooltipPosition="left" routerLink="/packs/new"
+    data-test="addCpButton">
     <mat-icon class="logo" aria-label="Add Context Pack">add</mat-icon>
-</button>
+  </button>
 </div>
-
