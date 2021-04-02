@@ -3,6 +3,7 @@ import { Word } from 'src/app/datatypes/word';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WordList } from 'src/app/datatypes/wordlist';
 import { WordListService } from 'src/app/services/wordlist.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DictionaryService } from 'src/app/services/dictionary-service/dictionary.service';
 
 @Component({
@@ -20,11 +21,13 @@ export class AddWordListComponent implements OnInit {
 
   words: Word[] = [];
   enabled = true;
+  status: string;
 
   constructor(
     private route: ActivatedRoute, private service: WordListService,
-    private dictService: DictionaryService, private router: Router
+    private dictService: DictionaryService, private router: Router, public snackBar: MatSnackBar
   ) { }
+
 
   add(val) {
     this.words.push(val);
@@ -52,8 +55,25 @@ export class AddWordListComponent implements OnInit {
     this.wordList.name = this.wordlistname;
     this.wordList.enabled = this.enabled;
     console.log(this.wordList);
-    this.service.addWordList(this.wordList, this.id).subscribe();
-    this.router.navigate(['packs', this.id]);
+     this.service.addWordList(this.wordList, this.id).subscribe(
+       res => {
+         console.log('HTTP RESPONSE', res);
+         this.router.navigate(['packs/', this.id]);
+              },
+       err => {
+        console.log(err);
+        this.status = err.statusText;
+        if(this.status === 'Bad Request'){
+          this.snackBar.open('There is already a Word List with the name ' + this.wordList.name + ' in the context pack', 'OK', {
+          duration: 90000,
+      });
+     }
+       else {
+        this.snackBar.open('Failed to add the word list', 'OK', {
+        duration: 90000,
+     });
+    };
+   });
   }
 
   enable(val: boolean) {
@@ -67,5 +87,6 @@ export class AddWordListComponent implements OnInit {
     console.log(this.words);
     return word.type;
   }
+
 
 }

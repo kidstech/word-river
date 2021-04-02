@@ -53,6 +53,7 @@ public class WordRiverController {
     String id = ctx.pathParam("id");
     ContextPack contextPack;
 
+
     System.out.println(id);
 
     try {
@@ -70,8 +71,14 @@ public class WordRiverController {
   public void addNewWordList(Context ctx) {
     WordList newWordList = ctx.bodyValidator(WordList.class).check(wl -> wl.name != null && wl.name.length() > 0).get();
     String id = ctx.pathParam("id");
+    ContextPack contextPack;
+    contextPack = ctxCollection.findOneById(id);
+    for (WordList wl : contextPack.wordlists) {
+      if (wl.name.toLowerCase().equals(newWordList.name.toLowerCase())) {
+        throw new BadRequestResponse("The word list already exists in the context pack");
+      }
+    }
     ctxCollection.updateById(id, Updates.push("wordlists", newWordList));
-
     ctx.status(201);
     ctx.json(ImmutableMap.of("id", ctxCollection.findOneById(id)._id));
   }
