@@ -1,7 +1,7 @@
 <mat-card class="cp-card" *ngIf="this.contextPack" (click)="openContextPack()">
   <div>
     <div class="top">
-      <img class="icon" src={{this.contextPack.icon}} (error)="setDefaultIcon()">
+      <img class="icon" src={{this.contextPack.icon}} onerror="this.src='https://st2.depositphotos.com/3616015/5374/v/600/depositphotos_53741327-stock-illustration-abc-blocks-flat-icon-with.jpg'">
       <h5 id="name">{{this.contextPack.name}}</h5>
       <div class="status enabled" *ngIf="contextPack.enabled">
         Enabled
