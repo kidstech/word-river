@@ -1,6 +1,7 @@
 .content {
   display: flex;
   margin-top: 30px;
+  height: 91vh;
 }
 
 .left {
@@ -8,8 +9,20 @@
   display: flex;
   flex-direction: column;
   margin-right: 24px;
-  position: fixed;
+  position: absolute;
+  top: 94px;;
+  left: 20px;
+  height: 91vh;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
+
+.left::-webkit-scrollbar,.right::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
+}
+
 .wordlist-details{
   padding: 30px;
 }
@@ -24,8 +37,13 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  max-height: 91vh;
+  overflow-y: scroll;
   height: 100%;
   margin-left: 374px;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
 .top{
   width: 100%;
@@ -51,4 +69,7 @@
 .delete{
   height: 40px;
   margin-left: 20px;
+}
+.save{
+  margin-bottom: 30px;
 }
