@@ -59,10 +59,10 @@ describe('AddWordListComponent', () => {
     expect(component.finished).toBe(false);
   });
 
-  it('should not accept "Pre-k"', () => {
+  it('should accept "Pre-k"', () => {
     component.wordlistname = 'Pre-k';
     component.check();
-    expect(component.finished).toBe(false);
+    expect(component.finished).toBe(true);
   });
 
   it('should accept names with numbers', () => {

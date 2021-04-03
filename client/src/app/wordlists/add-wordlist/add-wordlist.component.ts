@@ -37,9 +37,9 @@ export class AddWordListComponent implements OnInit {
 
   check() {
     this.finished =
-      this.wordlistname.trim().length > 1 && (this.wordlistname.trim().match(/[^a-zA-Z0-9 ]/)) === null;
+      this.wordlistname.trim().length > 1 && (this.wordlistname.trim().match(/[^-a-zA-Z0-9 ]/)) === null;
     console.log(this.wordlistname.length);
-    console.log(this.wordlistname.match(/[^a-zA-Z0-9 ]/));
+    console.log(this.wordlistname.match(/[^-a-zA-Z0-9- ]/));
     return this.finished;
   }
 
