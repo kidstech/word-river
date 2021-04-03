@@ -42,6 +42,7 @@ public class WordRiverControllerSpec {
   private WordRiverController wordRiverController;
 
   private ObjectId batmanId;
+  private ObjectId noWordListsId;
 
   static MongoClient mongoClient;
   static MongoDatabase db;
@@ -90,6 +91,7 @@ public class WordRiverControllerSpec {
                     Arrays.asList(new Document("word", "big").append("forms", Arrays.asList("big", "biggish"))))
                 .append("misc", Arrays.asList(new Document("word", "the").append("forms", Arrays.asList("the")))))));
 
+
     batmanId = new ObjectId();
     Document batman = new Document().append("_id", batmanId).append("name", "batman").append("icon", "batman.png")
         .append("enabled", "true").append("wordlists",
@@ -98,10 +100,22 @@ public class WordRiverControllerSpec {
                 .append("verbs", Arrays.asList(new Document("word", "fight").append("forms", Arrays.asList("fights"))))
                 .append("adjectives",
                     Arrays.asList(new Document("word", "big").append("forms", Arrays.asList("biggish"))))
-                .append("misc", Arrays.asList(new Document("word", "the").append("forms", Arrays.asList("the"))))));
+                .append("misc", Arrays.asList(new Document("word", "the").append("forms", Arrays.asList("the")))),
+                new Document().append("name", "captain america").append("enabled", true)
+                .append("nouns", Arrays.asList(new Document("word", "suit").append("forms", Arrays.asList("suits"))))
+                .append("verbs", Arrays.asList(new Document("word", "fight").append("forms", Arrays.asList("fights"))))
+                .append("adjectives",
+                    Arrays.asList(new Document("word", "big").append("forms", Arrays.asList("biggish"))))
+                .append("misc", Arrays.asList(new Document("word", "the").append("forms", Arrays.asList("the"))))
+                ));
+
+    noWordListsId = new ObjectId();
+    Document noWordLists = new Document().append("_id", noWordListsId).append("name", "batman").append("icon", "batman.png")
+        .append("enabled", "true").append("wordlists", null);
 
     ctxDocuments.insertMany(testPacks);
     ctxDocuments.insertOne(batman);
+    ctxDocuments.insertOne(noWordLists);
 
     wordRiverController = new WordRiverController(db);
   }
@@ -179,6 +193,43 @@ public class WordRiverControllerSpec {
     assertTrue(theContextPackWordLists
         .contains("Document{{name=Test Wordlist, enabled=true, nouns=[], verbs=[], adjectives=[], misc=[]}}"));
   }
+
+  @Test
+  public void AddNewWordListWithNullName() throws IOException {
+
+    String testNewWordList = "{" + "\"enabled\": true," + "\"nouns\": [],"
+        + "\"verbs\": []," + "\"adjectives\": []," + "\"misc\": []" + "}";
+
+    String testID = batmanId.toHexString();
+    mockReq.setBodyContent(testNewWordList);
+    mockReq.setMethod("POST");
+
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/packs/:id", ImmutableMap.of("id", testID));
+
+    assertThrows(BadRequestResponse.class, () -> {
+      wordRiverController.addNewWordList(ctx);
+    });;
+  }
+
+  @Test
+  public void AddNewWordListWithInvalidName() throws IOException {
+
+    String testNewWordList = "{" + "\"name\": \"\"," + "\"enabled\": true," + "\"nouns\": [],"
+        + "\"verbs\": []," + "\"adjectives\": []," + "\"misc\": []" + "}";
+
+    String testID = batmanId.toHexString();
+    mockReq.setBodyContent(testNewWordList);
+    mockReq.setMethod("POST");
+
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/packs/:id", ImmutableMap.of("id", testID));
+
+    assertThrows(BadRequestResponse.class, () -> {
+      wordRiverController.addNewWordList(ctx);
+    });;
+  }
+
 
 
   @Test
@@ -298,15 +349,26 @@ public class WordRiverControllerSpec {
 
     String result = ctx.resultString();
     WordList[] resultPack = JavalinJson.fromJson(result, WordList[].class);
-    assertEquals(resultPack.length, 1);
+    assertEquals(resultPack.length, 2);
   }
   @Test
   public void getWordListsByInvalidID() throws IOException {
-    String testID = "69";  // nice
+    String testID = "69"; // nice
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/packs/:id", ImmutableMap.of("id", testID));
     mockReq.setMethod("GET");
 
     assertThrows(BadRequestResponse.class, () -> {
+      wordRiverController.getWordLists(ctx);
+    });
+  }
+
+  @Test
+  public void getWordListsWithNullWordLists() throws IOException {
+    String testID = noWordListsId.toHexString();
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/packs/:id", ImmutableMap.of("id", testID));
+    mockReq.setMethod("GET");
+
+    assertThrows(NotFoundResponse.class, () -> {
       wordRiverController.getWordLists(ctx);
     });
   }
@@ -381,7 +443,7 @@ public class WordRiverControllerSpec {
 
     ObjectId theId = batmanId;
 
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/packs/:id/:name", ImmutableMap.of("id", testID, "name", "iron man"));
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/packs/:id/:name", ImmutableMap.of("id", testID, "name", "captain america"));
         wordRiverController.deleteWordList(ctx);
 
     Document ContextPack = db.getCollection("packs").find(Filters.eq("_id", theId)).first();
@@ -389,7 +451,7 @@ public class WordRiverControllerSpec {
     @SuppressWarnings("unchecked")
     ArrayList<WordList> cpWordLists = (ArrayList<WordList>) ContextPack.get("wordlists");
 
-    assertTrue(cpWordLists.isEmpty());
+    assertEquals(cpWordLists.size(), 1);
  }
 
   @Test
@@ -398,12 +460,11 @@ public class WordRiverControllerSpec {
     String testID = batmanId.toHexString();
     mockReq.setMethod("DELETE");
 
-    ObjectId theId = batmanId;
 
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/packs/:id", ImmutableMap.of("id", testID));
         wordRiverController.deleteContextPack(ctx);
 
-    assertTrue(db.getCollection("packs").count() == 2);
+    assertTrue(db.getCollection("packs").countDocuments() == 3);
 
   }
 
