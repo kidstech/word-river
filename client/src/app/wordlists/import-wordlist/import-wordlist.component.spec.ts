@@ -15,7 +15,7 @@ describe('ImportWordlistComponent', () => {
   const paramMap = new Map();
   paramMap.set('id','meow');
   const ex = {
-    name: 'test',
+    name: 'testWordlistForImport',
     enabled: true,
     nouns:[{word:'pig',forms:['pig','pigs']}],
     verbs:[{word:'sniff',forms:['sniffs','sniffing']}],
