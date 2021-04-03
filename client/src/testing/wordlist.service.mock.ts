@@ -64,7 +64,8 @@ export class MockWordListService extends WordListService {
   }
   addWordList(newWordlist: WordList,id: string): Observable<WordList>{
     const observable = new Observable<WordList>(observer=>{
-      if(newWordlist.name === 'animal'){
+      for(const wl of this.testWordLists){
+      if(newWordlist.name === wl.name){
         observer.error({statusText:'Bad Request'});
      }
      else if(newWordlist.name === null){
@@ -74,7 +75,8 @@ export class MockWordListService extends WordListService {
         this.testWordLists.push(newWordlist);
        observer.next(newWordlist);
       }
-    });
+    }
+  });
     return observable;
   }
   getWordListByName(word: string, id: string): Observable<WordList> {
