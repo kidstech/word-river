@@ -95,6 +95,7 @@ export class ViewWordlistComponent implements OnInit {
       if (current.includes(this.words[i])) {
         current.splice(current.indexOf(this.words[i]), 1);
         this.words.splice(i, 1);
+        this.types.splice(i,1);
       }
     }
   }

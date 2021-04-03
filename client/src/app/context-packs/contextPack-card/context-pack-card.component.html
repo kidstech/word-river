@@ -17,12 +17,12 @@
 
     <div class="stats-holder">
       <div class="stat-container">
-        <h2>{{contextPack ? contextPack.wordlists.length : 0}}</h2>
+        <h2>{{contextPack ? contextPack.wordlists ? contextPack.wordlists.length:0 : 0}}</h2>
         <p>wordlists</p>
       </div>
       <span class="separator"></span>
       <div class="stat-container">
-        <h2>{{count}}</h2>
+        <h2>{{count ? count : 0}}</h2>
         <p>words</p>
       </div>
       <!-- <span class="separator"></span>

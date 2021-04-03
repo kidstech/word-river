@@ -1,4 +1,5 @@
-  <mat-card class="wordList-card">
+  <a [routerLink]="['/packs', id, this.wordlist.name]">
+  <mat-card class="wordList-card" data-test="viewWordListButton">
   <div>
     <div class="card-header">
       <h1 class="wordList-name">{{wordlist.name}}</h1>
@@ -11,28 +12,29 @@
         <div class="nounsList" *ngIf="wordlist.nouns.length > 0">
             <!--display:flex-->
             <p  class="desc title-section" element="nouns">Nouns:</p>
-            <p color="primary" class="bubble" *ngFor="let noun of wordlist.nouns">{{noun.word}}</p>
+            <p color="primary" class="bubble noun" *ngFor="let noun of wordlist.nouns">{{noun.word}}</p>
           </div>
           <div class="verbsList" *ngIf="wordlist.verbs.length > 0">
             <!--display:flex-->
             <p  class="desc title-section" element="verbs">Verbs:</p>
-            <p color="primary" class="bubble" *ngFor="let verb of wordlist.verbs">{{verb.word}}</p>
+            <p color="primary" class="bubble verb" *ngFor="let verb of wordlist.verbs">{{verb.word}}</p>
           </div>
           <div class="adjectivesList" *ngIf="wordlist.adjectives.length > 0">
             <!--display:flex-->
             <p  class="desc title-section" element="adjectives">Adjectives:</p>
-            <p color="primary" class="bubble" *ngFor="let ad of wordlist.adjectives">{{ad.word}}</p>
+            <p color="primary" class="bubble adjective" *ngFor="let ad of wordlist.adjectives">{{ad.word}}</p>
 
           </div>
           <div class="miscList" *ngIf="wordlist.misc.length > 0">
             <!--display:flex-->
             <p  class="desc title-section" element="misc">Misc:</p>
-            <p color="primary" class="bubble" *ngFor="let m of wordlist.misc">{{m.word}}</p>
+            <p color="primary" class="bubble misc" *ngFor="let m of wordlist.misc">{{m.word}}</p>
 
           </div>
     </div>
   </mat-card-content>
   <div>
-    <button *ngIf="!disableButton" data-test="viewWordListButton" mat-button [routerLink]="['/packs', id, this.wordlist.name]" class="btn">View WordList</button>
+    <!-- <button *ngIf="!disableButton" data-test="viewWordListButton" mat-button [routerLink]="['/packs', id, this.wordlist.name]" class="btn">View WordList</button> -->
   </div>
 </mat-card>
+</a>

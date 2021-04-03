@@ -45,7 +45,11 @@ export class AddWordComponent implements OnInit {
   }
 
   save() {
-    this.addWord.emit({ name: this.wordName, forms: this.forms.filter(e => e.length !== 0), type: this.type });
+    this.addWord.emit({
+      name: this.wordName,
+      forms: [...new Set([this.wordName,...this.forms.filter(e => e.length !== 0)])], // This line removes repetitions and inserts main word
+      type: this.type
+    });
     console.log(this.forms + this.wordName + this.type);
     this.wordName = '';
     this.forms = [''];
