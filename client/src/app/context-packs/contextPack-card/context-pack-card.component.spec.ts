@@ -56,6 +56,15 @@ describe('CpCardComponent', () => {
     expect(cpCard.deletePack({stopPropagation:()=>{}})).toBeUndefined();
   });
   it('count the words', () => {
+    cpCard.contextPack = {
+      _id: 'computer',
+      schema: 'https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json',
+      name: 'Iron Man',
+      icon: 'image.png',
+      enabled: true,
+      wordlist: [],
+      wordlists: MockCPService.testCPs[0].wordlist
+    };
     cpCard.countWords();
     expect(cpCard.count).toBe(10);
   });

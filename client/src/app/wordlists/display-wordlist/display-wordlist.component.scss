@@ -69,8 +69,22 @@
 }
 .cp-profile > h2{
   margin: 0px 0px 0px 0px;
+  width: 240px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .cp-profile > h5{
   margin: 0px 0px 0px 0px;
   opacity: 0.7;
+}
+.confirmation{
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 5px 0px 20px 0px;
+}
+.confirmation > button{
+  width: 250px;
 }

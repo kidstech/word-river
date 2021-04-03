@@ -32,7 +32,7 @@ export class AddContextPackPage {
   }
 
   navigateToHome() {
-    return cy.visit('');
+    return cy.visit('/');
   }
 
   getCpCards() {

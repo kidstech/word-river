@@ -40,6 +40,7 @@ describe('View WordList', () => {
     page.deleteWordButton().eq(1).click({ force: true });
     page.getWordCards().should('have.length', '9');
   });
+
   it('Should save wordlist', () => {
     page.saveWordListButton().click({ force: true });
     page.navigateTo();

@@ -24,7 +24,6 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AddWordListComponent } from './wordlists/add-wordlist/add-wordlist.component';
@@ -69,7 +68,6 @@ const MATERIAL_MODULES: any[] = [
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     AddWordListComponent,
     DisplayWordlistComponent,
     ImportWordlistComponent,

@@ -34,4 +34,25 @@ describe('WordList', () => {
         cy.url().should(url => expect(url.endsWith('/packs/605bc9d893b2d94300a98753/import')).to.be.true);
     });
 
+    it('Should show a confirmation message when click delete context pack is clicked', () => {
+        page.clickDeleteContextPack().click();
+        page.getDeleteContextPackConfirmation().should('be.visible');
+    });
+
+    it('Should hide the confirmation message when cancel was clicked', () => {
+        page.clickDeleteContextPack().click();
+        page.getDeleteContextPackConfirmation().should('be.visible');
+        page.getDeleteContextPackConfirmationCancel().click();
+        page.getDeleteContextPackConfirmation().should('not.exist');
+    });
+
+    it('Should delete the context pack when confirmed', () => {
+        page.clickDeleteContextPack().click();
+        page.getDeleteContextPackConfirmation().should('be.visible');
+        page.getDeleteContextPackConfirmDeleteButton().click();
+        cy.url().should('match', /\/$/);
+        page.getCpCards().should('have.length', 3);
+
+    });
+
 });

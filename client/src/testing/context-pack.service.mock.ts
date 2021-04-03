@@ -95,7 +95,6 @@ export class MockCPService extends ContextPackService {
             icon: 'image.png',
             enabled: false,
             wordlist: MockCPService.testList,
-            wordlists: MockCPService.testList
         },
         {
             _id: 'woof',
@@ -104,7 +103,6 @@ export class MockCPService extends ContextPackService {
             icon: 'https://can-do-canines.org/wp-content/uploads/2018/01/admin-ajax.jpg',
             enabled: true,
             wordlist: MockCPService.testList,
-            wordlists: MockCPService.testList
         },
         {
             _id: 'moo',
@@ -113,7 +111,6 @@ export class MockCPService extends ContextPackService {
             icon: 'image.png',
             enabled: true,
             wordlist: MockCPService.testList,
-            wordlists: MockCPService.testList
         }
     ];
     constructor() {
@@ -123,6 +120,9 @@ export class MockCPService extends ContextPackService {
     getPacks(): Observable<ContextPack[]> {
         return of(MockCPService.testCPs);
     }
+    getPack(id: string): Observable<ContextPack>{
+      return of(MockCPService.testCPs[0]);
+    }
 
     deletePack(id: string): Observable<string>{
       MockCPService.testCPs= MockCPService.testCPs.filter(cp=> cp._id!==id);
@@ -131,5 +131,7 @@ export class MockCPService extends ContextPackService {
     addPack(newPack: ContextPack): Observable<string> {
       return of('fakeid');
     }
-
+    includes(cp: ContextPack){
+      return MockCPService.testCPs.some(e=>e._id === cp._id);
+    }
 }

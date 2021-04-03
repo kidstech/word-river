@@ -15,8 +15,17 @@
               <h2>{{pack ? pack.name : ''}}</h2>
               <h5>{{pack ? (pack.enabled ? 'Enabled' : 'Disabled') : ''}}</h5>
             </div>
+            <button *ngIf="!deleteClicked" mat-button data-test="deleteContextPackButton" (click)="deleteClicked = true">
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
-
+          <div class="confirmation" *ngIf="deleteClicked">
+            <h3 style="flex: 1;">Are you sure you want to delete? </h3>
+            <button data-test="deleteContextPackConfirmationButton"  style="margin-bottom: 5px;" mat-raised-button (click)="delete()"
+              color="accent">Delete</button>
+            <button data-test="cancel-delete" mat-raised-button class="cancel" (click)="deleteClicked = false"
+              color="link">Cancel</button>
+          </div>
           <div>
             <p style="opacity: 0.8;margin-bottom: 5px;">Number of wordlists</p>
             <h1><b>{{list ? list.length : 0}}</b></h1>

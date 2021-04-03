@@ -4,12 +4,9 @@ const page = new DisplayContextPacksComponent();
 
 describe('Display Context Pack', () => {
 
-    before(() => {
-        cy.task('seed:database');
-    });
-
     beforeEach(() => {
         page.navigateTo();
+        cy.task('seed:database');
     });
 
     it('Should have 4 context packs', () => {
@@ -45,5 +42,6 @@ describe('Display Context Pack', () => {
     it('Should click Delete Context Pack and remove the context pack from the page',() => {
         page.clickDeleteCp(page.getCpCards().first());
         page.getCpCards().should('have.length', 3);
+
     });
 });

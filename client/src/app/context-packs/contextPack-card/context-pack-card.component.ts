@@ -35,9 +35,9 @@ export class ContextPackCardComponent implements OnInit {
   }
   countWords() {
     let count = 0;
-    this.contextPack.wordlists.forEach(list =>
+    if(this.contextPack && this.contextPack.wordlists) {this.contextPack.wordlists.forEach(list =>
       count += list.adjectives.length + list.nouns.length + list.verbs.length + list.misc.length
-    );
+    );}
     this.count = count;
   }
 }

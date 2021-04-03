@@ -1,9 +1,9 @@
-import { ContextPack } from './../../datatypes/contextPacks';
 import { ContextPackService } from './../../services/contextPack-service/contextpack.service';
 import { WordListService } from 'src/app/services/wordlist.service';
 import { Component, OnInit } from '@angular/core';
 import { WordList } from 'src/app/datatypes/wordlist';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ContextPack } from 'src/app/datatypes/contextPacks';
 
 @Component({
   selector: 'app-display-wordlist',
@@ -16,6 +16,7 @@ export class DisplayWordlistComponent implements OnInit {
   pack: ContextPack;
   wordcount = 0;
   id: string;
+  deleteClicked = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +47,12 @@ export class DisplayWordlistComponent implements OnInit {
     this.wordcount = count;
   }
 
-
+  delete(){
+    this.cpservice.deletePack(this.pack._id).subscribe((r)=>{
+      console.log(r);
+      this.router.navigate(['']);
+    });
+  }
 
 
 }
