@@ -59,16 +59,22 @@ describe('AddWordListComponent', () => {
     expect(component.finished).toBe(false);
   });
 
-  it('should accept "Pre-k"', () => {
+  it('should not accept "Pre-k"', () => {
     component.wordlistname = 'Pre-k';
     component.check();
-    expect(component.finished).toBe(true);
+    expect(component.finished).toBe(false);
   });
 
   it('should accept names with numbers', () => {
     component.wordlistname = '1234';
     component.check();
     expect(component.finished).toBe(true);
+  });
+
+  it('should accept names with special characters or punctuation', () => {
+    component.wordlistname = ';+أنا أحبك';
+    component.check();
+    expect(component.finished).toBe(false);
   });
 
   it('should not accept a duplicate name', () => {
