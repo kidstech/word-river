@@ -30,4 +30,10 @@ describe('WordCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit a delete event when deleteWord is called', () => {
+    const spy = spyOn(component.delete, 'emit');
+    component.deleteWord();
+    expect(component.delete.emit).toHaveBeenCalled();
+  });
 });
