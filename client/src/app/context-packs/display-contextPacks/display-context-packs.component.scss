@@ -39,3 +39,19 @@
   align-items: center;
   margin-bottom: 20px;
 }
+.placeholder{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.placeholder > mat-icon{
+  font-size: 50px;
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.placeholder > h2 {
+  margin-top: 20px;
+  margin-bottom: 0px;
+}

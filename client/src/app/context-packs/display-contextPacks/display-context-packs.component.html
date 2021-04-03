@@ -9,6 +9,11 @@
   <div class="context-pack-display">
     <app-cp-card simple="true" (delete)="removeCP(pack._id)" *ngFor="let pack of contextPacks" class="cp-card"
       [contextPack]="pack"></app-cp-card>
+    <div class="placeholder" *ngIf="contextPacks ? contextPacks.length === 0 : false;">
+      <mat-icon>assignment</mat-icon>
+      <h2 style="opacity: 0.9;">No Context Packs to display.</h2>
+      <h4 style="opacity: 0.7;">You can add a context pack by using the 'Add' button.</h4>
+    </div>
   </div>
 
   <button mat-fab class="add-cp" matTooltip="Add Context Pack" matTooltipPosition="left" routerLink="/packs/new"

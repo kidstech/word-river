@@ -1,7 +1,7 @@
 import { WordList } from './wordlist';
 
 export interface ContextPack {
-  wordlists: WordList[];
+  wordlists?: WordList[];
 
   schema: 'https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json';
   _id: string;

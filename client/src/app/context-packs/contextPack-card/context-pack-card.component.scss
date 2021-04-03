@@ -112,3 +112,35 @@
   width: 270px;
   text-overflow: ellipsis;
 }
+.stats-holder{
+  display: flex;
+  align-items: center;
+  height: 80px;
+  width: 100%;
+  margin: 20px 0px 0px 0px;
+  background-color: rgba(0, 0, 0, 0.089);
+  border-radius: 5px;
+}
+.separator{
+  background-color: #8b8b8b83;
+  height: 80%;
+  width: 2px;
+}
+.stat-container{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.stat-container > h2{
+  margin-bottom: 0px;
+}
+.stat-container > p{
+  opacity: 0.5;
+  margin-bottom: 0px;
+}
+.placeholder{
+  justify-content: center;
+  display: flex;
+}

@@ -10,24 +10,34 @@ import { ContextPack } from '../../datatypes/contextPacks';
 export class ContextPackCardComponent implements OnInit {
 
   @Input() contextPack: ContextPack;
-  @Input() simple ? = false;
+  @Input() simple?= false;
   @Output() delete = new EventEmitter();
+
+  count: number;
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.countWords();
   }
 
   deletePack(event) {
     event.stopPropagation();
-   this.delete.emit();
+    this.delete.emit();
   }
 
   setDefaultIcon() {
     this.contextPack.icon = 'https://i.redd.it/awbsnq5xefy41.png';
   }
 
-  openContextPack(){
-    this.router.navigate(['packs',this.contextPack._id]);
+  openContextPack() {
+    this.router.navigate(['packs', this.contextPack._id]);
+  }
+  countWords() {
+    let count = 0;
+    this.contextPack.wordlists.forEach(list =>
+      count += list.adjectives.length + list.nouns.length + list.verbs.length + list.misc.length
+    );
+    this.count = count;
   }
 }

@@ -30,7 +30,7 @@ describe('CpCardComponent', () => {
   });
 
   beforeEach(() => {
-    const testList: Array<WordList> = [];
+    const testList: Array<WordList> = MockCPService.testCPs[0].wordlists;
     fixture = TestBed.createComponent(ContextPackCardComponent);
     cpCard = fixture.componentInstance;
     cpCard.contextPack = {
@@ -39,7 +39,8 @@ describe('CpCardComponent', () => {
       name: 'Iron Man',
       icon: 'image.png',
       enabled: true,
-      wordlist: testList
+      wordlist: testList,
+      wordlists: testList
     };
     fixture.detectChanges();
   });
@@ -52,6 +53,10 @@ describe('CpCardComponent', () => {
 
   it('should delete a context pack', () => {
     expect(cpCard).toBeTruthy();
-    expect(cpCard.deletePack()).toBeUndefined();
+    expect(cpCard.deletePack({stopPropagation:()=>{}})).toBeUndefined();
+  });
+  it('count the words', () => {
+    cpCard.countWords();
+    expect(cpCard.count).toBe(10);
   });
 });
