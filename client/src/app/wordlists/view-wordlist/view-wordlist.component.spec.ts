@@ -66,6 +66,14 @@ describe('ViewWordlistComponent', () => {
     component.save();
     expect(component).toBeTruthy();
   });
+
+  it('should automatically delete special character or punctuation if the word list name has it', () => {
+    component.wordlist = {name:'أنا أحبك?',enabled:false,nouns:[],verbs:[],adjectives:[],misc:[]};
+    component.enabled = false;
+    component.save();
+    expect(component).toBeTruthy();
+  });
+
   it('should export', () => {
     component.wordlist = {name:'',enabled:false,nouns:[],verbs:[],adjectives:[],misc:[]};
     component.export();
