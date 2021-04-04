@@ -37,4 +37,9 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual('WordRiver');
   });
+  it(`goBack() works`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    app.goBack();
+  });
 });

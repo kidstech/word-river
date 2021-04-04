@@ -1,9 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [autoFocus]="false">
+  <!-- <mat-sidenav #drawer class="sidenav" fixedInViewport [autoFocus]="false">
     <mat-toolbar>Word River</mat-toolbar>
     <mat-nav-list class="sidenav-list" role="navigation">
-      <!-- Side navigation links -->
-
       <a
         mat-list-item
         routerLink="/"
@@ -27,19 +25,30 @@
         Wordlists
       </a>
     </mat-nav-list>
-  </mat-sidenav>
+  </mat-sidenav> -->
 
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <button
         type="button"
         aria-label="Toggle sidenav"
+        (click)="goBack()"
+        data-test="back-button"
+        *ngIf="backButtonVisible"
+
         mat-icon-button
-        (click)="drawer.toggle()"
-        onclick="this.blur()"
+      >
+        <mat-icon aria-label="Side nav toggle icon">arrow_back</mat-icon>
+      </button>
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        data-test="home-button"
+        routerLink=""
         class="sidenav-button"
       >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon aria-label="Side nav toggle icon">home</mat-icon>
       </button>
       <span class="app-title">{{ title }}</span>
     </mat-toolbar>
