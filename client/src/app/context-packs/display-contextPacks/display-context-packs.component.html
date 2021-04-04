@@ -1,7 +1,7 @@
 <div>
   <div class="top">
     <h1 style="margin-bottom: 0px;">Context Packs</h1>
-    <a class="add-cp-button" routerLink="/packs/new">
+    <a class="add-cp-button" data-test="addCpButton" routerLink="/packs/new">
       <mat-icon>add</mat-icon>
       <span>Add</span>
     </a>
@@ -15,9 +15,4 @@
       <h4 style="opacity: 0.7;">You can add a context pack by using the 'Add' button.</h4>
     </div>
   </div>
-
-  <button mat-fab class="add-cp" matTooltip="Add Context Pack" matTooltipPosition="left" routerLink="/packs/new"
-    data-test="addCpButton">
-    <mat-icon class="logo" aria-label="Add Context Pack">add</mat-icon>
-  </button>
 </div>
