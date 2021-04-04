@@ -19,6 +19,13 @@ describe('Add Wordlist', () => {
     page.getWordListName().type('sada');
     page.addWordListButton().should('be.enabled');
   });
+
+  it('Should not enable the save button if the word list name contains special character or punctuation', () => {
+    page.addWordListButton().should('be.disabled');
+    page.getWordListName().type('أنا أحبك?+;');
+    page.addWordListButton().should('be.disabled');
+  });
+
   it('Should add a word', () => {
     page.addWord({ word: 'Boo', forms: [], type: 'nouns' });
     page.getWordCards().should('have.length', '1');
@@ -46,7 +53,6 @@ describe('Add Wordlist', () => {
     });
     cy.get('.mat-simple-snackbar').should('contain',`There is already a Word List with the name birthday in the context pack`);
   });
-
 
   it('Should add a field initially', () => {
     page.getInitialButton().click();

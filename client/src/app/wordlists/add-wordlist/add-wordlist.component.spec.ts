@@ -71,6 +71,12 @@ describe('AddWordListComponent', () => {
     expect(component.finished).toBe(true);
   });
 
+  it('should accept names with special characters or punctuation', () => {
+    component.wordlistname = ';+أنا أحبك';
+    component.check();
+    expect(component.finished).toBe(false);
+  });
+
   it('should not accept a duplicate name', () => {
     component.wordlistname = 'animal';
     component.wordList.name = 'animal';
