@@ -18,10 +18,10 @@
           <mat-label>Select a type</mat-label>
           <mat-select (selectionChange)="check()" id="select" [(ngModel)]="type">
             <mat-option>None</mat-option>
-            <mat-option value="nouns">{{suggested && type==='nouns' ? 'Noun (Suggested)': 'Noun'}}</mat-option>
-            <mat-option value="verbs">{{suggested && type==='verbs' ? 'Verb (Suggested)': 'Verb'}}</mat-option>
-            <mat-option value="adjectives">{{suggested && type==='adjectives' ? 'Adjective (Suggested)': 'Adjective'}}</mat-option>
-            <mat-option value="misc">{{suggested && type==='misc' ? 'Misc (Suggested)': 'Misc'}}</mat-option>
+            <mat-option value="nouns">{{suggested === 'noun' && type==='nouns' ? 'Noun (Suggested)': 'Noun'}}</mat-option>
+            <mat-option value="verbs">{{suggested === 'verb' && type==='verbs' ? 'Verb (Suggested)': 'Verb'}}</mat-option>
+            <mat-option value="adjectives">{{suggested === 'adjective' && type==='adjectives' ? 'Adjective (Suggested)': 'Adjective'}}</mat-option>
+            <mat-option value="misc">{{suggested === 'misc' && type==='misc' ? 'Misc (Suggested)': 'Misc'}}</mat-option>
           </mat-select>
         </mat-form-field>
 

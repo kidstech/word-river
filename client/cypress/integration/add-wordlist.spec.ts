@@ -30,6 +30,13 @@ describe('Add Wordlist', () => {
     page.addWord({ word: 'Boo', forms: [], type: 'nouns' });
     page.getWordCards().should('have.length', '1');
   });
+
+  it('Should type a word and get a suggestion', () => {
+    page.typeWord({ word: 'Chicken', forms: [], type: 'noun' });
+    cy.wait(2000);
+    page.addWordButton().should('be.enabled');
+  });
+
   it('Should add a wordlist', () => {
     page.addWordList({
       name: 'funpack',

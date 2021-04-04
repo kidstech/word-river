@@ -14,7 +14,7 @@ export class AddWordComponent implements OnInit {
   finished = false;
   type: string;
   cleared = false;
-  suggested = false;
+  suggested = '';
 
   added = false;
 
@@ -54,7 +54,8 @@ export class AddWordComponent implements OnInit {
           console.log('Retrieved type from API: ' + type);
           if (type === 'adjective' || type === 'verb' || type === 'noun') {
             this.type = `${type}s`;
-            this.suggested = true;
+            this.suggested = type;
+            this.check();
           } else { this.type = 'misc'; }
         }, err => console.log(err)
         );

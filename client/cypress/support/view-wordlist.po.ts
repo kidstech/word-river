@@ -58,4 +58,9 @@ export class ViewWordListPage {
     this.selectMatSelectType(newWord.type);
     return this.addWordButton().click();
   }
+
+  typeWord(newWord) {
+    this.getWordName().type(newWord.word);
+  }
+
 }
