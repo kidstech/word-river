@@ -63,4 +63,8 @@ export class AddWordListPage {
       // Select and click the desired value from the resulting menu
       .get(`mat-option[value="${type}"]`).click();
   }
+
+  typeWord(newWord) {
+    this.getWordName().type(newWord.word);
+  }
 }
