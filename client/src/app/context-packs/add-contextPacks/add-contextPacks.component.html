@@ -20,8 +20,8 @@
           <mat-form-field class="field">
             <mat-label>Enabled</mat-label>
             <mat-select required formControlName="enabled">
-              <mat-option id="true" value="true">True</mat-option>
-              <mat-option id="false" value="false">False</mat-option>
+              <mat-option id="true" value="true">Yes</mat-option>
+              <mat-option id="false" value="false">No</mat-option>
             </mat-select>
             <mat-error *ngIf="addContextPackForm.get('enabled').hasError('required')">You must make a selection
             </mat-error>
