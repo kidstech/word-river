@@ -15,6 +15,7 @@ import { of } from 'rxjs';
 describe('DisplayWordlistComponent', () => {
   let component: DisplayWordlistComponent;
   let fixture: ComponentFixture<DisplayWordlistComponent>;
+  let service: MockCPService;
 
   const paramMap = new Map();
   paramMap.set('id', 'moo');
@@ -41,6 +42,7 @@ describe('DisplayWordlistComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DisplayWordlistComponent);
     component = fixture.componentInstance;
+    service = TestBed.get(ContextPackService);
     fixture.detectChanges();
   });
 
@@ -61,17 +63,18 @@ describe('DisplayWordlistComponent', () => {
     expect(component.wordcount).toBe(4);
   });
 
-  it('should delete a wordlist', () => {
+  it('should delete a cp', () => {
     component.pack = {
-      _id: 'moo',
+      _id: 'boo',
       schema: 'https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json',
       name: 'bovines',
       icon: 'image.png',
       enabled: true,
       wordlist: MockCPService.testList
     };
-    // component.delete();
-    // expect(service.includes(component.pack)).toBe(false);
+    service.addPack(component.pack);
+    component.delete();
+    expect(service.includes(component.pack)).toBe(false);
   });
 
 });

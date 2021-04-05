@@ -20,5 +20,6 @@ export class AppComponent implements OnInit {
 
   goBack(){
     this.location.back();
+    // TODO: use location.path() to decide which page to go to.
   }
 }

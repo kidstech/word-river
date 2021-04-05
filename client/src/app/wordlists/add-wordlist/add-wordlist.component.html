@@ -19,7 +19,11 @@
       data-test="confirmAddWordListButton">Save word list</button>
     </div>
     <div class="right">
-      <h3 *ngIf="words.length === 0">Nothing added here yet.</h3>
+      <div class="placeholder" *ngIf="words ? words.length === 0 : true">
+        <mat-icon>font_download</mat-icon>
+        <h2 style="opacity: 0.9;">No words added yet.</h2>
+        <h4 style="opacity: 0.7;">You can add a word by using the form on the left.</h4>
+      </div>
       <app-word-card class="wordcard" [type]="word.type"  *ngFor="let word of words" [word]="word" [viewing]="true"></app-word-card>
     </div>
   </div>

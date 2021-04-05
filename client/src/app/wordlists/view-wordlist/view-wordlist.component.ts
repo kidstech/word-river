@@ -35,7 +35,7 @@ export class ViewWordlistComponent implements OnInit {
     });
   }
   addWord(word) {
-    console.log(this.wordlist);
+    console.log(word.type + JSON.stringify(this.wordlist));
     this.wordlist[word.type].unshift({ word: word.name, forms: word.forms });
     this.words.unshift({ word: word.name, forms: word.forms, type: word.type });
     this.types = this.refreshTypes(this.words);
@@ -63,14 +63,14 @@ export class ViewWordlistComponent implements OnInit {
     this.types = this.refreshTypes(temp);
   }
 
-  refreshTypes(temp: any[]) {
-    const l = temp.map(w =>
-      this.wordlist.nouns.some(i => i.word === w.word) ? 'Noun' :
-        this.wordlist.verbs.some(i => i.word === w.word) ? 'Verb' :
-          this.wordlist.adjectives.some(i => i.word === w.word) ? 'Adjective' : 'Misc'
+  refreshTypes(words: any[]) {
+    const l = words.map(w =>
+      this.wordlist.nouns.some(i => this.matches(i,w)) ? 'Noun' :
+        this.wordlist.verbs.some(i => this.matches(i,w)) ? 'Verb' :
+          this.wordlist.adjectives.some(i => this.matches(i,w)) ? 'Adjective' : 'Misc'
     );
     console.log(this.wordlist);
-    console.log(temp);
+    console.log(words);
     return l;
   }
 
@@ -84,20 +84,19 @@ export class ViewWordlistComponent implements OnInit {
     this.deleteClicked = !this.deleteClicked;
   }
 
-  deleteWord(i: number) {
-    for (const current of
-      [this.wordlist.nouns,
-      this.wordlist.verbs,
-      this.wordlist.adjectives,
-      this.wordlist.misc]) {
-      console.log(current + ' ' + this.words[i]);
+  matches(i: Word,w: Word): boolean{
+    return i.word === w.word && i.forms === w.forms;
+  }
 
-      if (current.includes(this.words[i])) {
-        current.splice(current.indexOf(this.words[i]), 1);
-        this.words.splice(i, 1);
-        this.types.splice(i,1);
-      }
-    }
+  deleteWord(i: number) {
+    const x = this.words[i];
+    this.wordlist.nouns = this.wordlist.nouns.filter(e => !this.matches(e,x));
+    this.wordlist.verbs = this.wordlist.verbs.filter(e => !this.matches(e,x));
+    this.wordlist.adjectives = this.wordlist.adjectives.filter(e => !this.matches(e,x));
+    this.wordlist.misc = this.wordlist.misc.filter(e => !this.matches(e,x));
+    this.words.splice(i, 1);
+    this.types.splice(i, 1);
+    this.countWords();
   }
 
   save() {
