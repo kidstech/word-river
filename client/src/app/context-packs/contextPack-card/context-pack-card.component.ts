@@ -14,6 +14,7 @@ export class ContextPackCardComponent implements OnInit {
   @Output() delete = new EventEmitter();
 
   count: number;
+  deleteClicked = false;
 
   constructor(private router: Router) { }
 
@@ -39,5 +40,9 @@ export class ContextPackCardComponent implements OnInit {
       count += list.adjectives.length + list.nouns.length + list.verbs.length + list.misc.length
     );}
     this.count = count;
+  }
+  toggle(event){
+    event.stopPropagation();
+    this.deleteClicked = !this.deleteClicked;
   }
 }

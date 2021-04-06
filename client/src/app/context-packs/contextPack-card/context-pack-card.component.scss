@@ -1,5 +1,5 @@
 .cp-card:hover {
-  background-color: rgba(0, 0, 0, 0.137);
+  background-color: rgba(0, 0, 0, 0.068);
   cursor: pointer;
 }
 
@@ -44,7 +44,8 @@
 }
 
 .cp-card {
-  width: 400px;
+  width: 440px;
+  height: 152px;
   margin: 0px 20px 20px 0px;
   padding: 20px;
 }
@@ -143,4 +144,15 @@
 .placeholder{
   justify-content: center;
   display: flex;
+}
+.confirmation{
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.confirmation button{
+  width: 300px;
 }
