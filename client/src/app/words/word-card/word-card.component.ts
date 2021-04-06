@@ -24,7 +24,6 @@ export class WordCardComponent implements OnInit {
   constructor(private service: WordListService) {}
 
   ngOnInit(): void {
-    console.log(this.word);
 
   }
 
