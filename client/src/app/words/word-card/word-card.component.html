@@ -6,7 +6,7 @@
         <div class="marquee">
           <h2 [ngClass]="{'word-name scrollable': word ? word.word.length > 20 : false,'word-name':word?word.word.length <= 20:false}">{{word ? word.word : ''}}</h2>
         </div>
-        <div *ngIf="word.word.length > 20" id="gradient"></div>
+        <div *ngIf="word ? word.word.length > 20 : false" id="gradient"></div>
 
 
       <div class="box" [ngClass]="{'visible': hovering, 'invisible': !hovering }">
