@@ -23,6 +23,15 @@ describe('Add Wordlist', () => {
     page.addWord({ word: 'Boo', forms: [], type: 'nouns' });
     page.getWordCards().should('have.length', '1');
   });
+
+  it('Should delete a word', () => {
+    page.addWord({ word: 'Joshua', forms: [], type: 'nouns' });
+    page.getWordCards().should('have.length', '1');
+    cy.get('.word-card').first().trigger('mouseover');
+    page.deleteWordButton().eq(1).click({ force: true });
+    page.getWordCards().should('have.length', '0');
+  });
+
   it('Should add a wordlist', () => {
     page.addWordList({
       name: 'funpack',
