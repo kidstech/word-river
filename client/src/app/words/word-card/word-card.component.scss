@@ -109,7 +109,7 @@
 }
 
 .forms {
-  margin-left: 8px;
+  margin-left: 6px;
   padding-left: 8px;
   margin-top: 8px;
 }
@@ -129,7 +129,7 @@
   height: 80px;
   background-color: rgba(0, 0, 0, 0.075);
   border-radius: 10px;
-  padding: 2px;
+  padding: 3px 2px 2px 2px;
   margin: 8px 0px 20px 0px;
   overflow-y: auto;
   -ms-overflow-style: none;
@@ -171,7 +171,7 @@
   border-bottom-right-radius: 5px;
   height: 155px;
   margin-right: 20px;
-  border-top: 4px solid #2196f3;
+  border-top: 3px solid #d11947;
 }
 .verb{
   padding: 18px;
@@ -182,7 +182,7 @@
   border-bottom-right-radius: 5px;
   height: 155px;
   margin-right: 20px;
-  border-top: 4px solid #21f3bf;
+  border-top: 3px solid #21f3bf;
 }
 .adjective{
   padding: 18px;
@@ -193,7 +193,7 @@
   border-bottom-right-radius: 5px;
   height: 155px;
   margin-right: 20px;
-  border-top: 4px solid #8321f3;
+  border-top: 3px solid #2196f3;
 }
 .misc{
   padding: 18px;
@@ -204,12 +204,12 @@
   border-bottom-right-radius: 5px;
   height: 155px;
   margin-right: 20px;
-  border-top: 4px solid #f3218a;
+  border-top: 3px solid #f3bb21;
 }
 .nounf{
   padding: 2px 7px 2px 7px;
   background-color: rgba(0, 0, 0, 0.116);
-  border: 2px solid #2196f3;
+  border: 2px solid #d11947;
   border-radius: 10px;
   margin: 5px;
 }
@@ -223,14 +223,14 @@
 .adjectivef{
   padding: 2px 7px 2px 7px;
   background-color: rgba(0, 0, 0, 0.116);
-  border: 2px solid #8321f3;
+  border: 2px solid #2196f3;
   border-radius: 10px;
   margin: 5px;
 }
 .miscf{
   padding: 2px 7px 2px 7px;
   background-color: rgba(0, 0, 0, 0.116);
-  border: 2px solid #f3218a;
+  border: 2px solid #f3bb21;
   border-radius: 10px;
   margin: 5px;
 }
