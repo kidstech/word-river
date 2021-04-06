@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
       if (parts.length === 3 && parts[1] === 'packs' || parts.length <= 1 || url.length <= 1) {
         this.contextPackVisible = false;
         this.contextPack = undefined;
-      } else if (parts.length >= 3 && parts[2]) {
+      } else if (parts.length >= 3 && parts.length <= 6 && parts[2]) {
         this.service.getPack(parts[2]).subscribe(pack => {
           this.contextPack = pack;
           this.contextPackVisible = true;
@@ -50,8 +50,8 @@ export class AppComponent implements OnInit {
       (/^\/?packs\/.{24}\/.{1,100}$/g).test(path) // view wordlist
     ) {
       this.router.navigate(['packs/' + path.split('/')[2]]);
-    } else { }
-  }
-  getPage() {
+    } else {
+      this.location.back();
+    }
   }
 }
