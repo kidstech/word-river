@@ -9,6 +9,7 @@
   </div>
   <mat-card-content>
     <div class= "list-detail">
+      <h3 style="opacity: 0.7;" *ngIf="wordlist.nouns.length == 0 && wordlist.verbs.length == 0 && wordlist.adjectives.length == 0 && wordlist.misc.length == 0 ">No words added yet.</h3>
         <div class="nounsList" *ngIf="wordlist.nouns.length > 0">
             <!--display:flex-->
             <p  class="desc title-section" element="nouns">Nouns:</p>
