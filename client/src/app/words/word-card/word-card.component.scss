@@ -43,11 +43,11 @@
   overflow: hidden;
   white-space: nowrap;
   flex-basis: unset;
-  width: 120%;
+  // width: 120%;
 }
 
 .marquee:hover> .scrollable {
-  animation: marquee 9s linear infinite;
+  animation: marquee 12s linear infinite;
   animation-play-state: running;
   text-overflow: unset;
   overflow: unset;
