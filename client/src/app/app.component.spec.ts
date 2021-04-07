@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { MockWordListService } from './../testing/wordlist.service.mock';
 import { WordListService } from './services/wordlist.service';
 import { WordList } from './datatypes/wordlist';
@@ -27,11 +28,13 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        ReactiveFormsModule,
         RouterTestingModule.withRoutes([
           {path:'packs/new',component:AddContextPackComponent},
           {path:'packs/123456789112345678921234',component:AddContextPackComponent},
           {path:'packs/123456789112345678921234/import',component:ImportWordlistComponent},
           {path:'packs/123456789112345678921234/bear',component:ImportWordlistComponent},
+          {path:'packs/123456789112345678921234/new',component:ImportWordlistComponent},
           {path:'pages/words/toys/bread/t/b/c',component:ImportWordlistComponent},
         ]),
         MatToolbarModule,
