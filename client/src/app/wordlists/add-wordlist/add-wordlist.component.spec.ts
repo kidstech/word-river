@@ -38,6 +38,8 @@ describe('AddWordListComponent', () => {
     fixture = TestBed.createComponent(AddWordListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.words = [];
+    component.types = [];
   });
 
   it('should create', () => {
@@ -84,6 +86,14 @@ describe('AddWordListComponent', () => {
   it('addWord() should work with misc', () => {
     expect(component.addWord({ name: '', type: 'misc', forms: [] })).toBe('misc');
   });
+
+  it('should delete a word', () => {
+    component.addWord({ name: 'Richard', type: 'misc', forms: [] });
+    component.types = ['misc'];
+    component.deleteWord(0);
+    expect(component.words.some(word=>word.word === 'Richard')).toBe(false);
+  });
+
   it('enable() should work', () => {
     component.enable(true);
     expect(component.enabled).toBe(true);
