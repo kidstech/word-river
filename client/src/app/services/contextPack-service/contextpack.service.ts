@@ -26,12 +26,12 @@ export class ContextPackService {
     return this.httpClient.get<ContextPack>(this.contextPackUrl + '/' + id);
   }
 
-  addPack(newPack: ContextPack): Observable<string> {
-    return this.httpClient.post<{id: string}>(this.contextPackUrl, newPack).pipe(map(res => res.id));
+  addPack(newPack: { name: string; icon: string; enabled: boolean; wordlists?: any[] }): Observable<string> {
+    return this.httpClient.post<{ id: string }>(this.contextPackUrl, newPack).pipe(map(res => res.id));
   }
 
   deletePack(id: string): Observable<string> {
-    return this.httpClient.delete<{id: string}>(this.contextPackUrl + '/' + id).pipe(map(res=>res.id));
+    return this.httpClient.delete<{ id: string }>(this.contextPackUrl + '/' + id).pipe(map(res => res.id));
   }
 
 }

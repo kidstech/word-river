@@ -70,7 +70,8 @@ export class AddContextPackComponent implements OnInit {
     if(!this.addContextPackForm.value.icon){
       this.addContextPackForm.value.icon = this.downloadURL ? this.downloadURL : '';
     }
-    this.cpService.addPack(this.addContextPackForm.value).subscribe(newID => {
+    const {name,icon,enabled} = this.addContextPackForm.value;
+    this.cpService.addPack({name,icon,enabled,wordlists:[]}).subscribe(newID => {
       this.snackBar.open('Added the ' + this.addContextPackForm.value.name + ' context pack successfully', null, {
         duration: 2000,
       });

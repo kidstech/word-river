@@ -128,7 +128,7 @@ export class MockCPService extends ContextPackService {
       MockCPService.testCPs= MockCPService.testCPs.filter(cp=> cp._id!==id);
       return of(id);
     }
-    addPack(newPack: ContextPack): Observable<string> {
+    addPack(newPack: { name: string; icon: string; enabled: boolean; wordlists?: any[] }): Observable<string> {
       return of('fakeid');
     }
     includes(cp: ContextPack){
