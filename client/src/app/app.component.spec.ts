@@ -1,7 +1,7 @@
+import { AngularFireModule } from '@angular/fire';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MockWordListService } from './../testing/wordlist.service.mock';
 import { WordListService } from './services/wordlist.service';
-import { WordList } from './datatypes/wordlist';
 import { ImportWordlistComponent } from './wordlists/import-wordlist/import-wordlist.component';
 import { AddContextPackComponent } from './context-packs/add-contextPacks/add-contextPacks.component';
 import { MockCPService } from './../testing/context-pack.service.mock';
@@ -29,6 +29,7 @@ describe('AppComponent', () => {
       imports: [
         BrowserAnimationsModule,
         ReactiveFormsModule,
+        AngularFireModule,
         RouterTestingModule.withRoutes([
           {path:'packs/new',component:AddContextPackComponent},
           {path:'packs/123456789112345678921234',component:AddContextPackComponent},
