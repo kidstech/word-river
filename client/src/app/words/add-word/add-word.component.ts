@@ -2,7 +2,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { DictionaryService } from './../../services/dictionary-service/dictionary.service';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 
 @Component({
