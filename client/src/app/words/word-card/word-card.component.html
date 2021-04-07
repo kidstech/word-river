@@ -1,19 +1,21 @@
-<mat-card (mouseover)="hovering=true" (mouseout)="hovering=false" [ngClass]="type ? {'noun': type.includes('oun'), 'verb': type.includes('erb'),'adjective': type.includes('djective'),'misc': type.includes('isc') }: 'misc'">
+<mat-card *ngIf="!isList" (mouseover)="hovering=true" (mouseout)="hovering=false"
+  [ngClass]="type ? {'noun': type.includes('oun'), 'verb': type.includes('erb'),'adjective': type.includes('djective'),'misc': type.includes('isc') }: 'misc'">
 
   <div class="card-header word-card">
     <div class="top">
 
-        <div class="marquee">
-          <h2 [ngClass]="{'word-name scrollable': word ? word.word.length > 20 : false,'word-name':word?word.word.length <= 20:false}">{{word ? word.word : ''}}</h2>
-        </div>
-        <div *ngIf="word ? word.word.length > 20 : false" id="gradient"></div>
+      <div class="marquee">
+        <h2
+          [ngClass]="{'word-name scrollable': word ? word.word.length > 20 : false,'word-name':word?word.word.length <= 20:false}">
+          {{word ? word.word : ''}}</h2>
+      </div>
+      <div *ngIf="word ? word.word.length > 20 : false" id="gradient"></div>
 
 
       <div class="box" [ngClass]="{'visible': hovering, 'invisible': !hovering }">
-        <button data-test="editWordButton" *ngIf="!viewing" mat-button  class="btn"
-          id="editbutton">
+        <!-- <button data-test="editWordButton" *ngIf="!viewing" mat-button class="btn" id="editbutton">
           <mat-icon>create</mat-icon>
-        </button>
+        </button> -->
         <button data-test="deleteWordButton" *ngIf="!viewing" mat-button (click)="deleteWord()" class="btn"
           id="delbutton">
           <mat-icon>delete</mat-icon>
@@ -27,9 +29,38 @@
   <mat-card-content>
     <div class="holder">
       <p class="forms">Forms: </p>
-      <p color="primary" [ngClass]="{'nounf': type.includes('oun'), 'verbf': type.includes('erb'),'adjectivef': type.includes('djective'),'miscf': type.includes('isc') }" *ngFor="let form of word ? word.forms : []">{{form ? form : ''}}</p>
+      <p color="primary"
+        [ngClass]="{'nounf': type.includes('oun'), 'verbf': type.includes('erb'),'adjectivef': type.includes('djective'),'miscf': type.includes('isc') }"
+        *ngFor="let form of word ? word.forms : []">{{form ? form : ''}}</p>
     </div>
 
   </mat-card-content>
 
 </mat-card>
+
+<div *ngIf="isList" (mouseover)="hovering=true" (mouseout)="hovering=false"
+  [ngClass]="type ? {'nounl': type.includes('oun'), 'verbl': type.includes('erb'),'adjectivel': type.includes('djective'),'miscl': type.includes('isc') }: 'misc'">
+
+    <div class="word">
+      <div class="marquee">
+        <h2 class="wordnamel">
+          {{word ? word.word : ''}}</h2>
+      </div>
+      <!-- <div *ngIf="word ? word.word.length > 80 : false" id="gradient"></div> -->
+
+      <h4 class="word-typel">
+        {{type === 'nouns' ? 'Noun' : type === 'verbs' ? 'Verb' :type === 'adjectives' ? 'Adjective' :type === 'misc' ? 'Misc' : type }}
+      </h4>
+    </div>
+
+
+    <div class="boxl" [ngClass]="{'visible': hovering, 'invisible': !hovering }">
+      <!-- <button data-test="editWordButton" *ngIf="!viewing" mat-button class="btn" id="editbutton">
+        <mat-icon>create</mat-icon>
+      </button> -->
+      <button data-test="deleteWordButton" *ngIf="!viewing" mat-button (click)="deleteWord()" class="btn"
+        id="delbutton">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+</div>

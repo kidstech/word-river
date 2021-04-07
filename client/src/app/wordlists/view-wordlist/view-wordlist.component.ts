@@ -23,6 +23,7 @@ export class ViewWordlistComponent implements OnInit {
   getUserSub: Subscription;
   wordCount: number;
   deleteClicked: boolean;
+  gridView = true;
 
   constructor(
     private route: ActivatedRoute, private service: WordListService, private router: Router) { }

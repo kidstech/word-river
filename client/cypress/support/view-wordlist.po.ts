@@ -6,7 +6,7 @@ export class ViewWordListPage {
   }
 
   getWordCards() {
-    return cy.get('.wordcards');
+    return cy.get('.wordgridcards');
   }
 
   deleteWordListButton() {
@@ -58,4 +58,13 @@ export class ViewWordListPage {
     this.selectMatSelectType(newWord.type);
     return this.addWordButton().click();
   }
+
+  getToggleButton() {
+    return cy.get('[data-test=wordListToggle]');
+  }
+
+  getWordCardsList() {
+    return cy.get('.wordlistcards');
+  }
+
 }

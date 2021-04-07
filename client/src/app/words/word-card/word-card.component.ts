@@ -15,6 +15,7 @@ export class WordCardComponent implements OnInit {
   @Input() wordList: WordList;
 
   @Input() viewing: boolean;
+  @Input() isList = false;
 
 
   @Output() delete = new EventEmitter();

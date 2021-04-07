@@ -32,6 +32,7 @@ describe('AppComponent', () => {
           {path:'packs/123456789112345678921234',component:AddContextPackComponent},
           {path:'packs/123456789112345678921234/import',component:ImportWordlistComponent},
           {path:'packs/123456789112345678921234/bear',component:ImportWordlistComponent},
+          {path:'pages/words/toys/bread/t/b/c',component:ImportWordlistComponent},
         ]),
         MatToolbarModule,
         MatIconModule,

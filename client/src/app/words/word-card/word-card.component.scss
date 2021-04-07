@@ -148,9 +148,6 @@
   border: 0px solid #000;  /* creates padding around scroll thumb */
 }
 
-
-
-
 .top {
   display: flex;
 }
@@ -233,4 +230,60 @@
   border: 2px solid #f3bb21;
   border-radius: 10px;
   margin: 5px;
+}
+.nounl{
+  padding: 10px;
+  border-left: 3px solid #d11947;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.195);
+  display: flex;
+  align-content: center;
+}
+.verbl{
+  padding: 10px;
+  border-left: 3px solid #21f3bf;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.195);
+  display: flex;
+  align-content: center;
+}
+.adjectivel{
+  padding: 10px;
+  border-left: 3px solid #2196f3;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.195);
+  display: flex;
+  align-content: center;
+}
+.miscl{
+  padding: 10px;
+  border-left: 3px solid #f3bb21;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.195);
+  display: flex;
+  align-content: center;
+}
+
+.word{
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  height: 100%;
+  flex: 1;
+}
+.boxl{
+  align-items: center;
+  display: flex;
+}
+.nounl:hover,.verbl:hover,.adjectivel:hover,.miscl:hover{
+  background: rgba(0, 0, 0, 0.055);
+}
+.wordnamel{
+  width: 1000px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+  margin: 0px;
+}
+.word-typel{
+  margin: 0px 0px 0px 15px;
+  opacity: 0.5;
 }
