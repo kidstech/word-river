@@ -59,17 +59,17 @@
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
 
-.grid::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
-}
-.grid::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.075);        /* color of the tracking area */
-}
-.grid::-webkit-scrollbar-thumb {
-  background-color: #00000025;    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 0px solid #000;  /* creates padding around scroll thumb */
-}
+// .grid::-webkit-scrollbar {
+//   width: 12px;               /* width of the entire scrollbar */
+// }
+// .grid::-webkit-scrollbar-track {
+//   background: rgba(0, 0, 0, 0.075);        /* color of the tracking area */
+// }
+// .grid::-webkit-scrollbar-thumb {
+//   background-color: #00000025;    /* color of the scroll thumb */
+//   border-radius: 20px;       /* roundness of the scroll thumb */
+//   border: 0px solid #000;  /* creates padding around scroll thumb */
+// }
 
 .top-name{
   width: 100%;

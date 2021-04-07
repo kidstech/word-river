@@ -276,7 +276,7 @@
   background: rgba(0, 0, 0, 0.055);
 }
 .wordnamel{
-  width: 1000px;
+  max-width: 1000px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
