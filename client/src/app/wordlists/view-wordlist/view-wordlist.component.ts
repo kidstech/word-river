@@ -40,6 +40,7 @@ export class ViewWordlistComponent implements OnInit {
     this.wordlist[word.type].unshift({ word: word.name, forms: word.forms });
     this.words.unshift({ word: word.name, forms: word.forms, type: word.type });
     this.types = this.refreshTypes(this.words);
+    this.countWords();
   }
 
   loadWords() {
