@@ -14,6 +14,7 @@ export class AddWordComponent implements OnInit {
   @Input() words = [];
 
   forms = [''];
+  counter=[''];
   wordName = '';
   finished = false;
   type: string;
@@ -45,13 +46,22 @@ export class AddWordComponent implements OnInit {
   }
 
   add(val) {
-    this.forms.push(val);
+    // if(this.forms.length === 1 && this.forms[0]===''){
+    //   this.forms = [];
+    // }
+    this.forms[this.forms.length - 1] = val;
+    this.forms.push('');
+    this.counter.push(val);
+    console.log(this.forms);
+
     this.cleared = false;
   }
 
   removeForm(i: number) {
     console.log(i);
     this.forms.splice(i, 1);
+    this.counter.splice(i, 1);
+    console.log(this.forms);
     if (this.forms.length === 0) { this.forms = ['']; }
 
 
@@ -83,6 +93,7 @@ export class AddWordComponent implements OnInit {
     console.log(this.forms + this.wordName + this.type);
     this.wordName = '';
     this.forms = [''];
+    this.counter = [''];
     this.added = false;
     this.finished = false;
     this.cleared = true;

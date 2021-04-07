@@ -29,7 +29,7 @@
     </div>
     <!-- <button *ngIf="!added || forms.length===0" (click)="add('')" mat-raised-button class="add-form-btn" style="margin-bottom: 40px;" color="accent">Add a word
       form</button> -->
-      <app-word-form class="form_item"  *ngFor="let i of forms;index as x" [cleared]="cleared" (removeForm)="removeForm(x)" (form)="add($event)"></app-word-form>
+      <app-word-form class="form_item"  *ngFor="let i of counter;index as x" [cleared]="cleared" (removeForm)="removeForm(x)" (form)="add($event)"></app-word-form>
 
 
     <div class="word-forms">

@@ -10,7 +10,8 @@ export class WordFormComponent implements OnInit,OnChanges {
   @Output() form = new EventEmitter();
   @Output() removeForm = new EventEmitter();
   @Input() cleared = false;
-  wordForm = '';
+  @Input() wordForm = '';
+
 
   added = false;
   err = false;
