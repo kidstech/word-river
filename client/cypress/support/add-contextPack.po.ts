@@ -1,4 +1,3 @@
-import { count } from 'console';
 import {ContextPack} from 'src/app/datatypes/contextPacks';
 
 export class AddContextPackPage {
