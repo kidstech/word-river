@@ -1,3 +1,5 @@
+import { environment } from './../environments/environment';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MockWordListService } from './../testing/wordlist.service.mock';
@@ -18,6 +20,7 @@ import { MatListModule } from '@angular/material/list';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -29,7 +32,9 @@ describe('AppComponent', () => {
       imports: [
         BrowserAnimationsModule,
         ReactiveFormsModule,
-        AngularFireModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireStorageModule,
+        MatSnackBarModule,
         RouterTestingModule.withRoutes([
           {path:'packs/new',component:AddContextPackComponent},
           {path:'packs/123456789112345678921234',component:AddContextPackComponent},
