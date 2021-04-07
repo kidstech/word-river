@@ -77,6 +77,9 @@ public class WordRiverController {
       if (wl.name.toLowerCase().equals(newWordList.name.toLowerCase())) {
         throw new BadRequestResponse("The word list already exists in the context pack");
       }
+      else{
+        continue;
+      }
     }
     ctxCollection.updateById(id, Updates.push("wordlists", newWordList));
     ctx.status(201);
@@ -92,6 +95,9 @@ public class WordRiverController {
       if (theWordList.name.equals(wordListName)) {
         ctxCollection.updateById(id, Updates.pull("wordlists", theWordList));
       }
+      else{
+        continue;
+      }
     }
   }
 
@@ -106,6 +112,9 @@ public class WordRiverController {
       if (theWordList.name.equals(wordListName)) {
         ctxCollection.updateById(id, Updates.pull("wordlists", theWordList));
         ctxCollection.updateById(id, Updates.push("wordlists", newList));
+      }
+      else{
+        continue;
       }
     }
   }

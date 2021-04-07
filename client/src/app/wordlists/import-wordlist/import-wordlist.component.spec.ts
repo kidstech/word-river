@@ -13,30 +13,30 @@ describe('ImportWordlistComponent', () => {
   let component: ImportWordlistComponent;
   let fixture: ComponentFixture<ImportWordlistComponent>;
   const paramMap = new Map();
-  paramMap.set('id','meow');
+  paramMap.set('id', 'meow');
   const ex = {
-    name: 'test',
+    name: 'testWordlistForImport',
     enabled: true,
-    nouns:[{word:'pig',forms:['pig','pigs']}],
-    verbs:[{word:'sniff',forms:['sniffs','sniffing']}],
-    adjectives:[{word:'round',forms:['rounder','round']}],
-    misc:[{word:'to',forms:['to']}]
+    nouns: [{ word: 'pig', forms: ['pig', 'pigs'] }],
+    verbs: [{ word: 'sniff', forms: ['sniffs', 'sniffing'] }],
+    adjectives: [{ word: 'round', forms: ['rounder', 'round'] }],
+    misc: [{ word: 'to', forms: ['to'] }]
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImportWordlistComponent ],
-      imports: [HttpClientTestingModule,RouterTestingModule.withRoutes([
+      declarations: [ImportWordlistComponent],
+      imports: [HttpClientTestingModule, RouterTestingModule.withRoutes([
         { path: 'packs/meow', component: DisplayWordlistComponent }
-      ]),COMMON_IMPORTS],
-      providers: [{ provide: WordListService, useValue: new MockWordListService() },  {
+      ]), COMMON_IMPORTS],
+      providers: [{ provide: WordListService, useValue: new MockWordListService() }, {
         provide: ActivatedRoute,
         useValue: {
           paramMap: of(paramMap)
         }
       }]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -47,6 +47,13 @@ describe('ImportWordlistComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should import', () => {
+    const mockFile = new File([''], 'filename', { type: 'text/html' });
+    const mockEvt = { target: { files: [mockFile] } };
+    const mockReader: FileReader = jasmine.createSpyObj('FileReader', ['readAsDataURL', 'onload']);
+    spyOn(window as any, 'FileReader').and.returnValue(mockReader);
+    try { component.onFileAdded(mockEvt as any); } catch (e) { }
   });
   it('should save', () => {
     component.wordlist = ex;
