@@ -1,4 +1,9 @@
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+import { DictionaryService } from './../../services/dictionary-service/dictionary.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
 
 @Component({
   selector: 'app-add-word',
@@ -14,13 +19,14 @@ export class AddWordComponent implements OnInit {
   finished = false;
   type: string;
   cleared = false;
+  suggested = '';
 
   added = false;
 
   valid: boolean;
 
 
-  constructor() { }
+  constructor(private dictionary: DictionaryService) { }
 
   check() {
     if (this.wordName && this.type) {
@@ -48,6 +54,25 @@ export class AddWordComponent implements OnInit {
     console.log(i);
     this.forms.splice(i, 1);
     if (this.forms.length === 0) { this.forms = ['']; }
+
+
+  }
+
+  suggest() {
+    const typed = this.wordName;
+    setTimeout(() => {
+      if (this.wordName && typed === this.wordName) {
+        this.dictionary.getType(this.wordName, type => {
+          console.log('Retrieved type from API: ' + type);
+          if (type === 'adjective' || type === 'verb' || type === 'noun') {
+            this.type = `${type}s`;
+            this.suggested = type;
+            this.check();
+          } else { this.type = 'misc'; }
+        }, err => console.log(err)
+        );
+      }
+    }, 1000);
   }
 
   save() {

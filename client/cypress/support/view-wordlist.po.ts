@@ -59,12 +59,16 @@ export class ViewWordListPage {
     return this.addWordButton().click();
   }
 
+
   getToggleButton() {
     return cy.get('[data-test=wordListToggle]');
   }
 
   getWordCardsList() {
     return cy.get('.wordlistcards');
+  }
+  typeWord(newWord) {
+    this.getWordName().type(newWord.word);
   }
 
 }

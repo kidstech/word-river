@@ -34,6 +34,13 @@ describe('View WordList GridView', () => {
     page.getWordCards().should('have.length', '11');
   });
 
+  it('Should type a word and get a suggestion', () => {
+    page.getWordCards().should('have.length', '10');
+    page.typeWord({ word: 'Chicken', forms: [], type: 'noun' });
+    cy.wait(2000);
+    page.addWordButton().should('be.enabled');
+  });
+
   it('Should delete a word', () => {
     page.getWordCards().should('have.length', '10');
     cy.get('.wordgridcards').first().trigger('mouseover');

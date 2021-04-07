@@ -1,12 +1,15 @@
 <mat-card>
   <div>
-    <h2>Add a new word</h2>
+    <div class="top">
+      <h2>Add a new word</h2>
+    </div>
+
     <div class="fields">
-      <mat-form-field class="new-word">
-        <mat-label>New word</mat-label>
-        <input matInput (input)="check()" data-test="newWord" [(ngModel)]="wordName" name="name"
-          placeholder="enter a new word">
-      </mat-form-field>
+        <mat-form-field class="new-word">
+          <mat-label>New word</mat-label>
+          <input matInput (input)="check()" data-test="newWord" [(ngModel)]="wordName" name="name" (keyup)="suggest()"
+            placeholder="enter a new word">
+        </mat-form-field>
 
       <div class="word-type">
         <!--drop down list for word-types-->
@@ -15,10 +18,10 @@
           <mat-label>Select a type</mat-label>
           <mat-select (selectionChange)="check()" id="select" [(ngModel)]="type">
             <mat-option>None</mat-option>
-            <mat-option value="nouns">Noun</mat-option>
-            <mat-option value="verbs">Verb</mat-option>
-            <mat-option value="adjectives">Adjective</mat-option>
-            <mat-option value="misc">Misc</mat-option>
+            <mat-option value="nouns">{{suggested === 'noun' && type==='nouns' ? 'Noun (Suggested)': 'Noun'}}</mat-option>
+            <mat-option value="verbs">{{suggested === 'verb' && type==='verbs' ? 'Verb (Suggested)': 'Verb'}}</mat-option>
+            <mat-option value="adjectives">{{suggested === 'adjective' && type==='adjectives' ? 'Adjective (Suggested)': 'Adjective'}}</mat-option>
+            <mat-option value="misc">{{suggested === 'misc' && type==='misc' ? 'Misc (Suggested)': 'Misc'}}</mat-option>
           </mat-select>
         </mat-form-field>
 

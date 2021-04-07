@@ -64,7 +64,12 @@ export class AddWordListPage {
       .get(`mat-option[value="${type}"]`).click();
   }
 
+
   deleteWordButton() {
     return cy.get('[data-test=deleteWordButton]');
+  }
+  typeWord(newWord) {
+    this.getWordName().type(newWord.word);
+
   }
 }
