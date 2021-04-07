@@ -15,6 +15,7 @@ export class WordCardComponent implements OnInit {
   @Input() wordList: WordList;
 
   @Input() viewing: boolean;
+  @Input() isList = false;
 
 
   @Output() delete = new EventEmitter();
@@ -24,7 +25,6 @@ export class WordCardComponent implements OnInit {
   constructor(private service: WordListService) {}
 
   ngOnInit(): void {
-    console.log(this.word);
 
   }
 

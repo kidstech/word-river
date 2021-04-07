@@ -18,6 +18,8 @@ export class AddWordListComponent implements OnInit {
   wordType = '';
   finished = false;
   id: string;
+  wordCount: number;
+  types: string[];
 
   words: Word[] = [];
   enabled = true;
@@ -88,6 +90,21 @@ export class AddWordListComponent implements OnInit {
     this.words.push({word:word.name,forms:word.forms,type});
     console.log(this.words);
     return word.type;
+  }
+
+
+  matches(i: Word,w: Word): boolean{
+    return i.word === w.word && i.forms === w.forms;
+  }
+
+  deleteWord(i: number) {
+    const x = this.words[i];
+    this.wordList.nouns = this.wordList.nouns.filter(e => !this.matches(e,x));
+    this.wordList.verbs = this.wordList.verbs.filter(e => !this.matches(e,x));
+    this.wordList.adjectives = this.wordList.adjectives.filter(e => !this.matches(e,x));
+    this.wordList.misc = this.wordList.misc.filter(e => !this.matches(e,x));
+    this.words.splice(i, 1);
+    this.types.splice(i, 1);
   }
 
 

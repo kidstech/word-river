@@ -31,10 +31,19 @@ describe('Add Wordlist', () => {
     page.getWordCards().should('have.length', '1');
   });
 
+
+  it('Should delete a word', () => {
+    page.addWord({ word: 'Joshua', forms: [], type: 'nouns' });
+    page.getWordCards().should('have.length', '1');
+    cy.get('.word-card').first().trigger('mouseover');
+    page.deleteWordButton().eq(1).click({ force: true });
+    page.getWordCards().should('have.length', '0');
+  });
   it('Should type a word and get a suggestion', () => {
     page.typeWord({ word: 'Chicken', forms: [], type: 'noun' });
     cy.wait(2000);
     page.addWordButton().should('be.enabled');
+
   });
 
   it('Should add a wordlist', () => {

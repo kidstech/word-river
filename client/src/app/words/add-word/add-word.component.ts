@@ -1,5 +1,8 @@
+
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 import { DictionaryService } from './../../services/dictionary-service/dictionary.service';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
 
 @Component({
   selector: 'app-add-word',
@@ -8,6 +11,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class AddWordComponent implements OnInit {
   @Output() addWord = new EventEmitter();
+  @Input() words = [];
 
   forms = [''];
   wordName = '';
@@ -26,7 +30,12 @@ export class AddWordComponent implements OnInit {
   check() {
     if (this.wordName && this.type) {
       this.finished =
-        this.wordName.length > 1 && this.type.length > 1;
+        this.wordName.length > 1 &&
+        this.type.length > 1     &&
+        !this.words.some(word =>
+          word.word === this.wordName &&
+          word.forms === [this.wordName, ...this.forms.filter(e => e.length !== 0)]
+        );
       console.log(this.wordName.length);
     }
     return this.finished;
@@ -44,6 +53,8 @@ export class AddWordComponent implements OnInit {
     console.log(i);
     this.forms.splice(i, 1);
     if (this.forms.length === 0) { this.forms = ['']; }
+
+
   }
 
   suggest() {
@@ -64,7 +75,11 @@ export class AddWordComponent implements OnInit {
   }
 
   save() {
-    this.addWord.emit({ name: this.wordName, forms: this.forms.filter(e => e.length !== 0), type: this.type });
+    this.addWord.emit({
+      name: this.wordName,
+      forms: [...new Set([this.wordName, ...this.forms.filter(e => e.length !== 0)])],// This line removes repetitions and inserts main word
+      type: this.type
+    });
     console.log(this.forms + this.wordName + this.type);
     this.wordName = '';
     this.forms = [''];

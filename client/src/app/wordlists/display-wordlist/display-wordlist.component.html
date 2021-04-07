@@ -3,10 +3,45 @@
     <div class="left">
 
       <div class="top">
-        <button data-test="addWordListButton" mat-stroked-button [routerLink]="['/packs', id, 'new']" color="primary">Add wordlist</button>
-        <button data-test="importWordListButton" mat-stroked-button [routerLink]="['/packs', id, 'import']" color="accent">Import wordlist</button>
-      </div>
-      <!-- <mat-card class="search-card" style="margin-bottom: 20px;">
+
+        <mat-card class="bottom-card">
+
+          <h2 class="bottom-title">Context Pack Details</h2>
+          <mat-divider></mat-divider>
+          <br>
+          <div class="details-container">
+            <img src="{{pack ? pack.icon : ''}}" onerror="this.src='https://st2.depositphotos.com/3616015/5374/v/600/depositphotos_53741327-stock-illustration-abc-blocks-flat-icon-with.jpg'" class="cp-icon">
+            <div class="cp-profile">
+              <h2>{{pack ? pack.name : ''}}</h2>
+              <h5>{{pack ? (pack.enabled ? 'Enabled' : 'Disabled') : ''}}</h5>
+            </div>
+            <button *ngIf="!deleteClicked" mat-button data-test="deleteContextPackButton" (click)="deleteClicked = true">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <div class="confirmation" *ngIf="deleteClicked">
+            <h3 style="flex: 1;">Are you sure you want to delete? </h3>
+            <button data-test="deleteContextPackConfirmationButton"  style="margin-bottom: 5px;" mat-raised-button (click)="delete()"
+              color="accent">Delete</button>
+            <button data-test="cancel-delete" mat-raised-button class="cancel" (click)="deleteClicked = false"
+              color="link">Cancel</button>
+          </div>
+          <div>
+            <p style="opacity: 0.8;margin-bottom: 5px;">Number of wordlists</p>
+            <h1><b>{{list ? list.length : 0}}</b></h1>
+          </div>
+          <div>
+            <p style="opacity: 0.8;margin-bottom: 5px;">Number of words</p>
+            <h1><b>{{wordcount}}</b></h1>
+          </div>
+
+          <!-- Could include information about the wordlists-->
+          <!-- ex. #of wordlists, # of words, etc.-->
+        </mat-card>
+
+
+
+        <!-- <mat-card class="search-card" style="margin-bottom: 20px;">
         <mat-form-field class="search">
           <mat-label>Name of the wordlist</mat-label>
           <input matInput>
@@ -14,24 +49,24 @@
         <button mat-raised-button class="search-btn" color="primary">Search</button>
 
       </mat-card> -->
+      <br>
+        <button data-test="addWordListButton" mat-stroked-button [routerLink]="['/packs', id, 'new']"
+          color="primary">Add wordlist</button>
 
-      <div class="bottom">
-        <mat-card class="bottom-card">
-
-          <h2 class="bottom-title">Details</h2>
-          <mat-divider></mat-divider>
-          <br>
-          <p><strong>Number of wordlists: </strong>{{list ? list.length : 0}}</p>
-          <p><strong>Number of words: </strong>{{wordcount}}</p>
-
-          <!-- Could include information about the wordlists-->
-          <!-- ex. #of wordlists, # of words, etc.-->
-        </mat-card>
+        <button data-test="importWordListButton" mat-stroked-button [routerLink]="['/packs', id, 'import']"
+          color="accent">Import wordlist</button>
       </div>
     </div>
-    <div class="right">
+    <div class="right" >
       <!--List of wordlists goes here!-->
-      <app-wordlist-card class="wordlist-cards" *ngFor="let wordlist of list" [wordlist]="wordlist" [id] = 'this.id'>
+      <h1 *ngIf="list ? list.length > 0 : false">Wordlists</h1>
+      <div class="placeholder" *ngIf="list ? list.length === 0 : true">
+        <mat-icon>assignment</mat-icon>
+        <h2 style="opacity: 0.9;">No wordlists added yet.</h2>
+        <h4 style="opacity: 0.7;">You can add a wordlist by using the button on the left.</h4>
+      </div>
+
+      <app-wordlist-card class="wordlist-cards" *ngFor="let wordlist of list" [wordlist]="wordlist" [id]='this.id'>
 
       </app-wordlist-card>
     </div>

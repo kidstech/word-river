@@ -3,6 +3,7 @@ import { ContextPack } from '../../datatypes/contextPacks';
 import { WordList } from '../../datatypes/wordlist';
 import { ContextPackService } from '../../services/contextPack-service/contextpack.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-display-context-packs',
@@ -19,7 +20,7 @@ export class DisplayContextPacksComponent implements OnInit, OnDestroy {
   public wordlist: Array<WordList>;
   getPackSub: Subscription;
 
-  constructor(private packService: ContextPackService) { }
+  constructor(private packService: ContextPackService, private router: Router) { }
 
   getPacksFromServer(): void {
     this.unsub();

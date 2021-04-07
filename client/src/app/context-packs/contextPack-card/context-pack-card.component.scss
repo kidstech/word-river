@@ -1,8 +1,158 @@
-.cp-card:hover{
-  background-color: rgba(0, 0, 0, 0.137);
+.cp-card:hover {
+  background-color: rgba(0, 0, 0, 0.068);
   cursor: pointer;
 }
-#name{
-  margin-top: 20px;
+
+.container {
+  width: 100%;
+}
+
+#name {
   font-size: large;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0px;
+}
+
+.top {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.status {
+  padding: 5px 10px 5px 10px;
+  border-radius: 8px;
+  display: flex;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.status>mat-icon {
+  padding-left: 5px;
+}
+
+.cp-card {
+  width: 440px;
+  height: 152px;
+  margin: 0px 20px 20px 0px;
+  padding: 20px;
+}
+
+.enabled {
+  // background-color: rgba(66, 241, 43, 0.329);
+  color: rgb(34, 184, 34);
+}
+
+.disabled {
+  // background-color: rgba(241, 49, 43, 0.329);
+  color: rgb(218, 38, 26);
+}
+
+.placeholder {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.placeholder>mat-icon {
+  font-size: 50px;
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+
+.placeholder>h2 {
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
+.details-container {
+  display: flex;
+  flex: 1;
+}
+
+.cp-icon {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.cp-profile {
+  flex: 1;
+  padding-left: 20px;
+  width: 100%;
+
+}
+
+.cp-profile>h2 {
+  margin: 0px 0px 0px 0px;
+}
+
+.cp-profile>h5 {
+  margin: 0px 0px 0px 0px;
+  opacity: 0.7;
+}
+
+.cp-profile h2 {
+  white-space: nowrap;
+  overflow:hidden;
+  width: 270px;
+  text-overflow: ellipsis;
+}
+.stats-holder{
+  display: flex;
+  align-items: center;
+  height: 80px;
+  width: 100%;
+  margin: 20px 0px 0px 0px;
+  background-color: rgba(0, 0, 0, 0.089);
+  border-radius: 5px;
+}
+.separator{
+  background-color: #8b8b8b83;
+  height: 80%;
+  width: 2px;
+}
+.stat-container{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.stat-container > h2{
+  margin-bottom: 0px;
+}
+.stat-container > p{
+  opacity: 0.5;
+  margin-bottom: 0px;
+}
+.placeholder{
+  justify-content: center;
+  display: flex;
+}
+.confirmation{
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.confirmation button{
+  width: 300px;
 }

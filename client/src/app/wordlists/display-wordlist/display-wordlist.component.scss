@@ -4,8 +4,8 @@
 
 .left {
   width: 400px;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   margin-right: 24px;
 }
 
@@ -16,11 +16,11 @@
 .top {
   display: flex;
   flex-direction: column;
-  height: 200px;
+  // height: 200px;
 }
 
 .top>button {
-  flex: 1;
+  height: 80px;
   margin-bottom: 20px;
 }
 
@@ -36,4 +36,55 @@
 }
 .search,.search-btn{
   display: inline-block;
+}
+.placeholder{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.placeholder > mat-icon{
+  font-size: 50px;
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.placeholder > h2 {
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+.details-container{
+  display: flex;
+  margin-bottom: 20px;
+}
+.cp-icon{
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+.cp-profile{
+  flex: 1;
+  padding-left: 20px;
+}
+.cp-profile > h2{
+  margin: 0px 0px 0px 0px;
+  width: 240px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cp-profile > h5{
+  margin: 0px 0px 0px 0px;
+  opacity: 0.7;
+}
+.confirmation{
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 5px 0px 20px 0px;
+}
+.confirmation > button{
+  width: 250px;
 }

@@ -120,6 +120,9 @@ export class MockCPService extends ContextPackService {
     getPacks(): Observable<ContextPack[]> {
         return of(MockCPService.testCPs);
     }
+    getPack(id: string): Observable<ContextPack>{
+      return of(MockCPService.testCPs[0]);
+    }
 
     deletePack(id: string): Observable<string>{
       MockCPService.testCPs= MockCPService.testCPs.filter(cp=> cp._id!==id);
@@ -128,5 +131,7 @@ export class MockCPService extends ContextPackService {
     addPack(newPack: ContextPack): Observable<string> {
       return of('fakeid');
     }
-
+    includes(cp: ContextPack){
+      return MockCPService.testCPs.some(e=>e._id === cp._id);
+    }
 }

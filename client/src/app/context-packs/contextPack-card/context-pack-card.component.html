@@ -1,17 +1,46 @@
-<mat-card class="cp-card" *ngIf="this.contextPack">
-    <mat-card-header>
-      <mat-card-title class="cp-card-name">
-        <img mat-card-avatar id ="icon" src={{this.contextPack.icon}} (error)="setDefaultIcon()">
-        <h5 id="name">{{this.contextPack.name}}</h5>
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content *ngIf="!this.simple">
-      <p>Enabled: <span class="cp-card-enabled">{{ this.contextPack.enabled }}</span></p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button data-test="viewContextPackButton" *ngIf="this.simple" [routerLink]="['/packs', this.contextPack._id]">View Context Pack</button>
-    </mat-card-actions>
-    <mat-card-actions>
-      <button mat-button data-test="deleteContextPackButton" (click)="deletePack()" *ngIf="this.simple" >Delete</button>
-    </mat-card-actions>
-  </mat-card>
+<mat-card class="cp-card" data-test="viewContextPackButton" *ngIf="this.contextPack" (click)="openContextPack()">
+  <div class="container" *ngIf="!deleteClicked">
+    <div class="top">
+      <div class="details-container">
+        <img src="{{contextPack ? contextPack.icon : ''}}"
+          onerror="this.src='https://st2.depositphotos.com/3616015/5374/v/600/depositphotos_53741327-stock-illustration-abc-blocks-flat-icon-with.jpg'"
+          class="cp-icon">
+        <div class="cp-profile">
+          <h2>{{contextPack ? contextPack.name : ''}}</h2>
+          <h5>{{contextPack ? (contextPack.enabled ? 'Enabled' : 'Disabled') : ''}}</h5>
+        </div>
+      </div>
+      <button mat-button data-test="deleteContextPackButton" (click)="toggle($event)" >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+    <div class="stats-holder">
+      <div class="stat-container">
+        <h2>{{contextPack ? contextPack.wordlists ? contextPack.wordlists.length:0 : 0}}</h2>
+        <p>wordlists</p>
+      </div>
+      <span class="separator"></span>
+      <div class="stat-container">
+        <h2>{{count ? count : 0}}</h2>
+        <p>words</p>
+      </div>
+      <!-- <span class="separator"></span>
+      <div class="stat-container">
+        <h2>5</h2>
+        <p>wordlists</p>
+      </div> -->
+    </div>
+
+
+
+  </div>
+  <div class="confirmation" *ngIf="deleteClicked">
+    <h3 style="flex: 1;">Are you sure you want to delete this context pack? </h3>
+    <button data-test="deleteConfirmationButton" style="margin-bottom: 5px;" mat-raised-button (click)="deletePack($event)"
+      color="accent">Delete</button>
+    <button data-test="cancel-delete" mat-raised-button class="cancel" (click)="toggle($event)"
+      color="link">Cancel</button>
+  </div>
+
+</mat-card>

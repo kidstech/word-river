@@ -3,7 +3,20 @@
     <div class="left">
 
       <mat-card class="wordlist-details" style="margin-bottom: 20px;">
-        <h2 class="bottom-title">Wordlist Details</h2>
+        <div class="top-name">
+          <h2 class="bottom-title">Wordlist Details</h2>
+
+          <div class="options">
+            <div class="list-type">
+              <mat-icon>view_headline</mat-icon>
+              <mat-slide-toggle data-test="wordListToggle" [(ngModel)]="gridView">
+
+              </mat-slide-toggle>
+              <mat-icon>apps</mat-icon>
+            </div>
+          </div>
+        </div>
+
 
         <div class="title-container">
           <mat-form-field class="title">
@@ -24,8 +37,8 @@
           </div>
           <div class="confirmation" *ngIf="deleteClicked">
             <h3 style="flex: 1;">Are you sure you want to delete? </h3>
-            <button data-test="deleteWordListButton" style="margin-bottom: 5px;" mat-raised-button (click)="deleteWordList()"
-              color="accent">Delete</button>
+            <button data-test="deleteWordListButton" style="margin-bottom: 5px;" mat-raised-button
+              (click)="deleteWordList()" color="accent">Delete</button>
             <button data-test="cancel-delete" mat-raised-button class="cancel" (click)="toggleConfirmation()"
               color="link">Cancel</button>
           </div>
@@ -34,13 +47,19 @@
 
       </mat-card>
 
-      <app-add-word (addWord)="addWord($event)" data-test="addWordButton"></app-add-word>
+      <app-add-word (addWord)="addWord($event)" data-test="addWordButton" [words]="words"></app-add-word>
       <button mat-raised-button [disabled]="!true" class="save" style="padding:20px;margin-top: 20px;" color="primary"
         (click)="save()" data-test="saveWordListButton">Save word list</button>
     </div>
-    <div class="right">
-      <app-word-card data-test="deleteWordButton" class="wordcards" (delete)="deleteWord(i)" [word]="w"
-        [type]="types[i]" [wordList]="wordlist" *ngFor="let w of words;index as i;"></app-word-card>
+    <div [ngClass]="{'grid': gridView,'list': !gridView}">
+      <div class="placeholder" *ngIf="words ? words.length === 0 : true">
+        <mat-icon>font_download</mat-icon>
+        <h2 style="opacity: 0.9;">No words added yet.</h2>
+        <h4 style="opacity: 0.7;">You can add a word by using the form on the left.</h4>
+      </div>
+      <app-word-card data-test="deleteWordButton" [ngClass]="{'wordlistcards': !gridView,'wordgridcards':gridView}"
+        [isList]="!gridView" (delete)="deleteWord(i)" [word]="w" [type]="types[i]" [wordList]="wordlist"
+        *ngFor="let w of words;index as i;"></app-word-card>
     </div>
   </div>
 </div>

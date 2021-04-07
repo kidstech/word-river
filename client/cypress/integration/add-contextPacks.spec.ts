@@ -1,3 +1,4 @@
+import { waitForAsync } from '@angular/core/testing';
 
 import { ContextPack } from 'src/app/datatypes/contextPacks';
 import { AddContextPackPage } from '../support/add-contextPack.po';
@@ -97,6 +98,7 @@ describe('Add Context Pack', () => {
             .should('not.match', /\/packs\/new$/);
 
         page.navigateToHome();
+        cy.wait(2000);
         page.getCpCards().should('have.length', '5');
    });
 

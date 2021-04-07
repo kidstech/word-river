@@ -26,4 +26,8 @@ export class DisplayContextPacksComponent {
     clickDeleteCp(pack: Cypress.Chainable<JQuery<HTMLElement>>) {
         return pack.find<HTMLButtonElement>('[data-test=deleteContextPackButton]').click();
     }
+
+    getDeleteCpConfirmation(pack: Cypress.Chainable<JQuery<HTMLElement>>) {
+        return pack.find<HTMLButtonElement>('[data-test=deleteConfirmationButton]').click();
+    }
 }

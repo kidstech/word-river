@@ -1,22 +1,96 @@
 .word-cardd {
-  padding: 25px;
+  padding: 18px;
   margin-bottom: 30px;
   font-family: "Ubuntu", sans-serif;
-  width: 290px;
-  height: 200px;
-  // min-width: 300px;
+  width: 310px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 155px;
+  // min-width: 310px;
   margin-right: 20px;
   border-top: 4px solid #2196f3;
 }
 
 .word-name {
   font-weight: bold;
-  margin-left: 15px;
+  overflow: hidden;
+  flex: 1;
+  margin-bottom: 0px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.marquee {
+  flex: 1;
+  margin: 0 auto;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-  flex: 1;
+  box-sizing: border-box;
+  display: inline-flex;
+  white-space: nowrap;
+
+  margin-left: 15px;
 }
+
+.marquee .scrollable{
+  display: flex;
+  font-weight: bold;
+  animation: marquee-reset;
+  text-overflow: ellipsis;
+  animation-play-state: paused;
+  margin-bottom: 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  flex-basis: unset;
+  // width: 120%;
+}
+
+.marquee:hover> .scrollable {
+  animation: marquee 12s linear infinite;
+  animation-play-state: running;
+  text-overflow: unset;
+  overflow: unset;
+  flex-basis: 100%;
+
+}
+
+@keyframes marquee {
+  0% {
+      transform: translate(0%, 0);
+  }
+  50% {
+      transform: translate(-100%, 0);
+  }
+  50.001% {
+      transform: translate(100%, 0);
+  }
+  100% {
+      transform: translate(0%, 0);
+  }
+}
+@keyframes marquee-reset {
+  0% {
+      transform: translate(0%, 0);
+  }
+}
+
+#gradient {
+  // position:fixed;
+  z-index:2;
+  width: 15px;
+  // right:0; bottom:0; left:0;
+  height:35px;
+  margin-left: -10px;
+  background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, #424242 70%);
+  background: -webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,#424242 70%);
+  background: -o-linear-gradient(left,  rgba(255,255,255,0) 0%,#424242 70%);
+  background: -ms-linear-gradient(left,  rgba(255,255,255,0) 0%,#424242 70%);
+  background: linear-gradient(to right,  rgba(255,255,255,0) 0%,#424242 70%);
+}
+
+
+
 #editbutton,
 #delbutton {
   height: 35px;
@@ -30,36 +104,48 @@
 }
 
 .word-type {
-  margin-left: 15px;
+  margin:0px 0px 0px 15px;
+  opacity: 0.5;
 }
 
 .forms {
-  margin-left: 15px;
+  margin-left: 6px;
   padding-left: 8px;
+  margin-top: 8px;
 }
 
 .bubble {
-  padding: 5px 10px 5px 10px;
+  padding: 2px 7px 2px 7px;
   background-color: rgba(0, 0, 0, 0.116);
   border: 2px solid #2196f3;
   border-radius: 10px;
-  margin: 7px;
+  margin: 5px;
 }
 
 .holder {
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
-  height: 100px;
+  height: 80px;
   background-color: rgba(0, 0, 0, 0.075);
-  border-radius: 20px;
-  padding: 10px;
-  margin: 20px 0px 20px 0px;
+  border-radius: 10px;
+  padding: 3px 2px 2px 2px;
+  margin: 8px 0px 20px 0px;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
 }
 
-.forms {
-  margin-top: 15px;
-  margin-left: 0px;
+.holder::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+.holder::-webkit-scrollbar-track {
+  background: transparent;        /* color of the tracking area */
+}
+.holder::-webkit-scrollbar-thumb {
+  background-color: #00000025;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 0px solid #000;  /* creates padding around scroll thumb */
 }
 
 .top {
@@ -74,66 +160,130 @@
   pointer-events: none;
 }
 .noun{
-  padding: 25px;
+  padding: 18px;
   margin-bottom: 30px;
   font-family: "Ubuntu", sans-serif;
-  width: 290px;
-  height: 200px;
+  width: 310px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 155px;
   margin-right: 20px;
-  border-top: 4px solid #2196f3;
+  border-top: 3px solid #d11947;
 }
 .verb{
-  padding: 25px;
+  padding: 18px;
   margin-bottom: 30px;
   font-family: "Ubuntu", sans-serif;
-  width: 290px;
-  height: 200px;
+  width: 310px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 155px;
   margin-right: 20px;
-  border-top: 4px solid #21f3bf;
+  border-top: 3px solid #21f3bf;
 }
 .adjective{
-  padding: 25px;
+  padding: 18px;
   margin-bottom: 30px;
   font-family: "Ubuntu", sans-serif;
-  width: 290px;
-  height: 200px;
+  width: 310px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 155px;
   margin-right: 20px;
-  border-top: 4px solid #8321f3;
+  border-top: 3px solid #2196f3;
 }
 .misc{
-  padding: 25px;
+  padding: 18px;
   margin-bottom: 30px;
   font-family: "Ubuntu", sans-serif;
-  width: 290px;
-  height: 200px;
+  width: 310px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 155px;
   margin-right: 20px;
-  border-top: 4px solid #f3218a;
+  border-top: 3px solid #f3bb21;
 }
 .nounf{
-  padding: 5px 10px 5px 10px;
+  padding: 2px 7px 2px 7px;
   background-color: rgba(0, 0, 0, 0.116);
-  border: 2px solid #2196f3;
+  border: 2px solid #d11947;
   border-radius: 10px;
-  margin: 7px;
+  margin: 5px;
 }
 .verbf{
-  padding: 5px 10px 5px 10px;
+  padding: 2px 7px 2px 7px;
   background-color: rgba(0, 0, 0, 0.116);
   border: 2px solid #21f3bf;
   border-radius: 10px;
-  margin: 7px;
+  margin: 5px;
 }
 .adjectivef{
-  padding: 5px 10px 5px 10px;
+  padding: 2px 7px 2px 7px;
   background-color: rgba(0, 0, 0, 0.116);
-  border: 2px solid #8321f3;
+  border: 2px solid #2196f3;
   border-radius: 10px;
-  margin: 7px;
+  margin: 5px;
 }
 .miscf{
-  padding: 5px 10px 5px 10px;
+  padding: 2px 7px 2px 7px;
   background-color: rgba(0, 0, 0, 0.116);
-  border: 2px solid #f3218a;
+  border: 2px solid #f3bb21;
   border-radius: 10px;
-  margin: 7px;
+  margin: 5px;
+}
+.nounl{
+  padding: 10px;
+  border-left: 3px solid #d11947;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.195);
+  display: flex;
+  align-content: center;
+}
+.verbl{
+  padding: 10px;
+  border-left: 3px solid #21f3bf;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.195);
+  display: flex;
+  align-content: center;
+}
+.adjectivel{
+  padding: 10px;
+  border-left: 3px solid #2196f3;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.195);
+  display: flex;
+  align-content: center;
+}
+.miscl{
+  padding: 10px;
+  border-left: 3px solid #f3bb21;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.195);
+  display: flex;
+  align-content: center;
+}
+
+.word{
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  height: 100%;
+  flex: 1;
+}
+.boxl{
+  align-items: center;
+  display: flex;
+}
+.nounl:hover,.verbl:hover,.adjectivel:hover,.miscl:hover{
+  background: rgba(0, 0, 0, 0.055);
+}
+.wordnamel{
+  max-width: 1000px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+  margin: 0px;
+}
+.word-typel{
+  margin: 0px 0px 0px 15px;
+  opacity: 0.5;
 }

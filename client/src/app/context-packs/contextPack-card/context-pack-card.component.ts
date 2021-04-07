@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { ContextPack } from '../../datatypes/contextPacks';
 
 @Component({
@@ -9,19 +10,39 @@ import { ContextPack } from '../../datatypes/contextPacks';
 export class ContextPackCardComponent implements OnInit {
 
   @Input() contextPack: ContextPack;
-  @Input() simple ? = false;
+  @Input() simple?= false;
   @Output() delete = new EventEmitter();
 
-  constructor() { }
+  count: number;
+  deleteClicked = false;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.countWords();
   }
 
-  deletePack() {
-   this.delete.emit();
+  deletePack(event) {
+    event.stopPropagation();
+    this.delete.emit();
   }
 
   setDefaultIcon() {
     this.contextPack.icon = 'https://i.redd.it/awbsnq5xefy41.png';
+  }
+
+  openContextPack() {
+    this.router.navigate(['packs', this.contextPack._id]);
+  }
+  countWords() {
+    let count = 0;
+    if(this.contextPack && this.contextPack.wordlists) {this.contextPack.wordlists.forEach(list =>
+      count += list.adjectives.length + list.nouns.length + list.verbs.length + list.misc.length
+    );}
+    this.count = count;
+  }
+  toggle(event){
+    event.stopPropagation();
+    this.deleteClicked = !this.deleteClicked;
   }
 }
