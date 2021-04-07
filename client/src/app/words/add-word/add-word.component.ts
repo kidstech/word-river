@@ -32,6 +32,7 @@ export class AddWordComponent implements OnInit {
     if (this.wordName && this.type) {
       this.finished =
         this.wordName.length > 1 &&
+        this.wordName.length <= 60 &&
         this.type.length > 1     &&
         !this.words.some(word =>
           word.word === this.wordName &&
@@ -76,8 +77,11 @@ export class AddWordComponent implements OnInit {
           if (type === 'adjective' || type === 'verb' || type === 'noun') {
             this.type = `${type}s`;
             this.suggested = type;
-            this.check();
-          } else { this.type = 'misc'; }
+          } else {
+            this.type = 'misc';
+            this.suggested = 'misc';
+          }
+          this.check();
         }, err => console.log(err)
         );
       }
