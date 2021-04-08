@@ -66,10 +66,18 @@ export class MockWordListService extends WordListService {
     const observable = new Observable<WordList>(observer=>{
       for(const wl of this.testWordLists){
       if(newWordlist.name === wl.name){
-        observer.error({statusText:'Bad Request'});
+        const error = {error: {
+                      title: 'The word list already exists in the context pack'
+                    }
+                  };
+        observer.error(error);
      }
      else if(newWordlist.name === null){
-      observer.error({statusText:'Server error'});
+      const error = {error: {
+        title: 'Server error'
+      }
+    };
+      observer.error(error);
    }
      else{
         this.testWordLists.push(newWordlist);
