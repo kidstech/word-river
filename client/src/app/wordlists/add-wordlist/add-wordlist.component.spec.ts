@@ -83,14 +83,14 @@ describe('AddWordListComponent', () => {
     component.wordlistname = 'animal';
     component.wordList.name = 'animal';
     component.save();
-    expect(component.status).toBe('Bad Request');
+    expect(component.title).toBe('The word list already exists in the context pack');
   });
 
   it('should not accept a null name', () => {
     component.wordlistname = null;
     component.wordList.name = null;
     component.save();
-    expect(component.status).toBe('Server error');
+    expect(component.title).toBe('Server error');
   });
 
 
