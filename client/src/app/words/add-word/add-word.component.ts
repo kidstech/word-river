@@ -14,7 +14,7 @@ export class AddWordComponent implements OnInit {
   @Input() words = [];
 
   forms = [''];
-  counter=[''];
+  counter = [''];
   wordName = '';
   finished = false;
   type: string;
@@ -31,12 +31,12 @@ export class AddWordComponent implements OnInit {
   check() {
     if (this.wordName && this.type) {
       this.finished =
-        this.wordName.length > 1 &&
-        this.wordName.length <= 60 &&
-        this.type.length > 1     &&
+        this.wordName.trim().length > 0 &&
+        this.wordName.trim().length <= 60 &&
+        this.type.trim().length > 1 &&
         !this.words.some(word =>
-          word.word === this.wordName &&
-          word.forms === [this.wordName, ...this.forms.filter(e => e.length !== 0)]
+          word.word === this.wordName.trim() &&
+          word.forms === [this.wordName.trim(), ...this.forms.filter(e => e.trim().length !== 0)]
         );
       console.log(this.wordName.length);
     }
@@ -90,8 +90,9 @@ export class AddWordComponent implements OnInit {
 
   save() {
     this.addWord.emit({
-      name: this.wordName,
-      forms: [...new Set([this.wordName, ...this.forms.filter(e => e.length !== 0)])],// This line removes repetitions and inserts main word
+      name: this.wordName.trim(),
+      forms: [...new Set([this.wordName.trim(),
+      ...this.forms.filter(e => e.length !== 0)])],// This line removes repetitions and inserts main word
       type: this.type
     });
     console.log(this.forms + this.wordName + this.type);
@@ -100,6 +101,8 @@ export class AddWordComponent implements OnInit {
     this.counter = [''];
     this.added = false;
     this.finished = false;
+    this.suggested = '';
+    this.type = '';
     this.cleared = true;
   }
 }

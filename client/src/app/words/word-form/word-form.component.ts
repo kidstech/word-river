@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
   templateUrl: './word-form.component.html',
   styleUrls: ['./word-form.component.scss']
 })
-export class WordFormComponent implements OnInit,OnChanges {
+export class WordFormComponent implements OnInit, OnChanges {
 
   @Output() form = new EventEmitter();
   @Output() removeForm = new EventEmitter();
@@ -19,7 +19,7 @@ export class WordFormComponent implements OnInit,OnChanges {
 
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.cleared.currentValue === true){
+    if (changes.cleared.currentValue === true) {
       this.wordForm = '';
       this.added = false;
     }
@@ -28,16 +28,16 @@ export class WordFormComponent implements OnInit,OnChanges {
   ngOnInit(): void {
   }
   add() {
-    if(this.wordForm && this.wordForm.length > 0) {
+    if (this.wordForm && this.wordForm.trim().length > 0) {
       this.form.emit(this.wordForm);
       console.log(this.wordForm);
 
       this.added = true;
-      this.err=false;
+      this.err = false;
     }
-    else {this.err = true;}
+    else { this.err = true; }
   }
-  remove(){
+  remove() {
     this.removeForm.emit();
   }
 }
