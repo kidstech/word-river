@@ -77,8 +77,10 @@ export class ViewWordlistComponent implements OnInit {
   }
 
   deleteWordList() {
-    const c = this.service.deleteWordList(this.wordlist, this.id).subscribe();
+    const c = this.service.deleteWordList(this.wordlist, this.id).subscribe(res=> {
+      console.log('HTTP RESPONSE:', res);
     this.router.navigate(['packs', this.id]);
+    });
     return c;
   }
 
@@ -105,8 +107,9 @@ export class ViewWordlistComponent implements OnInit {
     this.wordlist.name = this.name.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '').trim();
     this.wordlist.enabled = this.enabled;
     console.log(this.wordlist);
-    this.service.editWordList(this.originalName, this.wordlist, this.id).subscribe(_=>{
+    this.service.editWordList(this.originalName, this.wordlist, this.id).subscribe(res=> {
       this.router.navigate(['packs', this.id]);
+      console.log('HTTP RESPONSE:', res);
     });
   }
 
