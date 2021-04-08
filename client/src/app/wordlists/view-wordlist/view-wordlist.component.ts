@@ -102,11 +102,12 @@ export class ViewWordlistComponent implements OnInit {
   }
 
   save() {
-    this.wordlist.name = this.wordlist.name.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '').trim();
+    this.wordlist.name = this.name.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '').trim();
     this.wordlist.enabled = this.enabled;
     console.log(this.wordlist);
-    this.service.editWordList(this.originalName, this.wordlist, this.id).subscribe();
-    this.router.navigate(['packs', this.id]);
+    this.service.editWordList(this.originalName, this.wordlist, this.id).subscribe(_=>{
+      this.router.navigate(['packs', this.id]);
+    });
   }
 
   export() {

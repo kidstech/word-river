@@ -18,6 +18,7 @@ export class AddContextPackComponent implements OnInit {
   addContextPackForm: FormGroup;
 
   contextPack: ContextPack;
+  uploading: boolean;
 
   addCpValidationMessages = {
     name: [
@@ -88,6 +89,7 @@ export class AddContextPackComponent implements OnInit {
     const file = event.target.files[0];
     const filePath = `${Math.floor(Math.random() * 100000000)}`;
     const fileRef = this.storage.ref(filePath);
+    this.uploading = true;
     const task = this.storage.upload(filePath, file);
 
     task.snapshotChanges().pipe(
@@ -95,6 +97,7 @@ export class AddContextPackComponent implements OnInit {
         this.downloadURL = fileRef.getDownloadURL().subscribe(link=>{
           this.downloadURL = link;
           this.uploaded = true;
+          this.uploading = false;
         });
       })
     )

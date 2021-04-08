@@ -20,7 +20,7 @@ describe('AddWordComponent', () => {
       imports: [HttpClientTestingModule, RouterTestingModule, RouterModule.forRoot([]), COMMON_IMPORTS],
       providers: [
         { provide: WordListService, useValue: new MockWordListService() },
-      { provide: DictionaryService, useValue: new MockDictionaryService() }]
+        { provide: DictionaryService, useValue: new MockDictionaryService() }]
     })
       .compileComponents();
   });
@@ -44,7 +44,7 @@ describe('AddWordComponent', () => {
     component.add('tuna');
     expect(component.forms).toEqual(['bears', 'tuna', '']);
     component.removeForm(0);
-    expect(component.forms).toEqual(['tuna','']);
+    expect(component.forms).toEqual(['tuna', '']);
   });
   it('removeForm() should remove last form but keep a placeholder', () => {
     component.forms = [''];
@@ -83,7 +83,7 @@ describe('AddWordComponent', () => {
     component.forms = ['', '', ''];
     component.save();
     expect(component.wordName).toBe('');
-    expect(component.type).toBe('Noun');
+    expect(component.type).toBe('');
     expect(component.forms).toEqual(['']);
   });
 });
