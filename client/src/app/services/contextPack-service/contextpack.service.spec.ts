@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed } from '@angular/core/testing';
 import { ContextPack } from '../../datatypes/contextPacks';
 import { ContextPackService } from '../contextPack-service/contextpack.service';
 import { WordList } from '../../datatypes/wordlist';
@@ -136,11 +136,13 @@ describe('ContextPackService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('getPacks() should call api/packs', () => {
+  it('getPacks() should call api/packs', fakeAsync(() => {
     service.getPacks().subscribe(
       packs => expect(packs).toBe(testCPs)
     );
-  });
+    const req = httpTestingController.expectOne(service.contextPackUrl);
+    expect(req.request.method).toEqual('GET');
+  }));
 
   it('getPackById() calls api/packs/id', () => {
     const targetPack: ContextPack= testCPs[1];
@@ -149,6 +151,9 @@ describe('ContextPackService', () => {
     service.getPack(targetId).subscribe(
       pack => expect(pack).toBe(targetPack)
     );
+
+    const req = httpTestingController.expectOne(service.contextPackUrl + '/' + targetId);
+    expect(req.request.method).toEqual('GET');
   });
 
   it('addPack() posts to api/packs', () => {

@@ -10,8 +10,8 @@ import { WordList } from 'src/app/datatypes/wordlist';
 })
 export class ImportWordlistComponent implements OnInit {
 
-  validFile;
-  file: any;
+  validFile: boolean;
+  file: File;
   wordlist: WordList;
   id: string;
 
@@ -28,12 +28,13 @@ export class ImportWordlistComponent implements OnInit {
     const fileReader = new FileReader();
     fileReader.onload = () => {
       const result = fileReader.result;
-      // console.log(result);
       try {
         this.wordlist = JSON.parse(result as string);
-        this.validFile = true;
-      console.log(this.wordlist);
-
+        if (Array.isArray(this.wordlist)){
+          this.validFile = false;
+        } else {
+          this.validFile = true;
+        }
       } catch (err) {
         this.validFile = false;
       }

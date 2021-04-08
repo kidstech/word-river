@@ -19,7 +19,7 @@
 .app-title {
   padding-left: 16px;
 }
-.cp-icon{
+.cp-icon {
   height: 40px;
   width: 40px;
   border-radius: 100%;
@@ -27,24 +27,24 @@
   margin-bottom: 5px;
   margin-right: 10px;
 }
-.desc{
+.desc {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   justify-content: left;
 }
-.desc h2{
+.desc h2 {
   margin: 0px;
   font-size: large;
   height: 20px;
 }
-.desc span{
+.desc span {
   margin: 0px;
   opacity: 0.5;
   font-weight: 200;
   font-size: medium;
 }
-.cp{
+.cp {
   display: flex;
   align-items: center;
   justify-content: center;
