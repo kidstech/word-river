@@ -23,7 +23,7 @@ export class AddWordListComponent implements OnInit {
 
   words: Word[] = [];
   enabled = true;
-  status: string;
+  title: string;
 
   constructor(
     private route: ActivatedRoute, private service: WordListService,
@@ -66,8 +66,8 @@ export class AddWordListComponent implements OnInit {
               },
        err => {
         console.log(err);
-        this.status = err.statusText;
-        if(this.status === 'Bad Request'){
+        this.title = err.error.title;
+        if(this.title === 'The word list already exists in the context pack'){
           this.snackBar.open('There is already a Word List with the name ' + this.wordList.name + ' in the context pack', 'OK', {
           duration: 90000,
       });
