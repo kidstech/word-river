@@ -4,13 +4,8 @@ import { fakeAsync, TestBed } from '@angular/core/testing';
 import { ContextPack } from '../../datatypes/contextPacks';
 import { ContextPackService } from '../contextPack-service/contextpack.service';
 import { WordList } from '../../datatypes/wordlist';
-import { Word } from '../../datatypes/word';
 
 describe('ContextPackService', () => {
-  const testWord: Word = {
-    word: 'car',
-    forms: ['car', 'cars']
-  };
   const testList: Array<WordList> = [
     {
       name: 'Langley',
@@ -174,11 +169,8 @@ it('deletePack calls api/packs/:id', () => {
   service.deletePack(testCPs[2]._id).subscribe(
     id => expect(id).toBe('moo')
   );
-
   const req = httpTestingController.expectOne(service.contextPackUrl + '/' + testCPs[2]._id);
-
   expect(req.request.method).toEqual('DELETE');
-
   req.flush({id: 'moo'});
 });
 });

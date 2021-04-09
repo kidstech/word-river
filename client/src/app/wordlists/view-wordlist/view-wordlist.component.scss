@@ -10,24 +10,27 @@
   flex-direction: column;
   margin-right: 24px;
   position: absolute;
-  top: 94px;;
+  top: 94px;
   left: 20px;
   height: 91vh;
   overflow-y: scroll;
   overflow-x: hidden;
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
-.left::-webkit-scrollbar,.grid::-webkit-scrollbar,.list::-webkit-scrollbar { /* WebKit */
+.left::-webkit-scrollbar,
+.grid::-webkit-scrollbar,
+.list::-webkit-scrollbar {
+  /* WebKit */
   width: 0;
   height: 0;
 }
 
-.wordlist-details{
+.wordlist-details {
   padding: 30px;
 }
-.confirmation{
+.confirmation {
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -44,7 +47,7 @@
   margin-left: 374px;
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 .list {
   flex: 1;
@@ -56,65 +59,53 @@
   margin-left: 374px;
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
-// .grid::-webkit-scrollbar {
-//   width: 12px;               /* width of the entire scrollbar */
-// }
-// .grid::-webkit-scrollbar-track {
-//   background: rgba(0, 0, 0, 0.075);        /* color of the tracking area */
-// }
-// .grid::-webkit-scrollbar-thumb {
-//   background-color: #00000025;    /* color of the scroll thumb */
-//   border-radius: 20px;       /* roundness of the scroll thumb */
-//   border: 0px solid #000;  /* creates padding around scroll thumb */
-// }
-
-.top-name{
+.top-name {
   width: 100%;
   display: flex;
   align-items: center;
 }
-.bottom-title{
+.bottom-title {
   flex: 1;
 }
-.top{
+.top {
   width: 100%;
   display: flex;
   margin-bottom: 20px;
   align-items: center;
   justify-content: center;
 }
-.title-container{
+.title-container {
   flex: 1;
 }
-.enabled{
+.enabled {
   margin-left: 20px;
 }
-.title-container{
+.title-container {
   display: flex;
   align-items: center;
 }
-.title{
+.title {
   margin: 0px;
   font-size: large;
 }
-.delete{
+.delete {
   height: 40px;
   margin-left: 20px;
 }
-.save{
+.save {
   margin-bottom: 30px;
 }
-.placeholder{
+.placeholder {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
-.placeholder > mat-icon{
+.placeholder > mat-icon {
   font-size: 50px;
   margin-bottom: 20px;
   margin-left: -20px;
@@ -123,20 +114,20 @@
   margin-top: 20px;
   margin-bottom: 0px;
 }
-.wordgridcards{
+.wordgridcards {
   height: 200px;
   margin-bottom: 20px;
 }
-.wordlistcards{
+.wordlistcards {
   height: 80px;
   margin-bottom: 2px;
 }
-.list-type{
+.list-type {
   display: flex;
 }
-.list-type > *{
+.list-type > * {
   margin: 0px 5px 0px 5px;
 }
-.options{
+.options {
   margin-bottom: 16px;
 }

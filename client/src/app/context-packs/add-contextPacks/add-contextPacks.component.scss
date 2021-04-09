@@ -1,14 +1,14 @@
-*{
+* {
   font-size: large;
 }
-.container{
+.container {
   display: flex;
   height: 100%;
   width: 100%;
   justify-content: center;
   align-items: center;
 }
-.preview{
+.preview {
   width: 52px;
   height: 52px;
   border-radius: 100%;
@@ -16,33 +16,31 @@
   margin-left: 20px;
   object-fit: cover;
 }
-.preview-container{
+.preview-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.add-cp-card{
+.add-cp-card {
   padding: 40px;
   max-width: 1000px;
   min-width: 700px;
 }
-.icon-container{
+.icon-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-
 }
-.field{
+.field {
   flex: 1;
   font-size: large;
 }
 
-.btn-container>* {
+.btn-container > * {
   float: right;
   margin-right: 20px;
   width: 100px;
 }
-
 
 [type="file"] {
   height: 0;
@@ -57,7 +55,7 @@
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: inherit;
   font-weight: 500;
   margin-bottom: 1rem;

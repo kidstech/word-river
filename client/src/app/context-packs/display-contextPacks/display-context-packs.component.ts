@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class DisplayContextPacksComponent implements OnInit, OnDestroy {
 
   public contextPacks: ContextPack[];
-
   public name: string;
   public icon: string;
   public enabled: boolean;

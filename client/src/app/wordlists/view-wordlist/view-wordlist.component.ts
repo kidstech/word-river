@@ -36,7 +36,6 @@ export class ViewWordlistComponent implements OnInit {
     });
   }
   addWord(word) {
-    console.log(word.type + JSON.stringify(this.wordlist));
     this.wordlist[word.type].unshift({ word: word.name, forms: word.forms });
     this.words.unshift({ word: word.name, forms: word.forms, type: word.type });
     this.types = this.refreshTypes(this.words);
@@ -60,25 +59,20 @@ export class ViewWordlistComponent implements OnInit {
     temp.push(...this.wordlist.verbs);
     temp.push(...this.wordlist.adjectives);
     temp.push(...this.wordlist.misc);
-    console.log(temp);
     this.words = temp;
     this.types = this.refreshTypes(temp);
   }
 
   refreshTypes(words: any[]) {
-    const l = words.map(w =>
+    return words.map(w =>
       this.wordlist.nouns.some(i => this.matches(i,w)) ? 'Noun' :
         this.wordlist.verbs.some(i => this.matches(i,w)) ? 'Verb' :
           this.wordlist.adjectives.some(i => this.matches(i,w)) ? 'Adjective' : 'Misc'
     );
-    console.log(this.wordlist);
-    console.log(words);
-    return l;
   }
 
   deleteWordList() {
     const c = this.service.deleteWordList(this.wordlist, this.id).subscribe(res=> {
-      console.log('HTTP RESPONSE:', res);
     this.router.navigate(['packs', this.id]);
     });
     return c;
@@ -106,10 +100,8 @@ export class ViewWordlistComponent implements OnInit {
   save() {
     this.wordlist.name = this.name.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '').trim();
     this.wordlist.enabled = this.enabled;
-    console.log(this.wordlist);
     this.service.editWordList(this.originalName, this.wordlist, this.id).subscribe(res=> {
       this.router.navigate(['packs', this.id]);
-      console.log('HTTP RESPONSE:', res);
     });
   }
 

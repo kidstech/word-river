@@ -1,4 +1,5 @@
 package umm3601;
+
 import java.util.Arrays;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerAddress;
@@ -21,11 +22,8 @@ public class Server {
     String databaseName = System.getenv().getOrDefault("MONGO_DB", "dev");
 
     // Setup the MongoDB client object with the information we set earlier
-    MongoClient mongoClient
-      = MongoClients.create(MongoClientSettings
-        .builder()
-        .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress(mongoAddr))))
-        .build());
+    MongoClient mongoClient = MongoClients.create(MongoClientSettings.builder()
+        .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress(mongoAddr)))).build());
 
     // Get the database
     MongoDatabase database = mongoClient.getDatabase(databaseName);
@@ -37,11 +35,10 @@ public class Server {
       config.registerPlugin(new RouteOverviewPlugin("/api"));
     });
     /*
-     * We want to shut the `mongoClient` down if the server either
-     * fails to start, or when it's shutting down for whatever reason.
-     * Since the mongClient needs to be available throughout the
-     * life of the server, the only way to do this is to wait for
-     * these events and close it then.
+     * We want to shut the `mongoClient` down if the server either fails to start,
+     * or when it's shutting down for whatever reason. Since the mongClient needs to
+     * be available throughout the life of the server, the only way to do this is to
+     * wait for these events and close it then.
      */
     server.events(event -> {
       event.serverStartFailed(mongoClient::close);
@@ -53,7 +50,7 @@ public class Server {
 
     server.start(4567);
 
-    // Get Context Packs
+    // Get all the Context Packs
     server.get("/api/packs", wordRiverController::getPacks);
 
     // Get a single Context Pack
@@ -62,28 +59,25 @@ public class Server {
     // Adds a new Context Pack
     server.post("/api/packs", wordRiverController::addNewContextPack);
 
-    // Adds a new Word List
-    server.post("/api/packs/:id", wordRiverController::addNewWordList);
-
-    // Edits a Word List
-    server.put("/api/packs/:id/:name", wordRiverController::editWordList);
-
-    server.get("/api/packs/:id/wordlists", wordRiverController::getWordLists);
-
-    server.get("/api/packs/:id/:name", wordRiverController::getWordList);
-
-
-
-    // Edits a Context Pack (implement last)
-
-
-    // Deletes a Word List
-    server.delete("/api/packs/:id/:name", wordRiverController::deleteWordList);
-
     // Deletes a Context Pack
     server.delete("/api/packs/:id", wordRiverController::deleteContextPack);
 
+    // Get all the Wordlists in a Context Pack
+    server.get("/api/packs/:id/wordlists", wordRiverController::getWordLists);
 
+    // Get a single Wordlist
+    server.get("/api/packs/:id/:name", wordRiverController::getWordList);
+
+    // Adds a new Wordlist
+    server.post("/api/packs/:id", wordRiverController::addNewWordList);
+
+    // Edits a Wordlist
+    server.put("/api/packs/:id/:name", wordRiverController::editWordList);
+
+    // Deletes a Wordlist
+    server.delete("/api/packs/:id/:name", wordRiverController::deleteWordList);
+
+    // Throws an exception if there is one
     server.exception(Exception.class, (e, ctx) -> {
       ctx.status(500);
       ctx.json(e);
