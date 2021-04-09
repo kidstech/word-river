@@ -7,7 +7,4 @@ export class WordList {
   verbs: Word[];
   adjectives: Word[];
   misc: Word[];
-
-
-
 }

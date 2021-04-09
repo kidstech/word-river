@@ -57,9 +57,6 @@ export class MockWordListService extends WordListService {
   }
 
   getWordList(id: string): Observable<WordList[]> {
-    // Our goal here isn't to test (and thus rewrite) the service, so we'll
-    // keep it simple and just return the test WordLists regardless of what
-    // filters are passed in.
     return of(this.testWordLists);
   }
   addWordList(newWordlist: WordList,id: string): Observable<WordList>{
@@ -88,9 +85,6 @@ export class MockWordListService extends WordListService {
     return observable;
   }
   getWordListByName(word: string, id: string): Observable<WordList> {
-    // Our goal here isn't to test (and thus rewrite) the service, so we'll
-    // keep it simple and just return the test WordLists regardless of what
-    // filters are passed in.
     return of(this.testWordLists[0]);
   }
   editWordList(name: string, wordlist: WordList, id: string): Observable<WordList>{

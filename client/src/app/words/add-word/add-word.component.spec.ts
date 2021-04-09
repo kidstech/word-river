@@ -1,13 +1,12 @@
 import { MockDictionaryService } from './../../../testing/dictionary-service-mock';
 import { DictionaryService } from 'src/app/services/dictionary-service/dictionary.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, fakeAsync, flush, flushMicrotasks, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { COMMON_IMPORTS } from 'src/app/app-routing.module';
 import { WordListService } from 'src/app/services/wordlist.service';
 import { MockWordListService } from 'src/testing/wordlist.service.mock';
-
 import { AddWordComponent } from './add-word.component';
 
 describe('AddWordComponent', () => {

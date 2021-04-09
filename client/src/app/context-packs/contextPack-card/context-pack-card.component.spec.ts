@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { WordList } from 'src/app/datatypes/wordlist';
@@ -45,8 +44,6 @@ describe('CpCardComponent', () => {
     fixture.detectChanges();
   });
 
-
-
   it('should create', () => {
     expect(cpCard).toBeTruthy();
   });
@@ -55,6 +52,7 @@ describe('CpCardComponent', () => {
     expect(cpCard).toBeTruthy();
     expect(cpCard.deletePack({stopPropagation:()=>{}})).toBeUndefined();
   });
+
   it('count the words', () => {
     cpCard.contextPack = {
       _id: 'computer',

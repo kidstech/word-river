@@ -1,20 +1,19 @@
-
 #h3 {
-font-family: "Ubuntu", sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
-.word-forms{
+.word-forms {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-mat-card{
+mat-card {
   padding: 30px;
 }
-.top{
+.top {
   display: flex;
 }
-.suggest{
+.suggest {
   height: 40px;
   margin: 0px 5px 0px 5px;
 }

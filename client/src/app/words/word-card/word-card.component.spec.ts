@@ -32,7 +32,7 @@ describe('WordCardComponent', () => {
   });
 
   it('should emit a delete event when deleteWord is called', () => {
-    const spy = spyOn(component.delete, 'emit');
+    spyOn(component.delete, 'emit');
     component.deleteWord();
     expect(component.delete.emit).toHaveBeenCalled();
   });

@@ -5,7 +5,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { COMMON_IMPORTS } from 'src/app/app-routing.module';
 import { WordListService } from 'src/app/services/wordlist.service';
 import { MockWordListService } from 'src/testing/wordlist.service.mock';
-
 import { WordlistCardComponent } from './wordlist-card.component';
 
 describe('WordlistCardComponent', () => {

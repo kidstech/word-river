@@ -16,7 +16,6 @@ import { ContextPackService } from '../../services/contextPack-service/contextpa
 export class AddContextPackComponent implements OnInit {
 
   addContextPackForm: FormGroup;
-
   contextPack: ContextPack;
   uploading: boolean;
 
@@ -84,6 +83,7 @@ export class AddContextPackComponent implements OnInit {
       });
     });
   }
+
   onFileAdded(event) {
 
     const file = event.target.files[0];
@@ -100,7 +100,6 @@ export class AddContextPackComponent implements OnInit {
           this.uploading = false;
         });
       })
-    )
-      .subscribe();
+    ).subscribe();
   }
 }

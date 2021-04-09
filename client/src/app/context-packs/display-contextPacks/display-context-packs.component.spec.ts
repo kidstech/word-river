@@ -15,7 +15,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
-
 import { DisplayContextPacksComponent } from '../../context-packs/display-contextPacks/display-context-packs.component';
 import { ContextPackCardComponent } from '../../context-packs/contextPack-card/context-pack-card.component';
 import { MockCPService } from 'src/testing/context-pack.service.mock';

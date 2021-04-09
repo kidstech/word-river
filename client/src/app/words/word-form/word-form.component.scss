@@ -1,11 +1,13 @@
-.field{
+.field {
   flex: 1;
 }
-.outer{display: flex;}
-.add,.remove{
+.outer {
+  display: flex;
+}
+.add,
+.remove {
   margin-bottom: 17.5px;
 }
-.field{
+.field {
   margin-right: 20px;
-
 }

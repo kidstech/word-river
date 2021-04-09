@@ -1,6 +1,5 @@
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
 import { DictionaryService } from './../../services/dictionary-service/dictionary.service';
 
 
@@ -38,7 +37,6 @@ export class AddWordComponent implements OnInit {
           word.word === this.wordName.trim() &&
           word.forms === [this.wordName.trim(), ...this.forms.filter(e => e.trim().length !== 0)]
         );
-      console.log(this.wordName.length);
     }
     return this.finished;
   }
@@ -47,25 +45,16 @@ export class AddWordComponent implements OnInit {
   }
 
   add(val) {
-    // if(this.forms.length === 1 && this.forms[0]===''){
-    //   this.forms = [];
-    // }
     this.forms[this.forms.length - 1] = val;
     this.forms.push('');
     this.counter.push(val);
-    console.log(this.forms);
-
     this.cleared = false;
   }
 
   removeForm(i: number) {
-    console.log(i);
     this.forms.splice(i, 1);
     this.counter.splice(i, 1);
-    console.log(this.forms);
     if (this.forms.length === 0) { this.forms = ['']; }
-
-
   }
 
   suggest() {
@@ -73,7 +62,6 @@ export class AddWordComponent implements OnInit {
     setTimeout(() => {
       if (this.wordName && typed === this.wordName) {
         this.dictionary.getType(this.wordName, type => {
-          console.log('Retrieved type from API: ' + type);
           if (type === 'adjective' || type === 'verb' || type === 'noun') {
             this.type = `${type}s`;
             this.suggested = type;
@@ -95,7 +83,6 @@ export class AddWordComponent implements OnInit {
       ...this.forms.filter(e => e.length !== 0)])],// This line removes repetitions and inserts main word
       type: this.type
     });
-    console.log(this.forms + this.wordName + this.type);
     this.wordName = '';
     this.forms = [''];
     this.counter = [''];

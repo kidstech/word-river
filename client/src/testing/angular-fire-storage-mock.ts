@@ -1,4 +1,3 @@
-import { UploadTaskSnapshot } from '@angular/fire/storage/interfaces';
 import { Observable } from 'rxjs';
 export class FireStorageMock{
   public ref(filepath){

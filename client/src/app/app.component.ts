@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
     this.location.onUrlChange((url, state) => {
       this.backButtonVisible = url !== '/';
       const parts = url.split('/');
-      console.log(url);
 
       if (parts.length === 3 && parts[1] === 'packs' || parts.length <= 1 || url.length <= 1) {
         this.contextPackVisible = false;

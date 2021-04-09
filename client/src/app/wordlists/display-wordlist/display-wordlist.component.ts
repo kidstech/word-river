@@ -33,7 +33,6 @@ export class DisplayWordlistComponent implements OnInit {
       this.pack = cp;
       this.list = cp.wordlists;
       this.countWords();
-      console.log(cp);
     });
   }
 
@@ -49,7 +48,6 @@ export class DisplayWordlistComponent implements OnInit {
 
   delete(){
     this.cpservice.deletePack(this.pack._id).subscribe((r)=>{
-      console.log(r);
       this.router.navigate(['']);
     });
   }

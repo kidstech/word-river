@@ -1,5 +1,3 @@
-import { waitForAsync } from '@angular/core/testing';
-
 import { ContextPack } from 'src/app/datatypes/contextPacks';
 import { AddContextPackPage } from '../support/add-contextPack.po';
 import { WordList } from 'src/app/datatypes/wordlist';

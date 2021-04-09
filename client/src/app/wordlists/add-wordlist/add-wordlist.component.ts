@@ -33,15 +33,11 @@ export class AddWordListComponent implements OnInit {
 
   add(val) {
     this.words.push(val);
-    console.log(this.words);
-
   }
 
   check() {
     this.finished =
       this.wordlistname.trim().length > 1 && (this.wordlistname.trim().match(/[^-a-zA-Z0-9 ]/)) === null;
-    console.log(this.wordlistname.length);
-    console.log(this.wordlistname.match(/[^-a-zA-Z0-9 ]/));
     return this.finished;
   }
 
@@ -49,8 +45,6 @@ export class AddWordListComponent implements OnInit {
     this.route.paramMap.subscribe((pmap) => {
       this.id = pmap.get('id');
     });
-    this.dictService.getType('run', type => console.log(type), error=>{
-    }); // temporary spot to test
   }
 
   save() {
@@ -58,7 +52,6 @@ export class AddWordListComponent implements OnInit {
       this.wordList.name = this.wordlistname.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '').trim();
     }
     this.wordList.enabled = this.enabled;
-    console.log(this.wordList);
      this.service.addWordList(this.wordList, this.id).subscribe(
        res => {
          console.log('HTTP RESPONSE', res);
@@ -88,7 +81,6 @@ export class AddWordListComponent implements OnInit {
     const type: string = word.type;
     this.wordList[type].push({word:word.name,forms:word.forms});
     this.words.push({word:word.name,forms:word.forms,type});
-    console.log(this.words);
     return word.type;
   }
 

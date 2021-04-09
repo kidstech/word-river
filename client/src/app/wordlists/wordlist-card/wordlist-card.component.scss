@@ -1,6 +1,5 @@
-*{
+* {
   text-decoration: none;
-
 }
 .wordList-card {
   padding: 30px;
@@ -45,19 +44,17 @@
 
 .adjectiveList {
   display: flex;
-
 }
 
 .miscList {
   display: flex;
-
 }
 
-.wordList-enable>* {
+.wordList-enable > * {
   float: right;
 }
 
-.list-detail>div {
+.list-detail > div {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -67,7 +64,7 @@
   margin: 20px 0px 20px 0px;
 }
 
-.list-detail>div>* {
+.list-detail > div > * {
   transition-duration: 200ms;
 }
 
@@ -77,11 +74,9 @@
 
 .bubble {
   padding: 5px 10px 5px 10px;
-  // background-color: #2196f3;
   color: white;
   border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.116);
-  // box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   margin: 10px;
 }
 

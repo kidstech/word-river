@@ -17,19 +17,18 @@
   padding-top: 20px;
 }
 
-.success{
+.success {
   color: rgb(45, 192, 16);
 }
-.failure{
+.failure {
   color: #f3594e;
 }
 
-.btn-container>* {
+.btn-container > * {
   float: right;
   margin-right: 20px;
   width: 100px;
 }
-
 
 [type="file"] {
   height: 0;
@@ -44,7 +43,7 @@
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: inherit;
   font-weight: 500;
   margin-bottom: 1rem;

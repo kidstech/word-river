@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { COMMON_IMPORTS } from 'src/app/app-routing.module';
@@ -48,13 +48,16 @@ describe('ImportWordlistComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
   it('should import', () => {
     const mockFile = new File([''], 'filename', { type: 'text/html' });
     const mockEvt = { target: { files: [mockFile] } };
     const mockReader: FileReader = jasmine.createSpyObj('FileReader', ['readAsDataURL', 'onload']);
     spyOn(window as any, 'FileReader').and.returnValue(mockReader);
     try { component.onFileAdded(mockEvt as any); } catch (e) { }
+    expect(window.FileReader).toHaveBeenCalled();
   });
+
   it('should save', () => {
     component.wordlist = ex;
     component.id = 'meow';
@@ -62,5 +65,4 @@ describe('ImportWordlistComponent', () => {
     component.wordlist = undefined;
     expect(component.save()).toBe(false);
   });
-
 });
