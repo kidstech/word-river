@@ -1,12 +1,12 @@
 
-# Iteration 2 Team Chicken <!-- omit in toc -->
+# Iteration 3 Team Vibing Cats <!-- omit in toc -->
 
 [![Server Build Status](../../actions/workflows/server.yml/badge.svg)](../../actions/workflows/server.yml)
 [![Client Build Status](../../actions/workflows/client.yaml/badge.svg)](../../actions/workflows/client.yaml)
 [![End to End Build Status](../../actions/workflows/e2e.yaml/badge.svg)](../../actions/workflows/e2e.yaml)
 
-[![BCH compliance](https://bettercodehub.com/edge/badge/UMM-CSci-3601-S21/it-2-it-2-chicken?branch=main)](https://bettercodehub.com/)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/UMM-CSci-3601-S21/it-2-it-2-chicken.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/UMM-CSci-3601-S21/it-2-it-2-chicken/alerts/)
+[![BCH compliance](https://bettercodehub.com/edge/badge/UMM-CSci-3601-S21/it-3-vibing-cats?branch=main)](https://bettercodehub.com/)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/UMM-CSci-3601-S21/it-3-vibing-cats.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/UMM-CSci-3601-S21/it-3-vibing-cats/alerts/)
 - [Development](#development)
   - [Common commands](#common-commands)
 - [Deployment](#deployment)
