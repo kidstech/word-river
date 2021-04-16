@@ -1,3 +1,4 @@
+import { LoginComponent } from './auth/login/login.component';
 import { DisplayWordlistComponent } from './wordlists/display-wordlist/display-wordlist.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -39,7 +40,7 @@ export const COMMON_IMPORTS = [
 ];
 
 const routes: Routes = [
-  {path: '', component: DisplayContextPacksComponent},
+  {path: '', component: LoginComponent},
   {path: 'packs/new', component: AddContextPackComponent},
   {path: 'packs/:id', component: DisplayWordlistComponent},
   {path: 'packs/:id/import', component: ImportWordlistComponent},

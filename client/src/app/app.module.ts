@@ -42,7 +42,8 @@ import { AddContextPackComponent } from './context-packs/add-contextPacks/add-co
 import { ContextPackService } from './services/contextPack-service/contextpack.service';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { LoginComponent } from './auth/login/login.component';
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -80,7 +81,8 @@ const MATERIAL_MODULES: any[] = [
     WordFormComponent,
     DisplayContextPacksComponent,
     ContextPackCardComponent,
-    AddContextPackComponent
+    AddContextPackComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +95,8 @@ const MATERIAL_MODULES: any[] = [
     MATERIAL_MODULES,
     LayoutModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireAuthModule,
   ],
   providers: [
     WordListService,
