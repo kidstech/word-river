@@ -8,6 +8,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import io.javalin.Javalin;
 import io.javalin.core.util.RouteOverviewPlugin;
+import umm3601.wordRiver.UserController;
 import umm3601.wordRiver.WordRiverController;
 
 public class Server {
@@ -30,6 +31,7 @@ public class Server {
 
     // Initialize dependencies
     WordRiverController wordRiverController = new WordRiverController(database);
+    UserController userController = new UserController(database);
 
     Javalin server = Javalin.create(config -> {
       config.registerPlugin(new RouteOverviewPlugin("/api"));
@@ -76,6 +78,15 @@ public class Server {
 
     // Deletes a Wordlist
     server.delete("/api/packs/:id/:name", wordRiverController::deleteWordList);
+
+
+    // endpoints may be temporary
+    server.get("/api/users/:id", userController::getUser);
+    server.post("/api/users/:id", userController:: createLearner);
+
+
+
+
 
     // Throws an exception if there is one
     server.exception(Exception.class, (e, ctx) -> {

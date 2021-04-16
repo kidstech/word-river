@@ -11,7 +11,7 @@ public class User {
 
   public String name;
   public String icon;
-  public ArrayList<String> learners;
-  public ArrayList<String> cps;
+  public ArrayList<Learner> learners;
+  public ArrayList<String> contextPacks;
 
 }
