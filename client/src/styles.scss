@@ -14,6 +14,7 @@
   // Extract the palettes you need from the theme definition.
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
+  $blue: #2196f3;
   $warn: map-get($theme, warn);
 
   $background: map-get($theme, background);

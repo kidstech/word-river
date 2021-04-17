@@ -1,1 +1,27 @@
-<p>login works!</p>
+<div class="outer">
+  <mat-card class="outer-card">
+    <img class="logo" src="/assets/logo-dark.png" alt="logo">
+    <mat-tab-group class="tabs" mat-align-tabs="center">
+      <mat-tab label="Login">
+        <div class="auth-holder">
+          <input class="field" type="text" name="email" placeholder="Email">
+          <input class="field" type="text" name="password" placeholder="Password">
+          <button class="auth-btn">
+            Login
+          </button>
+        </div>
+      </mat-tab>
+      <mat-tab class="tabs" label="Sign Up">
+        <div class="auth-holder">
+          <input class="field" type="text" name="name" placeholder="Name" style="margin-top: 0px;">
+          <input class="field" type="text" name="email" placeholder="Email">
+          <input class="field" type="text" name="password" placeholder="Password">
+          <button class="auth-btn" style="margin-bottom: 0px;">
+            Sign Up
+          </button>
+        </div>
+
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

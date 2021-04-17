@@ -44,6 +44,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { LoginComponent } from './auth/login/login.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -65,7 +66,8 @@ const MATERIAL_MODULES: any[] = [
   MatChipsModule,
   MatFormFieldModule,
   MatSnackBarModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatTabsModule
 ];
 
 @NgModule({
