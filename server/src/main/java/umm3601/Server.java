@@ -83,6 +83,9 @@ public class Server {
     // endpoints may be temporary
     server.get("/api/users/:id", userController::getUser);
     server.post("/api/users/:id", userController:: createLearner);
+    server.get("/api/users/:id/learners", userController::getLearners);
+    server.put("/api/users/:id/:learnerId", userController::editLearner);
+    server.delete("/api/users/:id/:learnerId/:packId", userController::removePackFromLearner);
 
 
 
