@@ -39,25 +39,25 @@ public class UserController {
     String authId = ctx.pathParam("id");
     User user;
 
-    try {
-      String mongoId = findByAuthId(authId);
-      user = userCollection.find(eq("_id", new ObjectId(mongoId))).first();
-    } catch (IllegalArgumentException e) {
-      throw new BadRequestResponse("The requested user id wasn't a legal Mongo Object ID.");
-    }
-    if (user == null) {
-      throw new NotFoundResponse("The requested user could not be found");
-    } else {
-      ctx.json(user);
-    }
+    String mongoId = findByAuthId(authId);
+    user = userCollection.find(eq("_id", new ObjectId(mongoId))).first();
+
+    ctx.json(user);
   }
 
-//   /**
-//    * Create a new user
-//    */
-//   public void createUser(Context ctx) {
-//       //stub
-//   }
+  /**
+   * Create a new user
+   */
+  public void createUser(Context ctx) {
+      User newUser = ctx.bodyValidator(User.class)
+        .check(user -> user.authId != null && user.authId.length() > 0)
+        .check(user -> user.name != null && user.name.length() > 0)
+        .check(user -> user.icon != null).get();
+
+      userCollection.insertOne(newUser);
+      ctx.status(201);
+      ctx.json(ImmutableMap.of("id", newUser._id));
+  }
 
   /**
    * Create a new leaner
@@ -95,18 +95,16 @@ public class UserController {
        String learnerId = ctx.pathParam("learnerId");
        Learner foundLearner = null;
        User user;
-       try{
-        user = userCollection.findOneById(mongoId);
-       } catch (IllegalArgumentException e) {
-         throw new BadRequestResponse("The requested user id wasn't a legal Mongo Object Id");
-       }
+
+       user = userCollection.findOneById(mongoId);
+
        for(Learner lr : user.learners) {
+         System.out.println(lr._id.equals(learnerId));
          if(lr._id.equals(learnerId)){
            foundLearner = lr;
            break;
          }
        }
-
        if(foundLearner == null) {
          throw new NotFoundResponse("The requested learner was not found");
        }
@@ -125,12 +123,7 @@ public class UserController {
       User user;
       Learner foundLearner = null;
 
-      try{
-        user = userCollection.findOneById(mongoId);
-      }
-      catch (IllegalArgumentException e) {
-        throw new BadRequestResponse("The requested user id wasn't a legal Mongo Object Id");
-      }
+      user = userCollection.findOneById(mongoId);
 
       for(Learner lr: user.learners) {
         if(lr._id.equals(learnerId)){
@@ -183,18 +176,21 @@ public class UserController {
     String mongoId = findByAuthId(authId);
     String learnerId = ctx.pathParam("learnerId");
     String contextPackId = ctx.pathParam("packId");
-
+    boolean removed = false;
+    boolean foundLearner = false;
 
     User user = userCollection.findOneById(mongoId);
     for(int i = 0; i < user.learners.size(); i++) {
       Learner currentLearner = user.learners.get(i);
       if(currentLearner._id.equals(learnerId)) {
+        foundLearner = true;
         for(int j = 0; j < currentLearner.learnerPacks.size(); j++) {
           String currentPackId = currentLearner.learnerPacks.get(j);
           if(currentPackId.equals(contextPackId)) {
             userCollection.updateById(mongoId, Updates.pull("learners", currentLearner));
             currentLearner.learnerPacks.remove(j);
             userCollection.updateById(mongoId, Updates.push("learners", currentLearner));
+            removed = true;
             break;
           } else {
             continue;
@@ -204,11 +200,20 @@ public class UserController {
           continue;
       }
     }
-
+    if(!foundLearner) {
+      throw new NotFoundResponse("The learner does not exist");
+    }
+    else if(!removed) {
+      throw new NotFoundResponse("The context pack does not exist");
+    }
   }
 
   private String findByAuthId(String authId) {
     User user = userCollection.find(Filters.eq("authId", authId)).first();
+    if(user == null) {
+      throw new NotFoundResponse("The authId was not found in the system");
+    }
+    System.out.println(user._id);
     return user._id;
   }
 

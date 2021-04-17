@@ -102,7 +102,7 @@ public class UserControllerSpec {
 
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:id", ImmutableMap.of("id", "bad"));
 
-    assertThrows(BadRequestResponse.class, () -> {
+    assertThrows(NotFoundResponse.class, () -> {
       userController.getUser(ctx);
     });
   }
@@ -123,7 +123,7 @@ public class UserControllerSpec {
 
     String testNewLearner = "{" +  "\"name\": \"Test Name\"," + "\"icon\": \"image.png\"," + "\"learnerPacks\": []" + "}";
 
-    String testID = johnDoeId.toHexString();
+    String testID = "5678";
     mockReq.setBodyContent(testNewLearner);
     mockReq.setMethod("POST");
 
@@ -155,7 +155,7 @@ public class UserControllerSpec {
 
     String testNewLearner = "{" +  "\"icon\": \"image.png\"," + "\"learnerPacks\": []" + "}";
 
-    String testID = johnDoeId.toHexString();
+    String testID = "5678";
     mockReq.setBodyContent(testNewLearner);
     mockReq.setMethod("POST");
 
@@ -172,7 +172,7 @@ public class UserControllerSpec {
 
     String testNewLearner = "{" +  "\"name\": \"\"," + "\"icon\": \"image.png\"," + "\"learnerPacks\": []" + "}";
 
-    String testID = johnDoeId.toHexString();
+    String testID = "5678";
     mockReq.setBodyContent(testNewLearner);
     mockReq.setMethod("POST");
 
@@ -186,7 +186,7 @@ public class UserControllerSpec {
 
   @Test
   public void GetLearners() throws IOException {
-    String testID = johnDoeId.toHexString();
+    String testID = "5678";
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:id/learners", ImmutableMap.of("id", testID));
     userController.getLearners(ctx);
 
@@ -200,23 +200,23 @@ public class UserControllerSpec {
   @Test
   public void getLearner() throws IOException {
 
-    String testId = johnDoeId.toHexString();
-    String name = "iron man";
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/packs/:id/:name", ImmutableMap.of("id", testId, "name", name));
+    String testId = "5678";
+    String learnerId = "1234";
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/packs/:id/:learnerId", ImmutableMap.of("id", testId, "learnerId", learnerId));
     mockReq.setMethod("GET");
     userController.getLearner(ctx);
 
     String result = ctx.resultString();
-    WordList resultList = JavalinJson.fromJson(result, WordList.class);
+    Learner resultList = JavalinJson.fromJson(result, Learner.class);
 
-    assertEquals(resultList.name, name);
+    assertEquals(resultList._id, learnerId);
 
   }
 
   @Test
   public void getNonexistentLearner() throws IOException {
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/learners/:id",
-    ImmutableMap.of("id", "58af3a600343927e48e87335"));
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:id/:learnerId",
+    ImmutableMap.of("id", "5678", "learnerId", "badLearnerId"));
 
     assertThrows(NotFoundResponse.class, () -> {
       userController.getLearner(ctx);
@@ -228,7 +228,7 @@ public class UserControllerSpec {
     String testLearner = "{" + "\"_id\": \"1234\"," + "\"name\": \"Test Learner\"," + "\"icon\": \"Test1.png\","
     + "\"learnerPacks\": []" + "}";
 
-    String testId = johnDoeId.toHexString();
+    String testId = "5678";
     mockReq.setBodyContent(testLearner);
     mockReq.setMethod("PUT");
 
@@ -254,8 +254,27 @@ public class UserControllerSpec {
   }
 
   @Test
+  public void EditNonexistentLearner() throws IOException {
+    String testLearner = "{" + "\"_id\": \"1234\"," + "\"name\": \"Test Learner\"," + "\"icon\": \"Test1.png\","
+    + "\"learnerPacks\": []" + "}";
+
+    String testId = "5678";
+    mockReq.setBodyContent(testLearner);
+    mockReq.setMethod("PUT");
+
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "/api/users/:id/:learnerId", ImmutableMap.of("id", testId, "learnerId", "invalidLearner"));
+
+
+    assertThrows(NotFoundResponse.class, () -> {
+      userController.editLearner(ctx);
+    });
+
+  }
+
+  @Test
   public void RemovePackFromLearner() throws IOException {
-    String userId = johnDoeId.toHexString();
+    String userId = "5678";
     mockReq.setMethod("DELETE");
 
     ObjectId theId = johnDoeId;
@@ -273,6 +292,32 @@ public class UserControllerSpec {
 
 
     assertFalse(theUserLearners.contains("[Document{{_id=1234, name=Bob Doe, icon=bod.jpg, learnerPacks=[ironMan1, ironMan2]}}]"));
+  }
+
+  @Test
+  public void RemoveNonexistentPackFromLearner() throws IOException {
+    String userId = "5678";
+    mockReq.setMethod("DELETE");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:id/:learnerId/:packId",
+      ImmutableMap.of("id", userId, "learnerId", "1234", "packId", "cats"));
+
+    assertThrows(NotFoundResponse.class, () -> {
+      userController.removePackFromLearner(ctx);
+    });
+  }
+
+  @Test
+  public void RemovePackFromNonexistentLearner() throws IOException {
+    String userId = "5678";
+    mockReq.setMethod("DELETE");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:id/:learnerId/:packId",
+      ImmutableMap.of("id", userId, "learnerId", "badLearner", "packId", "ironMan2"));
+
+    assertThrows(NotFoundResponse.class, () -> {
+      userController.removePackFromLearner(ctx);
+    });
   }
 
 
