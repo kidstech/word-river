@@ -41,6 +41,7 @@ export const COMMON_IMPORTS = [
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
+  {path: 'packs', component: DisplayContextPacksComponent},
   {path: 'packs/new', component: AddContextPackComponent},
   {path: 'packs/:id', component: DisplayWordlistComponent},
   {path: 'packs/:id/import', component: ImportWordlistComponent},

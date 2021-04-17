@@ -1,3 +1,4 @@
+import { LoginService } from './services/login-service/login.service';
 import { ContextPackService } from './services/contextPack-service/contextpack.service';
 import { ContextPack } from './datatypes/contextPacks';
 import { Router } from '@angular/router';
@@ -14,10 +15,17 @@ export class AppComponent implements OnInit {
   backButtonVisible = false;
   contextPackVisible = false;
   contextPack: ContextPack;
+  loggedIn = false;
 
-  constructor(private location: Location, private router: Router, private service: ContextPackService) { }
+  constructor(
+    private location: Location,
+    private router: Router,
+    private service: ContextPackService,
+    private login: LoginService
+  ) { }
 
   ngOnInit(): void {
+    this.loggedIn = this.login.isLoggedIn;
     this.location.onUrlChange((url, state) => {
       this.backButtonVisible = url !== '/';
       const parts = url.split('/');
@@ -34,6 +42,7 @@ export class AppComponent implements OnInit {
       else {
         this.contextPackVisible = false;
       }
+      this.loggedIn = this.login.isLoggedIn;
     });
   }
 
@@ -52,5 +61,11 @@ export class AppComponent implements OnInit {
     } else {
       this.location.back();
     }
+  }
+  logOut() {
+    this.login.signOut(res=>{
+      console.log(res);
+      this.router.navigate(['']);
+    });
   }
 }

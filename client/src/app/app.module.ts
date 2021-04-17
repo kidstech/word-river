@@ -42,9 +42,10 @@ import { AddContextPackComponent } from './context-packs/add-contextPacks/add-co
 import { ContextPackService } from './services/contextPack-service/contextpack.service';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoginComponent } from './auth/login/login.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -67,7 +68,8 @@ const MATERIAL_MODULES: any[] = [
   MatFormFieldModule,
   MatSnackBarModule,
   MatSlideToggleModule,
-  MatTabsModule
+  MatTabsModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({

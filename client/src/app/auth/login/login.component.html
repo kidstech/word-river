@@ -1,22 +1,44 @@
 <div class="outer">
+  <img class="bg" src="/assets/login-bg.png" alt="logo">
   <mat-card class="outer-card">
     <img class="logo" src="/assets/logo-dark.png" alt="logo">
     <mat-tab-group class="tabs" mat-align-tabs="center">
-      <mat-tab label="Login">
+      <mat-tab label="LOGIN">
         <div class="auth-holder">
-          <input class="field" type="text" name="email" placeholder="Email">
-          <input class="field" type="text" name="password" placeholder="Password">
-          <button class="auth-btn">
+          <input [ngClass]="{'field':validLoginEmail,'invalid':!validLoginEmail}" (input)="update()" type="email"
+            name="email" placeholder="Email" [(ngModel)]="loginEmail">
+          <input [ngClass]="{'field':validLoginPassword,'invalid':!validLoginPassword}" (input)="update()"
+            type="password" name="password" placeholder="Password" [(ngModel)]="loginPass">
+          <button class="auth-btn" (click)="signIn()">
             Login
           </button>
         </div>
+
+        <div class="messages">
+          <div class="errorMessage">
+            <mat-icon>
+              error_outline
+            </mat-icon>
+            <p>Incorrect email entered. </p>
+          </div>
+          <!-- <div class="loading">
+            <mat-icon>
+              error_outline
+            </mat-icon>
+            <p>Incorrect email entered. </p>
+          </div> -->
+        </div>
+
       </mat-tab>
-      <mat-tab class="tabs" label="Sign Up">
+      <mat-tab class="tabs" label="SIGN UP">
         <div class="auth-holder">
-          <input class="field" type="text" name="name" placeholder="Name" style="margin-top: 0px;">
-          <input class="field" type="text" name="email" placeholder="Email">
-          <input class="field" type="text" name="password" placeholder="Password">
-          <button class="auth-btn" style="margin-bottom: 0px;">
+          <input [ngClass]="{'field':validSignUpName,'invalid':!validSignUpName}" (input)="update()" type="text"
+            name="name" placeholder="Name" style="margin-top: 0px;" [(ngModel)]="signUpName">
+          <input [ngClass]="{'field':validSignUpName,'invalid':!validSignUpEmail}" (input)="update()" type="email"
+            name="email" placeholder="Email" [(ngModel)]="signUpEmail">
+          <input [ngClass]="{'field':validSignUpName,'invalid':!validSignUpPassword}" (input)="update()" type="password"
+            name="password" placeholder="Password" [(ngModel)]="signUpPass">
+          <button class="auth-btn" style="margin-bottom: 0px;" (click)="signUp()">
             Sign Up
           </button>
         </div>
