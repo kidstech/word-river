@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -60,8 +61,8 @@ public class UserControllerSpec {
         MongoCollection<Document> ctxDocuments = db.getCollection("users");
         ctxDocuments.drop();
         johnDoeId = new ObjectId();
-        Document johnDoe = new Document().append("_id", johnDoeId).append("name", "John Doe").append("icon", "user.png")
-            .append("learners", Arrays.asList(new Document().append("name", "Bob Doe")
+        Document johnDoe = new Document().append("_id", johnDoeId).append("authId", "5678").append("name", "John Doe").append("icon", "user.png")
+            .append("learners", Arrays.asList(new Document().append("_id", "1234").append("name", "Bob Doe")
                 .append("icon","bod.jpg")
                  .append("learnerPacks", Arrays.asList( "ironMan1", "ironMan2"))))
                     .append("contextPacks", Arrays.asList("ironMan1", "ironMan2, ironMan3"));
@@ -81,7 +82,7 @@ public class UserControllerSpec {
     @Test
     public void GetUserExistentId() throws IOException {
 
-      String testID = johnDoeId.toHexString();
+      String testID = "5678";
 
       Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:id", ImmutableMap.of("id", testID));
       userController.getUser(ctx);
@@ -167,7 +168,7 @@ public class UserControllerSpec {
   }
 
   @Test
-  public void AddNewWordListWithInvalidName() throws IOException {
+  public void AddNewLearnerWithInvalidName() throws IOException {
 
     String testNewLearner = "{" +  "\"name\": \"\"," + "\"icon\": \"image.png\"," + "\"learnerPacks\": []" + "}";
 
@@ -180,6 +181,100 @@ public class UserControllerSpec {
 
     assertThrows(BadRequestResponse.class, () -> {
       userController.createLearner(ctx);
-    });;
+    });
   }
+
+  @Test
+  public void GetLearners() throws IOException {
+    String testID = johnDoeId.toHexString();
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:id/learners", ImmutableMap.of("id", testID));
+    userController.getLearners(ctx);
+
+    assertEquals(200, mockRes.getStatus());
+
+    String result = ctx.resultString();
+    Learner[] resultLearners = JavalinJson.fromJson(result, Learner[].class);
+    assertEquals(resultLearners.length, 1);
+  }
+
+  @Test
+  public void getLearner() throws IOException {
+
+    String testId = johnDoeId.toHexString();
+    String name = "iron man";
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/packs/:id/:name", ImmutableMap.of("id", testId, "name", name));
+    mockReq.setMethod("GET");
+    userController.getLearner(ctx);
+
+    String result = ctx.resultString();
+    WordList resultList = JavalinJson.fromJson(result, WordList.class);
+
+    assertEquals(resultList.name, name);
+
+  }
+
+  @Test
+  public void getNonexistentLearner() throws IOException {
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/learners/:id",
+    ImmutableMap.of("id", "58af3a600343927e48e87335"));
+
+    assertThrows(NotFoundResponse.class, () -> {
+      userController.getLearner(ctx);
+    });
+  }
+
+  @Test
+  public void EditLearner() throws IOException {
+    String testLearner = "{" + "\"_id\": \"1234\"," + "\"name\": \"Test Learner\"," + "\"icon\": \"Test1.png\","
+    + "\"learnerPacks\": []" + "}";
+
+    String testId = johnDoeId.toHexString();
+    mockReq.setBodyContent(testLearner);
+    mockReq.setMethod("PUT");
+
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "/api/users/:id/:learnerId", ImmutableMap.of("id", testId, "learnerId", "1234"));
+      userController.editLearner(ctx);
+
+
+    ObjectId theId = johnDoeId;
+    Document User = db.getCollection("users").find(Filters.eq("_id", theId)).first();
+    System.out.println(User);
+
+    @SuppressWarnings("unchecked")
+    ArrayList<Learner> userLearners = (ArrayList<Learner>) User.get("learners");
+    String theUserLearners = userLearners.toString();
+
+    System.out.println(theUserLearners);
+
+
+    assertTrue(theUserLearners
+           .contains("Document{{_id=1234, name=Test Learner, icon=Test1.png, learnerPacks=[]}}"));
+
+  }
+
+  @Test
+  public void RemovePackFromLearner() throws IOException {
+    String userId = johnDoeId.toHexString();
+    mockReq.setMethod("DELETE");
+
+    ObjectId theId = johnDoeId;
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:id/:learnerId/:packId",
+      ImmutableMap.of("id", userId, "learnerId", "1234", "packId", "ironMan2"));
+
+    userController.removePackFromLearner(ctx);
+
+    Document user = db.getCollection("users").find(Filters.eq("_id", theId)).first();
+
+    @SuppressWarnings("unchecked")
+    ArrayList<Learner> userLearners = (ArrayList<Learner>) user.get("learners");
+    String theUserLearners = userLearners.toString();
+
+
+    assertFalse(theUserLearners.contains("[Document{{_id=1234, name=Bob Doe, icon=bod.jpg, learnerPacks=[ironMan1, ironMan2]}}]"));
+  }
+
+
+
 }
