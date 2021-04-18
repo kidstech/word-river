@@ -2,12 +2,13 @@ package umm3601.wordRiver;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static com.mongodb.client.model.Filters.eq;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableMap;
@@ -20,8 +21,8 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
-
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,12 +33,14 @@ import io.javalin.plugin.json.JavalinJson;
 import io.javalin.http.BadRequestResponse;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
+
 public class UserControllerSpec {
     MockHttpServletRequest mockReq = new MockHttpServletRequest();
     MockHttpServletResponse mockRes = new MockHttpServletResponse();
 
     private UserController userController;
     private ObjectId johnDoeId;
+    private ObjectId johnSmithId;
 
     static MongoClient mongoClient;
     static MongoDatabase db;
@@ -62,7 +65,9 @@ public class UserControllerSpec {
         ctxDocuments.drop();
         johnDoeId = new ObjectId();
         Document johnDoe = new Document().append("_id", johnDoeId).append("authId", "5678").append("name", "John Doe").append("icon", "user.png")
-            .append("learners", Arrays.asList(new Document().append("_id", "1234").append("name", "Bob Doe")
+            .append("learners", Arrays.asList(new Document().append("_id", "117").append("name", "John Spartan")
+            .append("icon","master.jpg")
+             .append("learnerPacks", Arrays.asList( "ironMan1", "ironMan2")), new Document().append("_id", "1234").append("name", "Bob Doe")
                 .append("icon","bod.jpg")
                  .append("learnerPacks", Arrays.asList( "ironMan1", "ironMan2"))))
                     .append("contextPacks", Arrays.asList("ironMan1", "ironMan2, ironMan3"));
@@ -194,7 +199,7 @@ public class UserControllerSpec {
 
     String result = ctx.resultString();
     Learner[] resultLearners = JavalinJson.fromJson(result, Learner[].class);
-    assertEquals(resultLearners.length, 1);
+    assertEquals(resultLearners.length, 2);
   }
 
   @Test
@@ -320,6 +325,145 @@ public class UserControllerSpec {
     });
   }
 
+  @Test
+  public void CreateUser() throws IOException {
+
+    String testNewUser = "{" +  "\"authId\": \"1234\"," + "\"name\": \"Test Name\"," + "\"icon\": \"image.png\"," + "\"learners\": []," + "\"contextPacks\": []" +"}";
+
+    mockReq.setBodyContent(testNewUser);
+    mockReq.setMethod("POST");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users");
+    userController.createUser(ctx);
+
+    String result = ctx.resultString();
+    String id = jsonMapper.readValue(result, ObjectNode.class).get("id").asText();
+    assertNotEquals("", id);
+
+    assertEquals(201, mockRes.getStatus());
+
+    assertEquals(1, db.getCollection("users").countDocuments(eq("_id", new ObjectId(id))));
+
+    //Verify that the user was added to the database with the correct ID
+    Document addedUser = db.getCollection("users").find(eq("_id", new ObjectId(id))).first();
+
+    assertNotNull(addedUser);
+    assertEquals("Test Name", addedUser.getString("name"));
+    assertEquals("image.png", addedUser.getString("icon"));
+    assertNotNull(addedUser.get("learners"));
+    assertNotNull(addedUser.get("contextPacks"));
+
+  }
+
+  @Test
+  public void CreateUserWithNullId() throws IOException {
+    String nullIdUser = "{" +  "\"name\": \"Test Name\"," + "\"icon\": \"image.png\"," + "\"learners\": []," + "\"contextPacks\": []" +"}";
+    mockReq.setBodyContent(nullIdUser);
+    mockReq.setMethod("POST");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users");
+
+    assertThrows(BadRequestResponse.class, () -> {
+      userController.createUser(ctx);
+    });
+  }
+
+  @Test
+  public void CreateUserWithNullIcon() throws IOException {
+    String testNewUser = "{" +  "\"authId\": \"1234\"," + "\"name\": \"Test Name\","  + "\"learners\": []," + "\"contextPacks\": []" +"}";
+
+    mockReq.setBodyContent(testNewUser);
+    mockReq.setMethod("POST");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users");
+
+    assertThrows(BadRequestResponse.class, () -> {
+      userController.createUser(ctx);
+    });
+  }
+
+  @Test
+  public void CreateUserWithTooShortAuthId() throws IOException {
+    String testNewUser = "{" +  "\"authId\": \"\"," + "\"name\": \"Test Name\"," + "\"icon\": \"image.png\"," + "\"learners\": []," + "\"contextPacks\": []" +"}";
+
+    mockReq.setBodyContent(testNewUser);
+    mockReq.setMethod("POST");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users");
+
+    assertThrows(BadRequestResponse.class, () -> {
+      userController.createUser(ctx);
+    });
+  }
 
 
+  @Test
+  public void CreateUserWithNullName() throws IOException{
+    String testNewUser = "{" +  "\"authId\": \"1234\","  + "\"icon\": \"image.png\"," + "\"learners\": []," + "\"contextPacks\": []" +"}";
+
+    mockReq.setBodyContent(testNewUser);
+    mockReq.setMethod("POST");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users");
+
+    assertThrows(BadRequestResponse.class, () -> {
+      userController.createUser(ctx);
+    });
+  }
+
+
+  @Test
+  public void CreateUserWithTooShortName() throws IOException{
+    String testNewUser = "{" +  "\"authId\": \"1234\"," + "\"name\": \"\"," + "\"icon\": \"image.png\"," + "\"learners\": []," + "\"contextPacks\": []" +"}";
+
+    mockReq.setBodyContent(testNewUser);
+    mockReq.setMethod("POST");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users");
+
+    assertThrows(BadRequestResponse.class, () -> {
+      userController.createUser(ctx);
+    });
+  }
+
+
+  @Test
+  public void AddContextPackToLearner() throws IOException{
+
+
+    mockReq.setMethod("PUT");
+    String id = "5678";
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:id/:learnerId/:packId", ImmutableMap.of("id", id, "learnerId", "1234", "packId", "ironMan4"));
+    userController.addPackToLearner(ctx);
+
+    String result = ctx.resultString();
+    String theId = jsonMapper.readValue(result, ObjectNode.class).get("id").asText();
+    assertNotEquals("", theId);
+
+    assertEquals(201, mockRes.getStatus());
+
+
+    //Verify that the context pack was added to the learner
+    Document modifiedUser = db.getCollection("users").find(eq("_id", new ObjectId(theId))).first();
+
+    @SuppressWarnings("unchecked")
+    ArrayList<Learner> userLearners = (ArrayList<Learner>) modifiedUser.get("learners");
+    String theUserLearners = userLearners.toString();
+
+
+    assertTrue(theUserLearners
+           .contains("Document{{_id=1234, name=Bob Doe, icon=bod.jpg, learnerPacks=[ironMan1, ironMan2, ironMan4]}}"));
+  }
+
+  @Test
+  public void AddContextPackToFakeLearner() throws IOException {
+    String id = "5678";
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:id/:learnerId/:packId", ImmutableMap.of("id", id, "learnerId", "pong", "packId", "ironMan4"));
+
+    assertThrows(NotFoundResponse.class, () -> {
+      userController.addPackToLearner(ctx);
+    });
+
+  }
 }
