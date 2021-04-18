@@ -1,10 +1,10 @@
 <div class="outer">
   <img class="bg" src="/assets/login-bg-scaled.png" alt="logo">
   <mat-card class="outer-card">
-    <img class="logo" src="/assets/logo-dark.png" alt="logo">
-    <mat-tab-group class="tabs" mat-align-tabs="center">
+    <img class="logo" src="/assets/logo-dark-alt.png" alt="logo">
+    <mat-tab-group class="tabs" mat-align-tabs="center" headerPosition="below">
       <mat-tab label="LOGIN">
-        <div class="auth-holder">
+        <div class="auth-holder" id="logintab">
           <form [formGroup]="loginForm" class="auth-holder" (ngSubmit)="signIn();">
             <input class="field" (input)="update()" type="email" formControlName="email" name="email"
               placeholder="Email" [(ngModel)]="loginEmail">
@@ -31,15 +31,18 @@
             </div>
           </div>
         </div>
-
-
-
       </mat-tab>
-      <mat-tab class="tabs" label="SIGN UP">
-        <div class="auth-holder">
+
+      <mat-tab class="tabs" label="SIGN UP" color="blue">
+        <div class="auth-holder" id="signuptab">
+          <img src="{{''}}" onerror="this.src='/assets/add-img.png'" class="cp-icon">
           <form class="auth-holder" [formGroup]="signUpForm" (ngSubmit)="signUp();">
-            <input class="field" (input)="update()" type="text" formControlName="name" name="name" placeholder="Name"
+            <div class="signtop">
+              <input class="field" (input)="update()" type="text" formControlName="name" name="name" placeholder="Name"
               style="margin-top: 0px;" [(ngModel)]="signUpName">
+            </div>
+
+
             <input class="field" (input)="update()" type="email" formControlName="email" name="email"
               placeholder="Email" [(ngModel)]="signUpEmail">
             <input class="field" (input)="update()" type="password" formControlName="password" name="password"

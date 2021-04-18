@@ -72,6 +72,9 @@ export class LoginService {
   get user() {
     return JSON.parse(localStorage.getItem('user'));
   }
+  get authID() {
+    return this.user ? this.user.uid : null;
+  }
   // // Sign in with Google
   // googleAuth() {
   //   return this.authLogin(new auth.GoogleAuthProvider());

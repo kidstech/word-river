@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   contextPackVisible = false;
   contextPack: ContextPack;
   loggedIn = false;
+  uid: string;
 
   constructor(
     private location: Location,
@@ -43,6 +44,7 @@ export class AppComponent implements OnInit {
         this.contextPackVisible = false;
       }
       this.loggedIn = this.login.isLoggedIn;
+      this.uid = this.login.authID;
     });
   }
 

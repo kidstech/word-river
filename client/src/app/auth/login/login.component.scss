@@ -3,7 +3,7 @@
 }
 .outer-card{
 width: 600px;
-height: 700px;
+min-height: 500px;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -39,14 +39,21 @@ box-shadow: 0px 0px 17px 16px rgba(0,0,0,0.11);
 .auth-holder{
   display: flex;
   align-items: center;
-  // justify-content: center;
   height: 400px;
   flex-direction: column;
   padding-top: 10px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.auth-holder::-webkit-scrollbar {
+  display: none;
+}
+.mat-blue{
+  background-color: #02abad!important;
 }
 .field{
   border-radius: 10px;
-  height: 50px;
+  height: 40px;
   width: 250px;
   background-color: transparent;
   border: 4px solid rgb(129, 129, 129);
@@ -54,6 +61,8 @@ box-shadow: 0px 0px 17px 16px rgba(0,0,0,0.11);
   padding-left: 10px;
   outline: none;
   color: #fff;
+  transition-duration: 200ms;
+
   font-size: medium;
   font-family: Roboto, sans-serif;
 }
@@ -107,10 +116,29 @@ box-shadow: 0px 0px 17px 16px rgba(0,0,0,0.11);
 }
 .messages{
   width: 100%;
-  height: 300px;
+  max-height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 
+}
+#signuptab{
+  height: 400px;
+}
+#logintab{
+  height: 300px;
+}
+.cp-icon {
+  height: 80px;
+  width: 80px;
+  border-radius: 100%;
+  object-fit: cover;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition-duration: 200ms;
+}
+.cp-icon:hover,.field:hover{
+  filter: brightness(1.4);
 }

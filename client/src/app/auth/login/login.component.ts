@@ -92,6 +92,9 @@ export class LoginComponent implements OnInit {
   signIn() {
     this.login.signIn(this.loginEmail, this.loginPass, (uid) => {
       console.log(uid);
+      this.snackBar.open('Signed in successfully!', null, {
+        duration: 2000,
+      });
       this.router.navigate(['packs']);
     }, (err) => {
       this.snackBar.open(err, null, {
@@ -102,6 +105,9 @@ export class LoginComponent implements OnInit {
   signUp() {
     this.login.signUp('random', this.signUpEmail, this.signUpPass, (uid) => {
       console.log(uid);
+      this.snackBar.open('Signed up successfully!', null, {
+        duration: 2000,
+      });
       this.router.navigate(['packs']);
     }, (err) => {
       this.snackBar.open(err, null, {
