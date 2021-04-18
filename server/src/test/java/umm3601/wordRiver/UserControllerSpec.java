@@ -22,7 +22,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -40,7 +39,6 @@ public class UserControllerSpec {
 
     private UserController userController;
     private ObjectId johnDoeId;
-    private ObjectId johnSmithId;
 
     static MongoClient mongoClient;
     static MongoDatabase db;
@@ -156,7 +154,7 @@ public class UserControllerSpec {
 
 
   @Test
-  public void AddLearnerithNullName() throws IOException {
+  public void AddLearnerWithNullName() throws IOException {
 
     String testNewLearner = "{" +  "\"icon\": \"image.png\"," + "\"learnerPacks\": []" + "}";
 

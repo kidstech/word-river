@@ -30,8 +30,10 @@ public class Server {
     MongoDatabase database = mongoClient.getDatabase(databaseName);
 
     // Initialize dependencies
-    WordRiverController wordRiverController = new WordRiverController(database);
+    // WordRiverController wordRiverController = new WordRiverController(database);
     UserController userController = new UserController(database);
+    WordRiverController wordRiverController = new WordRiverController(userController,database);
+
 
     Javalin server = Javalin.create(config -> {
       config.registerPlugin(new RouteOverviewPlugin("/api"));
@@ -78,6 +80,14 @@ public class Server {
 
     // Deletes a Wordlist
     server.delete("/api/packs/:id/:name", wordRiverController::deleteWordList);
+
+
+    //Adds a context pack to the database and to the user
+    server.post("/api/users/:authId/newPack", wordRiverController::addNewContextPackToUser);
+    //Get User Context Packs
+    server.get("/api/users/:authId/packs", wordRiverController::getUserPacks);
+    //Get Learner Context Packs
+    server.get("/api/users/:authId/:learnerId/learnerPacks", wordRiverController::getLearnerPacks);
 
 
     // endpoints may be temporary

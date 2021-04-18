@@ -15,6 +15,7 @@ import io.javalin.http.NotFoundResponse;
 public class WordRiverController {
 
   private final JacksonMongoCollection<ContextPack> ctxCollection;
+  UserController userController = null;
 
   /**
    * Construct a controller for context packs.
@@ -25,9 +26,14 @@ public class WordRiverController {
     ctxCollection = JacksonMongoCollection.builder().build(database, "packs", ContextPack.class);
   }
 
+  public WordRiverController(UserController userController, MongoDatabase database) {
+    ctxCollection = JacksonMongoCollection.builder().build(database, "packs", ContextPack.class);
+    this.userController = userController;
+  }
+
   /**
    * Get a Json response with a list of all context packs.
-   *
+   * Don't need to touch this
    * @param ctx A Javalin HTTP context.
    */
   public void getPacks(Context ctx) {
@@ -35,6 +41,7 @@ public class WordRiverController {
   }
 
   /**
+   * todo Need to change to insert id into correct user
    * Adds a new Context Pack.
    *
    * @param ctx A Javalin HTTP context.
@@ -42,12 +49,14 @@ public class WordRiverController {
   public void addNewContextPack(Context ctx) {
     ContextPack newContextPack = ctx.bodyValidator(ContextPack.class)
         .check(cp -> cp.name != null && cp.name.length() > 0).check(cp -> cp.icon != null).get();
-
     ctxCollection.insertOne(newContextPack);
     ctx.status(201);
     ctx.json(ImmutableMap.of("id", newContextPack._id));
   }
 
+  /**
+   * todo Need to change to allow for an authId
+   */
   public void getPack(Context ctx) {
 
     String id = ctx.pathParam("id");
@@ -68,6 +77,10 @@ public class WordRiverController {
     }
   }
 
+  /**
+   * Don't need to touch this
+   * @param ctx
+   */
   public void addNewWordList(Context ctx) {
     WordList newWordList = ctx.bodyValidator(WordList.class).check(wl -> wl.name != null && wl.name.length() > 0).get();
     String id = ctx.pathParam("id");
@@ -86,6 +99,11 @@ public class WordRiverController {
     ctx.json(ImmutableMap.of("id", ctxCollection.findOneById(id)._id));
   }
 
+
+  /**
+   * Don't need to touch this
+   * @param ctx
+   */
   public void deleteWordList(Context ctx) {
     String id = ctx.pathParam("id");
     String wordListName = ctx.pathParam("name");
@@ -101,6 +119,10 @@ public class WordRiverController {
     }
   }
 
+  /**
+   * Don't need to touch this
+   * @param ctx
+   */
   public void editWordList(Context ctx) {
     String id = ctx.pathParam("id");
     String wordListName = ctx.pathParam("name");
@@ -119,6 +141,10 @@ public class WordRiverController {
     }
   }
 
+  /**
+   * todo Need to change to delete id from correct user as well
+   * @param ctx
+   */
   public void deleteContextPack(Context ctx) {
     String id = ctx.pathParam("id");
     try {
@@ -132,6 +158,10 @@ public class WordRiverController {
 
   }
 
+  /**
+   * Shouldn't need to touch this
+   * @param ctx
+   */
   public void getWordList(Context ctx) {
 
     String id = ctx.pathParam("id");
@@ -156,6 +186,10 @@ public class WordRiverController {
     }
   }
 
+/**
+ * Don't need to chage
+ * @param ctx
+ */
   public void getWordLists(Context ctx) {
 
     String id = ctx.pathParam("id");
@@ -174,4 +208,63 @@ public class WordRiverController {
       ctx.json(wordlists);
     }
   }
+
+  public void addNewContextPackToUser(Context ctx) {
+    System.out.println("HEE");
+    ContextPack newContextPack = ctx.bodyValidator(ContextPack.class)
+     .check(cp -> cp.name != null && cp.name.length() > 0).check(cp -> cp.icon != null).get();
+    String authId = ctx.pathParam("authId");
+    ctxCollection.insertOne(newContextPack);
+    String mongoId = userController.findByAuthId(authId);
+    userController.userCollection.updateById(mongoId, Updates.push("contextPacks", newContextPack._id));
+    ctx.status(201);
+    ctx.json(ImmutableMap.of("id", newContextPack._id));
+  }
+
+  public void getUserPacks(Context ctx) {
+    String authId = ctx.pathParam("authId");
+    String mongoId = userController.findByAuthId(authId);
+    User user = userController.userCollection.findOneById(mongoId);
+    ArrayList<ContextPack> userPacks = new ArrayList<ContextPack>();
+    for( String cpId: user.contextPacks){
+      try{
+        userPacks.add(ctxCollection.findOneById(cpId));
+      } catch (IllegalArgumentException e) {
+        throw new NotFoundResponse("The requested context pack was not found");
+      }
+    }
+
+    ctx.status(200);
+    ctx.json(userPacks);
+
+  }
+
+  public void getLearnerPacks(Context ctx) {
+
+    String authId = ctx.pathParam("authId");
+    String mongoId = userController.findByAuthId(authId);
+    String learnerId = ctx.pathParam("learnerId");
+    User user = userController.userCollection.findOneById(mongoId);
+    ArrayList<ContextPack> learnerPacks = new ArrayList<ContextPack>();
+    for( Learner lr: user.learners){
+        if(lr._id.equals(learnerId)){
+          for(String cpId: lr.learnerPacks){
+          try{
+           System.out.println(cpId);
+           learnerPacks.add(ctxCollection.findOneById(cpId));
+           System.out.println(learnerPacks);
+         } catch (IllegalArgumentException e) {
+           throw new NotFoundResponse("The requested context pack was not found");
+        }
+      }
+      break;
+    }
+    else{
+      continue;
+    }
+  }
+    ctx.status(200);
+    ctx.json(learnerPacks);
 }
+}
+

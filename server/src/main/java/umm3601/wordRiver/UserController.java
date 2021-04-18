@@ -13,7 +13,7 @@ import io.javalin.http.NotFoundResponse;
 
 public class UserController {
 
-  private final JacksonMongoCollection<User> userCollection;
+  protected final JacksonMongoCollection<User> userCollection;
 
    /**
    * Construct a controller for users
@@ -222,7 +222,7 @@ public class UserController {
     }
   }
 
-  private String findByAuthId(String authId) {
+  protected String findByAuthId(String authId) {
     User user = userCollection.find(Filters.eq("authId", authId)).first();
     if(user == null) {
       throw new NotFoundResponse("The authId was not found in the system");
@@ -230,5 +230,8 @@ public class UserController {
     System.out.println(user._id);
     return user._id;
   }
+
+
+
 
 }
