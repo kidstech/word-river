@@ -3,6 +3,8 @@ import { LoginService } from './../../services/login-service/login.service';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-login',
@@ -39,6 +41,9 @@ export class LoginComponent implements OnInit {
       { type: 'minLength', message: 'Your password must be at least 8 characters long'}
     ]
   };
+  downloadURL: any;
+  uploaded: boolean;
+  uploading: boolean;
 
 
 
@@ -46,6 +51,7 @@ export class LoginComponent implements OnInit {
     private login: LoginService,
     private router: Router,
     private snackBar: MatSnackBar,
+    private storage: AngularFireStorage,
     private fb: FormBuilder,
   ) { }
 
@@ -119,5 +125,23 @@ export class LoginComponent implements OnInit {
     // eslint-disable-next-line max-len
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
+  }
+  onFileAdded(event) {
+
+    const file = event.target.files[0];
+    const filePath = `${Math.floor(Math.random() * 100000000)}`;
+    const fileRef = this.storage.ref(filePath);
+    this.uploading = true;
+    const task = this.storage.upload(filePath, file);
+
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        this.downloadURL = fileRef.getDownloadURL().subscribe(link=>{
+          this.downloadURL = link;
+          this.uploaded = true;
+          this.uploading = false;
+        });
+      })
+    ).subscribe();
   }
 }

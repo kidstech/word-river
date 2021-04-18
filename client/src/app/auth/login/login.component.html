@@ -35,11 +35,20 @@
 
       <mat-tab class="tabs" label="SIGN UP" color="blue">
         <div class="auth-holder" id="signuptab">
-          <img src="{{''}}" onerror="this.src='/assets/add-img.png'" class="cp-icon">
+
+          <div class="image-upload">
+            <label for="file-input">
+              <img src="{{downloadURL}}" onerror="this.src='/assets/add-img.png'" class="cp-icon">
+            </label>
+            <input type="file" id="file-input" (change)="!uploading ? onFileAdded($event) : {}"
+              accept=".png,.jpg,.jpeg,.gif" />
+          </div>
+
+
           <form class="auth-holder" [formGroup]="signUpForm" (ngSubmit)="signUp();">
             <div class="signtop">
               <input class="field" (input)="update()" type="text" formControlName="name" name="name" placeholder="Name"
-              style="margin-top: 0px;" [(ngModel)]="signUpName">
+                style="margin-top: 0px;" [(ngModel)]="signUpName">
             </div>
 
 
