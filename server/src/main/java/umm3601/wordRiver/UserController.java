@@ -1,17 +1,12 @@
 package umm3601.wordRiver;
-
-
 import static com.mongodb.client.model.Filters.eq;
-
 import java.util.ArrayList;
-
 import com.google.common.collect.ImmutableMap;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import org.bson.types.ObjectId;
 import org.mongojack.JacksonMongoCollection;
-
 import io.javalin.http.BadRequestResponse;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
@@ -142,16 +137,35 @@ public class UserController {
       }
     }
 
-  // /**
-  //  * Add a context pack to a given learner
-  //  */
-  // public void addPackToLearner(Context ctx) {
-  //   String userId = ctx.pathParam("id");
-  //   String learnerId = ctx.pathParam("learnerId");
-  //   String contextPackId = ctx.pathParam("packId");
+   /**
+   * Add a context pack to a given learner
+    */
+   public void addPackToLearner(Context ctx) {
+     String authId = ctx.pathParam("id");
+     String mongoId = findByAuthId(authId);
+     String learnerId = ctx.pathParam("learnerId");
+     String contextPackId = ctx.pathParam("packId");
+     boolean foundLearner = false;
 
-
-  // }
+     User user = userCollection.findOneById(mongoId);
+     for(Learner lr: user.learners) {
+       if(lr._id.equals(learnerId)) {
+         foundLearner = true;
+         userCollection.updateById(mongoId, Updates.pull("learners", lr));
+         lr.learnerPacks.add(contextPackId);
+         userCollection.updateById(mongoId, Updates.push("learners", lr));
+         break;
+       }
+       else{
+         continue;
+       }
+     }
+     if(!foundLearner) {
+       throw new NotFoundResponse("The learner was not found");
+     }
+     ctx.status(201);
+     ctx.json(ImmutableMap.of("id", userCollection.findOneById(mongoId)._id));
+   }
 
   // /**
   //  * Remove a given learner
