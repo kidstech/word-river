@@ -40,12 +40,16 @@ public class WordRiverControllerSpec {
   MockHttpServletResponse mockRes = new MockHttpServletResponse();
 
   private WordRiverController wordRiverController;
+  private UserController userController;
 
   private ObjectId batmanId;
   private ObjectId noWordListsId;
+  private ObjectId johnDoeId;
+  private ObjectId capId;
 
   static MongoClient mongoClient;
   static MongoDatabase db;
+  static MongoDatabase databaseU;
 
   static ObjectMapper jsonMapper = new ObjectMapper();
 
@@ -57,6 +61,7 @@ public class WordRiverControllerSpec {
         .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress(mongoAddr)))).build());
 
     db = mongoClient.getDatabase("test");
+    databaseU = mongoClient.getDatabase("test");
   }
 
   @BeforeEach
@@ -67,7 +72,9 @@ public class WordRiverControllerSpec {
 
     // Setup database
     MongoCollection<Document> ctxDocuments = db.getCollection("packs");
+    MongoCollection<Document> userDocuments =databaseU.getCollection("users");
     ctxDocuments.drop();
+    userDocuments.drop();
     List<Document> testPacks = new ArrayList<>();
     testPacks
         .add(new Document().append("name", "iron man").append("icon", "iron.png").append("enabled", "true")
@@ -109,15 +116,46 @@ public class WordRiverControllerSpec {
                 .append("misc", Arrays.asList(new Document("word", "the").append("forms", Arrays.asList("the"))))
                 ));
 
+    capId = new ObjectId();
+    Document cap = new Document().append("_id", capId).append("name", "batman").append("icon", "batman.png")
+        .append("enabled", "true").append("wordlists",
+            Arrays.asList(new Document().append("name", "iron man").append("enabled", true)
+                  .append("nouns", Arrays.asList(new Document("word", "suit").append("forms", Arrays.asList("suits"))))
+                   .append("verbs", Arrays.asList(new Document("word", "fight").append("forms", Arrays.asList("fights"))))
+                    .append("adjectives",
+                        Arrays.asList(new Document("word", "big").append("forms", Arrays.asList("biggish"))))
+                    .append("misc", Arrays.asList(new Document("word", "the").append("forms", Arrays.asList("the")))),
+                     new Document().append("name", "captain america").append("enabled", true)
+                    .append("nouns", Arrays.asList(new Document("word", "suit").append("forms", Arrays.asList("suits"))))
+                    .append("verbs", Arrays.asList(new Document("word", "fight").append("forms", Arrays.asList("fights"))))
+                    .append("adjectives",
+                        Arrays.asList(new Document("word", "big").append("forms", Arrays.asList("biggish"))))
+                    .append("misc", Arrays.asList(new Document("word", "the").append("forms", Arrays.asList("the"))))
+                   ));
+
     noWordListsId = new ObjectId();
     Document noWordLists = new Document().append("_id", noWordListsId).append("name", "batman").append("icon", "batman.png")
         .append("enabled", "true").append("wordlists", null);
 
     ctxDocuments.insertMany(testPacks);
     ctxDocuments.insertOne(batman);
+    ctxDocuments.insertOne(cap);
     ctxDocuments.insertOne(noWordLists);
 
-    wordRiverController = new WordRiverController(db);
+
+    johnDoeId = new ObjectId();
+        Document johnDoe = new Document().append("_id", johnDoeId).append("authId", "5678").append("name", "John Doe").append("icon", "user.png")
+            .append("learners", Arrays.asList(new Document().append("_id", "117").append("name", "John Spartan")
+            .append("icon","master.jpg")
+             .append("learnerPacks", Arrays.asList(batmanId.toHexString(), capId.toHexString())), new Document().append("_id", "1234").append("name", "Bob Doe")
+                .append("icon","bod.jpg")
+                 .append("learnerPacks", Arrays.asList(batmanId.toString()))))
+                    .append("contextPacks", Arrays.asList(batmanId.toHexString()));
+
+    userDocuments.insertOne(johnDoe);
+
+    userController = new UserController(databaseU);
+    wordRiverController = new WordRiverController(userController, db);
   }
 
   @AfterAll
@@ -135,6 +173,7 @@ public class WordRiverControllerSpec {
     assertEquals(200, mockRes.getStatus());
 
     String result = ctx.resultString();
+
     assertEquals(db.getCollection("packs").countDocuments(), JavalinJson.fromJson(result, ContextPack[].class).length);
   }
 
@@ -229,8 +268,6 @@ public class WordRiverControllerSpec {
       wordRiverController.addNewWordList(ctx);
     });;
   }
-
-
 
   @Test
   public void AddDuplicateWordList() throws IOException {
@@ -351,6 +388,7 @@ public class WordRiverControllerSpec {
     WordList[] resultPack = JavalinJson.fromJson(result, WordList[].class);
     assertEquals(resultPack.length, 2);
   }
+
   @Test
   public void getWordListsByInvalidID() throws IOException {
     String testID = "69"; // nice
@@ -372,6 +410,7 @@ public class WordRiverControllerSpec {
       wordRiverController.getWordLists(ctx);
     });
   }
+
   @Test
   public void getWordList() throws IOException {
     String testID = batmanId.toHexString();
@@ -408,6 +447,7 @@ public class WordRiverControllerSpec {
       wordRiverController.getWordList(ctx);
     });
   }
+
   @Test
   public void editWordList() throws IOException {
 
@@ -464,7 +504,7 @@ public class WordRiverControllerSpec {
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/packs/:id", ImmutableMap.of("id", testID));
         wordRiverController.deleteContextPack(ctx);
 
-    assertTrue(db.getCollection("packs").countDocuments() == 3);
+    assertTrue(db.getCollection("packs").countDocuments() == 4);
 
   }
 
@@ -490,4 +530,73 @@ public class WordRiverControllerSpec {
     });
   }
 
+
+
+  @Test
+  public void AddContextPackToUserAndDatabase() throws IOException {
+
+    String testNewContextPack = "{" + "\"schema\": \"Test schema\"," + "\"name\": \"Test Context Pack\","
+        + "\"icon\": \"image.png\"," + "\"enabled\": true," + "\"wordlists\": []" + "}";
+
+
+    mockReq.setBodyContent(testNewContextPack);
+    mockReq.setMethod("POST");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/newPack", ImmutableMap.of("authId", "5678"));
+    System.out.println("Hello");
+    wordRiverController.addNewContextPackToUser(ctx);
+
+    assertEquals(201, mockRes.getStatus());
+
+    String result = ctx.resultString();
+    String id = jsonMapper.readValue(result, ObjectNode.class).get("id").asText();
+    assertNotEquals("", id);
+    System.out.println(id);
+
+    assertEquals(1, db.getCollection("packs").countDocuments(eq("_id", new ObjectId(id))));
+
+    // Verify the context pack was added to the database with the correct ID
+    Document addedContextPack = db.getCollection("packs").find(eq("_id", new ObjectId(id))).first();
+    assertNotNull(addedContextPack);
+    assertEquals("Test Context Pack", addedContextPack.getString("name"));
+    assertEquals("image.png", addedContextPack.getString("icon"));
+    assertEquals(true, addedContextPack.getBoolean("enabled"));
+    assertNotNull(addedContextPack.get("wordlists"));
+
+    //Verify that the contextPack was added to the User
+    Document modifiedUser = db.getCollection("users").find(eq("_id", new ObjectId(johnDoeId.toHexString()))).first();
+    @SuppressWarnings("unchecked")
+    ArrayList<Learner> userContextPacks = (ArrayList<Learner>) modifiedUser.get("contextPacks");
+    String theUserContextPacks = userContextPacks.toString();
+    System.out.println(theUserContextPacks);
+
+    assertTrue(theUserContextPacks.contains("[" + batmanId.toHexString() + ", " + id + "]"
+    ));
+  }
+
+  @Test
+  public void GetUserPacks() throws IOException {
+    // Create fake Javalin context
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/packs", ImmutableMap.of("authId", "5678"));
+    wordRiverController.getUserPacks(ctx);
+
+    assertEquals(200, mockRes.getStatus());
+
+    String result = ctx.resultString();
+    System.out.println(result);
+    assertTrue(JavalinJson.fromJson(result, ContextPack[].class).length == 1 );
+  }
+
+@Test
+  public void GetLearnerPacks() throws IOException {
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:learnerId/learnerPacks", ImmutableMap.of("authId", "5678", "learnerId", "117"));
+    wordRiverController.getLearnerPacks(ctx);
+
+    assertEquals(200, mockRes.getStatus());
+
+    String result = ctx.resultString();
+    System.out.println(result);
+    assertTrue(JavalinJson.fromJson(result, ContextPack[].class).length == 2 );
+  }
 }
