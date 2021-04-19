@@ -1,15 +1,16 @@
 <mat-card>
   <div>
     <div class="top">
-      <h2>Add a new word</h2>
+      <h2 style="flex: 1;">Add a new word</h2>
+      <p *ngIf="loading" class="loading" style="opacity: 0.5;">Loading...</p>
     </div>
 
     <div class="fields">
-        <mat-form-field class="new-word">
-          <mat-label>New word</mat-label>
-          <input matInput (input)="check()" data-test="newWord" [(ngModel)]="wordName" name="name" (keyup)="suggest()"
-            placeholder="Enter a new word">
-        </mat-form-field>
+      <mat-form-field class="new-word">
+        <mat-label>New word</mat-label>
+        <input matInput (input)="check()" data-test="newWord" [(ngModel)]="wordName" name="name" (keyup)="suggest()"
+          placeholder="Enter a new word">
+      </mat-form-field>
 
       <div class="word-type">
         <!--drop down list for word-types-->
@@ -18,9 +19,12 @@
           <mat-label>Select a type</mat-label>
           <mat-select (selectionChange)="check()" id="select" [(ngModel)]="type">
             <mat-option>None</mat-option>
-            <mat-option value="nouns">{{suggested === 'noun' && type==='nouns' ? 'Noun (Suggested)': 'Noun'}}</mat-option>
-            <mat-option value="verbs">{{suggested === 'verb' && type==='verbs' ? 'Verb (Suggested)': 'Verb'}}</mat-option>
-            <mat-option value="adjectives">{{suggested === 'adjective' && type==='adjectives' ? 'Adjective (Suggested)': 'Adjective'}}</mat-option>
+            <mat-option value="nouns">{{suggested === 'noun' && type==='nouns' ? 'Noun (Suggested)': 'Noun'}}
+            </mat-option>
+            <mat-option value="verbs">{{suggested === 'verb' && type==='verbs' ? 'Verb (Suggested)': 'Verb'}}
+            </mat-option>
+            <mat-option value="adjectives">
+              {{suggested === 'adjective' && type==='adjectives' ? 'Adjective (Suggested)': 'Adjective'}}</mat-option>
             <mat-option value="misc">{{suggested === 'misc' && type==='misc' ? 'Misc (Suggested)': 'Misc'}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -29,11 +33,26 @@
     </div>
     <!-- <button *ngIf="!added || forms.length===0" (click)="add('')" mat-raised-button class="add-form-btn" style="margin-bottom: 40px;" color="accent">Add a word
       form</button> -->
-      <app-word-form class="form_item"  *ngFor="let i of counter;index as x" [cleared]="cleared" (removeForm)="removeForm(x)" (form)="add($event)"></app-word-form>
 
+    <!-- <app-word-form class="form_item"  *ngFor="let i of counter;index as x" [cleared]="cleared" (removeForm)="removeForm(x)" (form)="add($event)"></app-word-form> -->
+    <mat-form-field class="example-chip-list">
+      <mat-label>Word Forms</mat-label>
+      <mat-chip-list #chipList aria-label="Fruit selection">
 
+        <input placeholder="Add form..." id="formField" [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="[188,13]" [matChipInputAddOnBlur]="true"
+          (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+    </mat-form-field>
+    <button class="suggest" *ngIf="forms ? forms.length > 0 : false" data-test="addFormButton" mat-stroked-button (click)="forms=[]"
+      color="primary">Clear all</button>
+    <mat-chip *ngFor="let form of forms;index as i" class="chip" [selectable]="true" [removable]="true" (removed)="remove(form)">
+      {{form}}
+      <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+    </mat-chip>
     <div class="word-forms">
-      <button style="margin-top: 0px;" data-test="confirmAddWordButton" [disabled]="!finished" (click)="save()" mat-raised-button class="add-word-btn" color="primary">Add
+      <button data-test="confirmAddWordButton" [disabled]="!finished" (click)="save()"
+        mat-raised-button class="add-word-btn" color="primary">Add
         Word</button>
     </div>
 
