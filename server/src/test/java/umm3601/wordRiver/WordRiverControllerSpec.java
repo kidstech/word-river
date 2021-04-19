@@ -2,6 +2,7 @@ package umm3601.wordRiver;
 
 import static com.mongodb.client.model.Filters.eq;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -598,5 +599,35 @@ public class WordRiverControllerSpec {
     String result = ctx.resultString();
     System.out.println(result);
     assertTrue(JavalinJson.fromJson(result, ContextPack[].class).length == 2 );
+  }
+
+
+  @Test
+  public void DeleteContextPackFromAll() throws IOException {
+
+    String testID = batmanId.toHexString();
+    mockReq.setMethod("DELETE");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:cpId", ImmutableMap.of("authId", "5678", "cpId", testID));
+      wordRiverController.deleteContextPackFromAll(ctx);
+
+    //Verify the contextPack was deleted from the context pack database
+    assertTrue(db.getCollection("packs").countDocuments() == 4);
+
+
+    Document modifiedUser = db.getCollection("users").find(eq("_id", new ObjectId(johnDoeId.toHexString()))).first();
+    @SuppressWarnings("unchecked")
+    ArrayList<String> userContextPacks = (ArrayList<String>) modifiedUser.get("contextPacks");
+
+    @SuppressWarnings("unchecked")
+    ArrayList<Learner> userLearners = (ArrayList<Learner>) modifiedUser.get("learners");
+    String theUserContextPacks = userContextPacks.toString();
+    String theUserLearners = userLearners.toString();
+    System.out.println(theUserContextPacks);
+
+    //Verify that the contextPack was deleted from the user
+    assertFalse(theUserContextPacks.contains("[" + batmanId.toHexString() + "]"));
+    assertFalse(theUserLearners.contains(batmanId.toHexString()));
+
   }
 }
