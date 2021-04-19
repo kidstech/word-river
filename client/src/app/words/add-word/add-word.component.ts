@@ -88,8 +88,12 @@ export class AddWordComponent implements OnInit {
         );
 
         this.dictionary.getForms(this.wordName, forms => {
-          this.suggestedForms = forms;
-          this.forms = this.suggestedForms;
+          let count = 0;
+          this.forms = forms.filter(w => w.split(' ').length < 2)
+          .filter(_=>{
+            count++;
+            return count <= 10;
+          });
           console.log(forms);
           this.check();
         }, err => console.log(err)
