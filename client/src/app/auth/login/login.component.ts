@@ -14,33 +14,32 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class LoginComponent implements OnInit {
 
   loginEmail: string;
-  loginPass: string;
+  loginPass='';
   signUpName: string;
-  signUpPass: string;
+  signUpPass='';
   signUpEmail: string;
 
   loginForm: FormGroup;
   signUpForm: FormGroup;
 
-  emailPattern = /.{1,50}@.{1,}\..{1,10}\w+/g;
-  // eslint-disable-next-line max-len
-  emailPattern2 = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g;
+  //eslint-disable-next-line max-len
+  //emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
-  validationMessages = {
-    name: [
-      { type: 'required', message: 'A name is required' },
-      { type: 'maxLength', message: 'Your name must be less than 50 characters'}
-    ],
+  // validationMessages = {
+  //   name: [
+  //     { type: 'required', message: 'A name is required' },
+  //     { type: 'maxLength', message: 'Your name must be less than 50 characters'}
+  //   ],
 
-    email: [
-      { type: 'pattern', message: 'Invalid email entered' }
-    ],
+  //   email: [
+  //     { type: 'pattern', message: 'Invalid email entered' }
+  //   ],
 
-    password: [
-      { type: 'minLength', message: 'Your password must be at least 8 characters long'}
-    ]
-  };
+  //   password: [
+  //     { type: 'minLength', message: 'Your password must be at least 8 characters long'}
+  //   ]
+  // };
   downloadURL: any;
   uploaded: boolean;
   uploading: boolean;
@@ -57,74 +56,71 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.login.user);
-    this.createForms();
+    // this.createForms();
     if (this.login.isLoggedIn) {
       this.router.navigate(['packs']);
     };
   }
-  update() {
-    console.log(this.loginForm.get('email').hasError('pattern'));
-  }
-  createForms() {
-    //Validates login
-    this.loginForm = this.fb.group({
-      email: new FormControl('', Validators.compose([
-        // eslint-disable-next-line max-len
-        Validators.pattern(this.emailPattern2)
-      ])),
+  // update() {
+  //   // console.log(this.loginForm.get('email').hasError('pattern'));
+  // }
+  // createForms() {
+    // //Validates login
+    // this.loginForm = this.fb.group({
+    //   email: new FormControl('', Validators.compose([
+    //     // eslint-disable-next-line max-len
+    //     Validators.pattern(this.emailPattern)
+    //   ])),
 
-      password: new FormControl('', Validators.compose([
-        Validators.minLength(8),
-      ]))
-    });
+    //   password: new FormControl('', Validators.compose([
+    //     Validators.minLength(8),
+    //   ]))
+    // });
 
-    //Validates sign up
-    this.signUpForm = this.fb.group({
-      name: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.maxLength(50),
-      ])),
+    // //Validates sign up
+    // this.signUpForm = this.fb.group({
+    //   name: new FormControl('', Validators.compose([
+    //     Validators.required,
+    //     Validators.maxLength(50),
+    //   ])),
 
-      email: new FormControl('', Validators.compose([
-        // eslint-disable-next-line max-len
-        Validators.pattern(this.emailPattern2)
-      ])),
+    //   email: new FormControl('', Validators.compose([
+    //     // eslint-disable-next-line max-len
+    //     Validators.pattern(this.emailPattern)
+    //   ])),
 
-      password: new FormControl('', Validators.compose([
-        Validators.minLength(8),
-      ]))
-    });
-  }
-  signIn() {
-    this.login.signIn(this.loginEmail, this.loginPass, (uid) => {
+    //   password: new FormControl('', Validators.compose([
+    //     Validators.minLength(8),
+    //   ]))
+    // });
+  // }
+  signIn(): Promise<any> {
+    return this.login.signIn(this.loginEmail, this.loginPass, (uid) => {
       console.log(uid);
       this.snackBar.open('Signed in successfully!', null, {
-        duration: 2000,
+        duration: 3000
       });
       this.router.navigate(['packs']);
     }, (err) => {
       this.snackBar.open(err, null, {
-        duration: 2000,
+        duration: 3000,
+        panelClass: ['snackbar-dark-theme']
       });
     });
   }
   signUp() {
-    this.login.signUp('random', this.signUpEmail, this.signUpPass, (uid) => {
+    return this.login.signUp(this.signUpName, this.signUpEmail, this.signUpPass, (uid) => {
       console.log(uid);
       this.snackBar.open('Signed up successfully!', null, {
-        duration: 2000,
+        duration: 3000,
       });
       this.router.navigate(['packs']);
     }, (err) => {
       this.snackBar.open(err, null, {
-        duration: 2000,
+        duration: 3000,
+        panelClass: ['snackbar-dark-theme']
       });
     });
-  }
-  validateEmail(email) {
-    // eslint-disable-next-line max-len
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
   }
   onFileAdded(event) {
 
@@ -136,7 +132,7 @@ export class LoginComponent implements OnInit {
 
     task.snapshotChanges().pipe(
       finalize(() => {
-        this.downloadURL = fileRef.getDownloadURL().subscribe(link=>{
+        this.downloadURL = fileRef.getDownloadURL().subscribe(link => {
           this.downloadURL = link;
           this.uploaded = true;
           this.uploading = false;

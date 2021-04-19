@@ -28,7 +28,7 @@
   </mat-sidenav> -->
 
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" *ngIf="loggedIn">
       <button type="button" aria-label="Toggle sidenav" (click)="goBack()" data-test="back-button"
         *ngIf="backButtonVisible" mat-icon-button>
         <mat-icon aria-label="Side nav toggle icon">arrow_back</mat-icon>

@@ -1,14 +1,65 @@
 <div class="outer">
-  <img class="bg" src="/assets/login-bg-scaled.png" alt="logo">
-  <mat-card class="outer-card">
+  <img class="bg" src="/assets/login-bg-alt.svg" alt="logo">
+ <mat-card class="outer-card">
+    <img class="logo" src="/assets/logo-dark-alt.png" alt="logo">
+    <mat-tab-group class="tabs" mat-align-tabs="center" headerPosition="below">
+      <mat-tab label="LOGIN">
+        <div class="auth-holder" id="logintab">
+          <form class="auth-holder" (ngSubmit)="signIn();">
+            <input class="field" type="email"  name="email"
+              placeholder="Email" [(ngModel)]="loginEmail">
+            <input class="field"  type="password" name="password"
+              placeholder="Password" [(ngModel)]="loginPass">
+            <button class="auth-btn" (click)="signIn()">
+              Login
+            </button>
+          </form>
+        </div>
+      </mat-tab>
+
+      <mat-tab class="tabs" label="SIGN UP" color="blue">
+        <div class="auth-holder" id="signuptab">
+
+          <div class="image-upload">
+            <label for="file-input">
+              <img src="{{downloadURL}}" onerror="this.src='/assets/add-img.png'" class="cp-icon">
+            </label>
+            <input type="file" id="file-input" (change)="!uploading ? onFileAdded($event) : {}"
+              accept=".png,.jpg,.jpeg,.gif" />
+          </div>
+
+
+          <form class="auth-holder"  (ngSubmit)="signUp();">
+            <div class="signtop">
+              <input class="field" type="text" name="name" placeholder="Name"
+                style="margin-top: 0px;" [(ngModel)]="signUpName">
+            </div>
+
+
+            <input class="field" type="email" name="email"
+              placeholder="Email" [(ngModel)]="signUpEmail">
+            <input class="field" type="password" name="password"
+              placeholder="Password" [(ngModel)]="signUpPass">
+
+          </form>
+          <button [disabled]="signUpName ? signUpName.length === 0 : true" class="auth-btn" style="margin-bottom: 0px;" (click)="signUp()">
+            Sign Up
+          </button>
+        </div>
+
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+  <p class="tm">@2021. Vibing Cats Inc, All rights reserved.</p>
+  <!-- <mat-card class="outer-card">
     <img class="logo" src="/assets/logo-dark-alt.png" alt="logo">
     <mat-tab-group class="tabs" mat-align-tabs="center" headerPosition="below">
       <mat-tab label="LOGIN">
         <div class="auth-holder" id="logintab">
           <form [formGroup]="loginForm" class="auth-holder" (ngSubmit)="signIn();">
-            <input class="field" (input)="update()" type="email" formControlName="email" name="email"
+            <input class="field" type="email" formControlName="email" name="email"
               placeholder="Email" [(ngModel)]="loginEmail">
-            <input class="field" (input)="update()" formControlName="password" type="password" name="password"
+            <input class="field" formControlName="password" type="password" name="password"
               placeholder="Password" [(ngModel)]="loginPass">
             <button class="auth-btn" (click)="signIn()">
               Login
@@ -47,14 +98,14 @@
 
           <form class="auth-holder" [formGroup]="signUpForm" (ngSubmit)="signUp();">
             <div class="signtop">
-              <input class="field" (input)="update()" type="text" formControlName="name" name="name" placeholder="Name"
+              <input class="field" type="text" formControlName="name" name="name" placeholder="Name"
                 style="margin-top: 0px;" [(ngModel)]="signUpName">
             </div>
 
 
-            <input class="field" (input)="update()" type="email" formControlName="email" name="email"
+            <input class="field" type="email" formControlName="email" name="email"
               placeholder="Email" [(ngModel)]="signUpEmail">
-            <input class="field" (input)="update()" type="password" formControlName="password" name="password"
+            <input class="field" type="password" formControlName="password" name="password"
               placeholder="Password" [(ngModel)]="signUpPass">
             <button class="auth-btn" style="margin-bottom: 0px;" (click)="signUp()">
               Sign Up
@@ -87,5 +138,5 @@
 
       </mat-tab>
     </mat-tab-group>
-  </mat-card>
+  </mat-card> -->
 </div>

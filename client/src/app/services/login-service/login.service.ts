@@ -16,11 +16,10 @@ export interface User {
 })
 export class LoginService {
   userData: any; // Save logged in user data
+  signedIn: any;
 
   constructor(
-    public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
-    public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
     /* Saving user data in localstorage when
@@ -47,18 +46,49 @@ export class LoginService {
         then(result.user.uid);
       })
       ).catch((error) => {
-        err(error);
+        console.log(JSON.stringify(error));
+        switch(error.code){
+          case 'auth/user-not-found':
+            err('The account you entered does not exist.');
+          break;
+          case 'auth/invalid-email':
+            err('The email you entered is invalid.');
+          break;
+          case 'auth/wrong-password':
+            err('Password is incorrect.');
+          break;
+          default:
+            err(error);
+          break;
+        }
       });
   }
 
   // Sign up with email/password
-  signUp(name, email, password, then: (res) => any, error: (err) => any) {
+  signUp(name, email, password, then: (res) => any, err: (e) => any) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         then(result);
         this.setUserData(result.user);
       }).catch((e) => {
-        error(e);
+        console.log(JSON.stringify(e));
+        switch(e.code){
+          case 'auth/email-already-in-use': //when the email is already in use
+            err('The email you entered is already in use.');
+          break;
+          case 'auth/invalid-email': //when you type in nothing (bad formatted email)
+            err('The email you entered is invalid.');
+          break;
+          case 'auth/weak-password': //when you put in a password of less than 6 characters
+            err('Your password must be at least 6 characters long.');
+          break;
+          case 'auth/argument-error': //when you put in a password of less than 6 characters
+            err('Please enter a valid email and password first.');
+          break;
+          default:
+            err(e);
+          break;
+        }
       });
   }
 
@@ -66,8 +96,11 @@ export class LoginService {
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user!==null);
+    console.log(user !== null);
     return user !== null;
+  }
+  set loggedIn(s) {
+    this.signedIn = s;
   }
   get user() {
     return JSON.parse(localStorage.getItem('user'));
@@ -81,17 +114,17 @@ export class LoginService {
   // }
 
   // Auth logic to run auth providers
-  authLogin(provider) {
-    return this.afAuth.signInWithPopup(provider)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
-        });
-        this.setUserData(result.user);
-      }).catch((error) => {
-        window.alert(error);
-      });
-  }
+  // authLogin(provider) {
+  //   return this.afAuth.signInWithPopup(provider)
+  //     .then((result) => {
+  //       this.ngZone.run(() => {
+  //         this.router.navigate(['dashboard']);
+  //       });
+  //       this.setUserData(result.user);
+  //     }).catch((error) => {
+  //       window.alert(error);
+  //     });
+  // }
 
   /* Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth
@@ -109,7 +142,7 @@ export class LoginService {
     //   merge: true
     // });
     localStorage.setItem('user', JSON.stringify(user));
-        JSON.parse(localStorage.getItem('user'));
+    JSON.parse(localStorage.getItem('user'));
   }
 
   // Sign out

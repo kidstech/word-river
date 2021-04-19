@@ -12,7 +12,9 @@
 // You can put styles in this mixin and the theme variables will refer to the actual theme being used (light or dark)
 @mixin app-theming($theme) {
   // Extract the palettes you need from the theme definition.
+  // $primary: map-get($theme, primary);
   $primary: map-get($theme, primary);
+
   $accent: map-get($theme, accent);
   $blue: #2196f3;
   $warn: map-get($theme, warn);
@@ -103,4 +105,26 @@ body {
 #BP_ELEMENT_HIGHLIGHT__ {
   z-index: 100;
   background-color: yellow !important;
+}
+
+.snackbar-dark-theme{
+  background-color: #424242;
+  color: white;
+}
+div {
+  // overflow-y: auto;
+  // -ms-overflow-style: none;
+  // scrollbar-width: none; /* Firefox */
+}
+
+div::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+div::-webkit-scrollbar-track {
+  background: transparent; /* color of the tracking area */
+}
+div::-webkit-scrollbar-thumb {
+  background-color: #00000025; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 0px solid #000; /* creates padding around scroll thumb */
 }
