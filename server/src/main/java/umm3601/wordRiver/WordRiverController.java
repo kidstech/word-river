@@ -17,14 +17,14 @@ public class WordRiverController {
   private final JacksonMongoCollection<ContextPack> ctxCollection;
   UserController userController = null;
 
-  /**
-   * Construct a controller for context packs.
-   *
-   * @param database The database containing context pack data.
-   */
-  public WordRiverController(MongoDatabase database) {
-    ctxCollection = JacksonMongoCollection.builder().build(database, "packs", ContextPack.class);
-  }
+  // /**
+  //  * Construct a controller for context packs.
+  //  *
+  //  * @param database The database containing context pack data.
+  //  */
+  // public WordRiverController(MongoDatabase database) {
+  //   ctxCollection = JacksonMongoCollection.builder().build(database, "packs", ContextPack.class);
+  // }
 
   public WordRiverController(UserController userController, MongoDatabase database) {
     ctxCollection = JacksonMongoCollection.builder().build(database, "packs", ContextPack.class);
@@ -187,7 +187,7 @@ public class WordRiverController {
   }
 
 /**
- * Don't need to chage
+ * Don't need to change
  * @param ctx
  */
   public void getWordLists(Context ctx) {
@@ -210,7 +210,6 @@ public class WordRiverController {
   }
 
   public void addNewContextPackToUser(Context ctx) {
-    System.out.println("HEE");
     ContextPack newContextPack = ctx.bodyValidator(ContextPack.class)
      .check(cp -> cp.name != null && cp.name.length() > 0).check(cp -> cp.icon != null).get();
     String authId = ctx.pathParam("authId");
@@ -266,5 +265,47 @@ public class WordRiverController {
     ctx.status(200);
     ctx.json(learnerPacks);
 }
+
+  /**
+   * This method deletes the context pack from the database, user,
+   * and any learners that were assigned it.
+   * @param ctx
+   */
+  public void deleteContextPackFromAll(Context ctx) {
+    String cpId = ctx.pathParam("cpId");
+    String authId = ctx.pathParam("authId");
+    String mongoId = userController.findByAuthId(authId);
+
+    // Deleting from the database
+    try {
+      if (ctxCollection.findOne(eq("_id", new ObjectId(cpId))) == null)
+        throw new NotFoundResponse("That context pack does not exist.");
+      ctx.json(ImmutableMap.of("id", ctxCollection.findOneById(cpId)._id));
+      ctxCollection.deleteOne(eq("_id", new ObjectId(cpId)));
+    } catch (IllegalArgumentException e) {
+      throw new BadRequestResponse("The requested context pack id wasn't a legal Mongo Object ID.");
+    }
+
+    // Deleting from the user's context pack array
+    User user = userController.userCollection.findOneById(mongoId);
+    for(String cp: user.contextPacks){
+      if(cpId.equals(cp)){
+        userController.userCollection.updateById(mongoId, Updates.pull("contextPacks", cp));
+        break;
+      }
+    }
+
+    // Deleting from the learners' context pack array
+    for( Learner lr: user.learners){
+      for(String id: lr.learnerPacks){
+        if(id.equals(cpId)){
+          userController.userCollection.updateById(mongoId, Updates.pull("learners", lr));
+          lr.learnerPacks.remove(id);
+          userController.userCollection.updateById(mongoId, Updates.push("learners", lr));
+          break;
+        }
+      }
+    }
+  }
 }
 

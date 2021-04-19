@@ -82,12 +82,16 @@ public class Server {
     server.delete("/api/packs/:id/:name", wordRiverController::deleteWordList);
 
 
-    //Adds a context pack to the database and to the user
+    // Adds a context pack to the database and to the user
     server.post("/api/users/:authId/newPack", wordRiverController::addNewContextPackToUser);
-    //Get User Context Packs
+
+    // Get User Context Packs
     server.get("/api/users/:authId/packs", wordRiverController::getUserPacks);
-    //Get Learner Context Packs
+
+    // Get Learner Context Packs
     server.get("/api/users/:authId/:learnerId/learnerPacks", wordRiverController::getLearnerPacks);
+
+
 
 
     // endpoints may be temporary
@@ -97,13 +101,11 @@ public class Server {
     server.get("/api/users/:id/learners", userController::getLearners);
     server.get("api/users/:id/:learnerId", userController::getLearner);
     server.put("/api/users/:id/:learnerId", userController::editLearner);
-    server.delete("/api/users/:id/:learnerId/:packId", userController::removePackFromLearner);
+    server.delete("/api/users/:authId/:learnerId/:packId", userController::removePackFromLearner);
     server.put("/api/users/:id/:learnerId/:packId", userController:: addPackToLearner);
 
-
-
-
-
+     // Deletes a Context Pack from the database, a user's array, and the learners' array
+     server.delete("/api/users/:authId/:cpId", wordRiverController::deleteContextPackFromAll);
 
     // Throws an exception if there is one
     server.exception(Exception.class, (e, ctx) -> {
