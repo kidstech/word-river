@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 @Injectable()
 export class MockDictionaryService extends DictionaryService {
   words = {tuna:'noun',run:'verb'};
+  forms = {tuna:['Tunas','Tunae'],bears:['bear','bearing']};
 
   constructor() {
     super(null);
@@ -21,6 +22,18 @@ export class MockDictionaryService extends DictionaryService {
       return of(val).subscribe();
     }
   }
+
+  getForms(word: string, onLoaded: (type: string[]) => any, onFailed?: (type: string) => any) {
+    const val = this.forms[word];
+    if(val === undefined){
+      onFailed('Not found');
+      return of('404').subscribe();
+    } else {
+      onLoaded(val);
+      return of(val).subscribe();
+    }
+  }
+
   generateLink(word: string): string {
     return `www.totallynotadictionary.com/${word}?key=${this.apiKey}`;
   }

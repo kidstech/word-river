@@ -39,7 +39,7 @@
       <mat-label>Word Forms</mat-label>
       <mat-chip-list #chipList aria-label="Fruit selection">
 
-        <input placeholder="Add form..." id="formField" [matChipInputFor]="chipList"
+        <input matInput placeholder="Add form..." id="formField" [matChipInputFor]="chipList"
           [matChipInputSeparatorKeyCodes]="[188,13]" [matChipInputAddOnBlur]="true"
           (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
