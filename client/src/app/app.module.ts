@@ -45,6 +45,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoginComponent } from './auth/login/login.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { UserService } from './services/user-service/user.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const MATERIAL_MODULES: any[] = [
@@ -104,7 +105,8 @@ const MATERIAL_MODULES: any[] = [
   ],
   providers: [
     WordListService,
-    ContextPackService
+    ContextPackService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
