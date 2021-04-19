@@ -282,8 +282,8 @@ public class UserControllerSpec {
 
     ObjectId theId = johnDoeId;
 
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:id/:learnerId/:packId",
-      ImmutableMap.of("id", userId, "learnerId", "1234", "packId", "ironMan2"));
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:learnerId/:packId",
+      ImmutableMap.of("authId", userId, "learnerId", "1234", "packId", "ironMan2"));
 
     userController.removePackFromLearner(ctx);
 
@@ -302,8 +302,8 @@ public class UserControllerSpec {
     String userId = "5678";
     mockReq.setMethod("DELETE");
 
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:id/:learnerId/:packId",
-      ImmutableMap.of("id", userId, "learnerId", "1234", "packId", "cats"));
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:learnerId/:packId",
+      ImmutableMap.of("authId", userId, "learnerId", "1234", "packId", "cats"));
 
     assertThrows(NotFoundResponse.class, () -> {
       userController.removePackFromLearner(ctx);
@@ -315,8 +315,8 @@ public class UserControllerSpec {
     String userId = "5678";
     mockReq.setMethod("DELETE");
 
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:id/:learnerId/:packId",
-      ImmutableMap.of("id", userId, "learnerId", "badLearner", "packId", "ironMan2"));
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:learnerId/:packId",
+      ImmutableMap.of("authId", userId, "learnerId", "badLearner", "packId", "ironMan2"));
 
     assertThrows(NotFoundResponse.class, () -> {
       userController.removePackFromLearner(ctx);

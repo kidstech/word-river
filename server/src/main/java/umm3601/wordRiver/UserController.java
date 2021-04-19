@@ -186,7 +186,7 @@ public class UserController {
   // }
 
   public void removePackFromLearner(Context ctx) {
-    String authId = ctx.pathParam("id");
+    String authId = ctx.pathParam("authId");
     String mongoId = findByAuthId(authId);
     String learnerId = ctx.pathParam("learnerId");
     String contextPackId = ctx.pathParam("packId");
