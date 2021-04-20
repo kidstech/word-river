@@ -1,14 +1,45 @@
 import { LoginService } from './services/login-service/login.service';
 import { ContextPackService } from './services/contextPack-service/contextpack.service';
 import { ContextPack } from './datatypes/contextPacks';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { trigger, transition, style, query, animateChild, animate, group } from '@angular/animations';
 
+const slideInAnimation =
+trigger('routeAnimations', [
+  transition('HomePage <=> LoginPage', [
+    style({ position: 'relative' }),
+    query(':enter, :leave', [
+      style({
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%'
+      })
+    ]),
+    query(':enter', [
+      style({ left: '-100%' })
+    ]),
+    query(':leave', animateChild()),
+    group([
+      query(':leave', [
+        animate('1s ease-out', style({ left: '100%',opacity:'0'}))
+      ]),
+      query(':enter', [
+        animate('1s ease-out', style({ left: '0%',opacity:'1' }))
+      ])
+    ]),
+    query(':enter', animateChild()),
+  ]),
+]);
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    slideInAnimation
+  ]
 })
 export class AppComponent implements OnInit {
   title = 'WordRiver';
@@ -19,6 +50,8 @@ export class AppComponent implements OnInit {
   uid: string;
   userName: string;
   icon: string;
+
+
 
   constructor(
     private location: Location,
@@ -79,4 +112,8 @@ export class AppComponent implements OnInit {
       this.router.navigate(['']);
     }, err => console.log(err));
   }
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
+  }
+
 }

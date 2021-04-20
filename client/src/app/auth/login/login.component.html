@@ -1,5 +1,6 @@
 <div class="outer">
-  <img class="bg" src="/assets/login-bg-alt.svg" alt="logo">
+  <img class="halftone" src="/assets/halftone.svg" alt="logo">
+  <img class="bg" src="/assets/login-bg-longer.svg" alt="logo">
  <mat-card class="outer-card">
     <img class="logo" src="/assets/logo-dark-alt.png" alt="logo">
     <mat-tab-group class="tabs" mat-align-tabs="center" headerPosition="below">
@@ -11,7 +12,7 @@
             <input class="field"  type="password" name="password"
               placeholder="Password" [(ngModel)]="loginPass">
             <button class="auth-btn" (click)="signIn()">
-              Login
+              LOGIN
             </button>
           </form>
         </div>
@@ -43,7 +44,7 @@
 
           </form>
           <button [disabled]="signUpName ? signUpName.length === 0 : true" class="auth-btn" style="margin-bottom: 0px;" (click)="signUp()">
-            Sign Up
+            SIGN UP
           </button>
         </div>
 

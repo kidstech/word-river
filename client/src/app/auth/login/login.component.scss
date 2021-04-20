@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "ProductSans";
+  src: url('/assets/ProductSansRegular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "ProductSansBold";
+  src: url('/assets/ProductSansBold.ttf') format("truetype");
+}
+
 .auth-holder {
   font-family: Roboto, sans-serif;
 }
@@ -30,6 +40,15 @@
   width: 100%;
   height: 100%;
 
+}
+.halftone {
+  object-fit: cover;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.05;
 }
 
 .logo {
@@ -100,6 +119,7 @@
   height: 50px;
   font-size: larger;
   margin-top: 10px;
+  font-family: 'ProductSans';
   padding: 10px;
   cursor: pointer;
   outline: none;
