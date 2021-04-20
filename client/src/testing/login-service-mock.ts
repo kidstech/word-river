@@ -1,12 +1,6 @@
 /* eslint-disable max-len */
-import { LoginService } from './../app/services/login-service/login.service';
-import { DictionaryService } from './../app/services/dictionary-service/dictionary.service';
-import { of } from 'rxjs';
-import { Injectable, NgZone } from '@angular/core';
-import auth from 'firebase/app';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
+import { Injectable} from '@angular/core';
+
 
 @Injectable()
 export class LoginServiceMock {

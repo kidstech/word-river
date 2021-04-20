@@ -115,7 +115,7 @@ export class MockCPService extends ContextPackService {
         }
     ];
 
-    static testUser: User = {
+     testUser: User = {
       authId: '12345',
       name: 'John Doe',
       icon: 'image.png',

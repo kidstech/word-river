@@ -47,60 +47,49 @@ export class LoginService {
       })
       ).catch((error) => {
         console.log(JSON.stringify(error));
-        switch (error.code) {
-          case 'auth/user-not-found':
-            err('The account you entered does not exist.');
-            break;
-          case 'auth/invalid-email':
-            err('The email you entered is invalid.');
-            break;
-          case 'auth/wrong-password':
-            err('Password is incorrect.');
-            break;
-          default:
-            err(error);
-            break;
-        }
+        err(this.convertMessage(error.code));
       });
   }
 
-    // Sign up with email/password
-    signUp(name, icon, email, password, then: (res) => any, err: (e) => any) {
-      return this.afAuth.createUserWithEmailAndPassword(email, password)
-        .then((result) => {
-          const user: User = {
-            authId: result.user.uid,
-            name,
-            icon,
-            learners: [],
-            contextPacks: []
-          };
-          this.users.createUser(user).subscribe(_ => {
-            this.setUserData(user);
-            then(result);
-          }, error => err(JSON.stringify(error)));
-        }).catch((e) => {
-          console.log(JSON.stringify(e));
-          switch (e.code) {
-            case 'auth/email-already-in-use': //when the email is already in use
-              err('The email you entered is already in use.');
-              break;
-            case 'auth/invalid-email': //when you type in nothing (bad formatted email)
-              err('The email you entered is invalid.');
-              break;
-            case 'auth/weak-password': //when you put in a password of less than 6 characters
-              err('Your password must be at least 6 characters long.');
-              break;
-            case 'auth/argument-error': //when you put in a password of less than 6 characters
-              err('Please enter a valid email and password first.');
-              break;
-            default:
-              err(e);
-              break;
-          }
-        });
-    }
+  // Sign up with email/password
+  signUp(name, icon, email, password, then: (res) => any, err: (e) => any) {
+    return this.afAuth.createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        const user: User = {
+          authId: result.user.uid,
+          name,
+          icon,
+          learners: [],
+          contextPacks: []
+        };
+        this.users.createUser(user).subscribe(_ => {
+          this.setUserData(user);
+          then(result);
+        }, error => err(JSON.stringify(error)));
+      }).catch((e) => {
+        console.log(JSON.stringify(e));
+        err(this.convertMessage(e.code));
+      });
+  }
 
+  convertMessage(err) {
+    switch (err) {
+      case 'auth/email-already-in-use': //when the email is already in use
+        return ('The email you entered is already in use.');
+      case 'auth/weak-password': //when you put in a password of less than 6 characters
+        return ('Your password must be at least 6 characters long.');
+      case 'auth/argument-error': //when you put in a password of less than 6 characters
+        return ('Please enter a valid email and password first.');
+      case 'auth/user-not-found':
+        return ('The account you entered does not exist.');
+      case 'auth/invalid-email':
+        return ('The email you entered is invalid.');
+      case 'auth/wrong-password':
+        return ('Password is incorrect.');
+      default:
+        return (err);
+    }
+  }
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
@@ -157,10 +146,10 @@ export class LoginService {
   }
 
   // Sign out
-  signOut(then: (res) => any,err: (some) => any) {
+  signOut(then: (res) => any, err: (some) => any) {
     return this.afAuth.signOut().then(res => {
-      localStorage.setItem('user',null);
+      localStorage.setItem('user', null);
       then(res);
-    },error=>err(error));
+    }, error => err(error));
   }
 }
