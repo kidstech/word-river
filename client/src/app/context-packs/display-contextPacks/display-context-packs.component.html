@@ -104,8 +104,7 @@
     </a>
   </div>
   <div class="context-pack-display">
-    <app-cp-card simple="true" (delete)="removeCP(pack._id)" *ngFor="let pack of contextPacks" class="cp-card"
-      [contextPack]="pack"></app-cp-card>
+    <app-learner-card class="cp-card" *ngFor=""></app-learner-card>
     <div class="placeholder" *ngIf="contextPacks ? contextPacks.length === 0 : false;">
       <mat-icon>assignment</mat-icon>
       <h2 style="opacity: 0.9;">No Context Packs to display.</h2>

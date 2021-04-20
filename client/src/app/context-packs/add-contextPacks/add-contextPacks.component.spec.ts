@@ -13,8 +13,12 @@ import { MockCPService } from 'src/testing/context-pack.service.mock';
 import { ContextPackService } from '../../services/contextPack-service/contextpack.service';
 import { FireStorageMock } from 'src/testing/angular-fire-storage-mock';
 import { DisplayWordlistComponent } from 'src/app/wordlists/display-wordlist/display-wordlist.component';
+import { FirebaseAuthMock } from 'src/testing/firebase-auth-mock';
+import { AngularFireAuth } from '@angular/fire/auth';
 
-describe('AddCpComponent', () => {
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+
+fdescribe('AddCpComponent', () => {
   let addContextPack: AddContextPackComponent;
   let addContextPackForm: FormGroup;
   let fixture: ComponentFixture<AddContextPackComponent>;
@@ -29,6 +33,7 @@ describe('AddCpComponent', () => {
         MatFormFieldModule,
         MatSelectModule,
         MatInputModule,
+        HttpClientTestingModule,
         BrowserAnimationsModule,
         RouterTestingModule.withRoutes([
           { path: 'packs/fakeid', component: DisplayWordlistComponent }
@@ -36,7 +41,8 @@ describe('AddCpComponent', () => {
       ],
       declarations: [ AddContextPackComponent ],
       providers: [{ provide: ContextPackService, useValue: new MockCPService() },
-        { provide: AngularFireStorage, useValue: new FireStorageMock() }
+        { provide: AngularFireStorage, useValue: new FireStorageMock() },
+        { provide: AngularFireAuth, useValue: new FirebaseAuthMock() }
       ]
     })
     .compileComponents().catch(error => {

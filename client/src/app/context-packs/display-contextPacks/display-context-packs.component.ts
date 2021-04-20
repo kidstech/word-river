@@ -25,7 +25,7 @@ export class DisplayContextPacksComponent implements OnInit, OnDestroy {
 
   getPacksFromServer(): void {
     this.unsub();
-    this.getPackSub = this.packService.getPacks().subscribe(
+    this.getPackSub = this.packService.getUserPacks(this.login.user.authId).subscribe(
       returnedPacks => {
         this.contextPacks = returnedPacks;
       }, err => {
@@ -49,7 +49,7 @@ export class DisplayContextPacksComponent implements OnInit, OnDestroy {
   }
 
   removeCP(id: string) {
-    this.packService.deletePack(id).subscribe(() => {
+    this.packService.deleteContextPackFromAll(this.login.user.authId, id).subscribe(() => {
       this.contextPacks = this.contextPacks.filter(cp => cp._id !== id);
     });
     return id;
