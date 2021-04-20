@@ -5,6 +5,7 @@ import { WordList } from '../../datatypes/wordlist';
 import { ContextPackService } from '../../services/contextPack-service/contextpack.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { safe } from 'src/testing/utils';
 
 @Component({
   selector: 'app-display-context-packs',
@@ -27,10 +28,10 @@ export class DisplayContextPacksComponent implements OnInit, OnDestroy {
     this.getPackSub = this.packService.getPacks().subscribe(
       returnedPacks => {
         this.contextPacks = returnedPacks;
-    }, err => {
-      console.log(err);
-    });
-    this.name = this.login.user.name;
+      }, err => {
+        console.log(err);
+      });
+    safe(() => { this.name = this.login.user.name; }, this.login.user);
   }
 
   ngOnInit(): void {
@@ -42,12 +43,12 @@ export class DisplayContextPacksComponent implements OnInit, OnDestroy {
   }
 
   unsub(): void {
-    if(this.getPackSub) {
+    if (this.getPackSub) {
       this.getPackSub.unsubscribe();
     }
   }
 
-  removeCP(id: string){
+  removeCP(id: string) {
     this.packService.deletePack(id).subscribe(() => {
       this.contextPacks = this.contextPacks.filter(cp => cp._id !== id);
     });
