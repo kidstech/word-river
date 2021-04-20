@@ -15,7 +15,7 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   getUser(authId: string): Observable<User> {
-    return this.httpClient.get<User>(this.userUrl + '/' + authId).pipe(map(res=> res));
+    return this.httpClient.get<User>(this.userUrl + '/' + authId);
   }
 
   createUser(newUser: User): Observable<string> {
@@ -33,7 +33,7 @@ export class UserService {
   }
 
   getLearner(authId: string, learnerId: string): Observable<Learner> {
-    return this.httpClient.get<Learner>(this.userUrl + '/' + authId + '/' + learnerId).pipe(map(res=>res));
+    return this.httpClient.get<Learner>(this.userUrl + '/' + authId + '/' + learnerId);
   }
 
   editLearner(authId: string, learnerId: string, editedLearner: Learner): Observable<Learner> {

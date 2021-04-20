@@ -138,7 +138,10 @@ export class MockCPService extends ContextPackService {
       return of(id);
     }
     addPack(newPack: { name: string; icon: string; enabled: boolean; wordlists?: any[] }): Observable<string> {
-      return of('fakeid');
+      return new Observable(sub=>{
+        if(newPack.name){sub.next('fakeid');}
+        else {sub.error('Error');}
+      });
     }
     includes(cp: ContextPack){
       return MockCPService.testCPs.some(e=>e._id === cp._id);

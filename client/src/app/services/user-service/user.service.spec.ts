@@ -87,6 +87,7 @@ describe('UserService', () => {
     service.editLearner(testUser.authId, testLearner._id, testLearner).subscribe(learner=>expect(learner).toBe(testLearner));
     const req = httpTestingController.expectOne(service.userUrl + '/' + testUser.authId + '/' + testLearner._id);
     expect(req.request.method).toBe('PUT');
+    req.flush(testLearner);
   });
   it('removePackFromLearner calls api/users/:id/:learnerId/:packId', () => {
     service.removePackFromLearner(testUser.authId, testLearner._id, testCP._id).subscribe(id => expect(id).toBe(testCP._id));

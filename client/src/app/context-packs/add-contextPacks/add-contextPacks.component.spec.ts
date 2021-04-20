@@ -137,6 +137,11 @@ describe('AddCpComponent', () => {
     addContextPack.onFileAdded(mockEvt as any);
     });
 
+    it('Should throw an error upon an error', () => {
+      addContextPack.addContextPackForm.controls.name.setValue(null);
+      expect(addContextPack.submitForm()).toBeUndefined();
+    });
+
   });
 
   describe('The enabled field', () => {
