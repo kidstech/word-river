@@ -27,7 +27,9 @@ export class UserService {
   }
 
   getLearners(authId: string): Observable<Learner[]> {
-    return this.httpClient.get<Learner[]>(this.userUrl + '/' + authId + '/' + 'learners');
+    return this.httpClient.get<Learner[]>(this.userUrl + '/' + authId + '/' + 'learners', {
+      params: new HttpParams(),
+    });
   }
 
   getLearner(authId: string, learnerId: string): Observable<Learner> {

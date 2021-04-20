@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ContextPack } from 'src/app/datatypes/contextPacks';
+import { User } from 'src/app/datatypes/user';
 import { WordList } from 'src/app/datatypes/wordlist';
 import { ContextPackService } from 'src/app/services/contextPack-service/contextpack.service';
 
@@ -113,6 +114,14 @@ export class MockCPService extends ContextPackService {
             wordlist: MockCPService.testList,
         }
     ];
+
+    static testUser: User = {
+      authId: '12345',
+      name: 'John Doe',
+      icon: 'image.png',
+      learners: [],
+      contextPacks: ['meow','woof']
+    };
     constructor() {
       super(null);
     }
@@ -133,5 +142,25 @@ export class MockCPService extends ContextPackService {
     }
     includes(cp: ContextPack){
       return MockCPService.testCPs.some(e=>e._id === cp._id);
+    }
+
+    addNewContextPackToUser(authId: string,
+      newPack: { name: string; icon: string; enabled: boolean; wordlists?: any[] } ): Observable<string> {
+        return of('fakeid');
+    }
+    getUserPacks(authId: string): Observable<ContextPack[]> {
+      let thePacks: ContextPack[];
+      thePacks.push(MockCPService.testCPs[0]);
+      thePacks.push(MockCPService.testCPs[1]);
+      return of(thePacks);
+    }
+
+    getLearnerPacks(authId: string, learnerId: string): Observable<ContextPack[]> {
+      return of(MockCPService.testCPs);
+    }
+
+    deleteContextPackFromAll(authId: string, cpId: string): Observable<string> {
+      MockCPService.testCPs= MockCPService.testCPs.filter(cp=> cp._id!==cpId);
+      return of(cpId);
     }
 }
