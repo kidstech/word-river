@@ -93,7 +93,7 @@ export class LoginService {
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user') || '');
     console.log(user !== null);
     return user !== null;
   }
@@ -103,7 +103,7 @@ export class LoginService {
   get user() {
     console.log(localStorage.getItem('user'));
 
-    return JSON.parse(localStorage.getItem('user'));
+    return JSON.parse(localStorage.getItem('user') || '');
   }
   get authID() {
     return this.user ? this.user.uid : null;
