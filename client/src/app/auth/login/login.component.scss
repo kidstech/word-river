@@ -85,7 +85,7 @@
   height: 40px;
   width: 250px;
   background-color: transparent;
-  border: 4px solid rgb(129, 129, 129);
+  border: 4px solid rgb(161, 161, 161);
   margin: 10px 0px 10px 0px;
   padding-left: 10px;
   outline: none;
@@ -94,6 +94,10 @@
 
   font-size: medium;
   font-family: Roboto, sans-serif;
+}
+.field::placeholder {
+  color: rgb(161, 161, 161);
+  font-family: 'ProductSans';
 }
 
 .invalid {

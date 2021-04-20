@@ -75,56 +75,109 @@
 .welcome {
   font-family: 'ProductSansBold';
   font-size: 40px;
+  margin-bottom: 20px;
 }
 
 .details-card {
   border-radius: 20px;
   width: 94%;
   padding: 30px;
-  height: 200px;
+  height: 300px;
   align-items: center;
   display: flex;
+  padding: 0px;
   margin-bottom: 30px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
-.details-card>div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  flex-direction: row;
-  flex: 1
-}
-.details-card>div>div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  flex-direction: column;
-}
-.details-card>span {
+// .details-card>div {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   height: 100%;
+//   flex-direction: row;
+//   flex: 1
+// }
+// .details-card>div>div {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   height: 100%;
+
+//   flex-direction: column;
+// }
+.details-card span {
   width: 2px;
   height: 90%;
   background-color: rgba(0, 0, 0, 0.1);
 }
-.details-card>div>div>h1 {
+.details-card h1 {
   font-size: 3em;
   font-family: 'ProductSansBold';
   // color: white;
+  margin-right: 20px;
 }
-.details-card>div>div>h3 {
-  font-size: 1em;
+.details-card h3 {
+  font-size: 1.3em;
   opacity: 0.5;
+  font-family: 'ProductSans';
 }
 .details-card mat-icon{
   font-size: 50px;
   width: 50px;
   height: 50px;
   color:#5cccce;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   margin-right: 40px;
 }
 .header{
   font-family: 'ProductSans';
+}
+.stat{
+  display: flex;
+  flex: 1;
+  height: 100%;
+  align-items: center;
+  flex-direction: column!important;
+}
+.icon-and-description{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  margin-right: 50px;
+  flex-direction: row!important;
+  flex: 1!important
+}
+.icon-and-description div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.details{
+  height: 70px;
+  width: 60%;
+  min-width: 200px;
+box-shadow: inset 0px 5px 15px -3px rgba(0,0,0,0.1);
+  background-color: rgba(0, 0, 0, 0.13);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+.sub-detail{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.sub-detail > h4{
+  margin: 0px;
+  font-size: large;
+  font-family: 'ProductSansBold';
+}
+.sub-detail > h5{
+  margin: 0px;
+  opacity: 0.6;
 }
