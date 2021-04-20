@@ -109,7 +109,7 @@ export class LoginComponent implements OnInit {
     });
   }
   signUp() {
-    return this.login.signUp(this.signUpName, this.signUpEmail, this.signUpPass, (uid) => {
+    return this.login.signUp(this.signUpName,this.downloadURL, this.signUpEmail, this.signUpPass, (uid) => {
       console.log(uid);
       this.snackBar.open('Signed up successfully!', null, {
         duration: 3000,

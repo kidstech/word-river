@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "ProductSans";
+  src: url('/assets/ProductSansRegular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "ProductSansBold";
+  src: url('/assets/ProductSansBold.ttf') format("truetype");
+}
+
 .cp-card:hover {
   background-color: rgba(0, 0, 0, 0.068);
   cursor: pointer;
@@ -152,4 +162,7 @@
 }
 .confirmation button {
   width: 300px;
+}
+.header{
+  font-family: 'ProductSans';
 }

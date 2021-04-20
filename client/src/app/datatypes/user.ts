@@ -1,7 +1,7 @@
 import { Learner } from './learner';
 
 export class User {
-  _id: string;
+  _id?: string;
   authId: string;
   name: string;
   icon: string;

@@ -1,3 +1,4 @@
+import { LoginService } from './../../services/login-service/login.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ContextPack } from '../../datatypes/contextPacks';
 import { WordList } from '../../datatypes/wordlist';
@@ -19,7 +20,7 @@ export class DisplayContextPacksComponent implements OnInit, OnDestroy {
   public wordlist: Array<WordList>;
   getPackSub: Subscription;
 
-  constructor(private packService: ContextPackService, private router: Router) { }
+  constructor(private packService: ContextPackService, private router: Router, private login: LoginService) { }
 
   getPacksFromServer(): void {
     this.unsub();
@@ -29,6 +30,7 @@ export class DisplayContextPacksComponent implements OnInit, OnDestroy {
     }, err => {
       console.log(err);
     });
+    this.name = this.login.user.name;
   }
 
   ngOnInit(): void {

@@ -3,14 +3,9 @@ import auth from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { UserService } from '../user-service/user.service';
+import { User } from 'src/app/datatypes/user';
 
-export interface User {
-  uid: string;
-  email: string;
-  displayName: string;
-  photoURL: string;
-  emailVerified: boolean;
-}
 @Injectable({
   providedIn: 'root'
 })
@@ -20,77 +15,91 @@ export class LoginService {
 
   constructor(
     public afAuth: AngularFireAuth, // Inject Firebase auth service
+    private users: UserService,
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
-    this.afAuth.authState.subscribe(user => {
-      if (user) {
-        this.userData = user;
-        console.log(JSON.stringify(this.userData));
+    // this.afAuth.authState.subscribe(user => {
+    //   if (user) {
+    //     this.userData = user;
+    //     console.log(JSON.stringify(this.userData));
 
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
-      } else {
-        localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
-      }
-    });
+    //     localStorage.setItem('user', JSON.stringify(this.userData));
+    //     JSON.parse(localStorage.getItem('user'));
+    //   } else {
+    //     localStorage.setItem('user', null);
+    //     JSON.parse(localStorage.getItem('user'));
+    //   }
+    // });
   }
 
   // Sign in with email/password
   signIn(email, password, then: (uid) => any, err: (msg) => any) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => this.ngZone.run(() => {
-        this.setUserData(result.user);
-        then(result.user.uid);
+        this.users.getUser(result.user.uid).subscribe(user => {
+          this.setUserData(user);
+          then(result.user.uid);
+        }, error =>
+          err(JSON.stringify(error))
+        );
       })
       ).catch((error) => {
         console.log(JSON.stringify(error));
-        switch(error.code){
+        switch (error.code) {
           case 'auth/user-not-found':
             err('The account you entered does not exist.');
-          break;
+            break;
           case 'auth/invalid-email':
             err('The email you entered is invalid.');
-          break;
+            break;
           case 'auth/wrong-password':
             err('Password is incorrect.');
-          break;
+            break;
           default:
             err(error);
-          break;
+            break;
         }
       });
   }
 
-  // Sign up with email/password
-  signUp(name, email, password, then: (res) => any, err: (e) => any) {
-    return this.afAuth.createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        then(result);
-        this.setUserData(result.user);
-      }).catch((e) => {
-        console.log(JSON.stringify(e));
-        switch(e.code){
-          case 'auth/email-already-in-use': //when the email is already in use
-            err('The email you entered is already in use.');
-          break;
-          case 'auth/invalid-email': //when you type in nothing (bad formatted email)
-            err('The email you entered is invalid.');
-          break;
-          case 'auth/weak-password': //when you put in a password of less than 6 characters
-            err('Your password must be at least 6 characters long.');
-          break;
-          case 'auth/argument-error': //when you put in a password of less than 6 characters
-            err('Please enter a valid email and password first.');
-          break;
-          default:
-            err(e);
-          break;
-        }
-      });
-  }
+    // Sign up with email/password
+    signUp(name, icon, email, password, then: (res) => any, err: (e) => any) {
+      return this.afAuth.createUserWithEmailAndPassword(email, password)
+        .then((result) => {
+          const user: User = {
+            authId: result.user.uid,
+            name,
+            icon,
+            learners: [],
+            contextPacks: []
+          };
+          this.users.createUser(user).subscribe(_ => {
+            this.setUserData(user);
+            then(result);
+          }, error => err(JSON.stringify(error)));
+        }).catch((e) => {
+          console.log(JSON.stringify(e));
+          switch (e.code) {
+            case 'auth/email-already-in-use': //when the email is already in use
+              err('The email you entered is already in use.');
+              break;
+            case 'auth/invalid-email': //when you type in nothing (bad formatted email)
+              err('The email you entered is invalid.');
+              break;
+            case 'auth/weak-password': //when you put in a password of less than 6 characters
+              err('Your password must be at least 6 characters long.');
+              break;
+            case 'auth/argument-error': //when you put in a password of less than 6 characters
+              err('Please enter a valid email and password first.');
+              break;
+            default:
+              err(e);
+              break;
+          }
+        });
+    }
 
 
   // Returns true when user is looged in and email is verified
@@ -103,6 +112,8 @@ export class LoginService {
     this.signedIn = s;
   }
   get user() {
+    console.log(localStorage.getItem('user'));
+
     return JSON.parse(localStorage.getItem('user'));
   }
   get authID() {
@@ -146,10 +157,10 @@ export class LoginService {
   }
 
   // Sign out
-  signOut(then: (res) => any) {
+  signOut(then: (res) => any,err: (some) => any) {
     return this.afAuth.signOut().then(res => {
-      localStorage.removeItem('user');
+      localStorage.setItem('user',null);
       then(res);
-    });
+    },error=>err(error));
   }
 }

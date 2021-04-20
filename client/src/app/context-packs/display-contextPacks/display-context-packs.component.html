@@ -1,6 +1,50 @@
 <div>
+  <h1 class="welcome">Welcome, {{name}}.</h1>
+  <mat-card class="details-card">
+    <div>
+      <mat-icon>assignment</mat-icon>
+      <div>
+        <h1>21</h1>
+        <h3>Context Packs</h3>
+      </div>
+    </div>
+    <span></span>
+    <div>
+      <mat-icon>people</mat-icon>
+      <div>
+        <h1>9</h1>
+        <h3>Students</h3>
+      </div>
+    </div>
+    <span></span>
+    <div>
+      <mat-icon>font_download</mat-icon>
+      <div>
+        <h1>21</h1>
+        <h3>Words</h3>
+      </div>
+    </div>
+  </mat-card>
+
+
   <div class="top">
-    <h1 style="margin-bottom: 0px;">Context Packs</h1>
+    <h1 class="header" style="margin-bottom: 0px;">Context Packs</h1>
+    <a class="add-cp-button" data-test="addCpButton" routerLink="/packs/new">
+      <mat-icon>add</mat-icon>
+      <span>Add</span>
+    </a>
+  </div>
+  <div class="context-pack-display">
+    <app-cp-card simple="true" (delete)="removeCP(pack._id)" *ngFor="let pack of contextPacks" class="cp-card"
+      [contextPack]="pack"></app-cp-card>
+    <div class="placeholder" *ngIf="contextPacks ? contextPacks.length === 0 : false;">
+      <mat-icon>assignment</mat-icon>
+      <h2 style="opacity: 0.9;">No Context Packs to display.</h2>
+      <h4 style="opacity: 0.7;">You can add a context pack by using the 'Add' button.</h4>
+    </div>
+  </div>
+  <div class="top">
+    <h1 class="header" style="margin-bottom: 0px;">Students</h1>
     <a class="add-cp-button" data-test="addCpButton" routerLink="/packs/new">
       <mat-icon>add</mat-icon>
       <span>Add</span>

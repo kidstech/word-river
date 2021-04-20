@@ -17,6 +17,8 @@ export class AppComponent implements OnInit {
   contextPack: ContextPack;
   loggedIn = false;
   uid: string;
+  userName: string;
+  icon: string;
 
   constructor(
     private location: Location,
@@ -43,9 +45,16 @@ export class AppComponent implements OnInit {
       else {
         this.contextPackVisible = false;
       }
-      this.loggedIn = this.login.isLoggedIn;
-      this.uid = this.login.authID;
+      this.initValues();
     });
+
+  }
+
+  initValues() {
+    this.loggedIn = this.login.isLoggedIn;
+    this.uid = this.login.authID;
+    this.userName = this.login.user ? this.login.user.name || '' : '';
+    this.icon = this.login.user ? this.login.user.icon|| '' : '';
   }
 
   goBack() {
@@ -65,9 +74,9 @@ export class AppComponent implements OnInit {
     }
   }
   logOut() {
-    this.login.signOut(res=>{
+    this.login.signOut(res => {
       console.log(res);
       this.router.navigate(['']);
-    });
+    }, err => console.log(err));
   }
 }

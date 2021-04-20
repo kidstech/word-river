@@ -11,6 +11,16 @@
 //   border-top: 4px solid #2196f3;
 // }
 
+@font-face {
+  font-family: "ProductSans";
+  src: url('/assets/ProductSansRegular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "ProductSansBold";
+  src: url('/assets/ProductSansBold.ttf') format("truetype");
+}
+
 .word-name {
   font-weight: bold;
   overflow: hidden;
