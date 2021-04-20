@@ -49,7 +49,7 @@ export class LoginServiceMock {
   }
 
   // Sign up with email/password
-  signUp(name, email, password, then: (res) => any, error: (err) => any) {
+  signUp(name, icon, email, password, then: (res) => any, error: (err) => any) {
     return new Promise<any>((resolve, reject) => {
       if (this.emailPattern.test(email) && password ? password.length > 0 : false) {
         this.users.push({email,password,uid:`${Date.now()}`});

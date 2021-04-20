@@ -1,3 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from './../../../environments/environment';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,6 +23,7 @@ import { ContextPackCardComponent } from '../../context-packs/contextPack-card/c
 import { MockCPService } from 'src/testing/context-pack.service.mock';
 import { ContextPackService } from '../../services/contextPack-service/contextpack.service';
 import { ContextPack } from '../../datatypes/contextPacks';
+import { AngularFireModule } from '@angular/fire';
 
 const COMMON_IMPORTS: any[] = [
   FormsModule,
@@ -37,6 +41,9 @@ const COMMON_IMPORTS: any[] = [
   MatIconModule,
   BrowserAnimationsModule,
   RouterTestingModule,
+  AngularFireModule.initializeApp(environment.firebaseConfig),
+  AngularFireAuthModule,
+  HttpClientTestingModule
 ];
 
 describe('Display Context-Packs component', () => {

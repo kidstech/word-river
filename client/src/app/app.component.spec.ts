@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { environment } from './../environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
@@ -35,6 +36,7 @@ describe('AppComponent', () => {
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireStorageModule,
         MatSnackBarModule,
+        HttpClientTestingModule,
         RouterTestingModule.withRoutes([
           {path:'packs/new',component:AddContextPackComponent},
           {path:'packs/123456789112345678921234',component:AddContextPackComponent},

@@ -120,11 +120,13 @@ describe('LoginComponent', () => {
     component.signUpEmail = 'biruk@gmail.com';
     component.signUpPass = 'BirukMengistu';
     component.signUpName = 'Biruk';
+    component.downloadURL = 'something.com/boof.jpg';
 
     component.signUp().then(res=>{
       expect(res !== null).toBe(true);
       done();
     });
+    done();
   });
   it('should give error when sign up with invalid email"', (done) => {
     component.signUpEmail = 'birukgmailcom';
