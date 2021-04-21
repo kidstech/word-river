@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { Injectable} from '@angular/core';
+import { User } from 'src/app/datatypes/user';
 
 
 @Injectable()
@@ -11,13 +12,13 @@ export class LoginServiceMock {
 
   users = [
     { email: 'biruk@gmail.com', password: 'BirukMengistu', uid:'123'},
-    { email: 'elena@gmail.com', password: 'ElenaLam', uid:'456' },
+    { email: 'elena@gmail.com', password: 'ElenaLam', uid:'456' }
   ];
 
   storage={};
 
-  constructor() {
-
+  constructor(user?) {
+    this.currentUser = user;
   }
 
   // Sign in with email/password
@@ -57,7 +58,7 @@ export class LoginServiceMock {
   }
 
 
-  // Returns true when user is looged in and email is verified
+  // Returns true when user is logged in and email is verified
   get isLoggedIn(): boolean {
     return this.signedIn;
   }

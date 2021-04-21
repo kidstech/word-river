@@ -78,7 +78,7 @@ export class LoginService {
         return ('The email you entered is already in use.');
       case 'auth/weak-password': //when you put in a password of less than 6 characters
         return ('Your password must be at least 6 characters long.');
-      case 'auth/argument-error': //when you put in a password of less than 6 characters
+      case 'auth/argument-error':
         return ('Please enter a valid email and password first.');
       case 'auth/user-not-found':
         return ('The account you entered does not exist.');
@@ -91,7 +91,7 @@ export class LoginService {
     }
   }
 
-  // Returns true when user is looged in and email is verified
+  // Returns true when user is logged in and email is verified
   get isLoggedIn(): boolean {
     const val = localStorage.getItem('user');
     let user = null;

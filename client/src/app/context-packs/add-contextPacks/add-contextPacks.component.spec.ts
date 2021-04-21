@@ -18,7 +18,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-fdescribe('AddCpComponent', () => {
+describe('AddCpComponent', () => {
   let addContextPack: AddContextPackComponent;
   let addContextPackForm: FormGroup;
   let fixture: ComponentFixture<AddContextPackComponent>;

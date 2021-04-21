@@ -94,7 +94,7 @@ export class AppComponent implements OnInit {
     const path = this.location.path();
     if ((/^\/?packs\/new\/?$/g).test(path) || // New Context Pack
       (/^\/?packs\/.{24}\/?$/g).test(path)) { // Display wordlists
-      this.router.navigate(['']);
+      this.router.navigate(['/home']);
     }
     else if (
       (/^\/?packs\/.{24}\/import$/g).test(path) || // Import wordlist

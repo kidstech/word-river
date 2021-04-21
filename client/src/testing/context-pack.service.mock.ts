@@ -152,7 +152,8 @@ export class MockCPService extends ContextPackService {
         return of('fakeid');
     }
     getUserPacks(authId: string): Observable<ContextPack[]> {
-      let thePacks: ContextPack[];
+      // eslint-disable-next-line prefer-const
+      let thePacks: ContextPack[] = [];
       thePacks.push(MockCPService.testCPs[0]);
       thePacks.push(MockCPService.testCPs[1]);
       return of(thePacks);

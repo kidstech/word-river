@@ -3,7 +3,7 @@
 export class DisplayContextPacksComponent {
 
     navigateTo() {
-        return cy.visit('http://localhost:4200/');
+        return cy.visit('http://localhost:4200/home');
     }
 
     getCpCards() {

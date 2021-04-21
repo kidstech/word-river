@@ -1,11 +1,19 @@
 import { ContextPack } from 'src/app/datatypes/contextPacks';
 import { AddContextPackPage } from '../support/add-contextPack.po';
 import { WordList } from 'src/app/datatypes/wordlist';
+import { LoginPage } from 'cypress/support/login.po';
 
 describe('Add Context Pack', () => {
     const page = new AddContextPackPage();
+    const loginPage = new LoginPage();
 
-    beforeEach(() => {
+   before(()=> {
+     loginPage.navigateTo();
+     loginPage.login();
+     cy.wait(1000);
+   });
+
+   beforeEach(() => {
         page.navigateTo();
     });
 
@@ -67,13 +75,19 @@ describe('Add Context Pack', () => {
 
    describe('Adding a new context pack', () => {
 
+    before(()=> {
+      loginPage.navigateTo();
+      loginPage.login();
+      cy.wait(1000);
+    });
+
     beforeEach(() => {
         cy.task('seed:database');
     });
 
     it('Should go to the right page, and have the right info', () => {
       page.navigateToHome();
-      page.getCpCards().should('have.length', '4');
+      page.getCpCards().should('have.length', '3');
 
         const testList: Array<WordList> = [];
         const contextPack: ContextPack = {
@@ -97,7 +111,7 @@ describe('Add Context Pack', () => {
 
         page.navigateToHome();
         cy.wait(2000);
-        page.getCpCards().should('have.length', '5');
+        page.getCpCards().should('have.length', '4');
    });
 
     it('Should add a valid name and enable field and then click the upload image button', () => {
