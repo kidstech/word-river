@@ -24,6 +24,8 @@ import { MockCPService } from 'src/testing/context-pack.service.mock';
 import { ContextPackService } from '../../services/contextPack-service/contextpack.service';
 import { ContextPack } from '../../datatypes/contextPacks';
 import { AngularFireModule } from '@angular/fire';
+import { LoginServiceMock } from 'src/testing/login-service-mock';
+import { LoginService } from 'src/app/services/login-service/login.service';
 
 const COMMON_IMPORTS: any[] = [
   FormsModule,
@@ -49,12 +51,15 @@ const COMMON_IMPORTS: any[] = [
 describe('Display Context-Packs component', () => {
   let dpContextPacks: DisplayContextPacksComponent;
   let fixture: ComponentFixture<DisplayContextPacksComponent>;
+  let loginService: LoginService;
 
   beforeEach( () => {
     TestBed.configureTestingModule({
       imports: [COMMON_IMPORTS],
       declarations: [ DisplayContextPacksComponent, ContextPackCardComponent ],
-      providers: [{ provide: ContextPackService, useValue: new MockCPService() }]
+      providers: [{ provide: ContextPackService, useValue: new MockCPService() },
+                  { provide: LoginService, useValue: new LoginServiceMock({ email: 'biruk@gmail.com',
+                  password: 'BirukMengistu', uid:'123'}) }]
     });
   });
 
@@ -68,7 +73,7 @@ describe('Display Context-Packs component', () => {
   }));
 
   it('contains all the packs', () => {
-    expect(dpContextPacks.contextPacks.length).toBe(3);
+    expect(dpContextPacks.contextPacks.length).toBe(2);
   });
 
   it('should delete a context pack and then have 1 fewer context pack', () => {
@@ -81,9 +86,9 @@ describe('Display Context-Packs component', () => {
       wordlist: MockCPService.testList,
   });
     const idToDelete = 'panda';
-    expect(dpContextPacks.contextPacks.length).toBe(4);
-    dpContextPacks.removeCP(idToDelete);
     expect(dpContextPacks.contextPacks.length).toBe(3);
+    dpContextPacks.removeCP(idToDelete);
+    expect(dpContextPacks.contextPacks.length).toBe(2);
   });
 
   it('contains a pack named "canines"', () => {
@@ -91,7 +96,7 @@ describe('Display Context-Packs component', () => {
   });
 
   it('contains two packs that are enabled', () => {
-    expect(dpContextPacks.contextPacks.filter((pack: ContextPack) => pack.enabled === true).length).toBe(2);
+    expect(dpContextPacks.contextPacks.filter((pack: ContextPack) => pack.enabled === true).length).toBe(1);
   });
 
   it('Contains a pack whose icon is "https://can-do-canines.org/wp-content/uploads/2018/01/admin-ajax.jpg"', () => {
@@ -109,13 +114,13 @@ describe('Misbehaving Context Pack List', () => {
   let dpContextPacks: DisplayContextPacksComponent;
   let fixture: ComponentFixture<DisplayContextPacksComponent>;
   let cpServiceStub: {
-     getPacks: () =>  Observable<ContextPack[]>;
+     getUserPacks: () =>  Observable<ContextPack[]>;
   };
 
   beforeEach(() =>  {
     // Stub Context-Pack service for test purposes
     cpServiceStub = {
-      getPacks: () => new Observable(observer => {
+      getUserPacks: () => new Observable(observer => {
          observer.error('Error-prone observable');
       })
     };
