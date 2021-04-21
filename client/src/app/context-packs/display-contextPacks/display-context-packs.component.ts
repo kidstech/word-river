@@ -19,6 +19,7 @@ export class DisplayContextPacksComponent implements OnInit, OnDestroy {
   public icon: string;
   public enabled: boolean;
   public wordlist: Array<WordList>;
+  public learners = [1,2,3,4];
   getPackSub: Subscription;
 
   constructor(private packService: ContextPackService, private router: Router, private login: LoginService) { }
