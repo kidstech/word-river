@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
     console.log(this.login.user);
     // this.createForms();
     if (this.login.isLoggedIn) {
-      this.router.navigate(['packs']);
+      this.router.navigate(['home']);
     };
   }
   // update() {
@@ -100,7 +100,7 @@ export class LoginComponent implements OnInit {
       this.snackBar.open('Signed in successfully!', null, {
         duration: 3000
       });
-      this.router.navigate(['packs']);
+      this.router.navigate(['home']);
     }, (err) => {
       this.snackBar.open(err, null, {
         duration: 3000,
@@ -114,7 +114,7 @@ export class LoginComponent implements OnInit {
       this.snackBar.open('Signed up successfully!', null, {
         duration: 3000,
       });
-      this.router.navigate(['packs']);
+      this.router.navigate(['home']);
     }, (err) => {
       this.snackBar.open(err, null, {
         duration: 3000,

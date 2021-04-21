@@ -7,11 +7,11 @@
       <mat-tab label="LOGIN">
         <div class="auth-holder" id="logintab">
           <form class="auth-holder" (ngSubmit)="signIn();">
-            <input class="field" type="email"  name="email"
+            <input class="field" data-test="loginEmail" type="email"  name="email"
               placeholder="Email" [(ngModel)]="loginEmail">
-            <input class="field"  type="password" name="password"
+            <input class="field" data-test="loginPassword"  type="password" name="password"
               placeholder="Password" [(ngModel)]="loginPass">
-            <button class="auth-btn" (click)="signIn()">
+            <button class="auth-btn" data-test="loginButton"  (click)="signIn()">
               LOGIN
             </button>
           </form>
