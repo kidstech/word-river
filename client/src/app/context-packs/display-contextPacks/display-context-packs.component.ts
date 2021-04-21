@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user-service/user.service';
 import { LoginService } from './../../services/login-service/login.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ContextPack } from '../../datatypes/contextPacks';
@@ -19,10 +20,13 @@ export class DisplayContextPacksComponent implements OnInit, OnDestroy {
   public icon: string;
   public enabled: boolean;
   public wordlist: Array<WordList>;
-  public learners = [1,2,3,4];
+  public learners = [];
   getPackSub: Subscription;
 
-  constructor(private packService: ContextPackService, private router: Router, private login: LoginService) { }
+  constructor(private packService: ContextPackService, private router: Router,
+     private login: LoginService,
+     private users: UserService
+     ) { }
 
   getPacksFromServer(): void {
     this.unsub();
@@ -33,6 +37,9 @@ export class DisplayContextPacksComponent implements OnInit, OnDestroy {
         console.log(err);
       });
     safe(() => { this.name = this.login.user.name; }, this.login.user);
+    this.users.getLearners(this.login.authID).subscribe(learners=>{
+      this.learners = learners;
+    });
   }
 
   ngOnInit(): void {

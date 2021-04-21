@@ -1,6 +1,6 @@
 export class Learner {
 
-    _id: string;
+    _id?: string;
     name: string;
     icon: string;
     learnerPacks: Array<string>;

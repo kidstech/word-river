@@ -21,6 +21,7 @@ import { ImportWordlistComponent } from './wordlists/import-wordlist/import-word
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DisplayContextPacksComponent } from './context-packs/display-contextPacks/display-context-packs.component';
 import { AddContextPackComponent } from './context-packs/add-contextPacks/add-contextPacks.component';
+import { CreateLearnerComponent } from './learners/create-learner/create-learner.component';
 
 export const COMMON_IMPORTS = [
   MatButtonModule,
@@ -47,6 +48,7 @@ const routes: Routes = [
   {path: 'packs/:id/import', component: ImportWordlistComponent},
   {path: 'packs/:id/new', component: AddWordListComponent},
   {path: 'packs/:id/:name', component: ViewWordlistComponent},
+  {path: 'learners/new', component: CreateLearnerComponent},
 
 ];
 

@@ -48,6 +48,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { UserService } from './services/user-service/user.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LearnerCardComponent } from './learners/learner-card/learner-card.component';
+import { CreateLearnerComponent } from './learners/create-learner/create-learner.component';
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -89,7 +90,8 @@ const MATERIAL_MODULES: any[] = [
     ContextPackCardComponent,
     AddContextPackComponent,
     LoginComponent,
-    LearnerCardComponent
+    LearnerCardComponent,
+    CreateLearnerComponent
   ],
   imports: [
     BrowserModule,

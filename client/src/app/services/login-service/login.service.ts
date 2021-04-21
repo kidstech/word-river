@@ -112,7 +112,7 @@ export class LoginService {
     return user;
   }
   get authID() {
-    return this.user ? this.user.uid : null;
+    return this.user ? this.user.authId : null;
   }
   // // Sign in with Google
   // googleAuth() {

@@ -128,3 +128,18 @@ div::-webkit-scrollbar-thumb {
   border-radius: 20px; /* roundness of the scroll thumb */
   border: 0px solid #000; /* creates padding around scroll thumb */
 }
+@font-face {
+  font-family: "ProductSans";
+  src: url('/assets/ProductSansRegular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "ProductSansBold";
+  src: url('/assets/ProductSansBold.ttf') format("truetype");
+}
+.productSans{
+  font-family: 'ProductSans';
+}
+.productSansBold{
+  font-family: 'ProductSansBold';
+}
