@@ -1,4 +1,9 @@
+import { LoginService } from 'src/app/services/login-service/login.service';
+import { ContextPackService } from 'src/app/services/contextPack-service/contextpack.service';
+import { UserService } from './../../services/user-service/user.service';
 import { Component, Input, OnInit } from '@angular/core';
+import { Learner } from 'src/app/datatypes/learner';
+import { ContextPack } from 'src/app/datatypes/contextPacks';
 
 @Component({
   selector: 'app-learner-card',
@@ -6,12 +11,23 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./learner-card.component.scss']
 })
 export class LearnerCardComponent implements OnInit {
-  @Input() learner;
+  @Input() learner: Learner;
 
-  constructor() { }
+  packs: ContextPack[];
+  displayed: ContextPack[];
+
+  constructor(private cpService: ContextPackService,private login: LoginService) { }
 
 
   ngOnInit(): void {
+    this.cpService.getLearnerPacks(this.login.authID,this.learner._id).subscribe(p=>{
+      let count = 0;
+      this.packs = p;
+      this.displayed = p.filter(_=>{
+        count++;
+        return count <= 5;
+      });
+    });
   }
 
 }

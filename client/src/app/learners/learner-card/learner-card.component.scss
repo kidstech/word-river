@@ -13,6 +13,7 @@
   align-items: center;
   width: 200px;
   height: 250px;
+  outline: none;
 }
 mat-card{
   border-radius: 15px;
@@ -31,7 +32,7 @@ mat-card:hover {
 .name{
   font-family: 'ProductSans';
   font-size: x-large;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   margin-top: 20px;
 }
 
@@ -51,12 +52,11 @@ mat-card:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
 }
 .learner-cps{
   height: 20px;
   width: 20px;
   border-radius: 100%;
   object-fit: cover;
-  margin-right: 3px;
-  margin-left: 3px;
 }

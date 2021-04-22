@@ -1,7 +1,7 @@
 import { ContextPackService } from './../../services/contextPack-service/contextpack.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { LoginService } from 'src/app/services/login-service/login.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from './../../services/user-service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Learner } from 'src/app/datatypes/learner';
@@ -28,7 +28,8 @@ export class EditLearnerComponent implements OnInit {
     private route: ActivatedRoute,
     private login: LoginService,
     private storage: AngularFireStorage,
-    private packs: ContextPackService
+    private packs: ContextPackService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -65,5 +66,32 @@ export class EditLearnerComponent implements OnInit {
         });
       })
     ).subscribe();
+  }
+  exists(pack) {
+    return this.learnerPacks.some(p => p._id === pack._id);
+  }
+  remove(pack) {
+    console.log('agsgfag');
+
+    this.learnerPacks = this.learnerPacks.filter(p => p._id !== pack._id);
+  }
+  add(pack) {
+    this.learnerPacks.push(pack);
+  }
+
+  saveChanges() {
+    this.users.editLearner(
+      this.login.authID,
+      this.learner._id,
+      { _id:this.learner._id,
+        name: this.name,
+         icon: this.downloadURL,
+          learnerPacks: this.learnerPacks.map(l=>l._id) }
+    ).subscribe(res=>{
+      this.router.navigate(['/home']);
+    },err=>console.log(err)
+    );
+    // console.log({learner: this.learner._id,name: this.name, icon: this.downloadURL, learnerPacks: this.learnerPacks });
+
   }
 }

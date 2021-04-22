@@ -10,21 +10,21 @@
       </div>
       <input class="field" type="text" name="name" placeholder="Name" [(ngModel)]="name">
       <div class="count-container">
-        <h3>{{learner ? learner.learnerPacks.length : 0}}</h3>
+        <h3>{{learnerPacks ? learnerPacks.length : 0}}</h3>
         <h4>Packs</h4>
       </div>
-      <div class="cp-holder">
+      <div class="cp-holder" *ngIf="learnerPacks ? learnerPacks.length !== 0 : false">
         <div class="learnercpholder" *ngFor="let pack of learnerPacks">
-          <span class="remove">X</span>
-          <img class="learner-cps" src="{{pack ? pack.icon : ''}}" onerror="this.src='/assets/add-img.png'">
+          <mat-icon (click)="remove(pack)" class="remove">cancel</mat-icon>
+          <img class="learner-cps" src="{{pack ? pack.icon : ''}}" onerror="this.src='https://st2.depositphotos.com/3616015/5374/v/600/depositphotos_53741327-stock-illustration-abc-blocks-flat-icon-with.jpg'">
           <p>{{pack ? pack.name : ''}}</p>
         </div>
       </div>
       <div style="display: flex;gap: 20px;">
-        <button class="auth-btn cancel" data-test="loginButton" (click)="true">
+        <button class="auth-btn cancel" routerLink="/home"data-test="loginButton" (click)="true">
           CANCEL
         </button>
-        <button class="auth-btn" data-test="loginButton" (click)="true">
+        <button class="auth-btn" data-test="loginButton" (click)="saveChanges()">
           SAVE CHANGES
         </button>
       </div>
@@ -39,8 +39,30 @@
     </a>
   </div>
   <div class="context-pack-display">
-    <app-cp-card simple="true"  *ngFor="let pack of userPacks" class="cp-card"
-      [contextPack]="pack"></app-cp-card>
+
+    <mat-card class="cp-card1" *ngFor="let pack of userPacks" data-test="viewContextPackButton" (click)="true">
+      <div class="container1">
+        <div class="top1">
+          <div class="details-container">
+            <img src="{{pack ? pack.icon : ''}}"
+              onerror="this.src='https://st2.depositphotos.com/3616015/5374/v/600/depositphotos_53741327-stock-illustration-abc-blocks-flat-icon-with.jpg'"
+              class="cp-icon1">
+            <div class="cp-profile1">
+              <h2 class="header">{{pack ? pack.name : ''}}</h2>
+              <h5>{{pack ? (pack.enabled ? 'Enabled' : 'Disabled') : ''}}</h5>
+            </div>
+          </div>
+          <button class="auth-btn assign" *ngIf="!exists(pack)" data-test="loginButton" (click)="add(pack)">
+            ASSIGN
+          </button>
+          <button class="auth-btn assigned" disabled *ngIf="exists(pack)" data-test="loginButton" (click)="true">
+            ASSIGNED
+          </button>
+        </div>
+      </div>
+    </mat-card>
+
+
     <div class="placeholder" *ngIf="userPacks ? userPacks.length === 0 : false;">
       <mat-icon>assignment</mat-icon>
       <h2 style="opacity: 0.9;">No Context Packs to display.</h2>

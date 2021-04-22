@@ -184,3 +184,12 @@ box-shadow: inset 0px 5px 15px -3px rgba(0,0,0,0.1);
 .learners-display{
   gap:20px
 }
+.link{
+  color:white;
+  text-decoration: none;
+}
+.link:hover{
+  color:white;
+  opacity: 1;
+  text-decoration: underline;
+}
