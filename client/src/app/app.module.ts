@@ -49,6 +49,7 @@ import { UserService } from './services/user-service/user.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LearnerCardComponent } from './learners/learner-card/learner-card.component';
 import { CreateLearnerComponent } from './learners/create-learner/create-learner.component';
+import { EditLearnerComponent } from './learners/edit-learner/edit-learner.component';
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -91,7 +92,8 @@ const MATERIAL_MODULES: any[] = [
     AddContextPackComponent,
     LoginComponent,
     LearnerCardComponent,
-    CreateLearnerComponent
+    CreateLearnerComponent,
+    EditLearnerComponent
   ],
   imports: [
     BrowserModule,

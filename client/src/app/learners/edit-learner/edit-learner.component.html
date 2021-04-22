@@ -1,0 +1,50 @@
+<div class="container">
+  <mat-card class="outer">
+    <div>
+      <div class="image-upload">
+        <label for="file-input">
+          <img src="{{downloadURL}}" onerror="this.src='/assets/add-img.png'" class="pp">
+        </label>
+        <input type="file" id="file-input" (change)="!uploading ? onFileAdded($event) : {}"
+          accept=".png,.jpg,.jpeg,.gif" />
+      </div>
+      <input class="field" type="text" name="name" placeholder="Name" [(ngModel)]="name">
+      <div class="count-container">
+        <h3>{{learner ? learner.learnerPacks.length : 0}}</h3>
+        <h4>Packs</h4>
+      </div>
+      <div class="cp-holder">
+        <div class="learnercpholder" *ngFor="let pack of learnerPacks">
+          <span class="remove">X</span>
+          <img class="learner-cps" src="{{pack ? pack.icon : ''}}" onerror="this.src='/assets/add-img.png'">
+          <p>{{pack ? pack.name : ''}}</p>
+        </div>
+      </div>
+      <div style="display: flex;gap: 20px;">
+        <button class="auth-btn cancel" data-test="loginButton" (click)="true">
+          CANCEL
+        </button>
+        <button class="auth-btn" data-test="loginButton" (click)="true">
+          SAVE CHANGES
+        </button>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="top">
+    <h1 class="header" style="margin-bottom: 0px;">Context Packs</h1>
+    <a class="add-cp-button" data-test="addCpButton" routerLink="/packs/new">
+      <mat-icon>add</mat-icon>
+      <span>Add</span>
+    </a>
+  </div>
+  <div class="context-pack-display">
+    <app-cp-card simple="true"  *ngFor="let pack of userPacks" class="cp-card"
+      [contextPack]="pack"></app-cp-card>
+    <div class="placeholder" *ngIf="userPacks ? userPacks.length === 0 : false;">
+      <mat-icon>assignment</mat-icon>
+      <h2 style="opacity: 0.9;">No Context Packs to display.</h2>
+      <h4 style="opacity: 0.7;">There are no more context packs that you can add to this student.</h4>
+    </div>
+  </div>
+</div>

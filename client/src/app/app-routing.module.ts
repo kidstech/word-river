@@ -1,3 +1,4 @@
+import { EditLearnerComponent } from './learners/edit-learner/edit-learner.component';
 import { LoginComponent } from './auth/login/login.component';
 import { DisplayWordlistComponent } from './wordlists/display-wordlist/display-wordlist.component';
 import { NgModule } from '@angular/core';
@@ -49,6 +50,7 @@ const routes: Routes = [
   {path: 'packs/:id/new', component: AddWordListComponent},
   {path: 'packs/:id/:name', component: ViewWordlistComponent},
   {path: 'learners/new', component: CreateLearnerComponent},
+  {path: 'learners/:id', component: EditLearnerComponent},
 
 ];
 
