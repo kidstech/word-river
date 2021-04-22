@@ -30,6 +30,7 @@ describe('Display Context Pack', () => {
     });
 
     it('Should click "View Context Pack" on a context pack and have one word list', () => {
+      cy.wait(1000);
       page.getCpCards().first().then((card) => {
 
           page.clickViewCp(page.getCpCards().first());
@@ -50,6 +51,5 @@ describe('Display Context Pack', () => {
         page.clickDeleteCp(page.getCpCards().first());
         page.getDeleteCpConfirmation(page.getCpCards().first());
         page.getCpCards().should('have.length', 2);
-
     });
 });

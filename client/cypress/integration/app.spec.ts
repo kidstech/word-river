@@ -14,6 +14,7 @@ describe('App', () => {
   beforeEach(() => page.navigateTo());
 
   it('Should click the home button and navigate to the home page', () => {
+    cy.wait(1000);
     page.getHomeButton();
     cy.url().should('match', /\/home$/);
   });
@@ -26,6 +27,7 @@ describe('App', () => {
 
   it('Should go back to home page when back button is clicked from display wordlists', () => {
     page.navigateToPack();
+    cy.wait(1000);
     page.getBackButton().click();
     cy.url().should('match', /\/home$/);
   });
