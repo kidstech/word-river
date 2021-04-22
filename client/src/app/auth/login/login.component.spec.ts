@@ -49,7 +49,7 @@ describe('LoginComponent', () => {
       MatInputModule,
       BrowserAnimationsModule,
        RouterTestingModule.withRoutes([
-         { path: 'packs', component: DisplayContextPacksComponent }
+         { path: 'home', component: DisplayContextPacksComponent }
        ])
      ],
      declarations: [ LoginComponent ],

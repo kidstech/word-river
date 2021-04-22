@@ -17,6 +17,8 @@ import { FirebaseAuthMock } from 'src/testing/firebase-auth-mock';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { LoginService } from 'src/app/services/login-service/login.service';
+import { LoginServiceMock } from 'src/testing/login-service-mock';
 
 describe('AddCpComponent', () => {
   let addContextPack: AddContextPackComponent;
@@ -42,7 +44,9 @@ describe('AddCpComponent', () => {
       declarations: [ AddContextPackComponent ],
       providers: [{ provide: ContextPackService, useValue: new MockCPService() },
         { provide: AngularFireStorage, useValue: new FireStorageMock() },
-        { provide: AngularFireAuth, useValue: new FirebaseAuthMock() }
+        { provide: AngularFireAuth, useValue: new FirebaseAuthMock() },
+        { provide: LoginService, useValue: new LoginServiceMock({ email: 'biruk@gmail.com',
+        password: 'BirukMengistu', uid:'123'}) }
       ]
     })
     .compileComponents().catch(error => {

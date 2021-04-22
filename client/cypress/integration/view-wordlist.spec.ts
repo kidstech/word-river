@@ -13,6 +13,7 @@ describe('View WordList GridView', () => {
   });
 
   it('Should load wordlists', () => {
+    cy.wait(1000);
     page.getWordCards().should('have.length', '10');
   });
 

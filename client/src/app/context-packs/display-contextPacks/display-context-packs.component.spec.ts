@@ -128,7 +128,9 @@ describe('Misbehaving Context Pack List', () => {
     TestBed.configureTestingModule({
       imports: [COMMON_IMPORTS],
       declarations:  [DisplayContextPacksComponent],
-      providers: [{provide: ContextPackService, useValue: cpServiceStub}]
+      providers: [{provide: ContextPackService, useValue: cpServiceStub},
+        { provide: LoginService, useValue: new LoginServiceMock({ email: 'biruk@gmail.com',
+        password: 'BirukMengistu', uid:'123'}) }]
     });
   });
 
