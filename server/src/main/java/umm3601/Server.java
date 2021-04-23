@@ -99,7 +99,7 @@ public class Server {
     server.post("/api/users/:id", userController:: createLearner);
     server.post("/api/users", userController::createUser);
     server.get("/api/users/:id/learners", userController::getLearners);
-    server.get("api/users/:id/:learnerId", userController::getLearner);
+    server.get("/api/users/:id/:learnerId", userController::getLearner);
     server.put("/api/users/:id/:learnerId", userController::editLearner);
     server.delete("/api/users/:authId/:learnerId/:packId", userController::removePackFromLearner);
     server.put("/api/users/:id/:learnerId/:packId", userController:: addPackToLearner);

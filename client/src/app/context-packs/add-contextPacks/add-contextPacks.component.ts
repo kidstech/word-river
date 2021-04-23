@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
+import { LoginService } from 'src/app/services/login-service/login.service';
 import { ContextPack } from '../../datatypes/contextPacks';
 import { ContextPackService } from '../../services/contextPack-service/contextpack.service';
 
@@ -42,6 +43,7 @@ export class AddContextPackComponent implements OnInit {
     private storage: AngularFireStorage,
     private cpService: ContextPackService,
     private snackBar: MatSnackBar,
+    private login: LoginService,
     private router: Router) { }
 
   createForms() {
@@ -71,7 +73,7 @@ export class AddContextPackComponent implements OnInit {
       this.addContextPackForm.value.icon = this.downloadURL ? this.downloadURL : '';
     }
     const {name,icon,enabled} = this.addContextPackForm.value;
-    this.cpService.addPack({name,icon,enabled,wordlists:[]}).subscribe(newID => {
+    this.cpService.addNewContextPackToUser(this.login.user.authId, {name,icon,enabled,wordlists:[]}).subscribe(newID => {
       this.snackBar.open('Added the ' + this.addContextPackForm.value.name + ' context pack successfully', null, {
         duration: 2000,
       });

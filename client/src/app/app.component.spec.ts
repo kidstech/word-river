@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { environment } from './../environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
@@ -35,6 +36,7 @@ describe('AppComponent', () => {
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireStorageModule,
         MatSnackBarModule,
+        HttpClientTestingModule,
         RouterTestingModule.withRoutes([
           {path:'packs/new',component:AddContextPackComponent},
           {path:'packs/123456789112345678921234',component:AddContextPackComponent},
@@ -81,7 +83,7 @@ describe('AppComponent', () => {
     spyOn(location, 'path').and.returnValue('packs/new');
     spyOn(router, 'navigate');
     component.goBack();
-    expect(router.navigate).toHaveBeenCalledWith(['']);
+    expect(router.navigate).toHaveBeenCalledWith(['/home']);
   });
   it(`goBack() works with display wordlists page`, () => {
     router.navigate(['packs/123456789112345678921234']);
@@ -89,7 +91,7 @@ describe('AppComponent', () => {
     spyOn(location, 'path').and.returnValue('packs/123456789112345678921234');
     spyOn(router, 'navigate');
     component.goBack();
-    expect(router.navigate).toHaveBeenCalledWith(['']);
+    expect(router.navigate).toHaveBeenCalledWith(['/home']);
   });
 
   it(`goBack() works with import wordlist page`, () => {

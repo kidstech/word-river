@@ -1,0 +1,28 @@
+<div class="outer">
+  <div class="container">
+    <form>
+      <mat-card class="add-learner-card">
+        <h1 class="title">Create a student profile</h1>
+        <div class="image-upload">
+          <label for="file-input">
+            <img src="{{downloadURL}}" onerror="this.src='/assets/add-img.png'" class="cp-icon">
+          </label>
+          <input type="file" id="file-input" (change)="!uploading ? onFileAdded($event) : {}"
+            accept=".png,.jpg,.jpeg,.gif" />
+        </div>
+        <input class="field" type="text" name="name"
+              placeholder="Name" [(ngModel)]="name">
+        <mat-card-actions align="end">
+          <button mat-button type="button" color="accent" routerLink="/home"
+            data-test="cancelCpButton">
+            CANCEL
+          </button>
+          <button mat-button type="button" color="primary" [disabled]="name ? name.length === 0 : true" type="submit"
+          data-test="addCpButton" (click)="createLearner()">
+          ADD LEARNER
+        </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
+</div>

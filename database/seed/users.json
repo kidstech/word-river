@@ -1,0 +1,61 @@
+[{
+  "_id": {
+    "$oid": "605bc9d893b2d94300a98753"
+  },
+  "authId": "nNgiquQmZzURvnnDrp3VlklE1kx2",
+  "icon": "https://pbs.twimg.com/profile_images/1320782895318007811/PrmXyscz.jpg",
+  "learners": [
+    {
+    "name": "Johnson Doe",
+    "icon": "image2.png",
+    "learnerPacks": ["605bc9d893b2d94300a98753"]
+    },
+    {
+    "name": "Steve Doe",
+    "icon": "image3.png",
+    "learnerPacks": ["605bc9d893b2d94300a98753", "604cdf3c63292e16753345f8"]
+    }
+  ],
+  "contextPacks": ["605bc9d893b2d94300a98753", "604cdf3c63292e16753345f8", "604cdf3cbb468a7463ad4d85" ]
+},
+{
+  "_id": {
+    "$oid": "605bc9d893b2d94300a98444"
+  },
+  "authId": "MUye7dAUlqYVGt9JD63Qb7dby152",
+  "icon": "https://pbs.twimg.com/profile_images/1320782895318007811/PrmXyscz.jpg",
+  "learners": [
+    {
+    "name": "Johnson Doe",
+    "icon": "image2.png",
+    "learnerPacks": ["605bc9d893b2d94300a98753"]
+    },
+    {
+    "name": "Steve Doe",
+    "icon": "image3.png",
+    "learnerPacks": ["605bc9d893b2d94300a98753", "604cdf3c63292e16753345f8"]
+    }
+  ],
+  "contextPacks": ["605bc9d893b2d94300a98753", "604cdf3c63292e16753345f8", "604cdf3cbb468a7463ad4d85" ]
+},
+{
+  "_id": {
+    "$oid": "605bc9d893b2d94300a98555"
+  },
+  "authId": "Kgi2sOVjvPUq4SUSB33rJm2VU8I3",
+  "icon": "https://pbs.twimg.com/profile_images/1320782895318007811/PrmXyscz.jpg",
+  "learners": [
+    {
+    "name": "Johnson Doe",
+    "icon": "image2.png",
+    "learnerPacks": ["605bc9d893b2d94300a98753"]
+    },
+    {
+    "name": "Steve Doe",
+    "icon": "image3.png",
+    "learnerPacks": ["605bc9d893b2d94300a98753", "604cdf3c63292e16753345f8"]
+    }
+  ],
+  "contextPacks": ["605bc9d893b2d94300a98753", "604cdf3c63292e16753345f8", "604cdf3cbb468a7463ad4d85" ]
+
+}]

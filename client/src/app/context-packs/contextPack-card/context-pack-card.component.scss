@@ -1,5 +1,15 @@
+@font-face {
+  font-family: "ProductSans";
+  src: url('/assets/ProductSansRegular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "ProductSansBold";
+  src: url('/assets/ProductSansBold.ttf') format("truetype");
+}
+
 .cp-card:hover {
-  background-color: rgba(0, 0, 0, 0.068);
+  background-color: rgb(54, 54, 54);
   cursor: pointer;
 }
 
@@ -48,6 +58,8 @@
   height: 152px;
   margin: 0px 20px 20px 0px;
   padding: 20px;
+  border-radius: 15px;
+  transition: background-color 80ms ease;
 }
 
 .enabled {
@@ -116,11 +128,11 @@
   height: 80px;
   width: 100%;
   margin: 20px 0px 0px 0px;
-  background-color: rgba(0, 0, 0, 0.089);
-  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.055);
+  border-radius: 15px;
 }
 .separator {
-  background-color: #8b8b8b83;
+  background-color: #00000015;
   height: 80%;
   width: 2px;
 }
@@ -152,4 +164,7 @@
 }
 .confirmation button {
   width: 300px;
+}
+.header{
+  font-family: 'ProductSans';
 }

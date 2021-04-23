@@ -1,16 +1,23 @@
+import { LoginPage } from 'cypress/support/login.po';
 import { DisplayContextPacksComponent } from '../support/display-contextPacks.po';
 
 const page = new DisplayContextPacksComponent();
+const loginPage = new LoginPage();
 
 describe('Display Context Pack', () => {
 
+  beforeEach(()=> {
+    loginPage.navigateTo();
+    loginPage.login();
+    cy.wait(1000);
+  });
     beforeEach(() => {
         page.navigateTo();
         cy.task('seed:database');
     });
 
-    it('Should have 4 context packs', () => {
-        page.getCpCards().should('have.length', 4);
+    it('Should have 3 context packs', () => {
+        page.getCpCards().should('have.length', 3);
     });
 
     it('Should click "View Context Pack" on a context pack and lead to a valid URL', () => {
@@ -23,6 +30,7 @@ describe('Display Context Pack', () => {
     });
 
     it('Should click "View Context Pack" on a context pack and have one word list', () => {
+      cy.wait(1000);
       page.getCpCards().first().then((card) => {
 
           page.clickViewCp(page.getCpCards().first());
@@ -42,7 +50,6 @@ describe('Display Context Pack', () => {
     it('Should click Delete Context Pack and remove the context pack from the page',() => {
         page.clickDeleteCp(page.getCpCards().first());
         page.getDeleteCpConfirmation(page.getCpCards().first());
-        page.getCpCards().should('have.length', 3);
-
+        page.getCpCards().should('have.length', 2);
     });
 });

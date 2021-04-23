@@ -11,6 +11,16 @@
 //   border-top: 4px solid #2196f3;
 // }
 
+@font-face {
+  font-family: "ProductSans";
+  src: url('/assets/ProductSansRegular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "ProductSansBold";
+  src: url('/assets/ProductSansBold.ttf') format("truetype");
+}
+
 .word-name {
   font-weight: bold;
   overflow: hidden;
@@ -164,8 +174,8 @@
   margin-bottom: 30px;
   font-family: "Ubuntu", sans-serif;
   width: 310px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   height: 155px;
   margin-right: 20px;
   border-top: 3px solid #d11947;
@@ -175,8 +185,8 @@
   margin-bottom: 30px;
   font-family: "Ubuntu", sans-serif;
   width: 310px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   height: 155px;
   margin-right: 20px;
   border-top: 3px solid #21f3bf;
@@ -186,8 +196,8 @@
   margin-bottom: 30px;
   font-family: "Ubuntu", sans-serif;
   width: 310px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   height: 155px;
   margin-right: 20px;
   border-top: 3px solid #2196f3;
@@ -197,8 +207,8 @@
   margin-bottom: 30px;
   font-family: "Ubuntu", sans-serif;
   width: 310px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   height: 155px;
   margin-right: 20px;
   border-top: 3px solid #f3bb21;

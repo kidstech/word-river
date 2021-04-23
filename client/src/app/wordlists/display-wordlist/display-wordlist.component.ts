@@ -48,7 +48,7 @@ export class DisplayWordlistComponent implements OnInit {
 
   delete(){
     this.cpservice.deletePack(this.pack._id).subscribe((r)=>{
-      this.router.navigate(['']);
+      this.router.navigate(['home']);
     });
   }
 

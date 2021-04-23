@@ -101,6 +101,7 @@
 .placeholder {
   width: 100%;
   display: flex;
+  padding-top: 100px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -113,6 +114,9 @@
 .placeholder > h2 {
   margin-top: 20px;
   margin-bottom: 0px;
+  font-family: 'ProductSans';
+  font-weight: 500;
+  font-size: x-large;
 }
 .wordgridcards {
   height: 200px;

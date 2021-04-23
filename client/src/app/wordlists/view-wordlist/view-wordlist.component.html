@@ -51,7 +51,7 @@
       <button mat-raised-button [disabled]="!true" class="save" style="padding:20px;margin-top: 20px;" color="primary"
         (click)="save()" data-test="saveWordListButton">Save word list</button>
     </div>
-    <div [ngClass]="{'grid': gridView,'list': !gridView}">
+    <div id="grid" [ngClass]="{'grid': gridView,'list': !gridView}">
       <div class="placeholder" *ngIf="words ? words.length === 0 : true">
         <mat-icon>font_download</mat-icon>
         <h2 style="opacity: 0.9;">No words added yet.</h2>

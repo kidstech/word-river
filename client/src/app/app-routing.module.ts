@@ -1,3 +1,5 @@
+import { EditLearnerComponent } from './learners/edit-learner/edit-learner.component';
+import { LoginComponent } from './auth/login/login.component';
 import { DisplayWordlistComponent } from './wordlists/display-wordlist/display-wordlist.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -20,6 +22,7 @@ import { ImportWordlistComponent } from './wordlists/import-wordlist/import-word
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DisplayContextPacksComponent } from './context-packs/display-contextPacks/display-context-packs.component';
 import { AddContextPackComponent } from './context-packs/add-contextPacks/add-contextPacks.component';
+import { CreateLearnerComponent } from './learners/create-learner/create-learner.component';
 
 export const COMMON_IMPORTS = [
   MatButtonModule,
@@ -39,12 +42,15 @@ export const COMMON_IMPORTS = [
 ];
 
 const routes: Routes = [
-  {path: '', component: DisplayContextPacksComponent},
+  {path: '', component: LoginComponent,data: {animation: 'LoginPage'}},
+  {path: 'home', component: DisplayContextPacksComponent,data: {animation: 'HomePage'}},
   {path: 'packs/new', component: AddContextPackComponent},
   {path: 'packs/:id', component: DisplayWordlistComponent},
   {path: 'packs/:id/import', component: ImportWordlistComponent},
   {path: 'packs/:id/new', component: AddWordListComponent},
   {path: 'packs/:id/:name', component: ViewWordlistComponent},
+  {path: 'learners/new', component: CreateLearnerComponent},
+  {path: 'learners/:id', component: EditLearnerComponent},
 
 ];
 

@@ -13,6 +13,12 @@ import { MockCPService } from 'src/testing/context-pack.service.mock';
 import { ContextPackService } from '../../services/contextPack-service/contextpack.service';
 import { FireStorageMock } from 'src/testing/angular-fire-storage-mock';
 import { DisplayWordlistComponent } from 'src/app/wordlists/display-wordlist/display-wordlist.component';
+import { FirebaseAuthMock } from 'src/testing/firebase-auth-mock';
+import { AngularFireAuth } from '@angular/fire/auth';
+
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { LoginService } from 'src/app/services/login-service/login.service';
+import { LoginServiceMock } from 'src/testing/login-service-mock';
 
 describe('AddCpComponent', () => {
   let addContextPack: AddContextPackComponent;
@@ -29,6 +35,7 @@ describe('AddCpComponent', () => {
         MatFormFieldModule,
         MatSelectModule,
         MatInputModule,
+        HttpClientTestingModule,
         BrowserAnimationsModule,
         RouterTestingModule.withRoutes([
           { path: 'packs/fakeid', component: DisplayWordlistComponent }
@@ -36,7 +43,10 @@ describe('AddCpComponent', () => {
       ],
       declarations: [ AddContextPackComponent ],
       providers: [{ provide: ContextPackService, useValue: new MockCPService() },
-        { provide: AngularFireStorage, useValue: new FireStorageMock() }
+        { provide: AngularFireStorage, useValue: new FireStorageMock() },
+        { provide: AngularFireAuth, useValue: new FirebaseAuthMock() },
+        { provide: LoginService, useValue: new LoginServiceMock({ email: 'biruk@gmail.com',
+        password: 'BirukMengistu', uid:'123'}) }
       ]
     })
     .compileComponents().catch(error => {
@@ -135,6 +145,11 @@ describe('AddCpComponent', () => {
     spyOn(window as any, 'FileReader').and.returnValue(mockReader);
 
     addContextPack.onFileAdded(mockEvt as any);
+    });
+
+    it('Should throw an error upon an error', () => {
+      addContextPack.addContextPackForm.controls.name.setValue(null);
+      expect(addContextPack.submitForm()).toBeUndefined();
     });
 
   });

@@ -1,14 +1,19 @@
 import { AddWordListPage } from '../support/add-wordlist.po';
+import { LoginPage } from 'cypress/support/login.po';
 
 describe('Add Wordlist', () => {
   const page = new AddWordListPage();
+  const loginPage = new LoginPage();
 
 
-  before(() => {
-    cy.task('seed:database');
-  });
+  // before(()=> {
+  //   loginPage.navigateTo();
+  //   loginPage.login();
+  //   cy.wait(1000);
+  // });
 
   beforeEach(() => {
+    cy.task('seed:database');
     page.navigateTo();
   });
 
@@ -56,7 +61,7 @@ describe('Add Wordlist', () => {
 
   it('Should add a wordlist', () => {
     page.addWordList({
-      name: 'funpack',
+      name: 'funpacks',
       enabled: true,
       nouns: [{ word: 'clown', forms: ['clowns'] }],
       adjectives: [{ word: 'heavy', forms: ['heavy', 'heavier', 'heavily'] }],
@@ -75,7 +80,7 @@ describe('Add Wordlist', () => {
       verbs: [{ word: 'laugh', forms: ['laugh', 'laughing', 'laughed'] }],
       misc: [{ word: 'to', forms: [] }]
     });
-    cy.get('.mat-simple-snackbar').should('contain',`There is already a Word List with the name birthday in the context pack`);
+    cy.get('.mat-simple-snackbar').should('be.visible');
   });
 
   it('Add form works for valid input', () => {

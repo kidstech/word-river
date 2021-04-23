@@ -13,7 +13,7 @@ describe('ImportWordlistComponent', () => {
   let component: ImportWordlistComponent;
   let fixture: ComponentFixture<ImportWordlistComponent>;
   const paramMap = new Map();
-  paramMap.set('id', 'meow');
+  paramMap.set('id', 'wow');
   const ex = {
     name: 'testWordlistForImport',
     enabled: true,
@@ -27,7 +27,7 @@ describe('ImportWordlistComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ImportWordlistComponent],
       imports: [HttpClientTestingModule, RouterTestingModule.withRoutes([
-        { path: 'packs/meow', component: DisplayWordlistComponent }
+        { path: 'packs/wow', component: DisplayWordlistComponent }
       ]), COMMON_IMPORTS],
       providers: [{ provide: WordListService, useValue: new MockWordListService() }, {
         provide: ActivatedRoute,
@@ -60,7 +60,7 @@ describe('ImportWordlistComponent', () => {
 
   it('should save', () => {
     component.wordlist = ex;
-    component.id = 'meow';
+    component.id = 'wow';
     expect(component.save()).toBe(true);
     component.wordlist = undefined;
     expect(component.save()).toBe(false);

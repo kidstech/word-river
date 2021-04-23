@@ -219,6 +219,7 @@ public class UserController {
     else if(!removed) {
       throw new NotFoundResponse("The context pack does not exist");
     }
+    ctx.json(ImmutableMap.of("id", contextPackId));
   }
 
   protected String findByAuthId(String authId) {
