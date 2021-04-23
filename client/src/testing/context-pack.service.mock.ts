@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ContextPack } from 'src/app/datatypes/contextPacks';
+import { Learner } from 'src/app/datatypes/learner';
 import { User } from 'src/app/datatypes/user';
 import { WordList } from 'src/app/datatypes/wordlist';
 import { ContextPackService } from 'src/app/services/contextPack-service/contextpack.service';
@@ -118,13 +119,35 @@ export class MockCPService extends ContextPackService {
         }
     ];
 
+    static learners: Learner[] = [
+      {
+        _id: '123',
+        name: 'George',
+        icon: 'image.jpg',
+        learnerPacks: ['meow', 'woof', 'moo']
+      },
+      {
+        _id: '345',
+        name: 'Steve',
+        icon: 'image.jpg',
+        learnerPacks: ['football', 'soccer']
+      },
+      {
+        _id: '678',
+        name: 'Peter',
+        icon: 'image.jpg',
+        learnerPacks: ['bananas', 'apples']
+      }
+    ];
+
      testUser: User = {
       authId: '12345',
       name: 'John Doe',
       icon: 'image.png',
       learners: [],
-      contextPacks: ['meow','woof']
+      contextPacks: ['meow','woof', 'moo']
     };
+
     constructor() {
       super(null);
     }

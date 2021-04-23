@@ -28,7 +28,7 @@ describe('LoginService', () => {
   let fixture: ComponentFixture<LoginService>;
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
-  const john = { name: 'john', email: 'asg@aqega.ags', password: 'sagasgasg', uid: '123' };
+  const john = { name: 'john', email: 'asg@aqega.ags', password: 'sagasgasg', authId: '123' };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

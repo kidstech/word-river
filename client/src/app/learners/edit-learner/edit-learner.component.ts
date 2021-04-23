@@ -45,7 +45,7 @@ export class EditLearnerComponent implements OnInit {
             this.userPacks = px;
           });
         });
-      }, err => console.log(err)
+      }
       );
     });
   }

@@ -87,6 +87,7 @@ describe('Add Context Pack', () => {
 
     it('Should go to the right page, and have the right info', () => {
       page.navigateToHome();
+      cy.wait(1000);
       page.getCpCards().should('have.length', '3');
 
         const testList: Array<WordList> = [];

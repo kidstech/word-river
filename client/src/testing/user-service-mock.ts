@@ -10,7 +10,7 @@ import { User } from 'src/app/datatypes/user';
 @Injectable()
 export class UserServiceMock {
 
-  learners: Learner[] = [
+  static learners: Learner[] = [
     {
       _id: '123',
       name: 'George',
@@ -37,7 +37,7 @@ export class UserServiceMock {
       authId: '12345',
       name: 'John Doe',
       icon: 'image.png',
-      learners: this.learners,
+      learners: UserServiceMock.learners,
       contextPacks: ['meow', 'woof']
     },
     {
@@ -79,9 +79,9 @@ export class UserServiceMock {
     return of(this.learners);
   }
 
-  // getLearner(authId: string, learnerId: string): Observable<Learner> {
-  //   return of(this.learners.find(l => l._id === learnerId));
-  // }
+  getLearner(authId: string, learnerId: string): Observable<Learner> {
+    return of(UserServiceMock.learners.find(l => l._id === learnerId));
+   }
 
   // editLearner(authId: string, learnerId: string, editedLearner: Learner): Observable<Learner> {
   //   this.learners = this.learners.map(learner => learner._id === learnerId ? editedLearner : learner);

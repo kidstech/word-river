@@ -79,7 +79,7 @@ describe('Display Context-Packs component', () => {
   }));
 
   it('contains all the packs', () => {
-    expect(dpContextPacks.contextPacks.length).toBe(2);
+    expect(dpContextPacks.contextPacks.length).toBe(3);
   });
 
   it('should delete a context pack and then have 1 fewer context pack', () => {
@@ -92,9 +92,9 @@ describe('Display Context-Packs component', () => {
       wordlist: MockCPService.testList,
     });
     const idToDelete = 'panda';
-    expect(dpContextPacks.contextPacks.length).toBe(3);
+    expect(dpContextPacks.contextPacks.length).toBe(4);
     dpContextPacks.removeCP(idToDelete);
-    expect(dpContextPacks.contextPacks.length).toBe(2);
+    expect(dpContextPacks.contextPacks.length).toBe(3);
   });
 
   it('contains a pack named "canines"', () => {
@@ -102,7 +102,7 @@ describe('Display Context-Packs component', () => {
   });
 
   it('contains two packs that are enabled', () => {
-    expect(dpContextPacks.contextPacks.filter((pack: ContextPack) => pack.enabled === true).length).toBe(1);
+    expect(dpContextPacks.contextPacks.filter((pack: ContextPack) => pack.enabled === true).length).toBe(2);
   });
 
   it('Contains a pack whose icon is "https://can-do-canines.org/wp-content/uploads/2018/01/admin-ajax.jpg"', () => {
