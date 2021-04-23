@@ -7,7 +7,7 @@ describe('Add Context Pack', () => {
     const page = new AddContextPackPage();
     const loginPage = new LoginPage();
 
-   before(()=> {
+   beforeEach(()=> {
      loginPage.navigateTo();
      loginPage.login();
      cy.wait(1000);
@@ -69,59 +69,43 @@ describe('Add Context Pack', () => {
      //Entering a valid icon should remove the error
      page.getFormField('icon').type('ironman.png').blur();
      cy.get('[data-test=iconError]').should('not.exist');
-
-
    });
 
-   describe('Adding a new context pack', () => {
+   it('Should go to the right page, and have the right info', () => {
+    page.navigateToHome();
+    cy.wait(5000);
+    page.getCpCards().should('have.length', '3');
 
-    before(()=> {
-      loginPage.navigateTo();
-      loginPage.login();
-      cy.wait(1000);
-    });
+      const testList: Array<WordList> = [];
+      const contextPack: ContextPack = {
+          _id: 'meow',
+          schema: 'https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json',
+          name: 'felines',
+          icon: 'image.png',
+          enabled: false,
+          wordlist: testList
+      };
 
-    beforeEach(() => {
-        cy.task('seed:database');
-    });
+      page.navigateTo();
 
-    it('Should go to the right page, and have the right info', () => {
+      page.addContextPack(contextPack);
+      //We should see the confirmation message at the bottom of the screen
+      cy.get('.mat-simple-snackbar').should('contain',`Added the ${contextPack.name} context pack successfully`);
+
+      cy.url()
+          .should('match', /\/packs\/[0-9a-fA-F]{24}$/)
+          .should('not.match', /\/packs\/new$/);
+
       page.navigateToHome();
       cy.wait(5000);
-      page.getCpCards().should('have.length', '3');
+      page.getCpCards().should('have.length', '4');
+ });
 
-        const testList: Array<WordList> = [];
-        const contextPack: ContextPack = {
-            _id: 'meow',
-            schema: 'https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json',
-            name: 'felines',
-            icon: 'image.png',
-            enabled: false,
-            wordlist: testList
-        };
-
-        page.navigateTo();
-
-        page.addContextPack(contextPack);
-        //We should see the confirmation message at the bottom of the screen
-        cy.get('.mat-simple-snackbar').should('contain',`Added the ${contextPack.name} context pack successfully`);
-
-        cy.url()
-            .should('match', /\/packs\/[0-9a-fA-F]{24}$/)
-            .should('not.match', /\/packs\/new$/);
-
-        page.navigateToHome();
-        cy.wait(5000);
-        page.getCpCards().should('have.length', '4');
-   });
-
-    it('Should add a valid name and enable field and then click the upload image button', () => {
-      page.getFormField('name').type('Testing Pack');
-      page.getFormField('enabled').click().then(() => {
-        cy.get('#true').click();
-      });
-      cy.get('.btn-2').click();
-   });
-  });
-
+  it('Should add a valid name and enable field and then click the upload image button', () => {
+    page.getFormField('name').type('Testing Pack');
+    page.getFormField('enabled').click().then(() => {
+      cy.get('#true').click();
+    });
+    cy.get('.btn-2').click();
+ });
 });
