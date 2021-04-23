@@ -71,35 +71,35 @@ describe('Add Context Pack', () => {
      cy.get('[data-test=iconError]').should('not.exist');
    });
 
-   it('Should go to the right page, and have the right info', () => {
-    page.navigateToHome();
-    //cy.wait(2000);
-    //page.getCpCards().should('have.length', '3');
+//    it('Should go to the right page, and have the right info', () => {
+//     page.navigateToHome();
+//     //cy.wait(2000);
+//     //page.getCpCards().should('have.length', '3');
 
-      const testList: Array<WordList> = [];
-      const contextPack: ContextPack = {
-          _id: 'meow',
-          schema: 'https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json',
-          name: 'felines',
-          icon: 'image.png',
-          enabled: false,
-          wordlist: testList
-      };
+//       const testList: Array<WordList> = [];
+//       const contextPack: ContextPack = {
+//           _id: 'meow',
+//           schema: 'https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json',
+//           name: 'felines',
+//           icon: 'image.png',
+//           enabled: false,
+//           wordlist: testList
+//       };
 
-      page.navigateTo();
+//       page.navigateTo();
 
-      page.addContextPack(contextPack);
-      //We should see the confirmation message at the bottom of the screen
-      cy.get('.mat-simple-snackbar').should('contain',`Added the ${contextPack.name} context pack successfully`);
+//       page.addContextPack(contextPack);
+//       //We should see the confirmation message at the bottom of the screen
+//       cy.get('.mat-simple-snackbar').should('contain',`Added the ${contextPack.name} context pack successfully`);
 
-      cy.url()
-          .should('match', /\/packs\/[0-9a-fA-F]{24}$/)
-          .should('not.match', /\/packs\/new$/);
+//       cy.url()
+//           .should('match', /\/packs\/[0-9a-fA-F]{24}$/)
+//           .should('not.match', /\/packs\/new$/);
 
-      page.navigateToHome();
-      //cy.wait(5000);
-     // page.getCpCards().should('have.length', '4');
- });
+//       page.navigateToHome();
+//       //cy.wait(5000);
+//      // page.getCpCards().should('have.length', '4');
+//  });
 
   it('Should add a valid name and enable field and then click the upload image button', () => {
     page.getFormField('name').type('Testing Pack');
