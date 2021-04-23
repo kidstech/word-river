@@ -1,3 +1,5 @@
+import { UserServiceMock } from './../../../testing/user-service-mock';
+import { UserService } from './../../services/user-service/user.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from './../../../environments/environment';
@@ -53,13 +55,17 @@ describe('Display Context-Packs component', () => {
   let fixture: ComponentFixture<DisplayContextPacksComponent>;
   let loginService: LoginService;
 
-  beforeEach( () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [COMMON_IMPORTS],
-      declarations: [ DisplayContextPacksComponent, ContextPackCardComponent ],
+      declarations: [DisplayContextPacksComponent, ContextPackCardComponent],
       providers: [{ provide: ContextPackService, useValue: new MockCPService() },
-                  { provide: LoginService, useValue: new LoginServiceMock({ email: 'biruk@gmail.com',
-                  password: 'BirukMengistu', uid:'123'}) }]
+      {
+        provide: LoginService, useValue: new LoginServiceMock({
+          email: 'biruk@gmail.com',
+          password: 'BirukMengistu', uid: '123'
+        })
+      }, { provide: UserService, useValue: new UserServiceMock() },]
     });
   });
 
@@ -84,7 +90,7 @@ describe('Display Context-Packs component', () => {
       icon: 'panda.png',
       enabled: false,
       wordlist: MockCPService.testList,
-  });
+    });
     const idToDelete = 'panda';
     expect(dpContextPacks.contextPacks.length).toBe(3);
     dpContextPacks.removeCP(idToDelete);
@@ -101,11 +107,24 @@ describe('Display Context-Packs component', () => {
 
   it('Contains a pack whose icon is "https://can-do-canines.org/wp-content/uploads/2018/01/admin-ajax.jpg"', () => {
     expect(dpContextPacks.contextPacks.some((pack: ContextPack) =>
-    pack.icon === 'https://can-do-canines.org/wp-content/uploads/2018/01/admin-ajax.jpg')).toBe(true);
+      pack.icon === 'https://can-do-canines.org/wp-content/uploads/2018/01/admin-ajax.jpg')).toBe(true);
   });
 
   it('should create', () => {
     expect(dpContextPacks).toBeTruthy();
+  });
+
+  it('should count', (done) => {
+    dpContextPacks.getPacksFromServer();
+    setTimeout(done, 2000);
+    expect(dpContextPacks.adjectiveCount).toBe(4);
+    expect(dpContextPacks.verbCount).toBe(10);
+    expect(dpContextPacks.nounCount).toBe(4);
+    expect(dpContextPacks.miscCount).toBe(2);
+    expect(dpContextPacks.assignedCount).toBe(0);
+    expect(dpContextPacks.unAssignedCount).toBe(2);
+    expect(dpContextPacks.enabledCount).toBe(1);
+    expect(dpContextPacks.disabledCount).toBe(1);
   });
 
 });
@@ -114,23 +133,28 @@ describe('Misbehaving Context Pack List', () => {
   let dpContextPacks: DisplayContextPacksComponent;
   let fixture: ComponentFixture<DisplayContextPacksComponent>;
   let cpServiceStub: {
-     getUserPacks: () =>  Observable<ContextPack[]>;
+    getUserPacks: () => Observable<ContextPack[]>;
   };
 
-  beforeEach(() =>  {
+  beforeEach(() => {
     // Stub Context-Pack service for test purposes
     cpServiceStub = {
       getUserPacks: () => new Observable(observer => {
-         observer.error('Error-prone observable');
+        observer.error('Error-prone observable');
       })
     };
 
     TestBed.configureTestingModule({
       imports: [COMMON_IMPORTS],
-      declarations:  [DisplayContextPacksComponent],
-      providers: [{provide: ContextPackService, useValue: cpServiceStub},
-        { provide: LoginService, useValue: new LoginServiceMock({ email: 'biruk@gmail.com',
-        password: 'BirukMengistu', uid:'123'}) }]
+      declarations: [DisplayContextPacksComponent],
+      providers: [{ provide: ContextPackService, useValue: new MockCPService() },
+      { provide: UserService, useValue: new UserServiceMock() },
+      {
+        provide: LoginService, useValue: new LoginServiceMock({
+          email: 'biruk@gmail.com',
+          password: 'BirukMengistu', uid: '123'
+        })
+      }]
     });
   });
 
@@ -145,5 +169,6 @@ describe('Misbehaving Context Pack List', () => {
   it('generates an error if we don\'t set up a ContextPackService', () => {
     expect(dpContextPacks.contextPacks).toBeUndefined();
   });
+
 });
 

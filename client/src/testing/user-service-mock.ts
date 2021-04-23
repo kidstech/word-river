@@ -75,9 +75,9 @@ export class UserServiceMock {
   //   return of(authId);
   // }
 
-  // getLearners(authId: string): Observable<Learner[]> {
-  //   return of(this.learners);
-  // }
+  getLearners(authId: string): Observable<Learner[]> {
+    return of(this.learners);
+  }
 
   // getLearner(authId: string, learnerId: string): Observable<Learner> {
   //   return of(this.learners.find(l => l._id === learnerId));
