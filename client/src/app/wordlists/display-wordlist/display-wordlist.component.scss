@@ -1,7 +1,12 @@
 .content {
   display: flex;
 }
-
+.bottom-title{
+  font-family: 'ProductSans';
+}
+.bottom-card{
+  border-radius: 15px;
+}
 .left {
   width: 400px;
   margin-right: 24px;
@@ -20,7 +25,16 @@
   height: 80px;
   margin-bottom: 20px;
 }
-
+.count,.title{
+  font-family: 'ProductSans';
+  font-size: 28px;
+  font-weight: 700;
+}
+.title{
+  font-family: 'ProductSans';
+  font-size: 25px;
+  font-weight: 700;
+}
 .bottom {
   flex: 1;
 }
@@ -35,9 +49,13 @@
 .search-btn {
   display: inline-block;
 }
+.cp-icon{
+  border: 2px solid #ccc;
+}
 .placeholder {
   width: 100%;
   display: flex;
+  padding-top: 100px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -50,6 +68,9 @@
 .placeholder > h2 {
   margin-top: 20px;
   margin-bottom: 0px;
+  font-family: 'ProductSans';
+  font-weight: 500;
+  font-size: x-large;
 }
 .details-container {
   display: flex;
@@ -68,6 +89,8 @@
 .cp-profile > h2 {
   margin: 0px 0px 0px 0px;
   width: 240px;
+  font-family: 'ProductSans';
+  font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

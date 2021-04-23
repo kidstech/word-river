@@ -24,7 +24,7 @@
         <button class="auth-btn cancel" routerLink="/home"data-test="loginButton" (click)="true">
           CANCEL
         </button>
-        <button class="auth-btn" data-test="loginButton" (click)="saveChanges()">
+        <button [disabled]="name ? name.length === 0 : true" class="auth-btn" data-test="loginButton" (click)="saveChanges()">
           SAVE CHANGES
         </button>
       </div>
@@ -33,10 +33,6 @@
 
   <div class="top">
     <h1 class="header" style="margin-bottom: 0px;">Context Packs</h1>
-    <a class="add-cp-button" data-test="addCpButton" routerLink="/packs/new">
-      <mat-icon>add</mat-icon>
-      <span>Add</span>
-    </a>
   </div>
   <div class="context-pack-display">
 
@@ -55,8 +51,8 @@
           <button class="auth-btn assign" *ngIf="!exists(pack)" data-test="loginButton" (click)="add(pack)">
             ASSIGN
           </button>
-          <button class="auth-btn assigned" disabled *ngIf="exists(pack)" data-test="loginButton" (click)="true">
-            ASSIGNED
+          <button class="auth-btn assigned" *ngIf="exists(pack)" data-test="loginButton" (click)="remove(pack)">
+            UNASSIGN
           </button>
         </div>
       </div>

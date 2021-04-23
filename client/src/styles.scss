@@ -144,3 +144,19 @@ div::-webkit-scrollbar-thumb {
 .productSansBold{
   font-family: 'ProductSansBold';
 }
+.scr{
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+}
+
+// .scr::-webkit-scrollbar {
+//   width: 16px; /* width of the entire scrollbar */
+// }
+// .scr::-webkit-scrollbar-track {
+//   background: transparent; /* color of the tracking area */
+// }
+// .scr::-webkit-scrollbar-thumb {
+//   background-color: #00000025; /* color of the scroll thumb */
+//   border-radius: 5px; /* roundness of the scroll thumb */
+//   border: 0px solid #000; /* creates padding around scroll thumb */
+// }

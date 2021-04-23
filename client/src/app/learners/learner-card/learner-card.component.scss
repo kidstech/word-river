@@ -20,7 +20,9 @@ mat-card{
   transition: background-color 80ms ease;
 }
 mat-card:hover {
-  background-color: rgba(0, 0, 0, 0.068);
+  background-color: rgb(54, 54, 54);
+
+
   cursor: pointer;
 }
 .pp{
