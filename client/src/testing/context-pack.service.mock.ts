@@ -145,7 +145,7 @@ export class MockCPService extends ContextPackService {
       name: 'John Doe',
       icon: 'image.png',
       learners: [],
-      contextPacks: ['meow','woof', 'moo']
+      contextPacks: ['meow','woof']
     };
 
     constructor() {

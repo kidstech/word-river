@@ -11,13 +11,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { UserServiceMock } from 'src/testing/user-service-mock';
 import { of } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContextPack } from 'src/app/datatypes/contextPacks';
 
 
 describe('EditLearnerComponent', () => {
   let component: EditLearnerComponent;
   let fixture: ComponentFixture<EditLearnerComponent>;
+  let userService: UserServiceMock;
+  let router: Router;
   const paramMap = new Map();
   paramMap.set('id', '123');
 
@@ -42,6 +44,7 @@ describe('EditLearnerComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditLearnerComponent);
     component = fixture.componentInstance;
+    router = TestBed.get(Router);
     fixture.detectChanges();
   });
 
@@ -50,7 +53,8 @@ describe('EditLearnerComponent', () => {
   });
 
   it('should get the correct learner', () => {
-    expect(component.learner).toBe(UserServiceMock.learners[0]);
+    userService = new UserServiceMock();
+    expect(component.learner).toEqual(userService.learners[0]);
   });
 
   it('should get the correct learner packs', () => {
@@ -58,7 +62,10 @@ describe('EditLearnerComponent', () => {
   });
 
   it('should get the correct user packs', () => {
-    expect(component.userPacks).toBe(MockCPService.testCPs);
+    const thePacks: ContextPack[] = [];
+    thePacks.push(MockCPService.testCPs[0]);
+    thePacks.push(MockCPService.testCPs[1]);
+    expect(component.userPacks).toEqual(thePacks);
   });
 
   // it('should be able to tell if a pack exists', () => {
@@ -71,9 +78,15 @@ describe('EditLearnerComponent', () => {
 
   it('should remove a pack', () => {
     component.remove(MockCPService.testCPs[0]);
-    expect(component.learnerPacks).toBe(MockCPService.testCPs.slice(1,2));
+    const thePacks: ContextPack[] = [];
+    thePacks.push(MockCPService.testCPs[1]);
+    thePacks.push(MockCPService.testCPs[2]);
+    expect(component.learnerPacks).toEqual(thePacks);
   });
 
-  // it('should save changes', () => {
-  // });
+  it('should save a edited learner', () => {
+    spyOn(router, 'navigate');
+    component.saveChanges();
+    expect(router.navigate).toHaveBeenCalledWith(['/home']);
+  });
 });

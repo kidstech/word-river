@@ -10,7 +10,7 @@ import { User } from 'src/app/datatypes/user';
 @Injectable()
 export class UserServiceMock {
 
-  static learners: Learner[] = [
+  learners: Learner[] = [
     {
       _id: '123',
       name: 'George',
@@ -37,8 +37,8 @@ export class UserServiceMock {
       authId: '12345',
       name: 'John Doe',
       icon: 'image.png',
-      learners: UserServiceMock.learners,
-      contextPacks: ['meow', 'woof']
+      learners: this.learners,
+      contextPacks: ['meow', 'woof', 'moo']
     },
     {
       _id: 'test1',
@@ -70,23 +70,26 @@ export class UserServiceMock {
     return of('1234');
   }
 
-  // createLearner(authId: string, newLearner: Learner): Observable<string> {
-  //   this.learners.push(newLearner);
-  //   return of(authId);
-  // }
+  createLearner(authId: string, newLearner: Learner): Observable<string> {
+    this.learners.push(newLearner);
+    return new Observable(sub => {
+      if(newLearner.name !== null){sub.next('err');}
+      else  {sub.error(authId);}
+    });
+  }
 
   getLearners(authId: string): Observable<Learner[]> {
     return of(this.learners);
   }
 
   getLearner(authId: string, learnerId: string): Observable<Learner> {
-    return of(UserServiceMock.learners.find(l => l._id === learnerId));
-   }
+    return of(this.learners.find(l => l._id === learnerId));
+  }
 
-  // editLearner(authId: string, learnerId: string, editedLearner: Learner): Observable<Learner> {
-  //   this.learners = this.learners.map(learner => learner._id === learnerId ? editedLearner : learner);
-  //   return of(editedLearner);
-  // }
+  editLearner(authId: string, learnerId: string, editedLearner: Learner): Observable<Learner> {
+    this.learners = this.learners.map(learner => learner._id === learnerId ? editedLearner : learner);
+    return of(editedLearner);
+  }
 
   // removePackFromLearner(authId: string, learnerId: string, packId: string): Observable<string> {
   //   this.learners = this.learners.map(learner => learner._id === learnerId ? learner.learnerPacks.filter(
