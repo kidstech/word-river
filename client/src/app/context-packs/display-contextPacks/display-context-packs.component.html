@@ -5,18 +5,17 @@
       <div class="icon-and-description">
         <mat-icon>assignment</mat-icon>
         <div>
-          <h1>21</h1>
+          <h1>{{contextPacks ? contextPacks.length : 0}}</h1>
           <a href="/home/#students" class="link"><h3>Context Packs</h3></a>
-
         </div>
       </div>
       <div class="details">
         <div class="sub-detail">
-          <h4>140</h4>
+          <h4>{{enabledCount}}</h4>
           <h5>Enabled</h5>
         </div><span></span>
         <div class="sub-detail">
-          <h4>201</h4>
+          <h4>{{disabledCount}}</h4>
           <h5>Disabled</h5>
         </div>
       </div>
@@ -26,26 +25,18 @@
       <div class="icon-and-description">
         <mat-icon>people</mat-icon>
         <div>
-          <h1>12</h1>
+          <h1>{{learners ? learners.length : 0}}</h1>
           <a href="/home/#students" class="link"><h3>Students</h3></a>
         </div>
       </div>
       <div class="details">
         <div class="sub-detail">
-          <h4>140</h4>
-          <h5>Nouns</h5>
+          <h4>{{assignedCount}}</h4>
+          <h5>Assigned Packs</h5>
         </div><span></span>
         <div class="sub-detail">
-          <h4>201</h4>
-          <h5>Verbs</h5>
-        </div><span></span>
-        <div class="sub-detail">
-          <h4>234</h4>
-          <h5>Adjectives</h5>
-        </div><span></span>
-        <div class="sub-detail">
-          <h4>14</h4>
-          <h5>Misc</h5>
+          <h4>{{unAssignedCount}}</h4>
+          <h5>Unassigned Packs</h5>
         </div>
       </div>
     </div>
@@ -54,25 +45,25 @@
       <div class="icon-and-description">
         <mat-icon>font_download</mat-icon>
         <div>
-          <h1>432</h1>
+          <h1>{{verbCount + miscCount + nounCount + adjectiveCount}}</h1>
           <h3>words</h3>
         </div>
       </div>
       <div class="details">
         <div class="sub-detail">
-          <h4>140</h4>
+          <h4>{{nounCount}}</h4>
           <h5>Nouns</h5>
         </div><span></span>
         <div class="sub-detail">
-          <h4>201</h4>
+          <h4>{{verbCount}}</h4>
           <h5>Verbs</h5>
         </div><span></span>
         <div class="sub-detail">
-          <h4>234</h4>
+          <h4>{{adjectiveCount}}</h4>
           <h5>Adjectives</h5>
         </div><span></span>
         <div class="sub-detail">
-          <h4>14</h4>
+          <h4>{{miscCount}}</h4>
           <h5>Misc</h5>
         </div>
       </div>
