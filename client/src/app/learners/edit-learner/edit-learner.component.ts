@@ -6,6 +6,7 @@ import { UserService } from './../../services/user-service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Learner } from 'src/app/datatypes/learner';
 import { finalize } from 'rxjs/operators';
+import { FileService } from 'src/app/services/file.service';
 
 @Component({
   selector: 'app-edit-learner',
@@ -29,7 +30,8 @@ export class EditLearnerComponent implements OnInit {
     private login: LoginService,
     private storage: AngularFireStorage,
     private packs: ContextPackService,
-    private router: Router
+    private router: Router,
+    private files: FileService
   ) { }
 
   ngOnInit(): void {
@@ -50,22 +52,13 @@ export class EditLearnerComponent implements OnInit {
     });
   }
   onFileAdded(event) {
-
-    const file = event.target.files[0];
-    const filePath = `${Math.floor(Math.random() * 100000000)}`;
-    const fileRef = this.storage.ref(filePath);
-    this.uploading = true;
-    const task = this.storage.upload(filePath, file);
-
-    task.snapshotChanges().pipe(
-      finalize(() => {
-        this.downloadURL = fileRef.getDownloadURL().subscribe(link => {
-          this.downloadURL = link;
-          this.uploaded = true;
-          this.uploading = false;
-        });
-      })
-    ).subscribe();
+    this.files.onFileAdded(event, () => {
+      this.uploading = true;
+    }, (link) => {
+      this.downloadURL = link;
+      this.uploaded = true;
+      this.uploading = false;
+    });
   }
   exists(pack) {
     return this.learnerPacks.some(p => p._id === pack._id);
@@ -83,13 +76,15 @@ export class EditLearnerComponent implements OnInit {
     this.users.editLearner(
       this.login.authID,
       this.learner._id,
-      { _id:this.learner._id,
+      {
+        _id: this.learner._id,
         name: this.name,
-         icon: this.downloadURL,
-          learnerPacks: this.learnerPacks.map(l=>l._id) }
-    ).subscribe(res=>{
+        icon: this.downloadURL,
+        learnerPacks: this.learnerPacks.map(l => l._id)
+      }
+    ).subscribe(res => {
       this.router.navigate(['/home']);
-    },err=>console.log(err)
+    }, err => console.log(err)
     );
     // console.log({learner: this.learner._id,name: this.name, icon: this.downloadURL, learnerPacks: this.learnerPacks });
 
