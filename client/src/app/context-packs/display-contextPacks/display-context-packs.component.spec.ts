@@ -60,6 +60,7 @@ describe('Display Context-Packs component', () => {
       imports: [COMMON_IMPORTS],
       declarations: [DisplayContextPacksComponent, ContextPackCardComponent],
       providers: [{ provide: ContextPackService, useValue: new MockCPService() },
+        { provide: UserService, useValue: new UserServiceMock() },
       {
         provide: LoginService, useValue: new LoginServiceMock({
           email: 'biruk@gmail.com',
@@ -121,8 +122,8 @@ describe('Display Context-Packs component', () => {
     expect(dpContextPacks.verbCount).toBe(10);
     expect(dpContextPacks.nounCount).toBe(4);
     expect(dpContextPacks.miscCount).toBe(2);
-    expect(dpContextPacks.assignedCount).toBe(0);
-    expect(dpContextPacks.unAssignedCount).toBe(2);
+    expect(dpContextPacks.assignedCount).toBe(1);
+    expect(dpContextPacks.unAssignedCount).toBe(1);
     expect(dpContextPacks.enabledCount).toBe(1);
     expect(dpContextPacks.disabledCount).toBe(1);
   });

@@ -60,6 +60,15 @@ describe('DisplayWordlistComponent', () => {
     expect(component.wordcount).toBe(4);
   });
 
+  it('should not count if the list is not initialized', () => {
+    component.list = null;
+    expect(component.wordcount).toBe(10);
+    component.countWords();
+    expect(component.wordcount).toBe(10);
+
+  });
+
+
   it('should delete a cp', () => {
     component.pack = {
       _id: 'boo',

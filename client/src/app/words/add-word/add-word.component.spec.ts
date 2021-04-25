@@ -99,4 +99,9 @@ describe('AddWordComponent', () => {
     component.suggestForms();
     expect(component.forms).toBe(component.suggestedForms);
   });
+  it('add is safe to use with no input', () => {
+    const input = {value: '', input:{test: 'string'}};
+    component.add(input);
+    expect(input.value).toBe('');
+  });
 });

@@ -15,7 +15,7 @@ export class UserServiceMock {
       _id: '123',
       name: 'George',
       icon: 'image.jpg',
-      learnerPacks: ['plants', 'fungi']
+      learnerPacks: ['meow', 'fungi']
     },
     {
       _id: '345',

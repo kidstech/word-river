@@ -42,8 +42,11 @@ export class DisplayWordlistComponent implements OnInit {
       this.list.forEach(w => {
         count += w.adjectives.length + w.nouns.length + w.verbs.length + w.misc.length;
       });
+      this.wordcount = count;
     }
-    this.wordcount = count;
+    else {
+      console.log('List has not been initialized');
+    }
   }
 
   delete(){

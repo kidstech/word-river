@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { Router } from '@angular/router';
+import { FileService } from 'src/app/services/file.service';
+import { FileServiceMock } from 'src/testing/file-service.mock';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -55,7 +57,8 @@ describe('LoginComponent', () => {
      declarations: [ LoginComponent ],
      providers: [{ provide: LoginService, useValue: new LoginServiceMock() },
        { provide: AngularFireStorage, useValue: new FireStorageMock() },
-       { provide: AngularFireAuth, useValue: new FirebaseAuthMock() }
+       { provide: AngularFireAuth, useValue: new FirebaseAuthMock() },
+       { provide: FileService, useValue: new FileServiceMock() }
      ]
    })
    .compileComponents();
@@ -73,14 +76,16 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should upload images"', () => {
+  it('should upload images"', (done) => {
     const mockFile = new File([''], 'filename', { type: 'text/html' });
     const mockEvt = { target: { files: [mockFile] } };
     const mockReader: FileReader = jasmine.createSpyObj('FileReader', ['readAsDataURL', 'onload']);
     spyOn(window as any, 'FileReader').and.returnValue(mockReader);
 
-    expect(()=>{component.onFileAdded(mockEvt as any);}).toBeTruthy();
-  });
+   component.onFileAdded(mockEvt as any);
+    expect(component.uploading).toBe(true);
+    setTimeout(()=>{expect(component.uploading).toBe(false); done();}, 150);
+    });
   it('should sign in"', (done) => {
     // Add tests for signing in using spies
     component.loginEmail = 'biruk@gmail.com';
