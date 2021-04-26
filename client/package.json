@@ -48,7 +48,7 @@
     "@types/node": "^13.13.45",
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
-    "cypress": "^7.1.0",
+    "cypress": "^7.2.0",
     "cypress-mongo-seeder": "^1.0.8",
     "eslint": "^7.21.0",
     "eslint-plugin-import": "2.22.1",
