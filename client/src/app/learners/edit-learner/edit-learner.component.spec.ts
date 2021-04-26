@@ -15,6 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ContextPack } from 'src/app/datatypes/contextPacks';
 import { FileService } from 'src/app/services/file.service';
 import { FileServiceMock } from 'src/testing/file-service.mock';
+import { ComponentFactoryResolver } from '@angular/core';
 
 
 describe('EditLearnerComponent', () => {
@@ -72,8 +73,9 @@ describe('EditLearnerComponent', () => {
   });
 
   it('should assign a context pack to a learner', () => {
+    component.learnerPacks = [];
     component.add(MockCPService.testCPs[0]);
-    //expect(component.learnerPacks).toBe();
+    expect(component.learnerPacks[0]).toEqual(MockCPService.testCPs[0]);
   });
 
   it('should remove a pack', () => {

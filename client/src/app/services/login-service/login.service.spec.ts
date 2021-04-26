@@ -70,6 +70,7 @@ describe('LoginService', () => {
 
     expect(service.authID).toBe('123');
   });
+
   it('convertMessage works', () => {
     const l = {
       'auth/email-already-in-use': 'The email you entered is already in use.',
@@ -83,6 +84,7 @@ describe('LoginService', () => {
     Object.keys(l).forEach(k =>
       expect(l[k]).toEqual(service.convertMessage(k)));
   });
+
   it('signUp works', (done) => {
     service.signUp('fs', 'fa.fa', 'faf@ga.ag', 'fadge', res => {
       expect(res).toEqual({ user: { uid: '123' } });
@@ -94,13 +96,16 @@ describe('LoginService', () => {
       done();
     });
   });
-  it('signIn works', () => {
+
+  it('signIn works', (done) => {
     service.signIn('faf@ga.ag', 'fadge', res => {
       expect(res).toEqual({ user: { uid: '123' } });
+      done();
     }, err => {});
     service.signIn('', '', res => {
     }, err => {
       expect(err).toBeUndefined();
+      done();
     });
   });
 });
