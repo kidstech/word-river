@@ -2,8 +2,7 @@ import { Router } from '@angular/router';
 import { LoginService } from './../../services/login-service/login.service';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { finalize } from 'rxjs/operators';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FileService } from 'src/app/services/file.service';
 

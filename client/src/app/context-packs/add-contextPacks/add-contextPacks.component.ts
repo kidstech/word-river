@@ -3,7 +3,6 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { finalize } from 'rxjs/operators';
 import { FileService } from 'src/app/services/file.service';
 import { LoginService } from 'src/app/services/login-service/login.service';
 import { ContextPack } from '../../datatypes/contextPacks';

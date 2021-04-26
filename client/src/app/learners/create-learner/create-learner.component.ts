@@ -3,7 +3,7 @@ import { UserService } from './../../services/user-service/user.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FileService } from 'src/app/services/file.service';
 
 @Component({
