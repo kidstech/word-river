@@ -96,7 +96,7 @@
     </a>
   </div>
   <div class="context-pack-display learners-display" id="students">
-    <app-learner-card class="cp-card" [learner]="learner" *ngFor="let learner of learners"></app-learner-card>
+    <app-learner-card class="learner-card" [learner]="learner" *ngFor="let learner of learners"></app-learner-card>
     <div class="placeholder" *ngIf="learners ? learners.length === 0 : false;">
       <mat-icon>people</mat-icon>
       <h2 style="opacity: 0.9;">No Students to display.</h2>

@@ -1,6 +1,5 @@
 import { LoginService } from 'src/app/services/login-service/login.service';
 import { ContextPackService } from 'src/app/services/contextPack-service/contextpack.service';
-import { UserService } from './../../services/user-service/user.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Learner } from 'src/app/datatypes/learner';
 import { ContextPack } from 'src/app/datatypes/contextPacks';

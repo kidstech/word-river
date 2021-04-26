@@ -2,9 +2,9 @@ import { Router } from '@angular/router';
 import { LoginService } from './../../services/login-service/login.service';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { finalize } from 'rxjs/operators';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { FileService } from 'src/app/services/file.service';
 
 @Component({
   selector: 'app-login',
@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     private storage: AngularFireStorage,
+    private files: FileService,
     private fb: FormBuilder,
   ) { }
 
@@ -123,21 +124,12 @@ export class LoginComponent implements OnInit {
     });
   }
   onFileAdded(event) {
-
-    const file = event.target.files[0];
-    const filePath = `${Math.floor(Math.random() * 100000000)}`;
-    const fileRef = this.storage.ref(filePath);
-    this.uploading = true;
-    const task = this.storage.upload(filePath, file);
-
-    task.snapshotChanges().pipe(
-      finalize(() => {
-        this.downloadURL = fileRef.getDownloadURL().subscribe(link => {
-          this.downloadURL = link;
-          this.uploaded = true;
-          this.uploading = false;
-        });
-      })
-    ).subscribe();
+    this.files.onFileAdded(event, () => {
+      this.uploading = true;
+    }, (link) => {
+      this.downloadURL = link;
+      this.uploaded = true;
+      this.uploading = false;
+    });
   }
 }

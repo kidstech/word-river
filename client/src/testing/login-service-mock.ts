@@ -89,27 +89,27 @@ export class LoginServiceMock {
   //     });
   // }
 
-  /* Setting up user data when sign in with username/password,
-  sign up with username/password and sign in with social auth
-  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  setUserData(user) {
-    this.storage = user;
-  }
+  // /* Setting up user data when sign in with username/password,
+  // sign up with username/password and sign in with social auth
+  // provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+  // setUserData(user) {
+  //   this.storage = user;
+  // }
 
-  // Sign out
-  signOut(then: (res) => any) {
-    return new Promise<any>((resolve, reject) => {
-      if(!this.signedIn){
-        reject('Error');
-      } else {
-        then(this.currentUser);
-        resolve(this.currentUser);
-        this.signedIn = false;
-        this.currentUser = null;
-        this.storage = null;
-      }
-    });
-  }
+  // // Sign out
+  // signOut(then: (res) => any) {
+  //   return new Promise<any>((resolve, reject) => {
+  //     if(!this.signedIn){
+  //       reject('Error');
+  //     } else {
+  //       then(this.currentUser);
+  //       resolve(this.currentUser);
+  //       this.signedIn = false;
+  //       this.currentUser = null;
+  //       this.storage = null;
+  //     }
+  //   });
+  // }
 }
 
 

@@ -22,7 +22,8 @@ describe('DisplayWordlistComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DisplayWordlistComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule, RouterModule.forRoot([]), COMMON_IMPORTS],
+      imports: [HttpClientTestingModule, RouterTestingModule, RouterModule.forRoot([]),  RouterTestingModule.withRoutes([
+        { path: 'home', component: DisplayWordlistComponent }]), COMMON_IMPORTS],
       providers: [{ provide: WordListService, useValue: new MockWordListService() },
       { provide: ContextPackService, useValue: new MockCPService() },
       {
@@ -59,6 +60,15 @@ describe('DisplayWordlistComponent', () => {
     component.countWords();
     expect(component.wordcount).toBe(4);
   });
+
+  it('should not count if the list is not initialized', () => {
+    component.list = null;
+    expect(component.wordcount).toBe(10);
+    component.countWords();
+    expect(component.wordcount).toBe(10);
+
+  });
+
 
   it('should delete a cp', () => {
     component.pack = {

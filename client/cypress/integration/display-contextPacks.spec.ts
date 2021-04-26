@@ -52,4 +52,22 @@ describe('Display Context Pack', () => {
         page.getDeleteCpConfirmation(page.getCpCards().first());
         page.getCpCards().should('have.length', 2);
     });
+
+    it('Should have 2 learners', () => {
+      cy.wait(1000);
+      page.getLearnerCards().should('have.length', 2);
+    });
+
+    it('should click on a learner and lead to a valid URL', () => {
+      page.getLearnerCards().first().then((card) => {
+        page.clickLearner(page.getLearnerCards().first());
+
+        cy.url().should('match', /\/learners\/[0-9]+/);
+
+      });
+    });
+    it('should click add learner and go to the right URL', () => {
+      page.addLearnerButton().click();
+      cy.url().should(url => expect(url.endsWith('/learners/new')).to.be.true);
+    });
 });

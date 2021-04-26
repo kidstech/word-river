@@ -75,6 +75,17 @@ describe('AddWordComponent', () => {
     }, 1000);
     flush();
   }));
+  it('suggest() should suggest misc if the type does not match noun, adjective, or verb', fakeAsync(() => {
+    component.wordName = 'the';
+    component.type = 'misc';
+    component.suggest();
+    tick(1000);
+    setTimeout(() => {
+      expect(component.type).toBe('misc');
+      expect(component.forms).toEqual(['the']);
+    }, 1000);
+    flush();
+  }));
   it('save() clears all fields', () => {
     component.wordName = 'sda';
     component.type = 'Noun';
@@ -83,5 +94,14 @@ describe('AddWordComponent', () => {
     expect(component.wordName).toBe('');
     expect(component.type).toBe('');
     expect(component.forms).toEqual([]);
+  });
+  it('suggestForms() works', () => {
+    component.suggestForms();
+    expect(component.forms).toBe(component.suggestedForms);
+  });
+  it('add is safe to use with no input', () => {
+    const input = {value: '', input:{test: 'string'}};
+    component.add(input);
+    expect(input.value).toBe('');
   });
 });

@@ -44,11 +44,11 @@
           (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
     </mat-form-field>
-    <button class="suggest" *ngIf="forms ? forms.length > 0 : false" data-test="addFormButton" mat-stroked-button (click)="forms=[]"
+    <button class="suggest" *ngIf="forms ? forms.length > 0 : false" data-test="clearFormButton" mat-stroked-button (click)="forms=[]"
       color="primary">Clear all</button>
     <mat-chip *ngFor="let form of forms;index as i" class="chip" [selectable]="true" [removable]="true" (removed)="remove(form)">
       {{form}}
-      <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+      <mat-icon matChipRemove class="removeForm" *ngIf="true">cancel</mat-icon>
     </mat-chip>
     <div class="word-forms">
       <button data-test="confirmAddWordButton" [disabled]="!finished" (click)="save()"

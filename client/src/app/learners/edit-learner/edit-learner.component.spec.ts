@@ -13,6 +13,9 @@ import { UserServiceMock } from 'src/testing/user-service-mock';
 import { of } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContextPack } from 'src/app/datatypes/contextPacks';
+import { FileService } from 'src/app/services/file.service';
+import { FileServiceMock } from 'src/testing/file-service.mock';
+import { ComponentFactoryResolver } from '@angular/core';
 
 
 describe('EditLearnerComponent', () => {
@@ -33,6 +36,7 @@ describe('EditLearnerComponent', () => {
         { provide: LoginService, useValue: new LoginServiceMock({ email: 'biruk@gmail.com',
         password: 'BirukMengistu', uid:'123'}) },
       { provide: AngularFireStorage, useValue: new FireStorageMock() },
+      { provide: FileService, useValue: new FileServiceMock() },
       {provide: ActivatedRoute,
         useValue: {
           paramMap: of(paramMap)
@@ -68,12 +72,10 @@ describe('EditLearnerComponent', () => {
     expect(component.userPacks).toEqual(thePacks);
   });
 
-  // it('should be able to tell if a pack exists', () => {
-  // });
-
   it('should assign a context pack to a learner', () => {
+    component.learnerPacks = [];
     component.add(MockCPService.testCPs[0]);
-    //expect(component.learnerPacks).toBe();
+    expect(component.learnerPacks[0]).toEqual(MockCPService.testCPs[0]);
   });
 
   it('should remove a pack', () => {
@@ -89,4 +91,15 @@ describe('EditLearnerComponent', () => {
     component.saveChanges();
     expect(router.navigate).toHaveBeenCalledWith(['/home']);
   });
+
+  it('should upload images"', (done) => {
+    const mockFile = new File([''], 'filename', { type: 'text/html' });
+    const mockEvt = { target: { files: [mockFile] } };
+    const mockReader: FileReader = jasmine.createSpyObj('FileReader', ['readAsDataURL', 'onload']);
+    spyOn(window as any, 'FileReader').and.returnValue(mockReader);
+
+   component.onFileAdded(mockEvt as any);
+    expect(component.uploading).toBe(true);
+    setTimeout(()=>{expect(component.uploading).toBe(false); done();}, 150);
+    });
 });
