@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from './../../services/user-service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Learner } from 'src/app/datatypes/learner';
-import { finalize } from 'rxjs/operators';
 import { FileService } from 'src/app/services/file.service';
 
 @Component({
