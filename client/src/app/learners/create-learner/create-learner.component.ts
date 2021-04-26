@@ -2,7 +2,6 @@ import { LoginService } from 'src/app/services/login-service/login.service';
 import { UserService } from './../../services/user-service/user.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { FileService } from 'src/app/services/file.service';
 

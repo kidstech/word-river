@@ -22,7 +22,8 @@ describe('DisplayWordlistComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DisplayWordlistComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule, RouterModule.forRoot([]), COMMON_IMPORTS],
+      imports: [HttpClientTestingModule, RouterTestingModule, RouterModule.forRoot([]),  RouterTestingModule.withRoutes([
+        { path: 'home', component: DisplayWordlistComponent }]), COMMON_IMPORTS],
       providers: [{ provide: WordListService, useValue: new MockWordListService() },
       { provide: ContextPackService, useValue: new MockCPService() },
       {
