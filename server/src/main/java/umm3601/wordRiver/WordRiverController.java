@@ -243,15 +243,15 @@ public class WordRiverController {
     String authId = ctx.pathParam("authId");
     String mongoId = userController.findByAuthId(authId);
     String learnerId = ctx.pathParam("learnerId");
+
     User user = userController.userCollection.findOneById(mongoId);
     ArrayList<ContextPack> learnerPacks = new ArrayList<ContextPack>();
+
     for( Learner lr: user.learners){
         if(lr._id.equals(learnerId)){
           for(String cpId: lr.learnerPacks){
           try{
-           System.out.println(cpId);
            learnerPacks.add(ctxCollection.findOneById(cpId));
-           System.out.println(learnerPacks);
          } catch (IllegalArgumentException e) {
            throw new NotFoundResponse("The requested context pack was not found");
         }
