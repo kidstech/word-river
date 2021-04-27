@@ -33,6 +33,7 @@ export class DisplayWordlistComponent implements OnInit {
       this.pack = cp;
       this.list = cp.wordlists;
       this.countWords();
+      console.log(NaN ? 'NaN':'Number');
     });
   }
 
