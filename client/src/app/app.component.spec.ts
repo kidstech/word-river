@@ -128,4 +128,5 @@ describe('AppComponent', () => {
     component.goBack();
     expect(location.back).toHaveBeenCalled();
   });
+
 });

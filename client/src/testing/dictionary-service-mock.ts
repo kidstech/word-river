@@ -4,8 +4,8 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class MockDictionaryService extends DictionaryService {
-  words = {tuna:'noun',run:'verb'};
-  forms = {tuna:['Tunas','Tunae'],bears:['bear','bearing']};
+  words = {tuna:'noun',run:'verb', the: 'misc'};
+  forms = {tuna:['Tunas','Tunae'],bears:['bear','bearing'], the:['the']};
 
   constructor() {
     super(null);
@@ -34,9 +34,9 @@ export class MockDictionaryService extends DictionaryService {
     }
   }
 
-  generateLink(word: string): string {
-    return `www.totallynotadictionary.com/${word}?key=${this.apiKey}`;
-  }
+  // generateLink(word: string): string {
+  //   return `www.totallynotadictionary.com/${word}?key=${this.apiKey}`;
+  // }
 
 }
 

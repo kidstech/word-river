@@ -152,9 +152,10 @@ export class MockCPService extends ContextPackService {
       super(null);
     }
 
-    getPacks(): Observable<ContextPack[]> {
-        return of(MockCPService.testCPs);
-    }
+    // This method is no longer used
+    // getPacks(): Observable<ContextPack[]> {
+    //     return of(MockCPService.testCPs);
+    // }
     getPack(id: string): Observable<ContextPack>{
       return of(MockCPService.testCPs[0]);
     }
@@ -164,10 +165,7 @@ export class MockCPService extends ContextPackService {
       return of(id);
     }
     addPack(newPack: { name: string; icon: string; enabled: boolean; wordlists?: any[] }): Observable<string> {
-      return new Observable(sub=>{
-        if(newPack.name){sub.next('fakeid');}
-        else {sub.error('Error');}
-      });
+      return of('fakeid');
     }
     includes(cp: ContextPack){
       return MockCPService.testCPs.some(e=>e._id === cp._id);
@@ -175,7 +173,10 @@ export class MockCPService extends ContextPackService {
 
     addNewContextPackToUser(authId: string,
       newPack: { name: string; icon: string; enabled: boolean; wordlists?: any[] } ): Observable<string> {
-        return of('fakeid');
+       return new Observable(sub=>{
+        if(newPack.name){sub.next('fakeid');}
+        else {sub.error('Error');}
+      });
     }
     getUserPacks(authId: string): Observable<ContextPack[]> {
       const thePacks: ContextPack[] = [];

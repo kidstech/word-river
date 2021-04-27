@@ -16,6 +16,7 @@ export class DisplayWordlistComponent implements OnInit {
   pack: ContextPack;
   wordcount = 0;
   id: string;
+  name = '';
   deleteClicked = false;
 
   constructor(
@@ -43,8 +44,11 @@ export class DisplayWordlistComponent implements OnInit {
       this.list.forEach(w => {
         count += w.adjectives.length + w.nouns.length + w.verbs.length + w.misc.length;
       });
+      this.wordcount = count;
     }
-    this.wordcount = count;
+    else {
+      console.log('List has not been initialized');
+    }
   }
 
   delete(){
@@ -53,5 +57,15 @@ export class DisplayWordlistComponent implements OnInit {
     });
   }
 
+  export() {
+    const {schema,name,icon,wordlists,enabled} = this.pack;
+    const blob = new Blob([JSON.stringify({schema,name,icon,enabled,wordlists})], { type: 'text/csv' });
+    const a = document.createElement('a');
+    document.body.appendChild(a);
+    const url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = this.pack.name + ' pack' + '.json';
+    a.click();
+  }
 
 }

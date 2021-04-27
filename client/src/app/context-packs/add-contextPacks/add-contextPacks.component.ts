@@ -3,7 +3,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { finalize } from 'rxjs/operators';
+import { FileService } from 'src/app/services/file.service';
 import { LoginService } from 'src/app/services/login-service/login.service';
 import { ContextPack } from '../../datatypes/contextPacks';
 import { ContextPackService } from '../../services/contextPack-service/contextpack.service';
@@ -43,6 +43,7 @@ export class AddContextPackComponent implements OnInit {
     private storage: AngularFireStorage,
     private cpService: ContextPackService,
     private snackBar: MatSnackBar,
+    private files: FileService,
     private login: LoginService,
     private router: Router) { }
 
@@ -87,21 +88,12 @@ export class AddContextPackComponent implements OnInit {
   }
 
   onFileAdded(event) {
-
-    const file = event.target.files[0];
-    const filePath = `${Math.floor(Math.random() * 100000000)}`;
-    const fileRef = this.storage.ref(filePath);
-    this.uploading = true;
-    const task = this.storage.upload(filePath, file);
-
-    task.snapshotChanges().pipe(
-      finalize(() => {
-        this.downloadURL = fileRef.getDownloadURL().subscribe(link=>{
-          this.downloadURL = link;
-          this.uploaded = true;
-          this.uploading = false;
-        });
-      })
-    ).subscribe();
+    this.files.onFileAdded(event, () => {
+      this.uploading = true;
+    }, (link) => {
+      this.downloadURL = link;
+      this.uploaded = true;
+      this.uploading = false;
+    });
   }
 }
