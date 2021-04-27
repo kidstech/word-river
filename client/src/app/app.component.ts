@@ -62,21 +62,16 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedIn = this.login.isLoggedIn;
-    this.location.onUrlChange((url, state) => {
+    this.location.onUrlChange(url => {
       this.backButtonVisible = url !== '/';
-      const parts = url.split('/');
-
-      if (parts.length === 3 && parts[1] === 'packs' || parts.length <= 1 || url.length <= 1) {
-        this.contextPackVisible = false;
-        this.contextPack = undefined;
-      } else if (parts.length >= 3 && parts.length <= 6 && parts[2]) {
-        this.service.getPack(parts[2]).subscribe(pack => {
+      if(/\/packs\/.{24}\/.{2,}/g.test(url)){
+        this.service.getPack(url.split('/')[2]).subscribe(pack => {
           this.contextPack = pack;
           this.contextPackVisible = true;
         });
-      }
-      else {
+      } else {
         this.contextPackVisible = false;
+        this.contextPack = undefined;
       }
       this.initValues();
     });

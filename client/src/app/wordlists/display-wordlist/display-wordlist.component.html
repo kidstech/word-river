@@ -3,7 +3,15 @@
     <div class="left">
       <div class="top">
         <mat-card class="bottom-card">
-          <h2 class="bottom-title">Context Pack Details</h2>
+          <div class="top-part">
+            <h2 class="bottom-title">Context Pack Details</h2>
+            <button
+            (click)="export()"
+            color="accent"
+            >
+            Export
+          </button>
+          </div>
           <mat-divider></mat-divider>
           <br />
           <div class="details-container">
@@ -90,13 +98,7 @@
           Import wordlist
         </button>
 
-        <button
-          mat-raised-button
-          (click)="export()"
-          color="accent"
-          >
-          Export Pack
-        </button>
+
       </div>
     </div>
     <div class="right">

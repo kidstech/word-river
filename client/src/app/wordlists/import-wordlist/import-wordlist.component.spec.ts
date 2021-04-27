@@ -52,7 +52,6 @@ describe('ImportWordlistComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
   it('should import', () => {
     // eslint-disable-next-line max-len
     const mockFile = new File(['{"name":"sad","enabled":true,"nouns":[],"verbs":[],"adjectives":[],"misc":[]}'], 'filename', { type: 'application/json' });
