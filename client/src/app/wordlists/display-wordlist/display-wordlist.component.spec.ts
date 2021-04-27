@@ -84,4 +84,17 @@ describe('DisplayWordlistComponent', () => {
     expect(service.includes(component.pack)).toBe(false);
   });
 
+  it('should export a context pack', () => {
+    component.pack = {
+      _id: 'boo',
+      schema: 'https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json',
+      name: 'bovines',
+      icon: 'image.png',
+      enabled: true,
+      wordlist: MockCPService.testList
+    };
+    component.export();
+    expect(component).toBeTruthy();
+  });
+
 });
