@@ -1,4 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NgZone } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -13,6 +14,8 @@ describe('ImportWordlistComponent', () => {
   let component: ImportWordlistComponent;
   let fixture: ComponentFixture<ImportWordlistComponent>;
   const paramMap = new Map();
+
+  let ngZone: NgZone;
   paramMap.set('id', 'wow');
   const ex = {
     name: 'testWordlistForImport',
@@ -42,6 +45,7 @@ describe('ImportWordlistComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ImportWordlistComponent);
     component = fixture.componentInstance;
+    ngZone = TestBed.get(NgZone);
     fixture.detectChanges();
   });
 
@@ -50,11 +54,27 @@ describe('ImportWordlistComponent', () => {
   });
 
   it('should import', () => {
-    const mockFile = new File([''], 'filename', { type: 'text/html' });
+    // eslint-disable-next-line max-len
+    const mockFile = new File(['{"name":"sad","enabled":true,"nouns":[],"verbs":[],"adjectives":[],"misc":[]}'], 'filename', { type: 'application/json' });
     const mockEvt = { target: { files: [mockFile] } };
-    const mockReader: FileReader = jasmine.createSpyObj('FileReader', ['readAsDataURL', 'onload']);
-    spyOn(window as any, 'FileReader').and.returnValue(mockReader);
-    try { component.onFileAdded(mockEvt as any); } catch (e) { }
+    spyOn(window as any, 'FileReader').and.callThrough();
+    component.onFileAdded(mockEvt as any);
+    expect(window.FileReader).toHaveBeenCalled();
+  });
+  it('should fail import with array', () => {
+    // eslint-disable-next-line max-len
+    const mockFile = new File(['[{"name":"sad","enabled":true,"nouns":[],"verbs":[],"adjectives":[],"misc":[]}]'], 'filename', { type: 'application/json' });
+    const mockEvt = { target: { files: [mockFile] } };
+    spyOn(window as any, 'FileReader').and.callThrough();
+    component.onFileAdded(mockEvt as any);
+    expect(window.FileReader).toHaveBeenCalled();
+  });
+  it('should fail import with invalid', () => {
+    // eslint-disable-next-line max-len
+    const mockFile = new File(['turkey'], 'filename', { type: 'application/json' });
+    const mockEvt = { target: { files: [mockFile] } };
+    spyOn(window as any, 'FileReader').and.callThrough();
+    component.onFileAdded(mockEvt as any);
     expect(window.FileReader).toHaveBeenCalled();
   });
 
