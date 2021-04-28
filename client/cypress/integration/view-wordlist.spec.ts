@@ -94,6 +94,7 @@ describe('View WordList ListView', () => {
 
   it('Should load word cards', () => {
     page.getToggleButton().click();
+    cy.wait(1000);
     page.getWordCardsList().should('have.length', '10');
   });
 
