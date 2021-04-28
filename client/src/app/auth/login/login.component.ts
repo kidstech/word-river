@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   //     { type: 'minLength', message: 'Your password must be at least 8 characters long'}
   //   ]
   // };
-  downloadURL: any;
+  downloadURL = '';
   uploaded: boolean;
   uploading: boolean;
 

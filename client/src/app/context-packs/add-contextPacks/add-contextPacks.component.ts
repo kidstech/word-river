@@ -19,6 +19,8 @@ export class AddContextPackComponent implements OnInit {
   addContextPackForm: FormGroup;
   contextPack: ContextPack;
   uploading: boolean;
+  enabled = true;
+  selected = true;
 
   addCpValidationMessages = {
     name: [
@@ -29,10 +31,6 @@ export class AddContextPackComponent implements OnInit {
 
     icon: [
       { type: 'pattern', message: 'Image must be a .jpg,.png or .gif' }
-    ],
-
-    enabled: [
-      { type: 'required', message: 'You must specify whether the pack is enabled or disabled' },
     ]
   };
   downloadURL: any;
@@ -56,11 +54,6 @@ export class AddContextPackComponent implements OnInit {
 
       icon: new FormControl('', Validators.compose([
         Validators.pattern('.+\.(png|jpg|jpeg|gif)$')
-      ])),
-
-      enabled: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^(true|false)$'),
       ]))
     });
   }
@@ -73,8 +66,8 @@ export class AddContextPackComponent implements OnInit {
     if(!this.addContextPackForm.value.icon){
       this.addContextPackForm.value.icon = this.downloadURL ? this.downloadURL : '';
     }
-    const {name,icon,enabled} = this.addContextPackForm.value;
-    this.cpService.addNewContextPackToUser(this.login.user.authId, {name,icon,enabled,wordlists:[]}).subscribe(newID => {
+    const {name,icon} = this.addContextPackForm.value;
+    this.cpService.addNewContextPackToUser(this.login.user.authId, {name,icon,enabled:this.enabled,wordlists:[]}).subscribe(newID => {
       this.snackBar.open('Added the ' + this.addContextPackForm.value.name + ' context pack successfully', null, {
         duration: 2000,
       });
