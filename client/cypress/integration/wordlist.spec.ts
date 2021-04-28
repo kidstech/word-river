@@ -56,8 +56,9 @@ describe('WordList', () => {
         page.clickDeleteContextPack().click();
         page.getDeleteContextPackConfirmation().should('be.visible');
         page.getDeleteContextPackConfirmDeleteButton().click();
+        cy.wait(1000);
         cy.url().should('match', /\/home$/);
-        page.getCpCards().should('have.length', 3);
+        page.getCpCards().should('have.length', 2);
 
     });
 
