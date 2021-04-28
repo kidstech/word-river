@@ -29,13 +29,6 @@ describe('LoginComponent', () => {
   let router: Router;
   let location: Location;
 
-  // beforeEach(async () => {
-  //   await TestBed.configureTestingModule({
-  //     declarations: [LoginComponent]
-  //   })
-  //     .compileComponents();
-  // });
-
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -69,7 +62,6 @@ describe('LoginComponent', () => {
     component = fixture.componentInstance;
     service = TestBed.get(LoginService);
     router = TestBed.get(Router);
-    // location = TestBed.get(Location);
     fixture.detectChanges();
   });
 
@@ -99,9 +91,6 @@ describe('LoginComponent', () => {
     service.loggedIn = true;
     component.ngOnInit();
     expect(_=>{component.ngOnInit();}).toBeTruthy();
-    // expect(location).toBe(null);
-    // spyOn(location, 'path').and.returnValue('packs/123456789112345678921234/import');
-
   });
   it('should return error when signing in with invalid credentials"', (done) => {
     // Add tests for signing in using spies
