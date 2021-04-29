@@ -90,7 +90,7 @@ export class EditLearnerComponent implements OnInit {
 
   }
   delete() {
-    this.router.navigate(['/home']);
+    this.users.removeLearner(this.login.authID, this.learner._id).subscribe(_res=>this.router.navigate(['home']));
     console.log('del');
   }
 }
