@@ -9,7 +9,7 @@
           <form class="auth-holder" (ngSubmit)="signIn();">
             <input class="field" data-test="loginEmail" type="email"  name="email"
               placeholder="Email" [(ngModel)]="loginEmail">
-            <input class="field" data-test="loginPassword"  type="password" name="password"
+            <input class="field" data-test="loginPassword" id="pass"  type="password" name="password"
               placeholder="Password" [(ngModel)]="loginPass">
             <button class="auth-btn" data-test="loginButton"  (click)="signIn()">
               LOGIN

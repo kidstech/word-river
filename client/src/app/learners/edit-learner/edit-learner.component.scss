@@ -360,6 +360,89 @@
   width: 270px;
   text-overflow: ellipsis;
 }
+@mixin del() {
+  border-radius: 30px;
+  height: 38px!important;
+  min-width: 100px;
+  outline: none;
+  border: 3px solid #e0486e;
+  font-family: 'Roboto';
+  text-transform: uppercase;
+  color:#e0486e;
+  transition-duration: 300ms;
+  cursor: pointer;
+  position: absolute;
+  padding: 0px!important;
+  top:20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: row!important;
+  justify-content: center;
+  user-select: none;
+  &:hover{
+    border: 3px solid #f57796;
+    color:#f57796;
+  }
+}
+@mixin inner() {
+  border-radius: 30px;
+  height: 32px!important;
+  min-width: 100px;
+  outline: none;
+  font-family: 'Roboto';
+  font-weight: 500;
+  text-transform: uppercase;
+  transition-duration: 200ms;
+  cursor: pointer;
+  justify-content: center;
+  user-select: none;
+  -webkit-animation: fadein 0.4s;
+
+}
+.clicked{
+  @include del();
+  color:#fff;
+  padding: 2px 10px 2px 10px !important;
+  background-color:#c52c5249;
+  border: 3px solid transparent!important;
+  font-weight: 400;
+  cursor: unset;
+
+}
+.unclicked{
+  @include del();
+  color:#02abad;
+  background-color:transparent;
+  font-weight: 500;
+  border: 3px solid #23c2c5;
+  cursor: pointer;
+  border-radius: 10px
+}
+.confirm{
+  @include inner();
+  margin-right: 10px;
+  border: 3px solid #fff;
+  color:#e0486e;
+  background-color:#fff;
+}
+.confirm:hover{
+  margin-right: 10px;
+  border: 3px solid #ffceda;
+  color:#c53257;
+  background-color:#ffceda;
+}
+
+.close{
+  @include inner();
+  color:#fff;
+  border: 3px solid transparent;
+  background-color:rgba(255, 255, 255, 0.1);
+}
+.close:hover{
+  border: 3px solid transparent;
+  background-color:rgba(255, 255, 255, 0.18);
+}
 @keyframes fadein {
   from { opacity: 0; }
   to   { opacity: 1; }
