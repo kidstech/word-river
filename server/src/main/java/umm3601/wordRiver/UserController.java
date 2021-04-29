@@ -180,6 +180,7 @@ public class UserController {
         if(lr._id.equals(learnerId)) {
           found = true;
           userCollection.updateById(mongoId, Updates.pull("learners", lr));
+          ctx.json(ImmutableMap.of("id", lr._id));
         } else {
           continue;
         }
