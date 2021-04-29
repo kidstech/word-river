@@ -46,9 +46,9 @@
       </mat-chip-list>
       <mat-chip *ngFor="let form of forms;index as i" class="chip" [selectable]="true" [removable]="true" (removed)="remove(form)">
         {{form}}
-        <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+        <mat-icon matChipRemove *ngIf="true" class="removeForm">cancel</mat-icon>
       </mat-chip>
-      <button class="suggest" *ngIf="forms ? forms.length > 0 : false" data-test="addFormButton" mat-stroked-button (click)="forms=[]"
+      <button class="suggest" *ngIf="forms ? forms.length > 0 : false" data-test="clearFormButton" mat-stroked-button (click)="forms=[]"
         color="primary">Clear all</button>
     </div>
 

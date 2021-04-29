@@ -106,42 +106,6 @@ describe('AddCpComponent', () => {
   });
 
   describe('The icon field', () => {
-    let iconControl: AbstractControl;
-
-    beforeEach(() => {
-      iconControl = addContextPack.addContextPackForm.controls.icon;
-    });
-
-    it('should allow empty icons', () => {
-      iconControl.setValue('');
-      expect(iconControl.valid).toBeTruthy();
-    });
-
-    it('should be fine with "image.png"', () => {
-      iconControl.setValue('image.png');
-      expect(iconControl.valid).toBeTruthy();
-    });
-
-    it('should not be fine with "image.notanimage"', () => {
-      iconControl.setValue('image.notanimage');
-      expect(iconControl.valid).toBeFalsy();
-    });
-    it('should default to empty string when provided no image"', () => {
-      iconControl.setValue(undefined);
-      addContextPack.addContextPackForm.controls.name.setValue('boo');
-      addContextPack.addContextPackForm.controls.enabled.setValue(true);
-      addContextPack.submitForm();
-      expect(addContextPack.addContextPackForm.value.icon).toBe('');
-    });
-    it('should use downloadURL when downloadUrl exists"', () => {
-      iconControl.setValue(undefined);
-      addContextPack.addContextPackForm.controls.name.setValue('boo');
-      addContextPack.addContextPackForm.controls.enabled.setValue(true);
-      addContextPack.downloadURL = 'umm.com';
-      addContextPack.submitForm();
-      expect(addContextPack.addContextPackForm.value.icon).toBe('umm.com');
-    });
-
     it('should upload images"', (done) => {
     const mockFile = new File([''], 'filename', { type: 'text/html' });
     const mockEvt = { target: { files: [mockFile] } };
@@ -156,36 +120,6 @@ describe('AddCpComponent', () => {
     it('Should throw an error upon an error', () => {
       addContextPack.addContextPackForm.controls.name.setValue(null);
       expect(addContextPack.submitForm()).toBeUndefined();
-    });
-
-  });
-
-  describe('The enabled field', () => {
-    let enabledControl: AbstractControl;
-
-    beforeEach(() => {
-      enabledControl = addContextPack.addContextPackForm.controls.enabled;
-    });
-
-    it('should not allow empty fields', () => {
-      enabledControl.setValue('');
-      expect(enabledControl.valid).toBeFalsy();
-    });
-
-    it('should be fine with "true"', () => {
-      enabledControl.setValue('true');
-      expect(enabledControl.valid).toBeTruthy();
-    });
-
-    it('should be fine with "false"', () => {
-      enabledControl.setValue('false');
-      expect(enabledControl.valid).toBeTruthy();
-    });
-
-    it('should fail on status that are not either "true" or "false"', () => {
-      enabledControl.setValue('nOtAbOoLeAn');
-      expect(enabledControl.valid).toBeFalsy();
-      expect(enabledControl.hasError('pattern')).toBeTruthy();
     });
   });
 });
