@@ -50,7 +50,6 @@ export class AddWordComponent implements OnInit {
     const input = event.input;
     const value = event.value;
 
-    // Add our fruit
     if ((value || '').trim()) {
       this.forms.push(value.trim());
     }

@@ -41,7 +41,6 @@ public class WordRiverController {
   }
 
   /**
-   * todo Need to change to insert id into correct user
    * Adds a new Context Pack.
    *
    * @param ctx A Javalin HTTP context.
@@ -54,15 +53,10 @@ public class WordRiverController {
     ctx.json(ImmutableMap.of("id", newContextPack._id));
   }
 
-  /**
-   * todo Need to change to allow for an authId
-   */
   public void getPack(Context ctx) {
 
     String id = ctx.pathParam("id");
     ContextPack contextPack;
-
-
     System.out.println(id);
 
     try {
@@ -77,10 +71,6 @@ public class WordRiverController {
     }
   }
 
-  /**
-   * Don't need to touch this
-   * @param ctx
-   */
   public void addNewWordList(Context ctx) {
     WordList newWordList = ctx.bodyValidator(WordList.class).check(wl -> wl.name != null && wl.name.length() > 0).get();
     String id = ctx.pathParam("id");
@@ -99,11 +89,6 @@ public class WordRiverController {
     ctx.json(ImmutableMap.of("id", ctxCollection.findOneById(id)._id));
   }
 
-
-  /**
-   * Don't need to touch this
-   * @param ctx
-   */
   public void deleteWordList(Context ctx) {
     String id = ctx.pathParam("id");
     String wordListName = ctx.pathParam("name");
@@ -119,14 +104,9 @@ public class WordRiverController {
     }
   }
 
-  /**
-   * Don't need to touch this
-   * @param ctx
-   */
   public void editWordList(Context ctx) {
     String id = ctx.pathParam("id");
     String wordListName = ctx.pathParam("name");
-    // todo add some try catch
     ContextPack contextPack = ctxCollection.findOneById(id);
     WordList newList = ctx.bodyValidator(WordList.class).get();
     for (int i = 0; i < contextPack.wordlists.size(); i++) {
@@ -141,10 +121,6 @@ public class WordRiverController {
     }
   }
 
-  /**
-   * todo Need to change to delete id from correct user as well
-   * @param ctx
-   */
   public void deleteContextPack(Context ctx) {
     String id = ctx.pathParam("id");
     try {
@@ -158,12 +134,7 @@ public class WordRiverController {
 
   }
 
-  /**
-   * Shouldn't need to touch this
-   * @param ctx
-   */
   public void getWordList(Context ctx) {
-
     String id = ctx.pathParam("id");
     String name = ctx.pathParam("name");
     ContextPack contextPack;
@@ -186,14 +157,8 @@ public class WordRiverController {
     }
   }
 
-/**
- * Don't need to change
- * @param ctx
- */
   public void getWordLists(Context ctx) {
-
     String id = ctx.pathParam("id");
-
     ArrayList<WordList> wordlists;
 
     try {
@@ -232,14 +197,11 @@ public class WordRiverController {
         throw new NotFoundResponse("The requested context pack was not found");
       }
     }
-
     ctx.status(200);
     ctx.json(userPacks);
-
   }
 
   public void getLearnerPacks(Context ctx) {
-
     String authId = ctx.pathParam("authId");
     String mongoId = userController.findByAuthId(authId);
     String learnerId = ctx.pathParam("learnerId");

@@ -10,7 +10,7 @@
           <h5>{{contextPack ? (contextPack.enabled ? 'Enabled' : 'Disabled') : ''}}</h5>
         </div>
       </div>
-      <button mat-button data-test="deleteContextPackButton" (click)="toggle($event)" >
+      <button mat-button class="del" data-test="deleteContextPackButton" (click)="toggle($event)" >
         <mat-icon>delete</mat-icon>
       </button>
     </div>

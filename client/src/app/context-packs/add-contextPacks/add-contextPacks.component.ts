@@ -19,23 +19,17 @@ export class AddContextPackComponent implements OnInit {
   addContextPackForm: FormGroup;
   contextPack: ContextPack;
   uploading: boolean;
+  enabled = true;
+  selected = true;
 
   addCpValidationMessages = {
     name: [
       { type: 'required', message: 'A name is required' },
       { type: 'maxlength', message: 'The name cannot exceed 50 characters' },
       { type: 'existingName', message: 'This name has already been taken' }
-    ],
-
-    icon: [
-      { type: 'pattern', message: 'Image must be a .jpg,.png or .gif' }
-    ],
-
-    enabled: [
-      { type: 'required', message: 'You must specify whether the pack is enabled or disabled' },
     ]
   };
-  downloadURL: any;
+  downloadURL ='';
   uploaded = false;
 
   constructor(
@@ -53,15 +47,6 @@ export class AddContextPackComponent implements OnInit {
         Validators.required,
         Validators.maxLength(50),
       ])),
-
-      icon: new FormControl('', Validators.compose([
-        Validators.pattern('.+\.(png|jpg|jpeg|gif)$')
-      ])),
-
-      enabled: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^(true|false)$'),
-      ]))
     });
   }
 
@@ -70,11 +55,9 @@ export class AddContextPackComponent implements OnInit {
   }
 
   submitForm() {
-    if(!this.addContextPackForm.value.icon){
-      this.addContextPackForm.value.icon = this.downloadURL ? this.downloadURL : '';
-    }
-    const {name,icon,enabled} = this.addContextPackForm.value;
-    this.cpService.addNewContextPackToUser(this.login.user.authId, {name,icon,enabled,wordlists:[]}).subscribe(newID => {
+    const {name} = this.addContextPackForm.value;
+    this.cpService.addNewContextPackToUser(this.login.user.authId, {name, icon: this.downloadURL,
+      enabled:this.enabled,wordlists:[]}).subscribe(newID => {
       this.snackBar.open('Added the ' + this.addContextPackForm.value.name + ' context pack successfully', null, {
         duration: 2000,
       });

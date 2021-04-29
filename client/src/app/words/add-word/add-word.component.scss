@@ -9,13 +9,25 @@
 }
 mat-card {
   padding: 30px;
+  border-radius: 15px;
 }
 .top {
   display: flex;
 }
+.top h2{
+  font-family: 'ProductSans';
+  font-size: 20px;
+}
 .suggest {
   height: 40px;
-  margin: 0px 5px 0px 5px;
+  margin: 0px 5px 10px 5px;
+}
+h4{
+  // font-family: 'ProductSans';
+  // font-size: 18px;
+  margin-bottom: 3px;
+  margin-top: 8px;
+  opacity: 0.95;
 }
 .form-field{
   width: 100%;
@@ -39,12 +51,43 @@ mat-card {
        animation: fadein 0.5s;
 }
 .suggest{
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-top: 10px;
   height: 35px;
   padding: 0px 10px 20px 10px;
 }
 .add-word-btn{
   margin-top: 20px;
+}
+.new-word{
+  width: 200px;
+  margin-top: 0px;
+  font-size: 15px;
+}
+
+.btn{
+  width: 120px;
+  height: 38px;
+  text-transform: uppercase;
+  border-radius: 25px;
+  color: #fff;
+  outline: none;
+  background-color: #02aaad8f;
+  border: 0px solid transparent;
+  font-family: "Roboto";
+    font-weight: 500;
+    font-size: 14px;
+  cursor: pointer;
+  transition-duration: 200ms;
+}
+.btn:hover{
+  background-color: #02abad;
+}
+.btn:disabled,
+.btn[disabled]{
+  background-color: #02aaad2f;
+  color: rgba(255, 255, 255, 0.233);
+  cursor:unset;
 }
 
 @keyframes fadein {
@@ -74,4 +117,13 @@ mat-card {
 @-o-keyframes fadein {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+.form-box{
+  border: 2px solid rgb(168, 168, 168);
+  border-radius: 10px;
+  padding: 12px 5px 12px 10px;
+  margin-bottom: 10px;
+}
+.typesel{
+  border-radius: 20px;
 }

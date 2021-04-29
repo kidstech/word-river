@@ -47,4 +47,9 @@ export class UserService {
   addPackToLearner(authId: string, learnerId: string, packId: string): Observable<string> {
     return this.httpClient.put<{id: string}>(this.userUrl + '/' + authId + '/' + learnerId + '/' + packId, packId).pipe(map(res=>res.id));
   }
+
+  removeLearner(authId: string, learnerId: string): Observable<string> {
+    return this.httpClient.delete<{id: string}>(this.userUrl + '/' + authId + '/' + learnerId + '/learners').pipe(map(res=>res.id));
+  }
+
 }

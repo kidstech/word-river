@@ -98,7 +98,31 @@
 .field::placeholder {
   color: rgb(161, 161, 161);
   font-family: 'ProductSans';
+  font-size: medium;
 }
+
+@-moz-document url-prefix() {
+  #pass{
+    color:#45b7b9;
+    font-size: large;
+  }
+}
+#pass{
+  color:#45b7b9;
+  font-size: x-large;
+}
+#pass::-webkit-input-placeholder {
+  line-height: 16px;
+  margin-top: -10px;
+  position: absolute;
+  top: 53%;
+}
+// #pass::-moz-placeholder {
+//   line-height: 16px;
+//   margin-top: -10px;
+//   position: absolute;
+//   top: 58%;
+// }
 
 .invalid {
   border-radius: 10px;

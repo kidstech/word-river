@@ -20,6 +20,7 @@ export class EditLearnerComponent implements OnInit {
   uploading;
   downloadURL: any;
   uploaded: boolean;
+  delClicked = false;
   learnerPacks;
   userPacks;
 
@@ -87,5 +88,9 @@ export class EditLearnerComponent implements OnInit {
     );
     // console.log({learner: this.learner._id,name: this.name, icon: this.downloadURL, learnerPacks: this.learnerPacks });
 
+  }
+  delete() {
+    this.users.removeLearner(this.login.authID, this.learner._id).subscribe(_res=>this.router.navigate(['home']));
+    console.log('del');
   }
 }

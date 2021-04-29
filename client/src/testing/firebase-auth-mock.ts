@@ -20,7 +20,7 @@ export class FirebaseAuthMock {
   signInWithEmailAndPassword(email, password){
     type Result = {user: {uid: string}};
     return new Promise<Result>((resolve,reject)=>{
-      if(email.length !== 0){resolve({user:{uid:'123'}});}
+      if(email.length !== 0){resolve({user:{uid:'1234'}});}
       else {reject('Error');}
     });
   }

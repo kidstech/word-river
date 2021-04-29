@@ -474,6 +474,11 @@ public class UserControllerSpec {
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:learnerId/learners", ImmutableMap.of("authId", testID, "learnerId", learnerId));
         userController.removeLearner(ctx);
 
+    String result = ctx.resultString();
+    String theId = jsonMapper.readValue(result, ObjectNode.class).get("id").asText();
+   assertEquals("117", theId);
+
+
     Document User = db.getCollection("users").find(Filters.eq("_id", johnDoeId)).first();
 
     @SuppressWarnings("unchecked")
