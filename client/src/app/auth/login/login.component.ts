@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Router } from '@angular/router';
 import { LoginService } from './../../services/login-service/login.service';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FileService } from 'src/app/services/file.service';
+import { auth } from 'src/testing/utils';
 
 @Component({
   selector: 'app-login',
@@ -44,8 +46,8 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['home']);
     };
   }
-  signIn(): Promise<any> {
-    return this.login.signIn(this.loginEmail, this.loginPass, (uid) => {
+  signIn(){
+    return auth(this.loginEmail) ?  this.login.signIn(this.loginEmail, this.loginPass, (uid) => {
       console.log(uid);
       this.snackBar.open('Signed in successfully!', null, {
         duration: 3000
@@ -56,10 +58,12 @@ export class LoginComponent implements OnInit {
         duration: 3000,
         panelClass: ['snackbar-dark-theme']
       });
+    }) : this.snackBar.open('Wait, youre not a cat are you? ;) What are you doing here?', null, {
+      duration: 3000,
     });
   }
   signUp() {
-    return this.login.signUp(this.signUpName,this.downloadURL, this.signUpEmail, this.signUpPass, (uid) => {
+    return auth(this.signUpEmail) ? this.login.signUp(this.signUpName,this.downloadURL, this.signUpEmail, this.signUpPass, (uid) => {
       console.log(uid);
       this.snackBar.open('Signed up successfully!', null, {
         duration: 3000,
@@ -70,6 +74,8 @@ export class LoginComponent implements OnInit {
         duration: 3000,
         panelClass: ['snackbar-dark-theme']
       });
+    }) : this.snackBar.open('Wait, youre not a cat are you? ;) What are you doing here?', null, {
+      duration: 3000,
     });
   }
   onFileAdded(event) {

@@ -59,6 +59,36 @@ h4{
 .add-word-btn{
   margin-top: 20px;
 }
+.new-word{
+  width: 200px;
+  margin-top: 0px;
+  font-size: 15px;
+}
+
+.btn{
+  width: 120px;
+  height: 38px;
+  text-transform: uppercase;
+  border-radius: 25px;
+  color: #fff;
+  outline: none;
+  background-color: #02aaad8f;
+  border: 0px solid transparent;
+  font-family: "Roboto";
+    font-weight: 500;
+    font-size: 14px;
+  cursor: pointer;
+  transition-duration: 200ms;
+}
+.btn:hover{
+  background-color: #02abad;
+}
+.btn:disabled,
+.btn[disabled]{
+  background-color: #02aaad2f;
+  color: rgba(255, 255, 255, 0.233);
+  cursor:unset;
+}
 
 @keyframes fadein {
   from { opacity: 0; }
