@@ -471,7 +471,7 @@ public class UserControllerSpec {
     String learnerId = "117";
     mockReq.setMethod("DELETE");
 
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:learnerId", ImmutableMap.of("authId", testID, "learnerId", learnerId));
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:learnerId/learners", ImmutableMap.of("authId", testID, "learnerId", learnerId));
         userController.removeLearner(ctx);
 
     Document User = db.getCollection("users").find(Filters.eq("_id", johnDoeId)).first();
@@ -488,7 +488,7 @@ public class UserControllerSpec {
     String learnerId = "114";
     mockReq.setMethod("DELETE");
 
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:learnerId", ImmutableMap.of("authId", testID, "learnerId", learnerId));
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:learnerId/learners", ImmutableMap.of("authId", testID, "learnerId", learnerId));
     assertThrows(NotFoundResponse.class, () -> {
       userController.removeLearner(ctx);
     });
