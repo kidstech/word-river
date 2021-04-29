@@ -464,4 +464,33 @@ public class UserControllerSpec {
     });
 
   }
+
+  @Test
+  public void RemoveLearner() throws IOException {
+    String testID = "5678";
+    String learnerId = "117";
+    mockReq.setMethod("DELETE");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:learnerId/learners", ImmutableMap.of("authId", testID, "learnerId", learnerId));
+        userController.removeLearner(ctx);
+
+    Document User = db.getCollection("users").find(Filters.eq("_id", johnDoeId)).first();
+
+    @SuppressWarnings("unchecked")
+    ArrayList<Learner> userLearners = (ArrayList<Learner>) User.get("learners");
+
+    assertEquals(1, userLearners.size());
+  }
+
+  @Test
+  public void RemoveNonExistentLearner() throws IOException {
+    String testID = "5678";
+    String learnerId = "114";
+    mockReq.setMethod("DELETE");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:learnerId/learners", ImmutableMap.of("authId", testID, "learnerId", learnerId));
+    assertThrows(NotFoundResponse.class, () -> {
+      userController.removeLearner(ctx);
+    });
+  }
 }

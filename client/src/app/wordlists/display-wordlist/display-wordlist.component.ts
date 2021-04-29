@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { WordList } from 'src/app/datatypes/wordlist';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContextPack } from 'src/app/datatypes/contextPacks';
+import { LoginService } from 'src/app/services/login-service/login.service';
 
 @Component({
   selector: 'app-display-wordlist',
@@ -23,7 +24,8 @@ export class DisplayWordlistComponent implements OnInit {
     private route: ActivatedRoute,
     private service: WordListService,
     private cpservice: ContextPackService,
-    private router: Router
+    private router: Router,
+    private login: LoginService
   ) { }
 
   ngOnInit(): void {
@@ -52,7 +54,7 @@ export class DisplayWordlistComponent implements OnInit {
   }
 
   delete(){
-    this.cpservice.deletePack(this.pack._id).subscribe((r)=>{
+    this.cpservice.deleteContextPackFromAll(this.login.user.authId, this.pack._id ).subscribe((r)=>{
       this.router.navigate(['home']);
     });
   }

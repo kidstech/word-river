@@ -166,59 +166,39 @@ public class UserController {
      ctx.json(ImmutableMap.of("id", userCollection.findOneById(mongoId)._id));
    }
 
-  // /**
-  //  * Remove a given learner
-  //  */
-  // public void removeLearner(Context ctx) {
-  //     String userId = ctx.pathParam("id");
-  //     String learnerId = ctx.pathParam("learnerId");
+  /**
+   * Remove a given learner
+   */
+  public void removeLearner(Context ctx) {
+      String authId = ctx.pathParam("authId");
+      String learnerId = ctx.pathParam("learnerId");
+      String mongoId = findByAuthId(authId);
+      boolean found = false;
 
-  //     User user = userCollection.findOneById(userId);
-  //     for(int i = 0; i < user.learners.size(); i++) {
-  //       Learner currentLearner = user.learners.get(i);
-  //       if(currentLearner._id == learnerId) {
-  //         userCollection.updateById(userId, Updates.pull("learners", currentLearner));
-  //       } else {
-  //         continue;
-  //       }
-  //     }
-  // }
+      User user = userCollection.findOneById(mongoId);
+      for(Learner lr: user.learners) {
+        if(lr._id.equals(learnerId)) {
+          found = true;
+          userCollection.updateById(mongoId, Updates.pull("learners", lr));
+        } else {
+          continue;
+        }
+      }
+      if(!found) {
+        throw new NotFoundResponse("The learner you want to delete was not found");
+      }
+  }
 
   public void removePackFromLearner(Context ctx) {
+
     String authId = ctx.pathParam("authId");
     String mongoId = findByAuthId(authId);
     String learnerId = ctx.pathParam("learnerId");
     String contextPackId = ctx.pathParam("packId");
-    boolean removed = false;
-    boolean foundLearner = false;
 
     User user = userCollection.findOneById(mongoId);
-    for(int i = 0; i < user.learners.size(); i++) {
-      Learner currentLearner = user.learners.get(i);
-      if(currentLearner._id.equals(learnerId)) {
-        foundLearner = true;
-        for(int j = 0; j < currentLearner.learnerPacks.size(); j++) {
-          String currentPackId = currentLearner.learnerPacks.get(j);
-          if(currentPackId.equals(contextPackId)) {
-            userCollection.updateById(mongoId, Updates.pull("learners", currentLearner));
-            currentLearner.learnerPacks.remove(j);
-            userCollection.updateById(mongoId, Updates.push("learners", currentLearner));
-            removed = true;
-            break;
-          } else {
-            continue;
-          }
-        }
-      } else {
-          continue;
-      }
-    }
-    if(!foundLearner) {
-      throw new NotFoundResponse("The learner does not exist");
-    }
-    else if(!removed) {
-      throw new NotFoundResponse("The context pack does not exist");
-    }
+
+    findAndRemoveLearnerPack(user, learnerId, contextPackId);
     ctx.json(ImmutableMap.of("id", contextPackId));
   }
 
@@ -231,7 +211,28 @@ public class UserController {
     return user._id;
   }
 
+  protected void findAndRemoveLearnerPack(User user, String learnerId, String contextPackId) {
+    boolean foundLearner = false;
 
-
-
+    for( Learner lr: user.learners) {
+      if(lr._id.equals(learnerId)){
+        foundLearner = true;
+        if(lr.learnerPacks.contains(contextPackId)){
+          userCollection.updateById(user._id, Updates.pull("learners", lr));
+          lr.learnerPacks.remove(contextPackId);
+          userCollection.updateById(user._id, Updates.push("learners", lr));
+          break;
+        }
+        else{
+          throw new NotFoundResponse("The context pack is not assigned to the learner");
+        }
+      }
+      else{
+        continue;
+      }
+    }
+    if(!foundLearner){
+      throw new NotFoundResponse("The learner does not exist");
+    }
+  }
 }

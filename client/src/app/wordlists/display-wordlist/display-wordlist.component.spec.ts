@@ -9,6 +9,8 @@ import { DisplayWordlistComponent } from './display-wordlist.component';
 import { MockCPService } from 'src/testing/context-pack.service.mock';
 import { ContextPackService } from 'src/app/services/contextPack-service/contextpack.service';
 import { of } from 'rxjs';
+import { LoginService } from 'src/app/services/login-service/login.service';
+import { LoginServiceMock } from 'src/testing/login-service-mock';
 
 describe('DisplayWordlistComponent', () => {
   let component: DisplayWordlistComponent;
@@ -31,6 +33,12 @@ describe('DisplayWordlistComponent', () => {
         useValue: {
           paramMap: of(paramMap)
         }
+      },
+      {
+        provide: LoginService, useValue: new LoginServiceMock({
+          email: 'biruk@gmail.com',
+          password: 'BirukMengistu', uid: '123'
+        })
       }
       ]
     })
