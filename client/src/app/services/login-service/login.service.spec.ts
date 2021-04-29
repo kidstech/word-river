@@ -99,7 +99,7 @@ describe('LoginService', () => {
 
   it('signIn works', (done) => {
     service.signIn('faf@ga.ag', 'fadge', res => {
-      expect(res).toEqual({ user: { uid: '123' } });
+      expect(res).toEqual({ user: { uid: '1234' } });
       done();
     }, err => {});
     service.signIn('', '', res => {

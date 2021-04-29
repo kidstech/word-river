@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     };
   }
   signIn(){
-    return auth(this.loginEmail) ?  this.login.signIn(this.loginEmail, this.loginPass, (uid) => {
+    return  this.login.signIn(this.loginEmail, this.loginPass, (uid) => {
       console.log(uid);
       this.snackBar.open('Signed in successfully!', null, {
         duration: 3000
@@ -58,12 +58,10 @@ export class LoginComponent implements OnInit {
         duration: 3000,
         panelClass: ['snackbar-dark-theme']
       });
-    }) : this.snackBar.open('Wait, youre not a cat are you? ;) What are you doing here?', null, {
-      duration: 3000,
     });
   }
-  signUp() {
-    return auth(this.signUpEmail) ? this.login.signUp(this.signUpName,this.downloadURL, this.signUpEmail, this.signUpPass, (uid) => {
+  signUp(){
+    return  this.login.signUp(this.signUpName,this.downloadURL, this.signUpEmail, this.signUpPass, (uid) => {
       console.log(uid);
       this.snackBar.open('Signed up successfully!', null, {
         duration: 3000,
@@ -74,8 +72,6 @@ export class LoginComponent implements OnInit {
         duration: 3000,
         panelClass: ['snackbar-dark-theme']
       });
-    }) : this.snackBar.open('Wait, youre not a cat are you? ;) What are you doing here?', null, {
-      duration: 3000,
     });
   }
   onFileAdded(event) {

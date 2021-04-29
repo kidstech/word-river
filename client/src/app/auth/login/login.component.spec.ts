@@ -83,7 +83,7 @@ describe('LoginComponent', () => {
     component.loginEmail = 'biruk@gmail.com';
     component.loginPass = 'BirukMengistu';
     component.signIn().then(res=>{
-      expect(res).toBe('someuserdata');
+      expect(res + '').toBe('someuserdata');
       done();
     });
   });

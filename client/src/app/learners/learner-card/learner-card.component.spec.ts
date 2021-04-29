@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContextPackService } from 'src/app/services/contextPack-service/contextpack.service';
 import { LoginService } from 'src/app/services/login-service/login.service';
@@ -12,6 +13,7 @@ describe('LearnerCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [ LearnerCardComponent ],
       providers: [{ provide: ContextPackService, useValue: new MockCPService() },
         { provide: LoginService, useValue: new LoginServiceMock({ email: 'biruk@gmail.com',
