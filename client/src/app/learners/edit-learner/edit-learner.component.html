@@ -1,6 +1,13 @@
 <div class="container">
   <mat-card class="outer">
+    <div [ngClass]="{'clicked':delClicked,'unclicked':!delClicked}" (click) = "delClicked ? null : delClicked = !delClicked">
+      {{delClicked ? '': 'Delete'}}
+      <button *ngIf="delClicked" (click)="$event.stopPropagation();delete()" class="confirm">Confirm</button>
+      <button *ngIf="delClicked" (click)="$event.stopPropagation();delClicked = false" class="close">Cancel</button>
+    </div>
+
     <div>
+
       <div class="image-upload">
         <label for="file-input">
           <img src="{{downloadURL}}" onerror="this.src='/assets/add-img.png'" class="pp">
