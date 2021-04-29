@@ -102,4 +102,11 @@ describe('EditLearnerComponent', () => {
     expect(component.uploading).toBe(true);
     setTimeout(()=>{expect(component.uploading).toBe(false); done();}, 150);
     });
+
+
+  it('should delete a learner', () => {
+    spyOn(router, 'navigate');
+    component.delete();
+    expect(router.navigate).toHaveBeenCalledWith(['home']);
+  });
 });

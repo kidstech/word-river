@@ -66,4 +66,19 @@ describe('Edit Learner', () => {
       page.getLearnerCardName().eq(1).should('have.text', 'Go Tigers');
     });
   });
+
+  it('Should delete the learner', () => {
+    page.getLearnerCards().eq(1).then((card) => {
+      page.clickLearner(page.getLearnerCards().eq(1));
+    });
+
+      cy.url().should('match', /\/learners\/[0-9]+/);
+
+      page.getDeleteButton().click();
+      page.getConfirmButton().click();
+      cy.wait(1000);
+      cy.url().should('match', /\/home$/);
+
+      page.getLearnerCards().should('have.length', 1);
+  });
 });

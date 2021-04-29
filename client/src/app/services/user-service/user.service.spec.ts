@@ -102,4 +102,10 @@ describe('UserService', () => {
     expect(req.request.method).toBe('PUT');
     req.flush({id: 'test'});
   });
+  it('removeLearner calls api/users/:id/:learnerId/learners', () => {
+    service.removeLearner(testUser.authId, testLearner._id).subscribe(id=>expect(id).toBe(testLearner._id));
+    const req = httpTestingController.expectOne(service.userUrl + '/' + testUser.authId + '/' + testLearner._id + '/learners');
+    expect(req.request.method).toBe('DELETE');
+    req.flush({id: '123'});
+  });
 });

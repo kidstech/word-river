@@ -42,10 +42,10 @@ export class UserServiceMock {
     },
     {
       _id: 'test1',
-      authId: '6789',
+      authId: '123',
       name: 'Danny Doe',
       icon: 'image.png',
-      learners: [],
+      learners: this.learners,
       contextPacks: ['moo', 'woof']
     },
     {
@@ -73,8 +73,8 @@ export class UserServiceMock {
   createLearner(authId: string, newLearner: Learner): Observable<string> {
     this.learners.push(newLearner);
     return new Observable(sub => {
-      if(newLearner.name !== null){sub.next('err');}
-      else  {sub.error(authId);}
+      if (newLearner.name !== null) { sub.next('err'); }
+      else { sub.error(authId); }
     });
   }
 
@@ -89,6 +89,14 @@ export class UserServiceMock {
   editLearner(authId: string, learnerId: string, editedLearner: Learner): Observable<Learner> {
     this.learners = this.learners.map(learner => learner._id === learnerId ? editedLearner : learner);
     return of(editedLearner);
+  }
+
+  removeLearner(authId: string, learnerId: string): Observable<string> {
+    console.log(this.users);
+    this.users = this.users.map(user =>
+      user.authId === authId ?
+        user.learners.filter(learner => learner._id !== learnerId) : user) as User[];
+    return of(learnerId);
   }
 
   // removePackFromLearner(authId: string, learnerId: string, packId: string): Observable<string> {

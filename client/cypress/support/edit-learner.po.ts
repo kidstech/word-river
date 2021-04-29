@@ -41,4 +41,12 @@ export class EditLearnerPage {
     return cy.get('.count-container');
   }
 
+  getDeleteButton() {
+    return cy.get('#deleteButton');
+  }
+
+  getConfirmButton() {
+    return cy.get('.confirm');
+  }
+
 }
