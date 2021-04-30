@@ -22,12 +22,17 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoginService } from './services/login-service/login.service';
+import { AuthGuard } from './auth/guards/auth-guard';
+import { LoginServiceMock } from 'src/testing/login-service-mock';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let location: Location;
   let router: Router;
+  let loginService: LoginService;
+  let authGuard: AuthGuard;
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -54,7 +59,8 @@ describe('AppComponent', () => {
       providers:[
         HttpClientModule,
         { provide: ContextPackService, useValue: new MockCPService() },
-        { provide: WordListService, useValue: new MockWordListService() }
+        { provide: WordListService, useValue: new MockWordListService() },
+        { provide: LoginService, useValue: new LoginServiceMock() }
       ],
       declarations: [
         AppComponent
@@ -66,6 +72,7 @@ describe('AppComponent', () => {
     component = fixture.componentInstance;
     location = TestBed.get(Location);
     router = TestBed.get(Router);
+    loginService = TestBed.get(LoginService);
     fixture.detectChanges();
   });
 
@@ -127,6 +134,12 @@ describe('AppComponent', () => {
     spyOn(router, 'navigate');
     component.goBack();
     expect(location.back).toHaveBeenCalled();
+  });
+  it(`authGuard takes user to the right page`, () => {
+    loginService.loggedIn = false;
+    authGuard = new AuthGuard(loginService, router);
+    authGuard.canActivate(null, null);
+    expect(location.path()).toEqual('');
   });
 
 });

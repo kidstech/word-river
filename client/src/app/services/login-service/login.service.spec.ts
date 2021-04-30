@@ -108,4 +108,20 @@ describe('LoginService', () => {
       done();
     });
   });
+  it('signIn works', (done) => {
+    service.signIn('faf@ga.ag', 'fadge', res => {
+      expect(res).toEqual({ user: { uid: '1234' } });
+      done();
+    }, err => {});
+    service.signIn('', '', res => {
+    }, err => {
+      expect(err).toBeUndefined();
+      done();
+    });
+  });
+
+  it('should return null when the user doesnt exist', () => {
+    service.user = undefined;
+    expect(service.authID).toBe(null);
+  });
 });
