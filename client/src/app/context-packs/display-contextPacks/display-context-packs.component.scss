@@ -217,7 +217,14 @@ box-shadow: inset 0px 5px 15px -3px rgba(0,0,0,0.1);
   overflow-x: unset;
   height: unset;
   overflow-y: visible;
-
+}
+.learners-display-expanded mat-icon{
+  transform: rotate(180deg);
+  transition: transform 0.2s ease;
+}
+.learners-display mat-icon{
+  transform: rotate(0deg);
+  transition: transform 0.2s ease;
 }
 .view-all{
   position: absolute;
