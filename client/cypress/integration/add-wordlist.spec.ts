@@ -45,14 +45,14 @@ describe('Add Wordlist', () => {
 
   it('Should type a word and get suggestions', () => {
     page.typeWord({ word: 'Chicken', forms: [], type: 'noun' });
-    cy.wait(2000);
+    cy.wait(3000);
     page.addWordButton().should('be.enabled');
     cy.get('.chip').should('have.length.greaterThan',0);
   });
 
   it('Should type a word and remove suggestions', () => {
     page.typeWord({ word: 'Chicken', forms: [], type: 'noun' });
-    cy.wait(2000);
+    cy.wait(3000);
     page.addWordButton().should('be.enabled');
     cy.get('.chip').should('have.length',2);
     cy.get('.mat-chip-remove').first().click();
