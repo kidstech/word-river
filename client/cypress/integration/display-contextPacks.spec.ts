@@ -54,7 +54,7 @@ describe('Display Context Pack', () => {
     });
 
     it('Should have 2 learners', () => {
-      cy.wait(1000);
+      cy.wait(2000);
       page.getLearnerCards().should('have.length', 2);
     });
 

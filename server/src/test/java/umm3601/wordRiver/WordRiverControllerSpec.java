@@ -1,6 +1,7 @@
 package umm3601.wordRiver;
 
 import static com.mongodb.client.model.Filters.eq;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -46,7 +47,9 @@ public class WordRiverControllerSpec {
   private ObjectId batmanId;
   private ObjectId noWordListsId;
   private ObjectId johnDoeId;
+  private ObjectId steveDoeId;
   private ObjectId capId;
+  private ObjectId peteDoeId;
 
   static MongoClient mongoClient;
   static MongoDatabase db;
@@ -148,12 +151,35 @@ public class WordRiverControllerSpec {
         Document johnDoe = new Document().append("_id", johnDoeId).append("authId", "5678").append("name", "John Doe").append("icon", "user.png")
             .append("learners", Arrays.asList(new Document().append("_id", "117").append("name", "John Spartan")
             .append("icon","master.jpg")
-             .append("learnerPacks", Arrays.asList(batmanId.toHexString(), capId.toHexString())), new Document().append("_id", "1234").append("name", "Bob Doe")
+             .append("learnerPacks", Arrays.asList(batmanId.toHexString(), capId.toHexString(), "5689")), new Document().append("_id", "1234").append("name", "Bob Doe")
                 .append("icon","bod.jpg")
                  .append("learnerPacks", Arrays.asList(batmanId.toString()))))
                     .append("contextPacks", Arrays.asList(batmanId.toHexString()));
 
+    //This user has an invalid context pack ID
+     peteDoeId = new ObjectId();
+        Document peteDoe = new Document().append("_id", peteDoeId).append("authId", "420").append("name", "Pete Doe").append("icon", "user.png")
+            .append("learners", Arrays.asList(new Document().append("_id", "114").append("name", "Johnson Spartan")
+            .append("icon","master.jpg")
+             .append("learnerPacks", Arrays.asList(batmanId.toHexString(), capId.toHexString())), new Document().append("_id", "1234").append("name", "Bob Doe")
+                .append("icon","bod.jpg")
+                 .append("learnerPacks", Arrays.asList(batmanId.toString())), new Document().append("_id", "117").append("name", "John Spartan")
+            .append("icon","master.jpg")
+             .append("learnerPacks", Arrays.asList(batmanId.toHexString(), capId.toHexString())), new Document().append("_id", "1234").append("name", "Bob Doe")
+                .append("icon","bod.jpg")
+                 .append("learnerPacks", Arrays.asList(batmanId.toString()))))
+                    .append("contextPacks", Arrays.asList("5493023490"));
+
+    steveDoeId = new ObjectId();
+        Document steveDoe = new Document().append("_id", steveDoeId).append("authId", "2345").append("name", "Steve Doe").append("icon", "user.png")
+            .append("learners", Arrays.asList(new Document().append("_id", "117").append("name", "John Spartan")
+            .append("icon","master.jpg")
+             .append("learnerPacks", Arrays.asList(capId.toHexString(), "5689"))))
+                    .append("contextPacks", Arrays.asList(batmanId.toHexString()));
+
     userDocuments.insertOne(johnDoe);
+    userDocuments.insertOne(peteDoe);
+    userDocuments.insertOne(steveDoe);
 
     userController = new UserController(databaseU);
     wordRiverController = new WordRiverController(userController, db);
@@ -249,7 +275,7 @@ public class WordRiverControllerSpec {
 
     assertThrows(BadRequestResponse.class, () -> {
       wordRiverController.addNewWordList(ctx);
-    });;
+    });
   }
 
   @Test
@@ -576,6 +602,57 @@ public class WordRiverControllerSpec {
   }
 
   @Test
+  public void AddContextPackToUserAndDatabaseWithNullName() throws IOException {
+
+    String testNewContextPack = "{" + "\"schema\": \"Test schema\","
+        + "\"icon\": \"image.png\"," + "\"enabled\": true," + "\"wordlists\": []" + "}";
+
+
+    mockReq.setBodyContent(testNewContextPack);
+    mockReq.setMethod("POST");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/newPack", ImmutableMap.of("authId", "5678"));
+
+    assertThrows(BadRequestResponse.class, () -> {
+      wordRiverController.addNewContextPackToUser(ctx);
+    });
+  }
+
+  @Test
+  public void AddContextPackToUserAndDatabaseWithNoName() throws IOException {
+
+    String testNewContextPack = "{" + "\"schema\": \"Test schema\"," + "\"name\": \"\","
+        + "\"icon\": \"image.png\"," + "\"enabled\": true," + "\"wordlists\": []" + "}";
+
+
+    mockReq.setBodyContent(testNewContextPack);
+    mockReq.setMethod("POST");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/newPack", ImmutableMap.of("authId", "5678"));
+
+    assertThrows(BadRequestResponse.class, () -> {
+      wordRiverController.addNewContextPackToUser(ctx);
+    });
+  }
+
+  @Test
+  public void AddContextPackToUserAndDatabaseWithNullIcon() throws IOException {
+
+    String testNewContextPack = "{" + "\"schema\": \"Test schema\"," + "\"name\": \"Test Pack\","
+         + "\"enabled\": true," + "\"wordlists\": []" + "}";
+
+
+    mockReq.setBodyContent(testNewContextPack);
+    mockReq.setMethod("POST");
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/newPack", ImmutableMap.of("authId", "5678"));
+
+    assertThrows(BadRequestResponse.class, () -> {
+      wordRiverController.addNewContextPackToUser(ctx);
+    });
+  }
+
+  @Test
   public void GetUserPacks() throws IOException {
     // Create fake Javalin context
 
@@ -585,20 +662,36 @@ public class WordRiverControllerSpec {
     assertEquals(200, mockRes.getStatus());
 
     String result = ctx.resultString();
-    System.out.println(result);
     assertTrue(JavalinJson.fromJson(result, ContextPack[].class).length == 1 );
+  }
+
+  @Test
+  public void GetUserPacksThatHasNonExistentPack() throws IOException {
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/packs", ImmutableMap.of("authId", "420"));
+
+    assertThrows(NotFoundResponse.class, () -> {
+      wordRiverController.getUserPacks(ctx);
+    });
   }
 
 @Test
   public void GetLearnerPacks() throws IOException {
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:learnerId/learnerPacks", ImmutableMap.of("authId", "5678", "learnerId", "117"));
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:learnerId/learnerPacks", ImmutableMap.of("authId", "420", "learnerId", "117"));
     wordRiverController.getLearnerPacks(ctx);
 
     assertEquals(200, mockRes.getStatus());
 
     String result = ctx.resultString();
-    System.out.println(result);
     assertTrue(JavalinJson.fromJson(result, ContextPack[].class).length == 2 );
+  }
+
+  @Test
+  public void GetLearnerPacksWithANonexistentContextPack() throws IOException {
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:learnerId/learnerPacks", ImmutableMap.of("authId", "5678", "learnerId", "117"));
+    assertThrows(NotFoundResponse.class, () -> {
+      wordRiverController.getLearnerPacks(ctx);
+    });
   }
 
 
@@ -628,6 +721,46 @@ public class WordRiverControllerSpec {
     //Verify that the contextPack was deleted from the user
     assertFalse(theUserContextPacks.contains("[" + batmanId.toHexString() + "]"));
     assertFalse(theUserLearners.contains(batmanId.toHexString()));
-
   }
+
+  @Test
+  public void DeleteContextPackFromAllWithIllegalContextPack() throws IOException {
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:cpId", ImmutableMap.of("authId", "5678", "cpId", "102433"));
+
+    assertThrows(BadRequestResponse.class, () -> {
+      wordRiverController.deleteContextPackFromAll(ctx);
+    });
+  }
+
+  @Test
+  public void DeleteContextPackFromAllWithNonExistentContextPack() throws IOException {
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:cpId", ImmutableMap.of("authId", "5678", "cpId", "605bc9b893b2d94920a98753"));
+
+    assertThrows(NotFoundResponse.class, () -> {
+      wordRiverController.deleteContextPackFromAll(ctx);
+    });
+  }
+
+  @Test
+  public void DeleteContextPackFromAllWithContextPackInDatabaseButNotInUser() throws IOException {
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:cpId", ImmutableMap.of("authId", "5678", "cpId", capId.toHexString()));
+
+    assertThrows(NotFoundResponse.class, () -> {
+      wordRiverController.deleteContextPackFromAll(ctx);
+    });
+  }
+
+  @Test
+  public void DeleteContextPackFromAllShouldNotThrowErrorIfPackNotInLearner() throws IOException {
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:authId/:cpId", ImmutableMap.of("authId", "2345", "cpId", batmanId.toHexString()));
+
+    assertDoesNotThrow( () -> {
+      wordRiverController.deleteContextPackFromAll(ctx);
+    });
+  }
+
 }
