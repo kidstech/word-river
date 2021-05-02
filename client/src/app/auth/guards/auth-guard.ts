@@ -11,9 +11,10 @@ export class AuthGuard implements CanActivate {
     public router: Router
   ){ }
   canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    _next: ActivatedRouteSnapshot,
+    _state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if(this.authService.isLoggedIn !== true && !(window as any).Cypress) {
+      window.alert('You have to be signed in to access this page.');
       this.router.navigate(['']);
     }
     return true;
