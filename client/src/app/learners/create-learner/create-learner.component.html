@@ -17,7 +17,7 @@
             data-test="cancelLearnerButton">
             CANCEL
           </button>
-          <button mat-button type="button" color="primary" [disabled]="name ? name.length === 0 : true" type="submit"
+          <button mat-button type="button" color="primary" [disabled]="name ? name.length === 0  || name.length > 50: true" type="submit"
           data-test="addLearnerButton" (click)="createLearner()">
           ADD LEARNER
         </button>

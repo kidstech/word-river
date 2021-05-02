@@ -22,6 +22,8 @@ describe('Edit Learner', () => {
     });
       cy.wait(1000);
 
+      cy.wait(1000);
+
       cy.url().should('match', /\/learners\/[0-9]+/);
 
       page.getAssignedPacks().should('have.length', 1);

@@ -51,13 +51,13 @@ describe('AddWordComponent', () => {
     component.wordName = '';
     component.type = '';
     component.check();
-    expect(component.finished).toBe(component.check());
+    expect(component.finished).toBe(false);
   });
 
   it('should not accept a one character name', () => {
     component.wordName = 'k';
     component.check();
-    expect(component.finished).toBe(component.check());
+    expect(component.finished).toBe(false);
   });
   it('check() should work', () => {
     component.wordName = 'sda';

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserService } from '../user-service/user.service';
@@ -9,6 +10,7 @@ import { User } from 'src/app/datatypes/user';
 export class LoginService {
   userData: any; // Save logged in user data
   signedIn: any;
+  _user: any;
 
   constructor(
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -87,12 +89,16 @@ export class LoginService {
   }
   get user() {
     const val = localStorage.getItem('user');
-    let user = null;
+     this._user = null;
     if(val !== 'undefined'){
-      user = JSON.parse(val);
+      this._user = JSON.parse(val);
     }
-    console.log(user);
-    return user;
+    console.log(this._user);
+    return this._user;
+  }
+
+  set user(x) {
+    this._user = x;
   }
   get authID() {
     return this.user ? this.user.authId : null;

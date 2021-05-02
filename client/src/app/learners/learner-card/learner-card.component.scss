@@ -36,6 +36,10 @@ mat-card:hover {
   font-size: x-large;
   margin-bottom: 30px;
   margin-top: 20px;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  white-space: nowrap;
+  max-width: 200px;
 }
 
 .count-container{
