@@ -6,7 +6,7 @@
         <mat-icon>assignment</mat-icon>
         <div>
           <h1>{{contextPacks ? contextPacks.length : 0}}</h1>
-          <a href="/home/#students" class="link"><h3>Context Packs</h3></a>
+          <a href="/home/#packs" class="link"><h3>Context Packs</h3></a>
         </div>
       </div>
       <div class="details">
@@ -101,7 +101,7 @@
       <span>Add</span>
     </a>
   </div>
-  <div class="context-pack-display">
+  <div class="context-pack-display" id="packs">
     <app-cp-card simple="true" (delete)="removeCP(pack._id)" *ngFor="let pack of contextPacks" class="cp-card"
       [contextPack]="pack"></app-cp-card>
     <div class="placeholder" *ngIf="contextPacks ? contextPacks.length === 0 : false;">
