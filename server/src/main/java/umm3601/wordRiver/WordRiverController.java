@@ -210,20 +210,18 @@ public class WordRiverController {
     ArrayList<ContextPack> learnerPacks = new ArrayList<ContextPack>();
 
     for( Learner lr: user.learners){
-        if(lr._id.equals(learnerId)){
-          for(String cpId: lr.learnerPacks){
+      if(lr._id.equals(learnerId)){
+        for(String cpId: lr.learnerPacks){
           try{
-           learnerPacks.add(ctxCollection.findOneById(cpId));
-         } catch (IllegalArgumentException e) {
-           throw new NotFoundResponse("The requested context pack was not found");
+             learnerPacks.add(ctxCollection.findOneById(cpId));
+          } catch (IllegalArgumentException e) {
+            throw new NotFoundResponse("The requested context pack was not found");
+          }
         }
+      } else {
+        continue;
       }
-      break;
     }
-    else{
-      continue;
-    }
-  }
     ctx.status(200);
     ctx.json(learnerPacks);
 }
@@ -237,6 +235,7 @@ public class WordRiverController {
     String cpId = ctx.pathParam("cpId");
     String authId = ctx.pathParam("authId");
     String mongoId = userController.findByAuthId(authId);
+    boolean cpFound = false;
 
     // Deleting from the database
     try {
@@ -252,9 +251,17 @@ public class WordRiverController {
     User user = userController.userCollection.findOneById(mongoId);
     for(String cp: user.contextPacks){
       if(cpId.equals(cp)){
+        cpFound = true;
         userController.userCollection.updateById(mongoId, Updates.pull("contextPacks", cp));
         break;
       }
+      else{
+        continue;
+      }
+    }
+
+    if(!cpFound) {
+      throw new NotFoundResponse("The requested context pack was not found");
     }
 
     // Deleting from the learners' context pack array
@@ -266,8 +273,12 @@ public class WordRiverController {
           userController.userCollection.updateById(mongoId, Updates.push("learners", lr));
           break;
         }
+        else{
+          continue;
+        }
       }
     }
+
   }
 }
 

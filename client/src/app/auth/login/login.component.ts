@@ -6,7 +6,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FileService } from 'src/app/services/file.service';
-import { auth } from 'src/testing/utils';
 
 @Component({
   selector: 'app-login',

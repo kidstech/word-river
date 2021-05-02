@@ -23,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DisplayContextPacksComponent } from './context-packs/display-contextPacks/display-context-packs.component';
 import { AddContextPackComponent } from './context-packs/add-contextPacks/add-contextPacks.component';
 import { CreateLearnerComponent } from './learners/create-learner/create-learner.component';
+import { AuthGuard } from './auth/guards/auth-guard';
 
 export const COMMON_IMPORTS = [
   MatButtonModule,
@@ -43,14 +44,15 @@ export const COMMON_IMPORTS = [
 
 const routes: Routes = [
   {path: '', component: LoginComponent,data: {animation: 'LoginPage'}},
-  {path: 'home', component: DisplayContextPacksComponent,data: {animation: 'HomePage'}},
-  {path: 'packs/new', component: AddContextPackComponent},
-  {path: 'packs/:id', component: DisplayWordlistComponent},
-  {path: 'packs/:id/import', component: ImportWordlistComponent},
-  {path: 'packs/:id/new', component: AddWordListComponent},
-  {path: 'packs/:id/:name', component: ViewWordlistComponent},
-  {path: 'learners/new', component: CreateLearnerComponent},
-  {path: 'learners/:id', component: EditLearnerComponent},
+  {path: 'home', component: DisplayContextPacksComponent,data: {animation: 'HomePage'},canActivate:[AuthGuard]},
+  {path: 'packs/new', component: AddContextPackComponent,canActivate:[AuthGuard]},
+  {path: 'packs/:id', component: DisplayWordlistComponent,canActivate:[AuthGuard]},
+  {path: 'packs/:id/import', component: ImportWordlistComponent,canActivate:[AuthGuard]},
+  {path: 'packs/:id/new', component: AddWordListComponent,canActivate:[AuthGuard]},
+  {path: 'packs/:id/:name', component: ViewWordlistComponent,canActivate:[AuthGuard]},
+  {path: 'learners/new', component: CreateLearnerComponent,canActivate:[AuthGuard]},
+  {path: 'learners/:id', component: EditLearnerComponent,canActivate:[AuthGuard]},
+  {path: '**', redirectTo: ''}
 
 ];
 

@@ -20,6 +20,9 @@ describe('Edit Learner', () => {
     page.getLearnerCards().first().then((card) => {
       page.clickLearner(page.getLearnerCards().first());
     });
+      cy.wait(1000);
+
+      cy.wait(1000);
 
       cy.url().should('match', /\/learners\/[0-9]+/);
 
@@ -28,16 +31,17 @@ describe('Edit Learner', () => {
       page.getCpCards().first().then((cpCard)=> {
         page.unassignPackButton().click();
       });
-
+      cy.wait(1000);
       page.getAssignedPacks().should('have.length', 0);
 
       page.saveLearnerButton().click();
+      cy.wait(1000);
       page.getAssignedPacksCount().eq(1).should('have.text', '0Packs');
 
       page.getLearnerCards().eq(1).then((card) => {
         page.clickLearner(page.getLearnerCards().eq(1));
       });
-
+      cy.wait(1000);
       cy.url().should('match', /\/learners\/[0-9]+/);
 
       page.getAssignedPacks().should('have.length', 0);
@@ -45,8 +49,10 @@ describe('Edit Learner', () => {
 
       page.assignPackButton().eq(0).click();
         });
+      cy.wait(1000);
       page.getAssignedPacks().should('have.length', 1);
       page.saveLearnerButton().click();
+      cy.wait(1000);
       page.getAssignedPacksCount().eq(1).should('have.text', '1Packs');
   });
 
