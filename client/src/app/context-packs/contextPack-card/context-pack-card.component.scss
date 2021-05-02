@@ -12,6 +12,11 @@
   background-color: rgb(60, 60, 60);
   cursor: pointer;
 }
+.cp-card:hover .del {
+  font-size: medium;
+  color:rgb(255, 255, 255);
+  opacity: 1;
+}
 
 .container {
   width: 100%;
@@ -176,6 +181,8 @@
   font-size: medium;
   color:rgba(255, 255, 255, 0.438);
   border-radius: 8px;
+  opacity: 0;
+  transition-duration: 200ms;
 }
 .del:hover{
   font-size: medium;
