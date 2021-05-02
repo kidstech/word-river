@@ -13,6 +13,21 @@
   display: flex;
   flex-wrap: wrap;
 }
+.unexpanded {
+  position: relative;
+  overflow-x: hidden;
+  flex-wrap: nowrap;
+}
+.fade {
+  position:absolute;
+  top:0px;
+  right:0;
+  height:95%;
+  width:300px;
+  background: linear-gradient(90deg,rgba(0,0,0,0), #313131);
+  pointer-events: none;
+  // margin-bottom: 6px;
+}
 
 .cp-card {
   margin-bottom: 10px;
@@ -51,6 +66,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .placeholder {
@@ -183,7 +199,48 @@ box-shadow: inset 0px 5px 15px -3px rgba(0,0,0,0.1);
   opacity: 0.6;
 }
 .learners-display{
-  gap:20px
+  gap:20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  overflow-x: hidden;
+  flex-wrap: nowrap;
+  height: 300px;
+  overflow-y: hidden;
+}
+.learners-display-expanded{
+  gap:20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-x: unset;
+  height: unset;
+  overflow-y: visible;
+}
+.learners-display-expanded mat-icon{
+  transform: rotate(180deg);
+  transition: transform 0.2s ease;
+}
+.learners-display mat-icon{
+  transform: rotate(0deg);
+  transition: transform 0.2s ease;
+}
+.view-all{
+  position: absolute;
+  top:0px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  opacity: 0.5;
+  transition-duration: 200ms;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
+.view-all:hover{
+  opacity: 1;
 }
 .link{
   color:white;
@@ -193,4 +250,7 @@ box-shadow: inset 0px 5px 15px -3px rgba(0,0,0,0.1);
   color:white;
   opacity: 1;
   text-decoration: underline;
+}
+.fade{
+
 }

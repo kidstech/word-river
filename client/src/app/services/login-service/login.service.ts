@@ -27,7 +27,7 @@ export class LoginService {
           this.setUserData(user);
           then(result.user.uid);
         }, error =>
-          err(JSON.stringify(error))
+          err(JSON.stringify(error).includes('404') ? 'Not found' : JSON.stringify(error))
         );
       })
       ).catch((error) => {
@@ -80,7 +80,7 @@ export class LoginService {
   get isLoggedIn(): boolean {
     const val = localStorage.getItem('user');
     let user = null;
-    if(val !== 'undefined') {user = JSON.parse(val);}
+    if (val !== 'undefined') { user = JSON.parse(val); }
     console.log(user !== null);
     return user !== null;
   }

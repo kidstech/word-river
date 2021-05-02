@@ -14,7 +14,7 @@ export class LoginPage {
     }
 
     login(){
-        this.loginEmail().type('cats2@gmail.com');
+        this.loginEmail().type('cats4@gmail.com');
         this.loginPassword().type('VibingCats');
         this.loginButton().click();
     }

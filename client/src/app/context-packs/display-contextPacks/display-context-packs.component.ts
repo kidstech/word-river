@@ -35,6 +35,8 @@ export class DisplayContextPacksComponent implements OnInit, OnDestroy {
   enabledCount;
   disabledCount;
 
+  lExpanded = false;
+
 
   constructor(private packService: ContextPackService, private router: Router,
     private login: LoginService,
