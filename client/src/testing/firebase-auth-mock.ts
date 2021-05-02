@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import { Observable } from 'rxjs';
 
 export class FirebaseAuthMock {
@@ -24,4 +25,9 @@ export class FirebaseAuthMock {
       else {reject('Error');}
     });
   }
+
+  // Sign out
+  signOut(then: (res) => any, err: (some) => any) {
+    return of(()=>{}).toPromise();
+}
 }
