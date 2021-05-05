@@ -43,6 +43,10 @@ WordRiver is a website for creating wordlists and context packs (Collections of 
 ## [Technical Document](DEPLOYMENT.md)
 
 A document that describes the technical details of the project.
+### Notes:
+* The Merriam-Webster API will only allow 1000 queries per day.
+* Icons uploaded through WordRiver to Firebase can be a maximum size of 5mb.
+* If you would like to facilitate agile development for planning your project, we would recommend [Pointing Poker](https://www.pointingpoker.com) for estimating the values for your epics.
 
 ## [To-Do List](DEPLOYMENT.md)
 
