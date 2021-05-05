@@ -1,4 +1,4 @@
-
+![WordRiver](/logo-top.png)
 # WordRiver <!-- omit in toc -->
 
 [![Server Build Status](../../actions/workflows/server.yml/badge.svg)](../../actions/workflows/server.yml)
@@ -52,7 +52,7 @@ A document that describes the technical details of the project.
 
 List of known issues and areas for improvements.
 
-## [Customer Pamphlet](RESOURCES.md)
+## [Customer Pamphlet](brochure.pdf)
 
 A non-technical document for inexperienced users.
 
