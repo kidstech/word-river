@@ -48,7 +48,7 @@ A document that describes the technical details of the project.
 * Icons uploaded through WordRiver to Firebase can be a maximum size of 5mb.
 * If you would like to facilitate agile development for planning your project, we would recommend [Pointing Poker](https://www.pointingpoker.com) for estimating the values for your epics.
 
-## [To-Do List](DEPLOYMENT.md)
+## [To-Do List](TO-DO-LIST.md)
 
 List of known issues and areas for improvements.
 
