@@ -108,5 +108,17 @@
     }
   ],
   "contextPacks": ["605bc9d893b2d94300a98753", "604cdf3c63292e16753345f8", "604cdf3cbb468a7463ad4d85" ]
+},
+{
+  "_id": {
+    "$oid": "60be8171bbaa96763c50ae15"
+  },
+  "authId": "FkKlZ8b1M3OdzQxVb1Armxr6m7h1",
+  "name": "K.K. Lamberty",
+  "icon": "",
+  "learners": [],
+  "contextPacks": [
+    "60beabcbbbaa96763c50ae16"
+  ]
 }
 ]
