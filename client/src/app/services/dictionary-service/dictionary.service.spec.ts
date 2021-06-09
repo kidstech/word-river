@@ -27,7 +27,7 @@ describe('DictionaryService', () => {
   });
   it('generateLink() generates the right link', () => {
     const link = service.generateLink('bear');
-    expect(link).toEqual('https://www.dictionaryapi.com/api/v3/references/collegiate/json/bear?key=79a089d4-002b-4bd0-a177-6eae2a531161');
+    expect(link).toEqual('https://www.dictionaryapi.com/api/v3/references/sd2/json/bear?key=0ac50be7-6f80-4a30-bde1-305366d66800');
   });
 
 });
