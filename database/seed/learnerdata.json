@@ -1,0 +1,31 @@
+[
+    {
+        "_id": {
+            "$oid": "60c6752204d2066d29d73a20"
+        },
+        "learnerId": "1623445120497",
+        "learnerName": "Carl",
+        "wordCounts": {
+            "away": 1,
+            "big": 1,
+            "find": 1,
+            "i": 1
+        }
+    },
+    {
+        "_id": {
+            "$oid": "60c6752204d2066d29d73a21"
+        },
+        "learnerId": "1623445108990",
+        "learnerName": "Bob",
+        "wordCounts": {
+            "for": 1,
+            "funny": 1,
+            "go": 1,
+            "it": 1,
+            "can": 1,
+            "blue": 1,
+            "big": 3
+        }
+    }
+]
