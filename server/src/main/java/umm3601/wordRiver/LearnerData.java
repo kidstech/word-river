@@ -12,10 +12,10 @@ import org.mongojack.ObjectId;
 
 public class LearnerData {
   @ObjectId @Id
-  public String _id;  
-  public String leanerId;
+  public String _id;
+  public String learnerId;
 
   public String learnerName;
   // java equivalent of the C# dictionary
-  public Map<String, Integer> wordCounts = new HashMap<String, Integer>();
+  public Map<String, Integer> wordCounts;
 }
