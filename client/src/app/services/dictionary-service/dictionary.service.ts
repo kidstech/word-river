@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DictionaryService {
-  apiUrl = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json';
-  apiKey = '79a089d4-002b-4bd0-a177-6eae2a531161';
+  apiUrl = 'https://www.dictionaryapi.com/api/v3/references/sd2/json';
+  apiKey = '0ac50be7-6f80-4a30-bde1-305366d66800';
 
   constructor(private httpClient: HttpClient) { }
 
