@@ -94,7 +94,8 @@ public class Server {
     server.get("/api/users/:authId/:learnerId/learnerPacks", wordRiverController::getLearnerPacks);
 
     // Get Learner data
-    server.get("/api/learnerData/:id", learnerDataController::getLearnerData);
+    server.get("/api/learnerData/:learnerId", learnerDataController::getLearnerData);
+    server.post("/api/learnerData/:learnerId", learnerDataController::postLearnerData);
 
 
 
