@@ -8,10 +8,12 @@ import com.mongodb.client.MongoDatabase;
 import org.mongojack.JacksonMongoCollection;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
+import java.util.regex.Pattern;
 
 public class LearnerDataController {
 
   protected final JacksonMongoCollection<LearnerData> learnerDataCollection;
+
 
   /**
    * Construct a controller for learnerData
@@ -30,17 +32,16 @@ public class LearnerDataController {
   public void getLearnerData(Context ctx) {
     String learnerId = ctx.pathParam("learnerId");
     LearnerData data = null;
-
     data = learnerDataCollection.find(eq("learnerId", learnerId)).first();
-    // if we didn't find anything, but the learnerId seems legit...
-    if (data == null && learnerId != null) {
+    // if we didn't find anything, but the learnerId seems legit... (13 digits exactly)
+    if (data == null && Pattern.matches("\\b\\d{13}\\b", learnerId)) {
       // create new learnerData in our DB
       createEmptyLearnerData(learnerId);
       // and then send that info back (really just want an objectId)
       getLearnerData(ctx);
       return;
     }
-    else if (data == null && learnerId == null)
+    else if (data == null)
     {
       throw new NotFoundResponse("The LearnerData was not found in the system.");
     }
