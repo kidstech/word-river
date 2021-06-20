@@ -54,6 +54,7 @@ public class LearnerDataController {
     learnerData.learnerId = learnerId;
     learnerData.learnerName = "";
     learnerData.wordCounts = new HashMap<String, Integer>();
+    learnerData.sessionTimes = new HashMap<String, Float>();
     learnerDataCollection.insert(learnerData);
   }
 
@@ -72,11 +73,5 @@ public class LearnerDataController {
     }
     ctx.status(201);
   }
-
-  public void updateLearnerData(LearnerData learnerData)
-  {
-    learnerDataCollection.replaceOneById(learnerData._id, learnerData);
-  }
-
   
 }

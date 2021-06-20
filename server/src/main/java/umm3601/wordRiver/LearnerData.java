@@ -16,6 +16,8 @@ public class LearnerData {
   public String learnerId;
 
   public String learnerName;
-  // java equivalent of the C# dictionary
+  // mapping of each word a learner has heard to the number of times they've heard it
   public Map<String, Integer> wordCounts;
+  // mapping of the date gotten at the start of their session with the time elapsed upon exiting the application
+  public Map<String, Float> sessionTimes;
 }
