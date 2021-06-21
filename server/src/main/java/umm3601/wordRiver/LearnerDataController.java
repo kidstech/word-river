@@ -54,7 +54,7 @@ public class LearnerDataController {
     learnerData.learnerId = learnerId;
     learnerData.learnerName = "";
     learnerData.wordCounts = new HashMap<String, Integer>();
-    learnerData.sessionTimes = new HashMap<String, Float>();
+    learnerData.sessionTimes = new HashMap<String, String>();
     learnerDataCollection.insert(learnerData);
   }
 
