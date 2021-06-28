@@ -173,12 +173,23 @@
     },
     "authId": "K55B061p79gBW0hsDN2W9XbadzR2",
     "name": "testuser",
-    "icon": "",
     "learners": [
       {
         "_id": "1623445108990",
         "name": "Bob",
         "learnerPacks": []
+      },
+      {
+        "_id": "1623473359959",
+        "name": "Mark",
+        "learnerPacks": []
+      },
+      {
+        "_id": "1623473355630",
+        "name": "John",
+        "learnerPacks": [
+          "60d4c568d073aa154239f3d4"
+        ]
       },
       {
         "_id": "1623445115664",
@@ -188,19 +199,18 @@
       {
         "_id": "1623445120497",
         "name": "Carl",
-        "learnerPacks": []
-      },
-      {
-        "_id": "1623473355630",
-        "name": "John",
-        "learnerPacks": []
-      },
-      {
-        "_id": "1623473359959",
-        "name": "Mark",
-        "learnerPacks": []
+        "icon": "https://firebasestorage.googleapis.com/v0/b/word-river.appspot.com/o/55621203?alt=media&token=07abb003-4c1c-4003-8dfa-e99db3107e9b",
+        "learnerPacks": [
+          "60d4c568d073aa154239f3d4",
+          "60d4c5dad073aa154239f3d5",
+          "60d7cfa7c02ced09b6750223"
+        ]
       }
     ],
-    "contextPacks": []
+    "contextPacks": [
+      "60d4c568d073aa154239f3d4",
+      "60d4c5dad073aa154239f3d5",
+      "60d7cfa7c02ced09b6750223"
+    ]
   }
 ]
