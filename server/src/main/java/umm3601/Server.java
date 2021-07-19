@@ -11,6 +11,7 @@ import io.javalin.core.util.RouteOverviewPlugin;
 import umm3601.wordRiver.UserController;
 import umm3601.wordRiver.WordRiverController;
 import umm3601.wordRiver.LearnerDataController;
+import umm3601.wordRiver.SentenceController;
 
 public class Server {
 
@@ -35,6 +36,7 @@ public class Server {
     UserController userController = new UserController(database);
     WordRiverController wordRiverController = new WordRiverController(userController,database);
     LearnerDataController learnerDataController = new LearnerDataController(database);
+    SentenceController sentenceController = new SentenceController(database);
 
 
     Javalin server = Javalin.create(config -> {
@@ -96,6 +98,10 @@ public class Server {
     // Get Learner data
     server.get("/api/learnerData/:learnerId", learnerDataController::getLearnerData);
     server.post("/api/learnerData/:learnerId", learnerDataController::postLearnerData);
+
+    // Get Sentences
+    server.get("/api/sentences/:learnerId", sentenceController::getSentences);
+    server.post("/api/sentences/:learnerId", sentenceController::postSentence);
 
 
 
