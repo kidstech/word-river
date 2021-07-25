@@ -18,4 +18,5 @@ public class Sentence {
     public List<String> selectedWordForms;
     // mongo object Id of associated user
     public String userId;
+    public List<String> contextPackIds;
 }

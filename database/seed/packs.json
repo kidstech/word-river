@@ -1265,5 +1265,126 @@
         ]
       }
     ]
+  },
+  {
+    "_id": {
+      "$oid": "60fb8e7042ad761f613eb85e"
+    },
+    "schema": "https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json",
+    "name": "2ndcontextpacktest",
+    "icon": "",
+    "enabled": true,
+    "wordlists": [
+      {
+        "name": "alist",
+        "enabled": true,
+        "nouns": [
+          {
+            "word": "apple",
+            "forms": [
+              "apple",
+              "apples"
+            ],
+            "contextPackId": "60fb8e7042ad761f613eb85e"
+          },
+          {
+            "word": "orange",
+            "forms": [
+              "orange",
+              "oranges"
+            ],
+            "contextPackId": "60fb8e7042ad761f613eb85e"
+          }
+        ],
+        "verbs": [],
+        "adjectives": [
+          {
+            "word": "red",
+            "forms": [
+              "red",
+              "redder",
+              "reddest",
+              "redness",
+              "rednesses"
+            ],
+            "contextPackId": "60fb8e7042ad761f613eb85e"
+          },
+          {
+            "word": "great",
+            "forms": [
+              "great",
+              "greater",
+              "greatest",
+              "greatly",
+              "greatness",
+              "greatnesses"
+            ],
+            "contextPackId": "60fb8e7042ad761f613eb85e"
+          }
+        ],
+        "misc": [
+          {
+            "word": "bye",
+            "forms": [
+              "bye",
+              "good-by",
+              "good-bye"
+            ],
+            "contextPackId": "60fb8e7042ad761f613eb85e"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "60fb70a0f005cc7db767c7d8"
+    },
+    "schema": "https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json",
+    "name": "newfeature",
+    "icon": "",
+    "enabled": true,
+    "wordlists": [
+      {
+        "name": "featuretesting",
+        "enabled": true,
+        "nouns": [
+          {
+            "word": "work",
+            "forms": [
+              "work",
+              "works"
+            ],
+            "contextPackId": "60fb70a0f005cc7db767c7d8"
+          },
+          {
+            "word": "man",
+            "forms": [
+              "man",
+              "manless",
+              "manlike",
+              "men"
+            ],
+            "contextPackId": "60fb70a0f005cc7db767c7d8"
+          }
+        ],
+        "verbs": [
+          {
+            "word": "please",
+            "forms": [
+              "please",
+              "pleased",
+              "pleaser",
+              "pleasers",
+              "pleases",
+              "pleasing"
+            ],
+            "contextPackId": "60fb70a0f005cc7db767c7d8"
+          }
+        ],
+        "adjectives": [],
+        "misc": []
+      }
+    ]
   }
 ]
