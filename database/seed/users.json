@@ -194,8 +194,6 @@
         "_id": "1626657557457",
         "name": "TestGuy",
         "learnerPacks": [
-          "60fb70a0f005cc7db767c7d8",
-          "60fb8e7042ad761f613eb85e"
         ]
       },
       {
@@ -215,10 +213,7 @@
     ],
     "contextPacks": [
       "60d4c5dad073aa154239f3d5",
-      "60d7cfa7c02ced09b6750223",
-      "60fb70a0f005cc7db767c7d8",
-      "60fb8e7042ad761f613eb85e",
-      "60fce6317964ce5c0beb5d5e"
+      "60d7cfa7c02ced09b6750223"
     ]
   }
 ]

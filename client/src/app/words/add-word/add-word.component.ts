@@ -2,7 +2,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AddWordListComponent } from 'src/app/wordlists/add-wordlist/add-wordlist.component';
 import { DictionaryService } from './../../services/dictionary-service/dictionary.service';
-import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -24,7 +23,6 @@ export class AddWordComponent implements OnInit {
   cleared = false;
   suggested = '';
   suggestedForms: string[] = [];
-  contextPackId = '';
 
   added = false;
   loading = false;
@@ -32,7 +30,7 @@ export class AddWordComponent implements OnInit {
   valid: boolean;
 
 
-  constructor(private dictionary: DictionaryService, private route: ActivatedRoute) { }
+  constructor(private dictionary: DictionaryService) { }
 
   check() {
     if (this.wordName && this.type) {
@@ -49,9 +47,6 @@ export class AddWordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((pmap) => {
-      this.contextPackId = pmap.get('id');
-    })
   }
 
   add(event): void {
@@ -118,8 +113,7 @@ export class AddWordComponent implements OnInit {
       name: this.wordName.trim(),
       forms: [...new Set([this.wordName.trim(),
       ...this.forms.filter(e => e.length !== 0)])],// This line removes repetitions and inserts main word
-      type: this.type,
-      contextPackId: this.contextPackId
+      type: this.type
     });
     this.wordName = '';
     this.forms = [];
