@@ -921,6 +921,365 @@
             ]
           }
         ]
+      },
+      {
+        "name": "Kindergarten",
+        "enabled": true,
+        "nouns": [],
+        "verbs": [
+          {
+            "word": "want",
+            "forms": [
+              "want",
+              "wanted",
+              "wanting",
+              "wants"
+            ]
+          },
+          {
+            "word": "say",
+            "forms": [
+              "say",
+              "said",
+              "saying",
+              "says"
+            ]
+          },
+          {
+            "word": "ride",
+            "forms": [
+              "ride",
+              "ridden",
+              "rideable",
+              "rides",
+              "riding"
+            ]
+          },
+          {
+            "word": "please",
+            "forms": [
+              "please",
+              "pleased",
+              "pleaser",
+              "pleases",
+              "pleasing"
+            ]
+          },
+          {
+            "word": "like",
+            "forms": [
+              "like",
+              "liked",
+              "likes",
+              "liking"
+            ]
+          },
+          {
+            "word": "have",
+            "forms": [
+              "have",
+              "had",
+              "has",
+              "having"
+            ]
+          },
+          {
+            "word": "get",
+            "forms": [
+              "get",
+              "gets",
+              "getting",
+              "got",
+              "gotten"
+            ]
+          },
+          {
+            "word": "be",
+            "forms": [
+              "be",
+              "am",
+              "are",
+              "been",
+              "being",
+              "is",
+              "was",
+              "were"
+            ]
+          }
+        ],
+        "adjectives": [
+          {
+            "word": "white",
+            "forms": [
+              "white",
+              "whiteness",
+              "whiter",
+              "whitest"
+            ]
+          },
+          {
+            "word": "pretty",
+            "forms": [
+              "pretty",
+              "prettier",
+              "prettiest",
+              "prettiness"
+            ]
+          },
+          {
+            "word": "our",
+            "forms": [
+              "our"
+            ]
+          },
+          {
+            "word": "new",
+            "forms": [
+              "new",
+              "newer",
+              "newest",
+              "newness"
+            ]
+          },
+          {
+            "word": "good",
+            "forms": [
+              "good"
+            ]
+          },
+          {
+            "word": "all",
+            "forms": [
+              "all"
+            ]
+          },
+          {
+            "word": "black",
+            "forms": [
+              "black",
+              "blacker",
+              "blackest"
+            ]
+          },
+          {
+            "word": "brown",
+            "forms": [
+              "brown",
+              "browner",
+              "brownest"
+            ]
+          },
+          {
+            "word": "four",
+            "forms": [
+              "four"
+            ]
+          }
+        ],
+        "misc": [
+          {
+            "word": "yes",
+            "forms": [
+              "yes"
+            ]
+          },
+          {
+            "word": "with",
+            "forms": [
+              "with"
+            ]
+          },
+          {
+            "word": "will",
+            "forms": [
+              "will",
+              "would"
+            ]
+          },
+          {
+            "word": "who",
+            "forms": [
+              "who"
+            ]
+          },
+          {
+            "word": "what",
+            "forms": [
+              "what"
+            ]
+          },
+          {
+            "word": "went",
+            "forms": [
+              "went",
+              "go",
+              "going"
+            ]
+          },
+          {
+            "word": "well",
+            "forms": [
+              "well"
+            ]
+          },
+          {
+            "word": "under",
+            "forms": [
+              "under"
+            ]
+          },
+          {
+            "word": "too",
+            "forms": [
+              "too"
+            ]
+          },
+          {
+            "word": "this",
+            "forms": [
+              "this",
+              "these"
+            ]
+          },
+          {
+            "word": "they",
+            "forms": [
+              "they",
+              "them"
+            ]
+          },
+          {
+            "word": "there",
+            "forms": [
+              "there"
+            ]
+          },
+          {
+            "word": "that",
+            "forms": [
+              "that",
+              "those"
+            ]
+          },
+          {
+            "word": "soon",
+            "forms": [
+              "soon",
+              "sooner",
+              "soonest"
+            ]
+          },
+          {
+            "word": "so",
+            "forms": [
+              "so"
+            ]
+          },
+          {
+            "word": "she",
+            "forms": [
+              "she",
+              "her",
+              "hers"
+            ]
+          },
+          {
+            "word": "saw",
+            "forms": [
+              "saw",
+              "see",
+              "seen",
+              "seeing"
+            ]
+          },
+          {
+            "word": "ran",
+            "forms": [
+              "ran",
+              "run"
+            ]
+          },
+          {
+            "word": "out",
+            "forms": [
+              "out"
+            ]
+          },
+          {
+            "word": "on",
+            "forms": [
+              "on"
+            ]
+          },
+          {
+            "word": "now",
+            "forms": [
+              "now"
+            ]
+          },
+          {
+            "word": "no",
+            "forms": [
+              "no"
+            ]
+          },
+          {
+            "word": "must",
+            "forms": [
+              "must"
+            ]
+          },
+          {
+            "word": "into",
+            "forms": [
+              "into"
+            ]
+          },
+          {
+            "word": "he",
+            "forms": [
+              "he",
+              "his",
+              "him"
+            ]
+          },
+          {
+            "word": "at",
+            "forms": [
+              "at"
+            ]
+          },
+          {
+            "word": "ate",
+            "forms": [
+              "ate",
+              "eat",
+              "eating"
+            ]
+          },
+          {
+            "word": "but",
+            "forms": [
+              "but"
+            ]
+          },
+          {
+            "word": "came",
+            "forms": [
+              "came",
+              "come",
+              "coming"
+            ]
+          },
+          {
+            "word": "did",
+            "forms": [
+              "did",
+              "do",
+              "doing"
+            ]
+          }
+        ]
       }
     ]
   },
@@ -1260,6 +1619,861 @@
               "night",
               "nightless",
               "nights"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "610376992c96b6238f61bc1a"
+    },
+    "schema": "https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json",
+    "name": "many words",
+    "icon": "",
+    "enabled": true,
+    "wordlists": [
+      {
+        "name": "all the words",
+        "enabled": true,
+        "nouns": [
+          {
+            "word": "tent",
+            "forms": [
+              "tent",
+              "tentless",
+              "tentlike",
+              "tents"
+            ]
+          },
+          {
+            "word": "grimace",
+            "forms": [
+              "grimace",
+              "grimaced",
+              "grimacer",
+              "grimacers",
+              "grimaces",
+              "grimacing"
+            ]
+          },
+          {
+            "word": "textbook",
+            "forms": [
+              "textbook",
+              "textbooks"
+            ]
+          },
+          {
+            "word": "book",
+            "forms": [
+              "book",
+              "bookful",
+              "bookfuls",
+              "books"
+            ]
+          },
+          {
+            "word": "phone",
+            "forms": [
+              "phone",
+              "phones"
+            ]
+          },
+          {
+            "word": "language",
+            "forms": [
+              "language",
+              "languages"
+            ]
+          },
+          {
+            "word": "computer",
+            "forms": [
+              "computer",
+              "computerdom",
+              "computerdoms",
+              "computerless",
+              "computerlike",
+              "computers"
+            ]
+          },
+          {
+            "word": "monitor",
+            "forms": [
+              "monitor",
+              "monitorial",
+              "monitors",
+              "monitorship",
+              "monitorships"
+            ]
+          },
+          {
+            "word": "keyboard",
+            "forms": [
+              "keyboard",
+              "keyboards"
+            ]
+          },
+          {
+            "word": "mouse",
+            "forms": [
+              "mouse",
+              "mice",
+              "mouselike",
+              "mouses"
+            ]
+          },
+          {
+            "word": "deer",
+            "forms": [
+              "deer",
+              "deerlike",
+              "deers"
+            ]
+          },
+          {
+            "word": "elk",
+            "forms": [
+              "elk",
+              "elks",
+              "wapiti"
+            ]
+          },
+          {
+            "word": "moose",
+            "forms": [
+              "moose"
+            ]
+          },
+          {
+            "word": "alphabet",
+            "forms": [
+              "alphabet",
+              "alphabets"
+            ]
+          },
+          {
+            "word": "game",
+            "forms": [
+              "game",
+              "gamelike",
+              "games"
+            ]
+          },
+          {
+            "word": "movie",
+            "forms": [
+              "movie",
+              "movies"
+            ]
+          },
+          {
+            "word": "school",
+            "forms": [
+              "school",
+              "schools"
+            ]
+          },
+          {
+            "word": "target",
+            "forms": [
+              "target",
+              "targets"
+            ]
+          },
+          {
+            "word": "kind",
+            "forms": [
+              "kind",
+              "kinds"
+            ]
+          },
+          {
+            "word": "blanket",
+            "forms": [
+              "blanket",
+              "blanketlike",
+              "blankets"
+            ]
+          },
+          {
+            "word": "house",
+            "forms": [
+              "house",
+              "houseful",
+              "housefuls",
+              "houseless",
+              "houselessness",
+              "houselessnesses",
+              "houses"
+            ]
+          },
+          {
+            "word": "dictionary",
+            "forms": [
+              "dictionary",
+              "dictionaries"
+            ]
+          },
+          {
+            "word": "tv",
+            "forms": [
+              "tv",
+              "TV",
+              "TVs"
+            ]
+          },
+          {
+            "word": "color",
+            "forms": [
+              "color",
+              "colorism",
+              "colorisms",
+              "colors"
+            ]
+          },
+          {
+            "word": "purple",
+            "forms": [
+              "purple",
+              "purples"
+            ]
+          },
+          {
+            "word": "orange",
+            "forms": [
+              "orange",
+              "oranges"
+            ]
+          },
+          {
+            "word": "blue",
+            "forms": [
+              "blue",
+              "blues",
+              "bluish",
+              "bluishness",
+              "bluishnesses"
+            ]
+          },
+          {
+            "word": "type",
+            "forms": [
+              "type",
+              "types"
+            ]
+          },
+          {
+            "word": "circle",
+            "forms": [
+              "circle",
+              "circles"
+            ]
+          },
+          {
+            "word": "square",
+            "forms": [
+              "square",
+              "squares"
+            ]
+          },
+          {
+            "word": "eight",
+            "forms": [
+              "eight",
+              "eights"
+            ]
+          },
+          {
+            "word": "eleven",
+            "forms": [
+              "eleven",
+              "elevens",
+              "eleventh",
+              "elevenths"
+            ]
+          },
+          {
+            "word": "eighteen",
+            "forms": [
+              "eighteen",
+              "eighteens",
+              "eighteenth",
+              "eighteenths"
+            ]
+          },
+          {
+            "word": "word",
+            "forms": [
+              "word",
+              "words"
+            ]
+          },
+          {
+            "word": "words",
+            "forms": [
+              "words",
+              "word"
+            ]
+          },
+          {
+            "word": "turf",
+            "forms": [
+              "turf",
+              "turfier",
+              "turfiest",
+              "turfs",
+              "turfy",
+              "turves"
+            ]
+          },
+          {
+            "word": "turtle",
+            "forms": [
+              "turtle",
+              "turtles"
+            ]
+          },
+          {
+            "word": "active",
+            "forms": [
+              "active",
+              "a",
+              "a's",
+              "as"
+            ]
+          },
+          {
+            "word": "day",
+            "forms": [
+              "day",
+              "days"
+            ]
+          },
+          {
+            "word": "pack",
+            "forms": [
+              "pack",
+              "packs"
+            ]
+          },
+          {
+            "word": "skunk",
+            "forms": [
+              "skunk",
+              "skunks"
+            ]
+          },
+          {
+            "word": "ant",
+            "forms": [
+              "ant",
+              "ants"
+            ]
+          },
+          {
+            "word": "aunt",
+            "forms": [
+              "aunt",
+              "aunthood",
+              "auntlier",
+              "auntliest",
+              "auntlike",
+              "auntly",
+              "aunts"
+            ]
+          },
+          {
+            "word": "box",
+            "forms": [
+              "box",
+              "boxes",
+              "boxful",
+              "boxfuls",
+              "boxlike"
+            ]
+          }
+        ],
+        "verbs": [
+          {
+            "word": "smirk",
+            "forms": [
+              "smirk",
+              "smirked",
+              "smirking",
+              "smirks"
+            ]
+          },
+          {
+            "word": "frown",
+            "forms": [
+              "frown",
+              "frowned",
+              "frowner",
+              "frowners",
+              "frowning",
+              "frowningly",
+              "frowns"
+            ]
+          },
+          {
+            "word": "smile",
+            "forms": [
+              "smile",
+              "smiled",
+              "smiler",
+              "smilers",
+              "smiles",
+              "smiling",
+              "smilingly"
+            ]
+          },
+          {
+            "word": "console",
+            "forms": [
+              "console",
+              "consoled",
+              "consoling"
+            ]
+          },
+          {
+            "word": "sprint",
+            "forms": [
+              "sprint",
+              "sprinted",
+              "sprinter",
+              "sprinting"
+            ]
+          },
+          {
+            "word": "run",
+            "forms": [
+              "run",
+              "ran",
+              "running"
+            ]
+          },
+          {
+            "word": "read",
+            "forms": [
+              "read",
+              "reading",
+              "reads"
+            ]
+          },
+          {
+            "word": "tell",
+            "forms": [
+              "tell",
+              "telling",
+              "tells",
+              "told"
+            ]
+          },
+          {
+            "word": "use",
+            "forms": [
+              "use",
+              "used",
+              "user",
+              "users",
+              "uses",
+              "using"
+            ]
+          },
+          {
+            "word": "stop",
+            "forms": [
+              "stop",
+              "stoppable",
+              "stopped",
+              "stopping",
+              "stops"
+            ]
+          },
+          {
+            "word": "create",
+            "forms": [
+              "create",
+              "created",
+              "creates",
+              "creating"
+            ]
+          },
+          {
+            "word": "freeze",
+            "forms": [
+              "freeze",
+              "freezes",
+              "freezing",
+              "freezingly",
+              "froze",
+              "frozen"
+            ]
+          },
+          {
+            "word": "burn",
+            "forms": [
+              "burn",
+              "burnable",
+              "burned",
+              "burning",
+              "burns",
+              "burnt"
+            ]
+          },
+          {
+            "word": "stink",
+            "forms": [
+              "stink",
+              "stank",
+              "stinking",
+              "stunk"
+            ]
+          }
+        ],
+        "adjectives": [
+          {
+            "word": "smart",
+            "forms": [
+              "smart",
+              "smarter",
+              "smartest",
+              "smartly",
+              "smartness",
+              "smartnesses"
+            ]
+          },
+          {
+            "word": "good",
+            "forms": [
+              "good",
+              "best",
+              "better",
+              "goodish"
+            ]
+          },
+          {
+            "word": "evil",
+            "forms": [
+              "evil",
+              "eviler",
+              "evilest",
+              "eviller",
+              "evillest",
+              "evilly",
+              "evilness",
+              "evilnesses"
+            ]
+          },
+          {
+            "word": "honest",
+            "forms": [
+              "honest",
+              "honester",
+              "honestest"
+            ]
+          },
+          {
+            "word": "frank",
+            "forms": [
+              "frank",
+              "franker",
+              "frankest",
+              "frankly",
+              "frankness",
+              "franknesses"
+            ]
+          },
+          {
+            "word": "white",
+            "forms": [
+              "white",
+              "whiteness",
+              "whitenesses",
+              "whiter",
+              "whitest",
+              "whitish"
+            ]
+          },
+          {
+            "word": "black",
+            "forms": [
+              "black",
+              "blacker",
+              "blackest",
+              "blackish",
+              "blackly",
+              "blackness",
+              "blacknesses"
+            ]
+          },
+          {
+            "word": "green",
+            "forms": [
+              "green",
+              "greener",
+              "greenest",
+              "greenish",
+              "greenishness",
+              "greenishnesses",
+              "greenlier",
+              "greenliest",
+              "greenly",
+              "greenness"
+            ]
+          },
+          {
+            "word": "red",
+            "forms": [
+              "red",
+              "redder",
+              "reddest",
+              "redness",
+              "rednesses"
+            ]
+          },
+          {
+            "word": "one",
+            "forms": [
+              "one"
+            ]
+          },
+          {
+            "word": "two",
+            "forms": [
+              "two"
+            ]
+          },
+          {
+            "word": "three",
+            "forms": [
+              "three"
+            ]
+          },
+          {
+            "word": "four",
+            "forms": [
+              "four"
+            ]
+          },
+          {
+            "word": "five",
+            "forms": [
+              "five"
+            ]
+          },
+          {
+            "word": "six",
+            "forms": [
+              "six"
+            ]
+          },
+          {
+            "word": "seven",
+            "forms": [
+              "seven"
+            ]
+          },
+          {
+            "word": "nine",
+            "forms": [
+              "nine"
+            ]
+          },
+          {
+            "word": "twelve",
+            "forms": [
+              "twelve"
+            ]
+          },
+          {
+            "word": "thirteen",
+            "forms": [
+              "thirteen"
+            ]
+          },
+          {
+            "word": "fourteen",
+            "forms": [
+              "fourteen"
+            ]
+          },
+          {
+            "word": "fifteen",
+            "forms": [
+              "fifteen"
+            ]
+          },
+          {
+            "word": "sixteen",
+            "forms": [
+              "sixteen"
+            ]
+          },
+          {
+            "word": "seventeen",
+            "forms": [
+              "seventeen"
+            ]
+          },
+          {
+            "word": "nineteen",
+            "forms": [
+              "nineteen"
+            ]
+          },
+          {
+            "word": "twenty",
+            "forms": [
+              "twenty"
+            ]
+          },
+          {
+            "word": "twenty-two",
+            "forms": [
+              "twenty-two",
+              "twenty"
+            ]
+          },
+          {
+            "word": "twenty-four",
+            "forms": [
+              "twenty-four",
+              "twenty"
+            ]
+          },
+          {
+            "word": "twenty-five",
+            "forms": [
+              "twenty-five",
+              "twenty"
+            ]
+          },
+          {
+            "word": "many",
+            "forms": [
+              "many",
+              "more",
+              "most"
+            ]
+          },
+          {
+            "word": "all",
+            "forms": [
+              "all"
+            ]
+          },
+          {
+            "word": "all",
+            "forms": [
+              "all"
+            ]
+          }
+        ],
+        "misc": [
+          {
+            "word": "and",
+            "forms": [
+              "and"
+            ]
+          },
+          {
+            "word": "or",
+            "forms": [
+              "or"
+            ]
+          },
+          {
+            "word": "bye",
+            "forms": [
+              "bye",
+              "good-by",
+              "good-bye"
+            ]
+          },
+          {
+            "word": "hello",
+            "forms": [
+              "hello"
+            ]
+          },
+          {
+            "word": "nightlight",
+            "forms": [
+              "nightlight"
+            ]
+          },
+          {
+            "word": "typo",
+            "forms": [
+              "typo"
+            ]
+          },
+          {
+            "word": "twenty-one",
+            "forms": [
+              "twenty-one",
+              "twenty"
+            ]
+          },
+          {
+            "word": "twenty-three",
+            "forms": [
+              "twenty-three"
+            ]
+          },
+          {
+            "word": "twenty-six",
+            "forms": [
+              "twenty-six",
+              "twenty"
+            ]
+          },
+          {
+            "word": "as",
+            "forms": [
+              "as"
+            ]
+          },
+          {
+            "word": "if",
+            "forms": [
+              "if"
+            ]
+          },
+          {
+            "word": "you",
+            "forms": [
+              "you"
+            ]
+          },
+          {
+            "word": "could",
+            "forms": [
+              "could"
+            ]
+          },
+          {
+            "word": "this",
+            "forms": [
+              "this",
+              "these"
+            ]
+          },
+          {
+            "word": "once",
+            "forms": [
+              "once"
+            ]
+          },
+          {
+            "word": "these",
+            "forms": [
+              "these",
+              "this"
             ]
           }
         ]

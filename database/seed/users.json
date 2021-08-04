@@ -193,8 +193,7 @@
       {
         "_id": "1626657557457",
         "name": "TestGuy",
-        "learnerPacks": [
-        ]
+        "learnerPacks": []
       },
       {
         "_id": "1623473355630",
@@ -207,13 +206,17 @@
         "icon": "https://firebasestorage.googleapis.com/v0/b/word-river.appspot.com/o/55621203?alt=media&token=07abb003-4c1c-4003-8dfa-e99db3107e9b",
         "learnerPacks": [
           "60d4c5dad073aa154239f3d5",
-          "60d7cfa7c02ced09b6750223"
+          "60d7cfa7c02ced09b6750223",
+          "60beabcbbbaa96763c50ae16",
+          "610376992c96b6238f61bc1a"
         ]
       }
     ],
     "contextPacks": [
       "60d4c5dad073aa154239f3d5",
-      "60d7cfa7c02ced09b6750223"
+      "60d7cfa7c02ced09b6750223",
+      "60beabcbbbaa96763c50ae16",
+      "610376992c96b6238f61bc1a"
     ]
   }
 ]
