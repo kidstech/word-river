@@ -6,13 +6,13 @@ export const environment = {
   production: false,
   apiUrl: '/api/',
   firebaseConfig: {
-    apiKey: 'AIzaSyAQiKwre6qGNQK0Pcz_XKEyy-e9w-x-6s0',
-    authDomain: 'word-river.firebaseapp.com',
-    projectId: 'word-river',
-    storageBucket: 'word-river.appspot.com',
-    messagingSenderId: '631848148168',
-    appId: '1:631848148168:web:b62d9de24e398e8d1159fd',
-    measurementId: 'G-9XRY12QV3R'
+    apiKey: "AIzaSyA0HZ6qa_AebqRV-s6atpgUDN11M6GAaSk",
+    authDomain: "word-river-26472.firebaseapp.com",
+    projectId: "word-river-26472",
+    storageBucket: "word-river-26472.appspot.com",
+    messagingSenderId: "414776996526",
+    appId: "1:414776996526:web:d94bad8ad66b8df163b33f",
+    measurementId: "G-6CVMLD46XT"
   }
 };
 
