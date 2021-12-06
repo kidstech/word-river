@@ -12,6 +12,7 @@ import umm3601.wordRiver.UserController;
 import umm3601.wordRiver.WordRiverController;
 import umm3601.wordRiver.LearnerDataController;
 import umm3601.wordRiver.SentenceController;
+import umm3601.wordRiver.StoryController;
 
 public class Server {
 
@@ -37,6 +38,7 @@ public class Server {
     WordRiverController wordRiverController = new WordRiverController(userController,database);
     LearnerDataController learnerDataController = new LearnerDataController(database);
     SentenceController sentenceController = new SentenceController(database);
+    StoryController storyController = new StoryController(database);
 
 
     Javalin server = Javalin.create(config -> {
@@ -102,6 +104,9 @@ public class Server {
     // Get Sentences
     server.get("/api/sentences/:learnerId", sentenceController::getSentences);
     server.post("/api/sentences/:learnerId", sentenceController::postSentence);
+
+    // Learner Stories
+    server.post("/api/stories/:learnerId", storyController::postStory);
 
 
 
