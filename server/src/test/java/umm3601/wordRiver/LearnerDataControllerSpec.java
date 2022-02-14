@@ -61,7 +61,7 @@ public class LearnerDataControllerSpec {
         mongoClient = MongoClients.create(MongoClientSettings.builder()
                 .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress(mongoAddr)))).build());
 
-        db = mongoClient.getDatabase("testDatabase");
+        db = mongoClient.getDatabase("test");
     }
 
     @BeforeEach
@@ -103,13 +103,13 @@ public class LearnerDataControllerSpec {
          * "9/18/2021 10:19:05 PM": "00:00:11" } }
          */
 
-        MongoCollection<Document> ctxDocuments = db.getCollection("learnerData");
+        MongoCollection<Document> ctxDocuments = db.getCollection("learnerdata");
         ctxDocuments.drop();
         johnDoeId = new ObjectId();
-        Document johnDoe = new Document().append("_id", johnDoeId).append("learnerId", "1623445120497").append("learnerName", "John Doe")
-                .append("wordCounts", wordCounts).append("sessionTimes", sessionTimes);
+        Document johnDoe = new Document().append("_id", johnDoeId).append("learnerId", "1623445120497").append("learnerName", "John Doe");
 
         ctxDocuments.insertOne(johnDoe);
+
 
         learnerDataController = new LearnerDataController(db);
     }
@@ -124,18 +124,46 @@ public class LearnerDataControllerSpec {
     @Test
     public void GetLearnerDataWithValidLearnerId()
     {
+      String testLearnerId = "1623445120497";
+      Context ctx = ContextUtil.init(mockReq, mockRes, "api/learnerData/:learnerId", ImmutableMap.of("learnerId", testLearnerId));
+          learnerDataController.getLearnerData(ctx);
 
+       String result = ctx.resultString();
+       LearnerData resultData = JavalinJson.fromJson(result, LearnerData.class);
+       System.out.println("This is the result: " + result);
+
+      assertEquals("John Doe", resultData.learnerName);
     }
 
-    @Test
+     @Test
     public void GetLearnerDataWithBadLearnerId()
     {
+      String testLearnerId = "10987654321";
+        Context ctx = ContextUtil.init(mockReq, mockRes, "api/learnerData/:learnerId", ImmutableMap.of("learnerId", testLearnerId));
 
+        assertThrows(NotFoundResponse.class, () -> {learnerDataController.getLearnerData(ctx);});
     }
 
-    @Test
+   @Test
     public void StoreValidLearnerData()
     {
+
+        String mongoId = johnDoeId.toHexString();
+
+        String fakeLearnerData  = "{" + "\"_id\": " + '"' + mongoId  + '"' + "," + "\"learnerId\": \"1623445120497\"," + "\"learnerName\": \"Carl\"," + "\"wordCounts\": {}," + "\"sessionTimes\": {}" + "}";
+
+
+        String testId = "1623445120497";
+        mockReq.setBodyContent(fakeLearnerData);
+        mockReq.setMethod("POST");
+        Context ctx = ContextUtil.init(mockReq, mockRes, "/api/learnerData/:learnerId", ImmutableMap.of("learnerId", testId));
+        learnerDataController.postLearnerData(ctx);
+
+        assertEquals(201, mockRes.getStatus());
+
+        Document modifiedLearnerData = db.getCollection("learnerdata").find(eq("learnerId", "1623445120497")).first();
+
+        assertEquals("Carl", modifiedLearnerData.get("learnerName"));
 
     }
 
@@ -148,7 +176,7 @@ public class LearnerDataControllerSpec {
     @Test
     public void CreateEmptyLearnerData()
     {
-        
+
     }
 
 }
