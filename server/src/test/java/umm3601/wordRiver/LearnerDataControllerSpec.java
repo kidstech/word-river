@@ -145,7 +145,7 @@ public class LearnerDataControllerSpec {
     }
 
    @Test
-    public void StoreValidLearnerData()
+    public void UpdateValidLearnerData()
     {
 
         String mongoId = johnDoeId.toHexString();
@@ -168,14 +168,100 @@ public class LearnerDataControllerSpec {
     }
 
     @Test
-    public void StoreBadLearnerData()
+    public void StoreValidLearnerData()
     {
+        String fakeLearnerData  = "{"  + "\"learnerId\": \"1623445120499\"," + "\"learnerName\": \"Jimmy\"," + "\"wordCounts\": {}," + "\"sessionTimes\": {}" + "}";
+
+
+        String testId = "1623445120499";
+        mockReq.setBodyContent(fakeLearnerData);
+        mockReq.setMethod("POST");
+        Context ctx = ContextUtil.init(mockReq, mockRes, "/api/learnerData/:learnerId", ImmutableMap.of("learnerId", testId));
+        learnerDataController.postLearnerData(ctx);
+
+        assertEquals(201, mockRes.getStatus());
+
+        Document modifiedLearnerData = db.getCollection("learnerdata").find(eq("learnerId", "1623445120499")).first();
+
+        assertEquals("Jimmy", modifiedLearnerData.get("learnerName"));
 
     }
 
     @Test
+    public void StoreBadWordCountLearnerData()
+    {
+        String mongoId = johnDoeId.toHexString();
+        String fakeLearnerData  = "{" + "\"_id\": " + '"' + mongoId  + '"' + "," + "\"learnerId\": \"1623445120497\"," + "\"learnerName\": \"John Doe\"," + "}";
+
+        String testId = "1623445120400";
+        mockReq.setBodyContent(fakeLearnerData);
+        mockReq.setMethod("POST");
+        Context ctx = ContextUtil.init(mockReq, mockRes, "/api/learnerData/:learnerId", ImmutableMap.of("learnerId", testId));
+
+        assertThrows(BadRequestResponse.class, () -> {
+          learnerDataController.postLearnerData(ctx);
+        });
+    }
+    @Test
+    public void StoreBadLearnerNameLearnerData()
+    {
+        String mongoId = johnDoeId.toHexString();
+        String fakeLearnerData  = "{" + "\"_id\": " + '"' + mongoId  + '"' + "," + "\"learnerId\": \"1623445120497\"," + "\"wordCounts\": {},"+ "\"sessionTimes\": {}" +"}";
+
+      String testId = "1623445120497";
+        mockReq.setBodyContent(fakeLearnerData);
+        mockReq.setMethod("POST");
+        Context ctx = ContextUtil.init(mockReq, mockRes, "/api/learnerData/:learnerId", ImmutableMap.of("learnerId", testId));
+
+        assertThrows(BadRequestResponse.class, () -> {
+          learnerDataController.postLearnerData(ctx);
+        });
+    }
+
+    @Test
+    public void StoreBadLearnerIdLearnerData()
+    {
+        String mongoId = johnDoeId.toHexString();
+        String fakeLearnerData  = "{" + "\"_id\": " + '"' + mongoId  + '"' + "," + "\"learnerName\": \"Bob\"," + "\"wordCounts\": {},"+ "\"sessionTimes\": {}" +"}";
+
+        String testId = "1623445120497";
+        mockReq.setBodyContent(fakeLearnerData);
+        mockReq.setMethod("POST");
+        Context ctx = ContextUtil.init(mockReq, mockRes, "/api/learnerData/:learnerId", ImmutableMap.of("learnerId", testId));
+
+        assertThrows(BadRequestResponse.class, () -> {
+          learnerDataController.postLearnerData(ctx);
+        });
+    }
+
+    @Test
+    public void StoreBadLearnerData()
+    {
+        String fakeLearnerData  = "{" + "}";
+
+        String testId = "1623445120467";
+        mockReq.setBodyContent(fakeLearnerData);
+        mockReq.setMethod("POST");
+        Context ctx = ContextUtil.init(mockReq, mockRes, "/api/learnerData/:learnerId", ImmutableMap.of("learnerId", testId));
+
+        assertThrows(BadRequestResponse.class, () -> {
+          learnerDataController.postLearnerData(ctx);
+        });
+    }
+
+
+
+    @Test
     public void CreateEmptyLearnerData()
     {
+        String testId = "1623445120498";
+        Context ctx = ContextUtil.init(mockReq, mockRes, "/api/learnerData/:learnerId", ImmutableMap.of("learnerId", testId));
+        learnerDataController.getLearnerData(ctx);
+
+        String result = ctx.resultString();
+        LearnerData resultData = JavalinJson.fromJson(result, LearnerData.class);
+
+        assertEquals("1623445120498", resultData.learnerId);
 
     }
 
