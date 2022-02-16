@@ -6,6 +6,8 @@ import java.util.List;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
 import org.mongojack.JacksonMongoCollection;
+
+import io.javalin.http.BadRequestResponse;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
 
@@ -19,15 +21,12 @@ public class StoryController {
       }
 
     public void postStory(Context ctx) {
-        Story story = ctx.bodyValidator(Story.class).get();
-
-        if(story.pages != null)
-        {
-            storyCollection.insert(story);
-        }
+        Story story = ctx.bodyValidator(Story.class).check(s -> s.pages != null).get();
+        storyCollection.insert(story);
         ctx.status(201);
-        System.out.println("story has been posted!");
+        System.out.println("Story has been posted!");
+        System.out.println(story.font);
     }
 
-    
+
 }
