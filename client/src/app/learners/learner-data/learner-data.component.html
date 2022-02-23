@@ -1,1 +1,12 @@
-<p>learner-data works!</p>
+<p>{{ learnerName }}</p>
+<table>
+  <tr>
+    <th>Word</th>
+    <th>Times Seen</th>
+  </tr>
+  <tr *ngFor="let word of learnerWords | keyvalue">
+    <td>{{word.key}}</td>
+    <td>{{word.value}}</td>
+  </tr>
+</table>
+
