@@ -6,6 +6,8 @@
       <button *ngIf="delClicked" (click)="$event.stopPropagation();delClicked = false" class="close">Cancel</button>
     </div>
 
+    <button [routerLink]="['/learners', learner._id, 'learnerData']" id="learnerDataButton">View Learner Data</button>
+
     <div>
 
       <div class="image-upload">

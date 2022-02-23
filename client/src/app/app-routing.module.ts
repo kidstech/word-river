@@ -24,6 +24,7 @@ import { DisplayContextPacksComponent } from './context-packs/display-contextPac
 import { AddContextPackComponent } from './context-packs/add-contextPacks/add-contextPacks.component';
 import { CreateLearnerComponent } from './learners/create-learner/create-learner.component';
 import { AuthGuard } from './auth/guards/auth-guard';
+import { LearnerDataComponent } from './learners/learner-data/learner-data.component';
 
 export const COMMON_IMPORTS = [
   MatButtonModule,
@@ -51,6 +52,7 @@ const routes: Routes = [
   {path: 'packs/:id/new', component: AddWordListComponent,canActivate:[AuthGuard]},
   {path: 'packs/:id/:name', component: ViewWordlistComponent,canActivate:[AuthGuard]},
   {path: 'learners/new', component: CreateLearnerComponent,canActivate:[AuthGuard]},
+  {path: 'learners/:id/learnerData', component: LearnerDataComponent, canActivate:[AuthGuard]},
   {path: 'learners/:id', component: EditLearnerComponent,canActivate:[AuthGuard]},
   {path: '**', redirectTo: ''}
 

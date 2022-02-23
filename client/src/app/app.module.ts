@@ -50,6 +50,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LearnerCardComponent } from './learners/learner-card/learner-card.component';
 import { CreateLearnerComponent } from './learners/create-learner/create-learner.component';
 import { EditLearnerComponent } from './learners/edit-learner/edit-learner.component';
+import { LearnerDataComponent } from './learners/learner-data/learner-data.component';
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -93,7 +94,8 @@ const MATERIAL_MODULES: any[] = [
     LoginComponent,
     LearnerCardComponent,
     CreateLearnerComponent,
-    EditLearnerComponent
+    EditLearnerComponent,
+    LearnerDataComponent
   ],
   imports: [
     BrowserModule,
