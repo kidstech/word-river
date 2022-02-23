@@ -1,12 +1,14 @@
-<p>{{ learnerName }}</p>
+<div class="outer">
+<h1 class="name">{{ learnerName }}'s Learner Data</h1>
 <table>
   <tr>
     <th>Word</th>
     <th>Times Seen</th>
   </tr>
   <tr *ngFor="let word of learnerWords | keyvalue">
-    <td>{{word.key}}</td>
-    <td>{{word.value}}</td>
+    <td class="word">{{word.key}}</td>
+    <td class="seen">{{word.value}}</td>
   </tr>
 </table>
+</div>
 
