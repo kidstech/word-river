@@ -1,6 +1,6 @@
 <div class="outer">
 <h1 class="name">{{ learnerName }}'s Learner Data</h1>
-<table>
+<table class="wordCountTable">
   <tr>
     <th>Word</th>
     <th>Times Seen</th>
@@ -8,6 +8,17 @@
   <tr *ngFor="let word of learnerWords | keyvalue">
     <td class="word">{{word.key}}</td>
     <td class="seen">{{word.value}}</td>
+  </tr>
+</table>
+
+<table class="sentencesTable">
+  <tr>
+    <th>Date</th>
+    <th>Sentence</th>
+  </tr>
+  <tr *ngFor="let sentence of sentences">
+    <td class="Time">{{sentence.timeSubmitted}}</td>
+    <td class="seen">{{sentence.sentenceText}}</td>
   </tr>
 </table>
 </div>
