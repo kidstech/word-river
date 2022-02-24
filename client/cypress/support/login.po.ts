@@ -14,8 +14,8 @@ export class LoginPage {
     }
 
     login(){
-        this.loginEmail().type('cats4@gmail.com');
-        this.loginPassword().type('VibingCats');
+      this.loginEmail().type('cypresstests@example.com');
+      this.loginPassword().type('testing123');
         this.loginButton().click();
     }
 }
