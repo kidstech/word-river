@@ -1,5 +1,6 @@
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AddWordListComponent } from 'src/app/wordlists/add-wordlist/add-wordlist.component';
 import { DictionaryService } from './../../services/dictionary-service/dictionary.service';
 
 
@@ -11,6 +12,8 @@ import { DictionaryService } from './../../services/dictionary-service/dictionar
 export class AddWordComponent implements OnInit {
   @Output() addWord = new EventEmitter();
   @Input() words = [];
+
+  
 
   forms = [];
   counter = [''];

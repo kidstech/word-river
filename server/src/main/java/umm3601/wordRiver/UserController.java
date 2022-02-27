@@ -208,7 +208,7 @@ public class UserController {
     if(user == null) {
       throw new NotFoundResponse("The authId was not found in the system");
     }
-    System.out.println(user._id);
+    //System.out.println(user._id);
     return user._id;
   }
 

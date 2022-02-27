@@ -80,7 +80,7 @@ export class AddWordListComponent implements OnInit {
   addWord(word){
     const type: string = word.type;
     this.wordList[type].push({word:word.name,forms:word.forms});
-    this.words.push({word:word.name,forms:word.forms,type});
+    this.words.push({word:word.name,forms:word.forms,type}); // 7/23/21 added contextPackId (the mongo object ID of the context pack this word is a part of)
     return word.type;
   }
 
