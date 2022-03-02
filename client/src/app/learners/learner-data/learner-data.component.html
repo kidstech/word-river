@@ -1,14 +1,27 @@
 <div class="outer">
 <h1 class="name">{{ learnerName }}'s Learner Data</h1>
-<table class="wordCountTable">
+<table>
+
   <tr>
-    <th>Word</th>
-    <th>Times Seen</th>
+    <td>
+      <tr class="word-header">Word</tr>
+    </td>
+    <td *ngFor="let word of learnerWords | keyvalue">
+      <tr class="word">{{word.key}}</tr>
+    </td>
   </tr>
-  <tr *ngFor="let word of learnerWords | keyvalue">
-    <td class="word">{{word.key}}</td>
-    <td class="seen">{{word.value}}</td>
+  <tr>
+    <td>
+      <tr class="seen-header">Times Seen</tr>
+    </td>
+    <td *ngFor="let word of learnerWords | keyvalue">
+
+      <tr class="seen">{{word.value}}</tr>
+    </td>
+
   </tr>
+
+
 </table>
 
 <table class="sentencesTable">

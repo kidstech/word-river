@@ -8,6 +8,7 @@
   margin-top: -5%;
   padding-bottom: 5%;
   font-weight: bolder;
+  font-family: 'ProductSansBold';
 }
 
 table {
@@ -18,15 +19,16 @@ table {
 
 table, th, td {
   border: 4px solid black;
-  width: 80%;
   font-size: x-large;
-}
-.word {
-padding-left: 5%;
-max-width: 50%;
+  font-family: 'ProductSans';
 }
 
-.seen {
+.seen-header, .word-header {
+  width: fit-content;
+}
+
+td > .seen,td > .word {
   text-align: center;
+  width: 40%;
 }
 
