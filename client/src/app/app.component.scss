@@ -67,11 +67,13 @@
 }
 
 .main-content {
-  margin: 24px;
-  @media (max-width: 599px) {
-    margin: 16px;
+  margin: 8%;
+  @media (max-width: 60%) {
+    margin: 10%;
   }
-  -ms-overflow-style: none;
+  //-ms-overflow-style: none;
+  display: flex;
+  flex-direction: column;
   scrollbar-width: none; /* Firefox */
 }
 
