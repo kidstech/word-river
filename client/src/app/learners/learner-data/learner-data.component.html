@@ -1,25 +1,54 @@
-<div class="outer">
-<h1 class="name">{{ learnerName }}'s Learner Data</h1>
-<table class="wordCountTable">
-  <tr>
-    <th>Word</th>
-    <th>Times Seen</th>
-  </tr>
-  <tr *ngFor="let word of learnerWords | keyvalue">
-    <td class="word">{{word.key}}</td>
-    <td class="seen">{{word.value}}</td>
-  </tr>
-</table>
 
-<table class="sentencesTable">
-  <tr>
-    <th>Date</th>
-    <th>Sentence</th>
-  </tr>
-  <tr *ngFor="let sentence of sentences">
-    <td class="Time">{{sentence.timeSubmitted}}</td>
-    <td class="seen">{{sentence.sentenceText}}</td>
-  </tr>
-</table>
+<div class="mat-elevation-z8" onload="banas()">
+  <table mat-table [dataSource]="wordCountArray">
+
+    <!-- Word Column -->
+    <ng-container matColumnDef="word">
+      <th mat-header-cell *matHeaderCellDef> Word </th>
+      <td mat-cell *matCellDef="let word"> {{word.word}} </td>
+    </ng-container>
+
+    <!-- Count Column -->
+    <ng-container matColumnDef="timesSeen">
+      <th mat-header-cell *matHeaderCellDef> Times Seen </th>
+      <td mat-cell *matCellDef="let word"> {{word.count}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="wordCountTableColums"></tr>
+    <tr mat-row *matRowDef="let row; columns: wordCountTableColums;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
 </div>
+
+
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="sentences">
+
+    <!-- Time Submitted Column -->
+    <ng-container matColumnDef="timeSubmitted">
+      <th mat-header-cell *matHeaderCellDef> Time Submitted </th>
+      <td mat-cell *matCellDef="let sentences"> {{sentences.timeSubmitted}} </td>
+    </ng-container>
+
+    <!-- Sentence Text Column -->
+    <ng-container matColumnDef="sentenceText">
+      <th mat-header-cell *matHeaderCellDef> Sentence </th>
+      <td mat-cell *matCellDef="let sentences"> {{sentences.sentenceText}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="sentenceTableColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: sentenceTableColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+
 

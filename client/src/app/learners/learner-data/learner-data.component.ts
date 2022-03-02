@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LearnerData } from 'src/app/datatypes/learnerData';
+import { WordCounts } from 'src/app/datatypes/wordCounts';
 import { Sentence } from 'src/app/datatypes/sentence';
 import { LearnerDataService } from 'src/app/services/learnerData-service/learner-data.service';
 import { SentencesService } from 'src/app/services/sentences-service/sentences.service';
@@ -17,6 +18,9 @@ export class LearnerDataComponent implements OnInit {
   learnerId: string;
   learnerWords: Map<string, number>;
   sentences: Sentence[];
+  wordCountArray: WordCounts[];
+  sentenceTableColumns = ['timeSubmitted', 'sentenceText'];
+  wordCountTableColums = ['word', 'timesSeen'];
   constructor(
     private route: ActivatedRoute,
     private learnerDataService: LearnerDataService,
@@ -37,4 +41,13 @@ export class LearnerDataComponent implements OnInit {
         this.learnerName = res.learnerName;
       });});
     }
-}
+
+     convertLearnerWordsMapToArray(): void {
+      for (const [key, value] of this.learnerWords.entries()) {
+        const word = new WordCounts();
+        word.word = key;
+        word.count = value;
+        this.wordCountArray.push(word);
+      }
+    }
+  }
