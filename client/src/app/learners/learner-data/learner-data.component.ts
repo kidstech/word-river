@@ -38,12 +38,15 @@ export class LearnerDataComponent implements OnInit {
       this.learnerDataService.getLearnerData(this.learnerId).subscribe(res=> {
         this.learnerData = res;
         this.learnerWords = res.wordCounts;
+        console.log(this.learnerWords);
+        this.convertLearnerWordsMapToArray();
         this.learnerName = res.learnerName;
       });});
     }
 
      convertLearnerWordsMapToArray(): void {
-      for (const [key, value] of this.learnerWords.entries()) {
+       this.wordCountArray = [];
+      for (const [key, value] of Object.entries(this.learnerWords)) {
         const word = new WordCounts();
         word.word = key;
         word.count = value;
