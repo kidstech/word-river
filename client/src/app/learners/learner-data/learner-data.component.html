@@ -20,9 +20,21 @@
 
   <mat-paginator #wordCountPaginator [pageSizeOptions]="[5, 10, 20]"
                  showFirstLastButtons
-                 aria-label="Select page of periodic elements">
+                 aria-label="Select page of words">
   </mat-paginator>
+
+<mat-select class="wordSort">
+  <mat-option value="alphabetic">Alphabetic</mat-option>
+  <mat-option value="highest">Highest Word Count</mat-option>
+  <mat-option value="lowest">Lowest Word Count</mat-option>
+</mat-select>
+
 </div>
+
+
+
+
+
 
 
 
@@ -47,7 +59,7 @@
 
   <mat-paginator #sentencePaginator [pageSizeOptions]="[1, 5, 10, 20]"
                  showFirstLastButtons
-                 aria-label="Select page of periodic elements">
+                 aria-label="Select page of sentences">
   </mat-paginator>
 </div>
 
