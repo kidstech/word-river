@@ -13,7 +13,6 @@ export class AddWordComponent implements OnInit {
   @Output() addWord = new EventEmitter();
   @Input() words = [];
 
-  
 
   forms = [];
   counter = [''];
