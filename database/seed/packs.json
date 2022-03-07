@@ -627,7 +627,7 @@
     },
     "schema": "https://raw.githubusercontent.com/kidstech/story-builder/master/Assets/packs/schema/pack.schema.json",
     "name": "Sight Words",
-    "icon": "",
+    "icon": "https://firebasestorage.googleapis.com/v0/b/word-river-26472.appspot.com/o/37516843?alt=media&token=4aa8ee9e-ae77-48e7-afa5-2c8b30b0e39e",
     "enabled": true,
     "wordlists": [
       {
