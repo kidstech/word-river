@@ -28,13 +28,21 @@
   <mat-option value="highest">Highest Word Count</mat-option>
   <mat-option value="lowest">Lowest Word Count</mat-option>
 </mat-select>
-
 </div>
 
 
+<!-- <div class="sentenceSearchDate">
+  <mat-form-field>
+    <input matInput (keyup)="filterSentenceByDate($event.target.value)" placeholder="Search for by date: 'Day/Month/Year">
+  </mat-form-field>
+  </div> -->
 
 
-
+<div class="sentenceSearchText">
+<mat-form-field>
+  <input matInput (keyup)="filterSentenceData($event.target.value)" placeholder="Search for a sentence">
+</mat-form-field>
+</div>
 
 
 
@@ -57,7 +65,7 @@
     <tr mat-row *matRowDef="let row; columns: sentenceTableColumns;"></tr>
   </table>
 
-  <mat-paginator #sentencePaginator [pageSizeOptions]="[1, 5, 10, 20]"
+  <mat-paginator #sentencePaginator [pageSizeOptions]="[5, 10, 20]"
                  showFirstLastButtons
                  aria-label="Select page of sentences">
   </mat-paginator>

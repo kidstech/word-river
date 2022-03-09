@@ -47,6 +47,11 @@ export class LearnerDataComponent implements OnInit, AfterViewInit {
       this.sentencesService.getSentences(this.learnerId).subscribe(res=> {
         this.sentences = res;
         this.sentenceDataSource.data = this.sentences;
+        this.sentenceDataSource.filterPredicate = (data, filter) => {
+          console.log(data.sentenceText);
+          console.log(filter === data.sentenceText);
+        return  data.sentenceText.toLowerCase().split(' ').includes(filter) || data.sentenceText.toLowerCase() === filter;
+        };
       });
       this.learnerDataService.getLearnerData(this.learnerId).subscribe(res=> {
         this.learnerData = res;
@@ -54,6 +59,11 @@ export class LearnerDataComponent implements OnInit, AfterViewInit {
         this.convertLearnerWordsMapToArray();
         this.learnerName = res.learnerName;
       });});
+    }
+
+    filterSentenceData(filterValue: string) {
+      this.sentenceDataSource.filter = filterValue.trim().toLowerCase();
+
     }
 
      convertLearnerWordsMapToArray(): void {
@@ -66,4 +76,9 @@ export class LearnerDataComponent implements OnInit, AfterViewInit {
       }
       this.wordCountDataSource.data = this.wordCountArray;
     }
+
+  //   findWord(sentence: string, word: string) {
+  //     const split: string[] = sentence.split(' ');
+  //     return split.includes(word);
+  //  }
   }
