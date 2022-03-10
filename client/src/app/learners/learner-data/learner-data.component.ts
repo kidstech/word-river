@@ -59,13 +59,17 @@ export class LearnerDataComponent implements OnInit, AfterViewInit {
       const a =  !filter.word || data.word === filter.word;
       const b =  !filter.endsWith || data.word.endsWith(filter.endsWith);
       const c =  !filter.startsWith || data.word.startsWith(filter.startsWith);
-      return a && b && c;
+      const d =  !filter.minWordCount || data.count >= filter.minWordCount;
+      const e = !filter.maxWordCount || data.count <= filter.maxWordCount;
+      return a && b && c && d && e;
     }) as (currentWord, aString) => boolean;
 
     this.wordFormControl = this.formBuilder.group({
       word: '',
       endsWith: '',
-      startsWith: ''
+      startsWith: '',
+      minWordCount: '',
+      maxWordCount: ''
     });
 
     this.wordFormControl.valueChanges.subscribe(value => {

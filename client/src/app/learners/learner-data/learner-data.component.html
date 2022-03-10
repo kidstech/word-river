@@ -1,4 +1,5 @@
 
+<div class="wordFilter">
 <form style="display: flex" [formGroup]="wordFormControl">
   <mat-form-field>
     <input matInput formControlName="word">
@@ -12,7 +13,16 @@
     <input matInput formControlName="endsWith">
     <mat-placeholder>Search for a Word that ends with</mat-placeholder>
   </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="minWordCount" type="number" min="1">
+    <mat-placeholder>Minimum Word Count</mat-placeholder>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="maxWordCount" type="number">
+    <mat-placeholder>Maximum Word Count</mat-placeholder>
+  </mat-form-field>
 </form>
+</div>
 
 <div id="wordTable" class="mat-elevation-z8">
   <table mat-table [dataSource]="wordCountDataSource">
