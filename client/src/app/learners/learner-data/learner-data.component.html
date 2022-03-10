@@ -37,12 +37,17 @@
   </mat-form-field>
   </div> -->
 
+  <form style="display: flex" [formGroup]="formControl">
+    <mat-form-field>
+      <input matInput formControlName="sentenceText">
+      <mat-placeholder>Text</mat-placeholder>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="timeSubmitted">
+      <mat-placeholder>Date</mat-placeholder>
+    </mat-form-field>
+  </form>
 
-<div class="sentenceSearchText">
-<mat-form-field>
-  <input matInput (keyup)="filterSentenceData($event.target.value)" placeholder="Search for a sentence">
-</mat-form-field>
-</div>
 
 
 

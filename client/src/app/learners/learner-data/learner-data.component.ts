@@ -7,6 +7,7 @@ import { LearnerDataService } from 'src/app/services/learnerData-service/learner
 import { SentencesService } from 'src/app/services/sentences-service/sentences.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 
 
@@ -28,11 +29,31 @@ export class LearnerDataComponent implements OnInit, AfterViewInit {
   wordCountArray: WordCounts[];
   sentenceTableColumns = ['timeSubmitted', 'sentenceText'];
   wordCountTableColums = ['word', 'timesSeen'];
+  readonly formControl: AbstractControl;
+
+  //below code sourced from https://stackblitz.com/edit/table-filtering-multiple-filters-example?file=app%2Ftable-filtering-example.ts
   constructor(
     private route: ActivatedRoute,
     private learnerDataService: LearnerDataService,
-    private sentencesService: SentencesService
-  ) { }
+    private sentencesService: SentencesService,
+    private formBuilder: FormBuilder
+  ) {
+    this.sentenceDataSource.filterPredicate = ((data, filter) => {
+      const a = !filter.sentenceText || data.sentenceText.toLowerCase().includes(filter.sentenceText);
+      const b = !filter.timeSubmitted || data.timeSubmitted.split(' ').includes(filter.timeSubmitted);
+      return a && b;
+    }) as (currentSentence, aString) => boolean;
+
+    this.formControl = this.formBuilder.group({
+      sentenceText: '',
+      timeSubmitted: ''
+    });
+
+    this.formControl.valueChanges.subscribe(value => {
+      const filter = {...value, sentenceText: value.sentenceText.trim().toLowerCase()} as string;
+      this.sentenceDataSource.filter = filter;
+    });
+  }
 
   ngAfterViewInit() {
     this.sentenceDataSource.paginator = this.sentencePaginator;
@@ -47,11 +68,11 @@ export class LearnerDataComponent implements OnInit, AfterViewInit {
       this.sentencesService.getSentences(this.learnerId).subscribe(res=> {
         this.sentences = res;
         this.sentenceDataSource.data = this.sentences;
-        this.sentenceDataSource.filterPredicate = (data, filter) => {
-          console.log(data.sentenceText);
-          console.log(filter === data.sentenceText);
-        return  data.sentenceText.toLowerCase().split(' ').includes(filter) || data.sentenceText.toLowerCase() === filter;
-        };
+        // this.sentenceDataSource.filterPredicate = (data, filter) => {
+        //   console.log(data.sentenceText);
+        //   console.log(filter === data.sentenceText);
+        // return  data.sentenceText.toLowerCase().split(' ').includes(filter) || data.sentenceText.toLowerCase() === filter;
+        // };
       });
       this.learnerDataService.getLearnerData(this.learnerId).subscribe(res=> {
         this.learnerData = res;
@@ -61,10 +82,7 @@ export class LearnerDataComponent implements OnInit, AfterViewInit {
       });});
     }
 
-    filterSentenceData(filterValue: string) {
-      this.sentenceDataSource.filter = filterValue.trim().toLowerCase();
 
-    }
 
      convertLearnerWordsMapToArray(): void {
        this.wordCountArray = [];
