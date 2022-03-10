@@ -1,4 +1,19 @@
 
+<form style="display: flex" [formGroup]="wordFormControl">
+  <mat-form-field>
+    <input matInput formControlName="word">
+    <mat-placeholder>Search for a Word</mat-placeholder>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="startsWith">
+    <mat-placeholder>Search for a Word that starts with</mat-placeholder>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="endsWith">
+    <mat-placeholder>Search for a Word that ends with</mat-placeholder>
+  </mat-form-field>
+</form>
+
 <div id="wordTable" class="mat-elevation-z8">
   <table mat-table [dataSource]="wordCountDataSource">
 
