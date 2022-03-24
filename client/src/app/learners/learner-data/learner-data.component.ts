@@ -29,8 +29,8 @@ export class LearnerDataComponent implements OnInit, AfterViewInit {
   wordCountArray: WordCounts[];
   sentenceTableColumns = ['timeSubmitted', 'sentenceText'];
   wordCountTableColums = ['word', 'timesSeen'];
-  readonly formControl: AbstractControl;
-  readonly wordFormControl: AbstractControl;
+  formControl: AbstractControl;
+  wordFormControl: AbstractControl;
 
   //below code sourced from https://stackblitz.com/edit/table-filtering-multiple-filters-example?file=app%2Ftable-filtering-example.ts
   constructor(
@@ -39,43 +39,6 @@ export class LearnerDataComponent implements OnInit, AfterViewInit {
     private sentencesService: SentencesService,
     private formBuilder: FormBuilder
   ) {
-    this.sentenceDataSource.filterPredicate = ((data, filter) => {
-      const a = !filter.sentenceText || data.sentenceText.toLowerCase().includes(filter.sentenceText);
-      const b = !filter.timeSubmitted || data.timeSubmitted.split(' ').includes(filter.timeSubmitted);
-      return a && b;
-    }) as (currentSentence, aString) => boolean;
-
-    this.formControl = this.formBuilder.group({
-      sentenceText: '',
-      timeSubmitted: ''
-    });
-
-    this.formControl.valueChanges.subscribe(value => {
-      const filter = {...value, sentenceText: value.sentenceText.trim().toLowerCase()} as string;
-      this.sentenceDataSource.filter = filter;
-    });
-
-    this.wordCountDataSource.filterPredicate = ((data, filter) => {
-      const a =  !filter.word || data.word === filter.word;
-      const b =  !filter.endsWith || data.word.endsWith(filter.endsWith);
-      const c =  !filter.startsWith || data.word.startsWith(filter.startsWith);
-      const d =  !filter.minWordCount || data.count >= filter.minWordCount;
-      const e = !filter.maxWordCount || data.count <= filter.maxWordCount;
-      return a && b && c && d && e;
-    }) as (currentWord, aString) => boolean;
-
-    this.wordFormControl = this.formBuilder.group({
-      word: '',
-      endsWith: '',
-      startsWith: '',
-      minWordCount: '',
-      maxWordCount: ''
-    });
-
-    this.wordFormControl.valueChanges.subscribe(value => {
-      const filter = {...value, word: value.word.trim().toLowerCase()} as string;
-      this.wordCountDataSource.filter = filter;
-    });
   }
 
   ngAfterViewInit() {
@@ -103,6 +66,45 @@ export class LearnerDataComponent implements OnInit, AfterViewInit {
         this.convertLearnerWordsMapToArray();
         this.learnerName = res.learnerName;
       });});
+
+      this.sentenceDataSource.filterPredicate = ((data, filter) => {
+        const a = !filter.sentenceText || data.sentenceText.toLowerCase().includes(filter.sentenceText);
+        const b = !filter.timeSubmitted || data.timeSubmitted.split(' ').includes(filter.timeSubmitted);
+        return a && b;
+      }) as (currentSentence, aString) => boolean;
+
+      this.formControl = this.formBuilder.group({
+        sentenceText: '',
+        timeSubmitted: ''
+      });
+
+      this.formControl.valueChanges.subscribe(value => {
+        const filter = {...value, sentenceText: value.sentenceText.trim().toLowerCase()} as string;
+        this.sentenceDataSource.filter = filter;
+      });
+
+      this.wordCountDataSource.filterPredicate = ((data, filter) => {
+        const a =  !filter.word || data.word === filter.word;
+        const b =  !filter.endsWith || data.word.endsWith(filter.endsWith);
+        const c =  !filter.startsWith || data.word.startsWith(filter.startsWith);
+        const d =  !filter.minWordCount || data.count >= filter.minWordCount;
+        const e = !filter.maxWordCount || data.count <= filter.maxWordCount;
+        return a && b && c && d && e;
+      }) as (currentWord, aString) => boolean;
+
+      this.wordFormControl = this.formBuilder.group({
+        word: '',
+        endsWith: '',
+        startsWith: '',
+        minWordCount: '',
+        maxWordCount: ''
+      });
+
+      this.wordFormControl.valueChanges.subscribe(value => {
+        const filter = {...value, word: value.word.trim().toLowerCase()} as string;
+        this.wordCountDataSource.filter = filter;
+      });
+
     }
 
 
