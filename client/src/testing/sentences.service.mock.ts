@@ -1,7 +1,9 @@
+import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Sentence } from 'src/app/datatypes/sentence';
 import { SentencesService } from 'src/app/services/sentences-service/sentences.service';
 
+@Injectable()
 export class MockSentencesService extends SentencesService {
   static testSentences: Array<Sentence> = [
     {  sentenceId: '06748b8c-d080-4e72-bba1-274438449727',

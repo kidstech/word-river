@@ -1,10 +1,12 @@
+import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { LearnerData } from 'src/app/datatypes/learnerData';
 import { LearnerDataService } from 'src/app/services/learnerData-service/learner-data.service';
 
+@Injectable()
 export class MockLearnerDataService extends LearnerDataService {
-  static wordMap: Map<string, number>;
-  static sessionTimes: Map<string, string>;
+  static wordMap = new Map<string, number>();
+  static sessionTimes = new Map<string, string>();
 
   static testLearnerData: LearnerData = {
     learnerId: '1623445108911',
