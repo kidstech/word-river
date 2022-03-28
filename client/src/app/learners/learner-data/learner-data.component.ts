@@ -16,7 +16,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/f
   templateUrl: './learner-data.component.html',
   styleUrls: ['./learner-data.component.scss']
 })
-export class LearnerDataComponent implements OnInit, AfterViewInit {
+export class LearnerDataComponent implements OnInit{
   @ViewChild('wordCountPaginator') wordCountPaginator: MatPaginator;
   @ViewChild('sentencePaginator') sentencePaginator: MatPaginator;
   sentenceDataSource = new MatTableDataSource<Sentence>();
@@ -41,31 +41,38 @@ export class LearnerDataComponent implements OnInit, AfterViewInit {
   ) {
   }
 
-  ngAfterViewInit() {
-    this.sentenceDataSource.paginator = this.sentencePaginator;
-    this.wordCountDataSource.paginator = this.wordCountPaginator;
-  }
 
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((pmap) => {
+      console.log(pmap);
+      console.log('This is ngOnInit');
       this.learnerId = pmap.get('id');
 
       this.sentencesService.getSentences(this.learnerId).subscribe(res=> {
         this.sentences = res;
         this.sentenceDataSource.data = this.sentences;
+        this.sentenceDataSource.paginator = this.sentencePaginator;
         // this.sentenceDataSource.filterPredicate = (data, filter) => {
         //   console.log(data.sentenceText);
         //   console.log(filter === data.sentenceText);
         // return  data.sentenceText.toLowerCase().split(' ').includes(filter) || data.sentenceText.toLowerCase() === filter;
         // };
+      },
+      error => {
+        console.log(error);
       });
       this.learnerDataService.getLearnerData(this.learnerId).subscribe(res=> {
         this.learnerData = res;
         this.learnerWords = res.wordCounts;
         this.convertLearnerWordsMapToArray();
         this.learnerName = res.learnerName;
-      });});
+        this.wordCountDataSource.paginator = this.wordCountPaginator;
+      });
+    },
+     error => {
+        console.log(error);
+      });
 
       this.sentenceDataSource.filterPredicate = ((data, filter) => {
         const a = !filter.sentenceText || data.sentenceText.toLowerCase().includes(filter.sentenceText);
@@ -104,7 +111,6 @@ export class LearnerDataComponent implements OnInit, AfterViewInit {
         const filter = {...value, word: value.word.trim().toLowerCase()} as string;
         this.wordCountDataSource.filter = filter;
       });
-
     }
 
 

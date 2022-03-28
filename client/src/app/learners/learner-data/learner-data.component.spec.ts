@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
@@ -19,12 +20,12 @@ describe('LearnerDataComponent', () => {
   const paramMap = new Map();
   paramMap.set('id', '123');
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+  TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        ReactiveFormsModule,
         FormsModule,
+        ReactiveFormsModule
     ],
       declarations: [ LearnerDataComponent ],
       providers: [
@@ -37,12 +38,15 @@ describe('LearnerDataComponent', () => {
       }}]
     })
     .compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LearnerDataComponent);
     component = fixture.componentInstance;
+    fixture.whenStable().then(()=> {
     fixture.detectChanges();
+    }
+    );
   });
 
   it('should create', () => {
