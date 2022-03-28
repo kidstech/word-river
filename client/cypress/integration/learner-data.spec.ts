@@ -14,8 +14,8 @@ describe('Word Count Table', () => {
 
   it('Should have words and their counts', () => {
     cy.wait(1000);
-    page.getWords().should('have.length', '4');
-    page.getCounts().should('have.length', '4');
+    page.getWords().should('have.length', '5');
+    page.getCounts().should('have.length', '5');
     page.getWords().first().should('have.text', ' away ');
     page.getCounts().first().should('have.text', ' 1 ');
   });
