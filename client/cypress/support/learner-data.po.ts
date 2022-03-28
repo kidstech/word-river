@@ -11,4 +11,8 @@ export class LearnerDataPage {
     return cy.get('[data-test=counts]');
   }
 
+  getWordPaginator() {
+    return cy.get('[data-test=wordPaginator');
+  }
+
 }

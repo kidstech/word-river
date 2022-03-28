@@ -43,7 +43,7 @@
     <tr mat-row *matRowDef="let row; columns: wordCountTableColums;"></tr>
   </table>
 
-  <mat-paginator #wordCountPaginator [pageSizeOptions]="[5, 10, 20]"
+  <mat-paginator #wordCountPaginator data-test='wordPaginator' [pageSizeOptions]="[5, 10, 20]"
                  showFirstLastButtons
                  aria-label="Select page of words">
   </mat-paginator>
