@@ -25,18 +25,18 @@
 </div>
 
 <div id="wordTable" class="mat-elevation-z8">
-  <table mat-table [dataSource]="wordCountDataSource">
+  <table mat-table  [dataSource]="wordCountDataSource">
 
     <!-- Word Column -->
     <ng-container matColumnDef="word">
       <th mat-header-cell *matHeaderCellDef> Word </th>
-      <td mat-cell *matCellDef="let word"> {{word.word}} </td>
+      <td mat-cell *matCellDef="let word" data-test = 'words'> {{word.word}} </td>
     </ng-container>
 
     <!-- Count Column -->
     <ng-container matColumnDef="timesSeen">
       <th mat-header-cell *matHeaderCellDef> Times Seen </th>
-      <td mat-cell *matCellDef="let word"> {{word.count}} </td>
+      <td mat-cell *matCellDef="let word" data-test = 'counts'> {{word.count}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="wordCountTableColums"></tr>
