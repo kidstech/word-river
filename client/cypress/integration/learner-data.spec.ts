@@ -84,9 +84,22 @@ describe('Word Count Table', () => {
     page.getCounts().should('have.length', '2');
     page.getCounts().first().should('have.text', ' 2 ');
     page.getCounts().eq(1).should('have.text', ' 4 ');
+  });
+});
 
+describe('Sentences Table', () => {
+
+  before(() => {
+    cy.task('seed:database');
   });
 
+  beforeEach(() => {
+    page.navigateTo();
+  });
 
-
+  it('Should sentences and their times', () => {
+    cy.wait(1000);
+    page.getTimesSubmitted().should('have.length', '5');
+    page.getSentences().should('have.length', '5');
+  });
 });

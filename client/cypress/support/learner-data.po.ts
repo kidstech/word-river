@@ -3,6 +3,7 @@ export class LearnerDataPage {
     return cy.visit('/learners/1203842390/learnerData');
   }
 
+  //Word Table Methods
   getWords() {
     return cy.get('[data-test=words]');
   }
@@ -33,6 +34,20 @@ export class LearnerDataPage {
 
   getMaxWordCount() {
     return cy.get('[data-test=maxWordCount]');
+  }
+
+  //Sentence Table Methods
+
+  getTimesSubmitted() {
+    return cy.get('[data-test=timeSubmitted]');
+  }
+
+  getSentences() {
+    return cy.get('[data-test=sentenceText]');
+  }
+
+  getSentencePaginator() {
+    return cy.get('[data-test=sentencePaginator]');
   }
 
 }
