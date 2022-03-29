@@ -292,5 +292,261 @@
     "60d4c5dad073aa154239f3d5",
     "60beabcbbbaa96763c50ae16"
   ]
+},
+{
+  "_id": {
+    "$oid": "622810ba8d1396111ab29c15"
+  },
+  "sentenceId": "06748b8c-d080-4e72-bba1-274438449721",
+  "sentenceText": "wow cypress testing is really cool",
+  "timeSubmitted": "3/28/2022 8:29:10 PM",
+  "learnerId": "1203842390",
+  "words": [
+    {
+      "word": "wow",
+      "forms": [
+        "wow",
+        "wowzers"
+      ]
+    },
+    {
+      "word": "cypress",
+      "forms": [
+        "cypress"
+      ]
+    },
+    {
+      "word": "testing",
+      "forms": [
+        "test",
+        "tests",
+        "testsing"
+      ]
+    },
+    {
+      "word": "is",
+      "forms": [
+        "is"
+      ]
+    },
+    {
+      "word": "really",
+      "forms": [
+        "really"
+      ]
+    },
+    {
+      "word": "cool",
+      "forms": [
+        "cool"
+      ]
+    }
+  ],
+  "selectedWordForms": [
+    "wow",
+    "cypress",
+    "testing",
+    "is",
+    "really",
+    "cool"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+    "60d7cfa7c02ced09b6750223",
+    "610376992c96b6238f61bc1a",
+    "60beabcbbbaa96763c50ae16"
+  ]
+},
+{
+  "_id": {
+    "$oid": "622810ba8d1396111ab29c15"
+  },
+  "sentenceId": "06748b8c-d080-4e72-bba1-274438449722",
+  "sentenceText": "I was born and raised in Morris",
+  "timeSubmitted": "3/28/2022 8:20:10 PM",
+  "learnerId": "1203842390",
+  "words": [
+    {
+      "word": "I",
+      "forms": [
+        "I",
+        "I"
+      ]
+    },
+    {
+      "word": "was",
+      "forms": [
+        "was"
+      ]
+    },
+    {
+      "word": "born",
+      "forms": [
+        "test",
+        "tests",
+        "testsing"
+      ]
+    },
+    {
+      "word": "is",
+      "forms": [
+        "is"
+      ]
+    },
+    {
+      "word": "really",
+      "forms": [
+        "really"
+      ]
+    },
+    {
+      "word": "cool",
+      "forms": [
+        "cool"
+      ]
+    }
+  ],
+  "selectedWordForms": [
+    "wow",
+    "cypress",
+    "testing",
+    "is",
+    "really",
+    "cool"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+    "60d7cfa7c02ced09b6750223",
+    "610376992c96b6238f61bc1a",
+    "60beabcbbbaa96763c50ae16"
+  ]
+},
+{
+  "_id": {
+    "$oid": "622810ba8d1396111ab29c15"
+  },
+  "sentenceId": "06748b8c-d080-4e72-bba1-274438449722",
+  "sentenceText": "The new Batman movie looks really good",
+  "timeSubmitted": "3/9/2022 8:23:10 PM",
+  "learnerId": "1203842390",
+  "words": [
+    {
+      "word": "I",
+      "forms": [
+        "I",
+        "I"
+      ]
+    },
+    {
+      "word": "was",
+      "forms": [
+        "was"
+      ]
+    },
+    {
+      "word": "born",
+      "forms": [
+        "test",
+        "tests",
+        "testsing"
+      ]
+    },
+    {
+      "word": "is",
+      "forms": [
+        "is"
+      ]
+    },
+    {
+      "word": "really",
+      "forms": [
+        "really"
+      ]
+    },
+    {
+      "word": "cool",
+      "forms": [
+        "cool"
+      ]
+    }
+  ],
+  "selectedWordForms": [
+    "wow",
+    "cypress",
+    "testing",
+    "is",
+    "really",
+    "cool"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+    "60d7cfa7c02ced09b6750223",
+    "610376992c96b6238f61bc1a",
+    "60beabcbbbaa96763c50ae16"
+  ]
+},
+{
+  "_id": {
+    "$oid": "622810ba8d1396111ab29c15"
+  },
+  "sentenceId": "06748b8c-d080-4e72-bba1-274438449722",
+  "sentenceText": "My Ti-84 calculator is very handy",
+  "timeSubmitted": "3/9/2022 8:24:10 PM",
+  "learnerId": "1203842390",
+  "words": [
+    {
+      "word": "I",
+      "forms": [
+        "I",
+        "I"
+      ]
+    },
+    {
+      "word": "was",
+      "forms": [
+        "was"
+      ]
+    },
+    {
+      "word": "born",
+      "forms": [
+        "test",
+        "tests",
+        "testsing"
+      ]
+    },
+    {
+      "word": "is",
+      "forms": [
+        "is"
+      ]
+    },
+    {
+      "word": "really",
+      "forms": [
+        "really"
+      ]
+    },
+    {
+      "word": "cool",
+      "forms": [
+        "cool"
+      ]
+    }
+  ],
+  "selectedWordForms": [
+    "wow",
+    "cypress",
+    "testing",
+    "is",
+    "really",
+    "cool"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+    "60d7cfa7c02ced09b6750223",
+    "610376992c96b6238f61bc1a",
+    "60beabcbbbaa96763c50ae16"
+  ]
 }
 ]
