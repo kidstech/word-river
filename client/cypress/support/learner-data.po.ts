@@ -12,7 +12,27 @@ export class LearnerDataPage {
   }
 
   getWordPaginator() {
-    return cy.get('[data-test=wordPaginator');
+    return cy.get('[data-test=wordPaginator]');
+  }
+
+  getWordSearch() {
+    return cy.get('[data-test=wordSearch');
+  }
+
+  getStartsWith() {
+    return cy.get('[data-test=startsWith]');
+  }
+
+  getEndsWith() {
+    return cy.get('[data-test=endsWith]');
+  }
+
+  getMinWordCount() {
+    return cy.get('[data-test=minWordCount]');
+  }
+
+  getMaxWordCount() {
+    return cy.get('[data-test=maxWordCount]');
   }
 
 }
