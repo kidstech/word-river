@@ -50,4 +50,12 @@ export class LearnerDataPage {
     return cy.get('[data-test=sentencePaginator]');
   }
 
+  getSentenceFormField(){
+    return cy.get('[data-test=sentenceTextField]');
+  }
+
+  getDateFormField() {
+    return cy.get('[data-test=time]');
+  }
+
 }

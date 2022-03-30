@@ -97,9 +97,51 @@ describe('Sentences Table', () => {
     page.navigateTo();
   });
 
-  it('Should sentences and their times', () => {
+  it('Should have sentences and their times', () => {
     cy.wait(1000);
     page.getTimesSubmitted().should('have.length', '5');
     page.getSentences().should('have.length', '5');
+    page.getSentences().first().should('have.text', ' a active ant at the alphabet ');
+    page.getTimesSubmitted().first().should('have.text', ' 3/8/2022 8:28:10 PM ');
   });
+
+  it('Should paginate the data', () => {
+    page.getSentences().should('have.length', '5');
+    page.getTimesSubmitted().should('have.length', '5');
+
+    page.getSentencePaginator().find('button.mat-paginator-navigation-next.mat-icon-button')
+    .click();
+
+    page.getSentences().should('have.length', '1');
+    page.getTimesSubmitted().should('have.length', '1');
+    page.getSentences().first().should('have.text', ' My Ti-84 calculator is very handy ');
+    page.getTimesSubmitted().first().should('have.text', ' 3/9/2022 8:24:10 PM ');
+
+    page.getSentencePaginator().find('button.mat-paginator-navigation-previous.mat-icon-button')
+    .click();
+
+    page.getSentences().should('have.length', '5');
+    page.getTimesSubmitted().should('have.length', '5');
+
+    page.getSentencePaginator().find('.mat-select')
+    .click().get('mat-option').contains('10').click();
+
+    page.getSentences().should('have.length', '6');
+    page.getTimesSubmitted().should('have.length', '6');
+  });
+
+  it('Should apply filters', () => {
+    //Testing Sentence date search field
+    page.getDateFormField().type('3/9/2022');
+    page.getSentences().should('have.length', '3');
+    page.getTimesSubmitted().should('have.length', '3');
+    page.getSentences().first().should('have.text', ' a big box ate my mean moose ');
+    page.getSentences().eq(1).should('have.text', ' The new Batman movie looks really good ');
+    page.getSentences().eq(2).should('have.text', ' My Ti-84 calculator is very handy ');
+
+     //Testing Sentence text search
+     page.getSentenceFormField().type('Batman');
+     page.getSentences().first().should('have.text', ' The new Batman movie looks really good ');
+  });
+
 });
