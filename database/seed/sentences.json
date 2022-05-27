@@ -1,0 +1,552 @@
+[
+{
+  "_id": {
+    "$oid": "622810ba8d1396111ab29c15"
+  },
+  "sentenceId": "06748b8c-d080-4e72-bba1-274438449727",
+  "sentenceText": "a active ant at the alphabet",
+  "timeSubmitted": "3/8/2022 8:28:10 PM",
+  "learnerId": "1623445120497",
+  "words": [
+    {
+      "word": "a",
+      "forms": [
+        "a"
+      ]
+    },
+    {
+      "word": "active",
+      "forms": [
+        "active",
+        "a",
+        "a's",
+        "as"
+      ]
+    },
+    {
+      "word": "ant",
+      "forms": [
+        "ant",
+        "ants"
+      ]
+    },
+    {
+      "word": "at",
+      "forms": [
+        "at"
+      ]
+    },
+    {
+      "word": "the",
+      "forms": [
+        "the"
+      ]
+    },
+    {
+      "word": "alphabet",
+      "forms": [
+        "alphabet",
+        "alphabets"
+      ]
+    }
+  ],
+  "selectedWordForms": [
+    "a",
+    "active",
+    "ant",
+    "at",
+    "the",
+    "alphabet"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+    "60d7cfa7c02ced09b6750223",
+    "610376992c96b6238f61bc1a",
+    "60beabcbbbaa96763c50ae16"
+  ]
+},
+{
+  "_id": {
+    "$oid": "622810d28d1396111ab29c16"
+  },
+  "sentenceId": "f9261efc-aeae-46d3-947a-a7adc644d89d",
+  "sentenceText": "a big box ate my mean moose",
+  "timeSubmitted": "3/9/2022 8:28:34 PM",
+  "learnerId": "1623445120497",
+  "words": [
+    {
+      "word": "a",
+      "forms": [
+        "a"
+      ]
+    },
+    {
+      "word": "big",
+      "forms": [
+        "big",
+        "bigger",
+        "biggest"
+      ]
+    },
+    {
+      "word": "box",
+      "forms": [
+        "box",
+        "boxes",
+        "boxful",
+        "boxfuls",
+        "boxlike"
+      ]
+    },
+    {
+      "word": "ate",
+      "forms": [
+        "ate",
+        "eat",
+        "eating"
+      ]
+    },
+    {
+      "word": "my",
+      "forms": [
+        "my"
+      ]
+    },
+    {
+      "word": "mean",
+      "forms": [
+        "mean",
+        "meaner",
+        "meaners",
+        "meaning",
+        "means",
+        "meant"
+      ]
+    },
+    {
+      "word": "moose",
+      "forms": [
+        "moose"
+      ]
+    }
+  ],
+  "selectedWordForms": [
+    "a",
+    "big",
+    "box",
+    "ate",
+    "my",
+    "mean",
+    "moose"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+    "610376992c96b6238f61bc1a",
+    "60d4c5dad073aa154239f3d5",
+    "60beabcbbbaa96763c50ae16"
+  ]
+},
+{
+  "_id": {
+    "$oid": "622810ba8d1396111ab29c54"
+  },
+  "sentenceId": "06748b8c-d080-4e72-bba1-274438449746",
+  "sentenceText": "a active ant at the alphabet",
+  "timeSubmitted": "3/8/2022 8:28:10 PM",
+  "learnerId": "1203842390",
+  "words": [
+    {
+      "word": "a",
+      "forms": [
+        "a"
+      ]
+    },
+    {
+      "word": "active",
+      "forms": [
+        "active",
+        "a",
+        "a's",
+        "as"
+      ]
+    },
+    {
+      "word": "ant",
+      "forms": [
+        "ant",
+        "ants"
+      ]
+    },
+    {
+      "word": "at",
+      "forms": [
+        "at"
+      ]
+    },
+    {
+      "word": "the",
+      "forms": [
+        "the"
+      ]
+    },
+    {
+      "word": "alphabet",
+      "forms": [
+        "alphabet",
+        "alphabets"
+      ]
+    }
+  ],
+  "selectedWordForms": [
+    "a",
+    "active",
+    "ant",
+    "at",
+    "the",
+    "alphabet"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+    "60d7cfa7c02ced09b6750223",
+    "610376992c96b6238f61bc1a",
+    "60beabcbbbaa96763c50ae16"
+  ]
+},
+{
+  "_id": {
+    "$oid": "622810d28d1396111ab29c00"
+  },
+  "sentenceId": "f9261efc-aeae-46d3-947a-a7adc644d89f",
+  "sentenceText": "a big box ate my mean moose",
+  "timeSubmitted": "3/9/2022 8:28:34 PM",
+  "learnerId": "1203842390",
+  "words": [
+    {
+      "word": "a",
+      "forms": [
+        "a"
+      ]
+    },
+    {
+      "word": "big",
+      "forms": [
+        "big",
+        "bigger",
+        "biggest"
+      ]
+    },
+    {
+      "word": "box",
+      "forms": [
+        "box",
+        "boxes",
+        "boxful",
+        "boxfuls",
+        "boxlike"
+      ]
+    },
+    {
+      "word": "ate",
+      "forms": [
+        "ate",
+        "eat",
+        "eating"
+      ]
+    },
+    {
+      "word": "my",
+      "forms": [
+        "my"
+      ]
+    },
+    {
+      "word": "mean",
+      "forms": [
+        "mean",
+        "meaner",
+        "meaners",
+        "meaning",
+        "means",
+        "meant"
+      ]
+    },
+    {
+      "word": "moose",
+      "forms": [
+        "moose"
+      ]
+    }
+  ],
+  "selectedWordForms": [
+    "a",
+    "big",
+    "box",
+    "ate",
+    "my",
+    "mean",
+    "moose"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+    "610376992c96b6238f61bc1a",
+    "60d4c5dad073aa154239f3d5",
+    "60beabcbbbaa96763c50ae16"
+  ]
+},
+{
+  "_id": {
+    "$oid": "622810ba8d1396111ab29c44"
+  },
+  "sentenceId": "06748b8c-d080-4e72-bba1-274438449721",
+  "sentenceText": "wow cypress testing is really cool",
+  "timeSubmitted": "3/28/2022 8:29:10 PM",
+  "learnerId": "1203842390",
+  "words": [
+    {
+      "word": "wow",
+      "forms": [
+        "wow",
+        "wowzers"
+      ]
+    },
+    {
+      "word": "cypress",
+      "forms": [
+        "cypress"
+      ]
+    },
+    {
+      "word": "testing",
+      "forms": [
+        "test",
+        "tests",
+        "testsing"
+      ]
+    },
+    {
+      "word": "is",
+      "forms": [
+        "is"
+      ]
+    },
+    {
+      "word": "really",
+      "forms": [
+        "really"
+      ]
+    },
+    {
+      "word": "cool",
+      "forms": [
+        "cool"
+      ]
+    }
+  ],
+  "selectedWordForms": [
+    "wow",
+    "cypress",
+    "testing",
+    "is",
+    "really",
+    "cool"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+    "60d7cfa7c02ced09b6750223",
+    "610376992c96b6238f61bc1a",
+    "60beabcbbbaa96763c50ae16"
+  ]
+},
+{
+  "_id": {
+    "$oid": "622810ba8d1396111ab29c33"
+  },
+  "sentenceId": "06748b8c-d080-4e72-bba1-274438449722",
+  "sentenceText": "I was born and raised in Morris",
+  "timeSubmitted": "3/28/2022 8:20:10 PM",
+  "learnerId": "1203842390",
+  "words": [
+    {
+      "word": "I",
+      "forms": [
+        "I",
+        "I"
+      ]
+    },
+    {
+      "word": "was",
+      "forms": [
+        "was"
+      ]
+    },
+    {
+      "word": "born",
+      "forms": [
+        "test",
+        "tests",
+        "testsing"
+      ]
+    },
+    {
+      "word": "is",
+      "forms": [
+        "is"
+      ]
+    },
+    {
+      "word": "really",
+      "forms": [
+        "really"
+      ]
+    },
+    {
+      "word": "cool",
+      "forms": [
+        "cool"
+      ]
+    }
+  ],
+  "selectedWordForms": [
+    "wow",
+    "cypress",
+    "testing",
+    "is",
+    "really",
+    "cool"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+    "60d7cfa7c02ced09b6750223",
+    "610376992c96b6238f61bc1a",
+    "60beabcbbbaa96763c50ae16"
+  ]
+},
+{
+  "_id": {
+    "$oid": "622810ba8d1396111ab29c22"
+  },
+  "sentenceId": "06748b8c-d080-4e72-bba1-274438449722",
+  "sentenceText": "The new Batman movie looks really good",
+  "timeSubmitted": "3/9/2022 8:23:10 PM",
+  "learnerId": "1203842390",
+  "words": [
+    {
+      "word": "I",
+      "forms": [
+        "I",
+        "I"
+      ]
+    },
+    {
+      "word": "was",
+      "forms": [
+        "was"
+      ]
+    },
+    {
+      "word": "born",
+      "forms": [
+        "test",
+        "tests",
+        "testsing"
+      ]
+    },
+    {
+      "word": "is",
+      "forms": [
+        "is"
+      ]
+    },
+    {
+      "word": "really",
+      "forms": [
+        "really"
+      ]
+    },
+    {
+      "word": "cool",
+      "forms": [
+        "cool"
+      ]
+    }
+  ],
+  "selectedWordForms": [
+    "wow",
+    "cypress",
+    "testing",
+    "is",
+    "really",
+    "cool"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+    "60d7cfa7c02ced09b6750223",
+    "610376992c96b6238f61bc1a",
+    "60beabcbbbaa96763c50ae16"
+  ]
+},
+{
+  "_id": {
+    "$oid": "622810ba8d1396111ab29c11"
+  },
+  "sentenceId": "06748b8c-d080-4e72-bba1-274438449722",
+  "sentenceText": "My Ti-84 calculator is very handy",
+  "timeSubmitted": "3/9/2022 8:24:10 PM",
+  "learnerId": "1203842390",
+  "words": [
+    {
+      "word": "I",
+      "forms": [
+        "I",
+        "I"
+      ]
+    },
+    {
+      "word": "was",
+      "forms": [
+        "was"
+      ]
+    },
+    {
+      "word": "born",
+      "forms": [
+        "test",
+        "tests",
+        "testsing"
+      ]
+    },
+    {
+      "word": "is",
+      "forms": [
+        "is"
+      ]
+    },
+    {
+      "word": "really",
+      "forms": [
+        "really"
+      ]
+    },
+    {
+      "word": "cool",
+      "forms": [
+        "cool"
+      ]
+    }
+  ],
+  "selectedWordForms": [
+    "wow",
+    "cypress",
+    "testing",
+    "is",
+    "really",
+    "cool"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+    "60d7cfa7c02ced09b6750223",
+    "610376992c96b6238f61bc1a",
+    "60beabcbbbaa96763c50ae16"
+  ]
+}
+]

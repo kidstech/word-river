@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -50,6 +52,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LearnerCardComponent } from './learners/learner-card/learner-card.component';
 import { CreateLearnerComponent } from './learners/create-learner/create-learner.component';
 import { EditLearnerComponent } from './learners/edit-learner/edit-learner.component';
+import { LearnerDataComponent } from './learners/learner-data/learner-data.component';
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -73,6 +76,8 @@ const MATERIAL_MODULES: any[] = [
   MatSnackBarModule,
   MatSlideToggleModule,
   MatTabsModule,
+  MatTableModule,
+  MatPaginatorModule,
   MatProgressSpinnerModule
 ];
 
@@ -93,7 +98,8 @@ const MATERIAL_MODULES: any[] = [
     LoginComponent,
     LearnerCardComponent,
     CreateLearnerComponent,
-    EditLearnerComponent
+    EditLearnerComponent,
+    LearnerDataComponent
   ],
   imports: [
     BrowserModule,
