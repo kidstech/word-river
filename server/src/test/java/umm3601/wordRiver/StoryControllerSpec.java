@@ -54,16 +54,13 @@ public class StoryControllerSpec {
         ctxDocuments.drop();
 
         Document johnDoeStory = new Document().append("learnerId", "123456").append("storyName", "Batman and Robin")
-        .append("font", "Comic Sans haha").append("pages", Arrays.asList(new Document().append("sentences", Arrays.asList("banana", "apple", "orange"))
-        .append("pageNumber", 5)));
+        .append("font", "Comic Sans haha").append("sentences", Arrays.asList("banana", "orange", "apple", "grape"));
 
         Document johnDoeStory2 = new Document().append("learnerId", "123456").append("storyName", "Batman and Nightwing")
-        .append("font", "Comic Sans haha").append("pages", Arrays.asList(new Document().append("sentences", Arrays.asList("banana", "grape", "orange"))
-        .append("pageNumber", 5)));
+        .append("font", "Comic Sans haha").append("sentences", Arrays.asList("banana", "apple", "I like turtles"));
 
         Document steveDoeStory = new Document().append("learnerId", "789101112").append("storyName", "Batman and Robin")
-        .append("font", "Comic Sans haha").append("pages", Arrays.asList(new Document().append("sentences", Arrays.asList("banana", "apple", "orange"))
-        .append("pageNumber", 5)));
+        .append("font", "Comic Sans haha").append("sentences", Arrays.asList("Is mayonnaise an instrument?","Ravioli, ravioli. Give me the formuoli", "The inner machinations of my mind are an enigma"));
 
         ctxDocuments.insertOne(johnDoeStory);
         ctxDocuments.insertOne(johnDoeStory2);
@@ -80,7 +77,7 @@ public class StoryControllerSpec {
 
    @Test
     public void postValidStory() {
-      String storyData  = "{"  + "\"learnerId\": \"1623445120497\"," + "\"storyName\": \"Jimmy's Pizza\"," + "\"font\": \"Comic Sans?\"," + "\"pages\": []" + "}";
+      String storyData  = "{"  + "\"learnerId\": \"1623445120497\"," + "\"storyName\": \"Jimmy's Pizza\"," + "\"font\": \"Comic Sans?\"," + "\"sentences\": []" + "}";
 
       String testId = "1623445120497";
       mockReq.setBodyContent(storyData);
@@ -96,7 +93,7 @@ public class StoryControllerSpec {
     }
 
     @Test
-    public void postInvalidPagesStory() {
+    public void postInvalidSentencesStory() {
       String storyData  = "{"  + "\"learnerId\": \"1623445120497\"," + "\"storyName\": \"Jimmy's Pizza\"," + "\"font\": \"Comic Sans?\"," + "}";
 
       String testId = "1623445120497";

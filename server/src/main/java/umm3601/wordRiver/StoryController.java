@@ -22,7 +22,7 @@ public class StoryController {
       }
 
     public void postStory(Context ctx) {
-        Story story = ctx.bodyValidator(Story.class).check(s -> s.pages != null).get();
+        Story story = ctx.bodyValidator(Story.class).check(s -> s.sentences != null).get();
         storyCollection.insert(story);
         ctx.status(201);
         System.out.println("Story has been posted!");
