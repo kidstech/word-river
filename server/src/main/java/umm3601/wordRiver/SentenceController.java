@@ -14,14 +14,16 @@ import io.javalin.http.NotFoundResponse;
 public class SentenceController {
 
     protected final JacksonMongoCollection<Sentence> sentenceCollection;
+    StoryController storyController = null;
 
     /**
      * Construct a controller for Sentences
-     * 
+     *
      * @param database
      */
-    public SentenceController(MongoDatabase database) {
+    public SentenceController(StoryController storyController, MongoDatabase database) {
         sentenceCollection = JacksonMongoCollection.builder().build(database, "sentences", Sentence.class);
+        this.storyController = storyController;
     }
 
     // need to add proper error checking
@@ -47,5 +49,24 @@ public class SentenceController {
         sentenceCollection.insert(sentence);
         ctx.status(201);
       }
+
+    public void getRecentSentences(Context ctx) {
+      String learnerId = ctx.pathParam("learnerId");
+      String mostRecentTime = storyController.getRecentStory();
+      mostRecentTime = mostRecentTime.split(" ")[0];
+      System.out.println(mostRecentTime);
+      ArrayList<Sentence> sentences = new ArrayList<Sentence>();
+      FindIterable<Sentence> sentenceIterator = sentenceCollection.find(eq("learnerId", learnerId));
+      System.out.println("Am I working here?");
+      for(Sentence sentence: sentenceIterator) {
+        String date = sentence.timeSubmitted.split(" ")[0];
+        if (date.equals(mostRecentTime)) {
+          System.out.println((date == mostRecentTime));
+          sentences.add(sentence);
+        }
+      }
+      ctx.json(sentences);
+
+    }
 
 }

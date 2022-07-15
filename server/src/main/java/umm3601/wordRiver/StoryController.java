@@ -42,4 +42,9 @@ public class StoryController {
       ctx.json(learnerStories);
     }
 
-}
+    public String getRecentStory() {
+      Story recentStory = storyCollection.find().sort(new Document("_id", -1)).first();
+      System.out.println("The most recent time was actually found" + recentStory.timeSubmitted);
+      return recentStory.timeSubmitted;
+    }
+  }

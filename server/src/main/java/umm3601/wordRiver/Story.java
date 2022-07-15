@@ -13,6 +13,6 @@ public class Story {
     public String learnerId;
     public String storyName;
     public String font;
+    public String timeSubmitted;
     public ArrayList<String> sentences;
-
 }

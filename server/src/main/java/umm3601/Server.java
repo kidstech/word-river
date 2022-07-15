@@ -37,8 +37,8 @@ public class Server {
     UserController userController = new UserController(database);
     WordRiverController wordRiverController = new WordRiverController(userController,database);
     LearnerDataController learnerDataController = new LearnerDataController(database);
-    SentenceController sentenceController = new SentenceController(database);
     StoryController storyController = new StoryController(database);
+    SentenceController sentenceController = new SentenceController(storyController, database);
 
 
     Javalin server = Javalin.create(config -> {
@@ -103,6 +103,7 @@ public class Server {
 
     // Get Sentences
     server.get("/api/sentences/:learnerId", sentenceController::getSentences);
+    server.get("/api/sentences/:learnerId/mostRecentSentences", sentenceController::getRecentSentences);
     server.post("/api/sentences/:learnerId", sentenceController::postSentence);
 
     // Learner Stories
