@@ -44,7 +44,12 @@ public class StoryController {
 
     public String getRecentStory() {
       Story recentStory = storyCollection.find().sort(new Document("_id", -1)).first();
-      System.out.println("The most recent time was actually found" + recentStory.timeSubmitted);
+      System.out.println(recentStory);
+      if(recentStory == null) {
+        //This is necessary in the instance where the learner needs to get their sentences but has not constructed their first story
+        return "oops";
+      }
+      //System.out.println("The most recent time was actually found " + recentStory.timeSubmitted);
       return recentStory.timeSubmitted;
     }
   }

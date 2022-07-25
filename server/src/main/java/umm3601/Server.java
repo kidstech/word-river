@@ -105,6 +105,7 @@ public class Server {
     server.get("/api/sentences/:learnerId", sentenceController::getSentences);
     server.get("/api/sentences/:learnerId/mostRecentSentences", sentenceController::getRecentSentences);
     server.post("/api/sentences/:learnerId", sentenceController::postSentence);
+    server.put("/api/sentences/:sentenceId", sentenceController::updateSentence);
 
     // Learner Stories
     server.post("/api/stories/:learnerId", storyController::postStory);
