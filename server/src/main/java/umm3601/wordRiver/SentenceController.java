@@ -2,7 +2,12 @@ package umm3601.wordRiver;
 
 import static com.mongodb.client.model.Filters.eq;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+//import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.mongodb.client.FindIterable;
@@ -12,6 +17,7 @@ import org.bson.types.ObjectId;
 import org.mongojack.JacksonMongoCollection;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
+import kotlin.time.TimeSourceKt;
 
 public class SentenceController {
 
@@ -62,47 +68,28 @@ public class SentenceController {
         ctx.status(200);
       }
 
-    public void getRecentSentences(Context ctx) {
+    public void getRecentSentences(Context ctx) throws ParseException {
       String learnerId = ctx.pathParam("learnerId");
+      //Timestamp mostRecentTime = Timestamp.valueOf("2018-09-01 09:01:15");
+      //Timestamp mostRecentTime = Date.getTime(storyController.getRecentStory());
       String mostRecentTime = storyController.getRecentStory();
-      String mostRecentDate = "";
-      int mostRecentMinute = 0;
-      int mostRecentSecond = 0;
-      int recentMonth = 0;
-      int recentDay = 0;
-      int recentYear = 0;
-      if (mostRecentTime.equals("oops") || !mostRecentTime.equals("oops")){
-          mostRecentDate = mostRecentTime.split(" ")[0];
-          System.out.println(mostRecentTime.split(" ")[1].split(":")[1]);
-          mostRecentMinute = Integer.parseInt(mostRecentTime.split(" ")[1].split(":")[1]);
-          mostRecentSecond = Integer.parseInt(mostRecentTime.split(" ")[1].split(":")[2]);
-          recentMonth = Integer.parseInt(mostRecentDate.split("/")[0]);
-          recentDay = Integer.parseInt(mostRecentDate.split("/")[1]);
-          recentYear = Integer.parseInt(mostRecentDate.split("/")[2]);
-      }
+      SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+      Date parsedDate = dateFormat.parse(mostRecentTime);
+      Timestamp timestamp = new Timestamp(parsedDate.getTime());
       System.out.println(mostRecentTime);
       ArrayList<Sentence> sentences = new ArrayList<Sentence>();
       FindIterable<Sentence> sentenceIterator = sentenceCollection.find(eq("learnerId", learnerId));
       for(Sentence sentence: sentenceIterator) {
-        String date = sentence.timeSubmitted.split(" ")[0];
-        int month = Integer.parseInt(date.split("/")[0]);
-        int day = Integer.parseInt(date.split("/")[1]);
-        int year = Integer.parseInt(date.split("/")[2]);
-        int minute = Integer.parseInt(sentence.timeSubmitted.split(" ")[1].split(":")[1]);
-        int second = Integer.parseInt(sentence.timeSubmitted.split(" ")[1].split(":")[2]);
-        if ( (month >= recentMonth && day >= recentDay && year >= recentYear && !sentence.deleted)) {
-            if(mostRecentTime.equals("oops") || (minute > mostRecentMinute) || (minute == mostRecentMinute && second > mostRecentSecond) ) {
-                //System.out.println(minute > mostRecentMinute);
-                //System.out.println("This is the sentence minute: " + minute);
-                //System.out.println("This is the most recent story minute: " + mostRecentMinute);
-                //System.out.println("I passed the if check: " + sentence.sentenceText);
-                sentences.add(sentence);
-
-            }
+        String date = sentence.timeSubmitted;
+        SimpleDateFormat dateSentenceFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+        Date parsedSentenceDate = dateSentenceFormat.parse(date);
+        Timestamp sentenceTimeStamp = new Timestamp(parsedSentenceDate.getTime());
+        System.out.println(sentenceTimeStamp.after(timestamp));
+        if(sentenceTimeStamp.after(timestamp) && !sentence.deleted) {
+          sentences.add(sentence);
         }
       }
       ctx.json(sentences);
 
     }
-
 }
