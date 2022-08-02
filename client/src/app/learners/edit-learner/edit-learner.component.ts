@@ -23,6 +23,7 @@ export class EditLearnerComponent implements OnInit {
   delClicked = false;
   learnerPacks;
   userPacks;
+  selected: string;
 
   constructor(
     private users: UserService,
@@ -92,5 +93,32 @@ export class EditLearnerComponent implements OnInit {
   delete() {
     this.users.removeLearner(this.login.authID, this.learner._id).subscribe(_res=>this.router.navigate(['home']));
     console.log('del');
+  }
+
+  inputChange(event) {
+    console.log(this.selected);
+
+    switch (this.selected) {
+        case 'moose':
+            this.downloadURL = '/assets/moose.png';
+            break;
+        case 'narwhal':
+            this.downloadURL = '/assets/narwhal.png';
+            break;
+        case 'penguin':
+            this.downloadURL = '/assets/penguin.png';
+            break;
+        case 'pig':
+            this.downloadURL = '/assets/pig.png';
+            break;
+        case 'duck':
+            this.downloadURL = '/assets/duck.png';
+            break;
+
+        default:
+          this.downloadURL = '/assets/add-img.png';
+            break;
+    }
+
   }
 }
