@@ -1,8 +1,9 @@
 package umm3601.wordRiver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StoryPage {
-    public List<String> sentences;
+    public ArrayList<String> sentences;
     public int pageNumber;
 }

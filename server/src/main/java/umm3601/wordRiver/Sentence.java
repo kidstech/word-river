@@ -19,4 +19,5 @@ public class Sentence {
     // mongo object Id of associated user
     public String userId;
     public List<String> contextPackIds;
+    public Boolean deleted;
 }

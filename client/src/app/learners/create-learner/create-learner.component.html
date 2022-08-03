@@ -3,6 +3,7 @@
     <form>
       <mat-card class="add-learner-card">
         <h1 class="title">Create a student profile</h1>
+
         <div class="image-upload">
           <label for="file-input">
             <img src="{{downloadURL}}" onerror="this.src='/assets/add-img.png'" class="cp-icon">
@@ -10,6 +11,20 @@
           <input type="file" id="file-input" (change)="!uploading ? onFileAdded($event) : {}"
             accept=".png,.jpg,.jpeg,.gif" />
         </div>
+
+        <div class="choose-image">
+          <mat-form-field appearance="fill">
+            <mat-label>Profile Picture Options</mat-label>
+            <mat-select [(value)]="selected" (valueChange)="inputChange($event)">
+              <mat-option value="moose">Moose</mat-option>
+              <mat-option value="narwhal">Narwhal</mat-option>
+              <mat-option value="penguin">Penguin</mat-option>
+              <mat-option value="pig">Pig</mat-option>
+              <mat-option value="duck">Duck</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
         <input class="field" data-test="nameField" type="text" name="name" id='name'
               placeholder="Name" [(ngModel)]="name">
         <mat-card-actions align="end">

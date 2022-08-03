@@ -68,7 +68,7 @@ public class SentenceControllerSpec {
 
         ctxDocuments.insertOne(johnDoeSentences);
 
-        sentenceController = new SentenceController(db);
+        sentenceController = new SentenceController(null, db);
     }
 
     @AfterAll

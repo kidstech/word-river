@@ -1,6 +1,6 @@
 <mat-card style="outline: none;" data-test="viewLearnerButton" [routerLink]="['/learners', learner ? learner._id : '']">
   <div class="outer">
-    <img src="{{learner ? learner.icon: ''}}" class="pp" onerror="this.src='/assets/user.png'">
+    <img src="{{learner ? learner.icon: ''}}" class="pp" onerror="this.src='/assets/narwhal.png'">
     <h1 class="name">{{learner ? learner.name: ''}}</h1>
     <div class="count-container">
       <h3>{{packs ? packs.length : 0}}</h3>
