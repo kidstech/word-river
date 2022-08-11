@@ -1,0 +1,19 @@
+.story-card{
+  margin: 10px;
+}
+
+#name{
+  font-size: large;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+mat-card-title{
+  font-size: large;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
