@@ -6,6 +6,6 @@
     <p>Sentences: <span class="story-card-sentences">{{ story.sentences }}</span></p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button data-test="viewStoryButton" *ngIf="this.simple" [routerLink]="['/story', this.story.storyName]">View Story</button>
+    <button mat-button data-test="viewStoryButton" *ngIf="this.simple" [routerLink]="['/learners',  story.learnerId, 'learnerData', 'story', this.story.storyName, this.story._id]">View Story</button>
   </mat-card-actions>
 </mat-card>

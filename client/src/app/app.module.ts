@@ -54,6 +54,7 @@ import { CreateLearnerComponent } from './learners/create-learner/create-learner
 import { EditLearnerComponent } from './learners/edit-learner/edit-learner.component';
 import { LearnerDataComponent } from './learners/learner-data/learner-data.component';
 import { StoryCardComponent } from './learners/story-card/story-card.component';
+import { StoryDetailsComponent } from './story-details/story-details.component';
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -101,7 +102,8 @@ const MATERIAL_MODULES: any[] = [
     CreateLearnerComponent,
     EditLearnerComponent,
     LearnerDataComponent,
-    StoryCardComponent
+    StoryCardComponent,
+    StoryDetailsComponent
   ],
   imports: [
     BrowserModule,

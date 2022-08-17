@@ -42,6 +42,19 @@ public class StoryController {
       ctx.json(learnerStories);
     }
 
+    public void getLearnerStory(Context ctx) {
+      String storyId = ctx.pathParam("storyId");
+      String storyName = ctx.pathParam("storyName");
+      Story theStory = new Story();
+      FindIterable<Story> matchedStories = storyCollection.find(eq("storyName", storyName));
+      for(Story story: matchedStories) {
+        if(story._id.equals(storyId)) {
+          theStory = story;
+        }
+      }
+      ctx.json(theStory);
+    }
+
     public String getRecentStory() {
       Story recentStory = storyCollection.find().sort(new Document("_id", -1)).first();
       System.out.println(recentStory);

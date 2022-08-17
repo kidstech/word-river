@@ -6,6 +6,8 @@
   font-size: large;
   flex: 1;
   white-space: nowrap;
+  width: 260px;
+  display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
 }

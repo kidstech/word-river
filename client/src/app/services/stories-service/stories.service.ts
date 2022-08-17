@@ -16,4 +16,8 @@ export class StoriesService {
   getLearnerStories(learnerId: string): Observable<Story[]> {
     return this.httpClient.get<Story[]>(this.storiesUrl + '/' + learnerId);
   }
+
+  getLearnerStory(storyName: string, storyID: string): Observable<Story> {
+    return this.httpClient.get<Story>(this.storiesUrl + '/theStory/' + storyName + '/' + storyID);
+  }
 }
