@@ -8,6 +8,8 @@ import { SentencesService } from 'src/app/services/sentences-service/sentences.s
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { StoriesService } from 'src/app/services/stories-service/stories.service';
+import { Story } from 'src/app/datatypes/story';
 
 
 
@@ -31,13 +33,15 @@ export class LearnerDataComponent implements OnInit{
   wordCountTableColums = ['word', 'timesSeen'];
   formControl: AbstractControl;
   wordFormControl: AbstractControl;
+  learnerStories: Story[];
 
   //below code sourced from https://stackblitz.com/edit/table-filtering-multiple-filters-example?file=app%2Ftable-filtering-example.ts
   constructor(
     private route: ActivatedRoute,
     private learnerDataService: LearnerDataService,
     private sentencesService: SentencesService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private storyService: StoriesService
   ) {
   }
 
@@ -48,6 +52,13 @@ export class LearnerDataComponent implements OnInit{
       console.log(pmap);
       console.log('This is ngOnInit');
       this.learnerId = pmap.get('id');
+
+      this.storyService.getLearnerStories(this.learnerId).subscribe(res=> {
+        this.learnerStories = res;
+      },
+      error => {
+        console.log(error);
+      });
 
       this.sentencesService.getSentences(this.learnerId).subscribe(res=> {
         this.sentences = res;

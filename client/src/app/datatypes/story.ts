@@ -1,9 +1,10 @@
 import { StoryPage } from './storyPage';
 
 export class Story {
+  _id?: string;
   learnerId: string;
   storyName: string;
   font?: string;
-  pages: Array<StoryPage>;
+  sentences: Array<string>;
 
 }

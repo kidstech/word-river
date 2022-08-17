@@ -73,9 +73,6 @@
     </mat-form-field>
   </form>
 
-
-
-
 <div id="sentenceTable" class="mat-elevation-z8">
   <table mat-table [dataSource]="sentenceDataSource">
 
@@ -100,5 +97,18 @@
                  aria-label="Select page of sentences">
   </mat-paginator>
 </div>
+
+
+<div fxLayout="row">
+  <div class="story-list" fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
+    <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
+
+
+      <!-- Card grid view -->
+      <div  fxLayout="row wrap" fxLayoutGap="10px" class="story-card-container">
+        <app-story-card simple="true" *ngFor="let story of learnerStories" class="story-card" [story]="story" fxFlex="1 1 280px"></app-story-card>
+      </div>
+  </div>
+  </div>
 
 

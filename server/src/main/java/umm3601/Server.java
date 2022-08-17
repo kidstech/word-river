@@ -110,6 +110,7 @@ public class Server {
     // Learner Stories
     server.post("/api/stories/:learnerId", storyController::postStory);
     server.get("/api/stories/:learnerId", storyController::getLearnerStories);
+    server.get("/api/stories/theStory/:storyName/:storyId", storyController::getLearnerStory);
 
 
 

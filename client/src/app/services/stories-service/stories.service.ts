@@ -14,6 +14,10 @@ export class StoriesService {
   constructor(private httpClient: HttpClient) { }
 
   getLearnerStories(learnerId: string): Observable<Story[]> {
-    return this.httpClient.get<Story[]>(this.userUrl + '/' + learnerId);
+    return this.httpClient.get<Story[]>(this.storiesUrl + '/' + learnerId);
+  }
+
+  getLearnerStory(storyName: string, storyID: string): Observable<Story> {
+    return this.httpClient.get<Story>(this.storiesUrl + '/theStory/' + storyName + '/' + storyID);
   }
 }
