@@ -25,10 +25,11 @@
     "@angular/platform-browser": "~11.2.4",
     "@angular/platform-browser-dynamic": "~11.2.4",
     "@angular/router": "~11.2.4",
+    "firebase": "^7.0 || ^8.0",
+    "ngx-print": "^1.2.1",
     "rxjs": "~6.6.6",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.3",
-    "firebase": "^7.0 || ^8.0"
+    "zone.js": "~0.10.3"
   },
   "devDependencies": {
     "@angular-devkit/architect": ">= 0.900 < 0.1200",
