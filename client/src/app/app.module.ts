@@ -55,6 +55,7 @@ import { EditLearnerComponent } from './learners/edit-learner/edit-learner.compo
 import { LearnerDataComponent } from './learners/learner-data/learner-data.component';
 import { StoryCardComponent } from './learners/story-card/story-card.component';
 import { StoryDetailsComponent } from './story-details/story-details.component';
+import { NgxPrintModule } from 'ngx-print';
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -106,6 +107,7 @@ const MATERIAL_MODULES: any[] = [
     StoryDetailsComponent
   ],
   imports: [
+    NgxPrintModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

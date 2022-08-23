@@ -1,5 +1,9 @@
+<div id="print-section">
+<h1> Title: {{theStory.storyName}}</h1>
 <ul *ngFor="let sentence of theStory.sentences">
   <li>
     {{sentence}}
 </li>
 </ul>
+</div>
+<button printSectionId="print-section" ngxPrint>print</button> <!--Your relevant print button-->
