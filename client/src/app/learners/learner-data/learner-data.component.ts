@@ -10,7 +10,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { StoriesService } from 'src/app/services/stories-service/stories.service';
 import { Story } from 'src/app/datatypes/story';
-
+import * as Highcharts from 'highcharts';
+import Histogram from 'highcharts/modules/histogram-bellcurve';
 
 
 @Component({
@@ -18,6 +19,8 @@ import { Story } from 'src/app/datatypes/story';
   templateUrl: './learner-data.component.html',
   styleUrls: ['./learner-data.component.scss']
 })
+
+
 export class LearnerDataComponent implements OnInit{
   @ViewChild('wordCountPaginator') wordCountPaginator: MatPaginator;
   @ViewChild('sentencePaginator') sentencePaginator: MatPaginator;
@@ -85,9 +88,9 @@ export class LearnerDataComponent implements OnInit{
         console.log(error);
       });
 
-      this.sentenceDataSource.filterPredicate = ((data, filter) => {
-        const a = !filter.sentenceText || data.sentenceText.toLowerCase().includes(filter.sentenceText);
-        const b = !filter.timeSubmitted || data.timeSubmitted.split(' ').includes(filter.timeSubmitted);
+      this.sentenceDataSource.filterPredicate = ((data2, filter) => {
+        const a = !filter.sentenceText || data2.sentenceText.toLowerCase().includes(filter.sentenceText);
+        const b = !filter.timeSubmitted || data2.timeSubmitted.split(' ').includes(filter.timeSubmitted);
         return a && b;
       }) as (currentSentence, aString) => boolean;
 
@@ -101,12 +104,12 @@ export class LearnerDataComponent implements OnInit{
         this.sentenceDataSource.filter = filter;
       });
 
-      this.wordCountDataSource.filterPredicate = ((data, filter) => {
-        const a =  !filter.word || data.word === filter.word;
-        const b =  !filter.endsWith || data.word.endsWith(filter.endsWith);
-        const c =  !filter.startsWith || data.word.startsWith(filter.startsWith);
-        const d =  !filter.minWordCount || data.count >= filter.minWordCount;
-        const e = !filter.maxWordCount || data.count <= filter.maxWordCount;
+      this.wordCountDataSource.filterPredicate = ((data2, filter) => {
+        const a =  !filter.word || data2.word === filter.word;
+        const b =  !filter.endsWith || data2.word.endsWith(filter.endsWith);
+        const c =  !filter.startsWith || data2.word.startsWith(filter.startsWith);
+        const d =  !filter.minWordCount || data2.count >= filter.minWordCount;
+        const e = !filter.maxWordCount || data2.count <= filter.maxWordCount;
         return a && b && c && d && e;
       }) as (currentWord, aString) => boolean;
 
@@ -122,6 +125,54 @@ export class LearnerDataComponent implements OnInit{
         const filter = {...value, word: value.word.trim().toLowerCase()} as string;
         this.wordCountDataSource.filter = filter;
       });
+
+      const text =
+      'Chapter 1. Down the Rabbit-Hole ' +
+      'Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: ' +
+      'once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations ' +
+      'in it, \'and what is the use of a book,\' thought Alice \'without pictures or conversation?\'' +
+      'So she was considering in her own mind (as well as she could, for the hot day made her feel very sleepy ' +
+      'and stupid), whether the pleasure of making a daisy-chain would be worth the trouble of getting up and picking ' +
+      'the daisies, when suddenly a White Rabbit with pink eyes ran close by her.';
+  const lines = text.replace(/[():'?0-9]+/g, '').split(/[,\. ]+/g);
+  const data = lines.reduce((arr, word) => {
+      let obj = Highcharts.find(arr, bobj => bobj.name === word);
+      if (obj) {
+          obj.weight += 1;
+      } else {
+          obj = {
+              name: word,
+              weight: 1
+          };
+          arr.push(obj);
+      }
+      return arr;
+  }, []);
+
+Highcharts.chart('container', {
+  accessibility: {
+      screenReaderSection: {
+          beforeChartFormat: '<h5>{chartTitle}</h5>' +
+              '<div>{chartSubtitle}</div>' +
+              '<div>{chartLongdesc}</div>' +
+              '<div>{viewTableButton}</div>'
+      }
+  },
+  series: [{
+      type: 'wordcloud',
+      data,
+      name: 'Occurrences'
+  }],
+  title: {
+      text: 'Wordcloud of Alice\'s Adventures in Wonderland'
+  },
+  subtitle: {
+      text: 'An excerpt from chapter 1: Down the Rabbit-Hole  '
+  },
+  tooltip: {
+      headerFormat: '<span style="font-size: 16px"><b>{point.key}</b></span><br>'
+  }
+});
     }
 
 
@@ -141,4 +192,5 @@ export class LearnerDataComponent implements OnInit{
   //     const split: string[] = sentence.split(' ');
   //     return split.includes(word);
   //  }
+
   }
