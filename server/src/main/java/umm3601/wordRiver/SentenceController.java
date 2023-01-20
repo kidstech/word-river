@@ -70,22 +70,24 @@ public class SentenceController {
 
     public void getRecentSentences(Context ctx) throws ParseException {
       String learnerId = ctx.pathParam("learnerId");
-      //Timestamp mostRecentTime = Timestamp.valueOf("2018-09-01 09:01:15");
-      //Timestamp mostRecentTime = Date.getTime(storyController.getRecentStory());
-      String mostRecentTime = storyController.getRecentStory();
+
+      // Get the most recent submitted story
+      String mostRecentTime = storyController.getRecentStory(learnerId);
+
+      // This is the date format that we are using for both word river and story builder
       SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
-      Date parsedDate = dateFormat.parse(mostRecentTime);
-      Timestamp timestamp = new Timestamp(parsedDate.getTime());
-      System.out.println(mostRecentTime);
+      Date mostRecentStorySubmissionDate = dateFormat.parse(mostRecentTime);
+
+      // Find all the sentences created by the learner
       ArrayList<Sentence> sentences = new ArrayList<Sentence>();
       FindIterable<Sentence> sentenceIterator = sentenceCollection.find(eq("learnerId", learnerId));
+
+
       for(Sentence sentence: sentenceIterator) {
-        String date = sentence.timeSubmitted;
-        SimpleDateFormat dateSentenceFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
-        Date parsedSentenceDate = dateSentenceFormat.parse(date);
-        Timestamp sentenceTimeStamp = new Timestamp(parsedSentenceDate.getTime());
-        System.out.println(sentenceTimeStamp.after(timestamp));
-        if(sentenceTimeStamp.after(timestamp) && !sentence.deleted) {
+        Date sentenceDate = dateFormat.parse(sentence.timeSubmitted);
+
+        // Check to see if the sentence was created after the most recently submitted story and if it hasn't been deleted by the user
+        if(sentenceDate.after(mostRecentStorySubmissionDate) && !sentence.deleted) {
           sentences.add(sentence);
         }
       }
