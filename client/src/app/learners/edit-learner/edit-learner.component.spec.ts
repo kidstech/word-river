@@ -103,10 +103,46 @@ describe('EditLearnerComponent', () => {
     setTimeout(()=>{expect(component.uploading).toBe(false); done();}, 150);
     });
 
-
   it('should delete a learner', () => {
     spyOn(router, 'navigate');
     component.delete();
     expect(router.navigate).toHaveBeenCalledWith(['home']);
   });
+
+  it('should set downloadURL to "/assets/moose.png" when selected is "moose"', () => {
+    component.selected = 'moose';
+    component.inputChange(null);
+    expect(component.downloadURL).toBe('/assets/moose.png');
+  });
+
+  it('should set downloadURL to "/assets/narwhal.png" when selected is "narwhal"', () => {
+    component.selected = 'narwhal';
+    component.inputChange(null);
+    expect(component.downloadURL).toBe('/assets/narwhal.png');
+  });
+
+  it('should set downloadURL to "/assets/penguin.png" when selected is "penguin"', () => {
+    component.selected = 'penguin';
+    component.inputChange(null);
+    expect(component.downloadURL).toBe('/assets/penguin.png');
+  });
+
+  it('should set downloadURL to "/assets/pig.png" when selected is "pig"', () => {
+    component.selected = 'pig';
+    component.inputChange(null);
+    expect(component.downloadURL).toBe('/assets/pig.png');
+  });
+
+  it('should set downloadURL to "/assets/duck.png" when selected is "duck"', () => {
+    component.selected = 'duck';
+    component.inputChange(null);
+    expect(component.downloadURL).toBe('/assets/duck.png');
+  });
+
+  it('should set downloadURL to "/assets/add-img.png" for unknown selected values', () => {
+    component.selected = 'unknown';
+    component.inputChange(null);
+    expect(component.downloadURL).toBe('/assets/add-img.png');
+  });
 });
+
