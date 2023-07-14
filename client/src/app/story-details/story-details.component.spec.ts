@@ -1,33 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { StoryDetailsComponent } from './story-details.component';
-
-describe('StoryDetailsComponent', () => {
-  let component: StoryDetailsComponent;
-  let fixture: ComponentFixture<StoryDetailsComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ StoryDetailsComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(StoryDetailsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-//    expect(component).toBeTruthy();
-  });
-});
-
-/*
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { of } from 'rxjs';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { of, throwError } from 'rxjs';
 import { StoryDetailsComponent } from './story-details.component';
 import { StoriesService } from '../services/stories-service/stories.service';
 import { Story } from '../datatypes/story';
@@ -35,71 +8,78 @@ import { Story } from '../datatypes/story';
 describe('StoryDetailsComponent', () => {
   let component: StoryDetailsComponent;
   let fixture: ComponentFixture<StoryDetailsComponent>;
-  let activatedRoute: ActivatedRoute;
-  let storiesService: StoriesService;
+  let routeMock: any;
+  let storyServiceMock: any;
+  let getLearnerStorySpy: jasmine.Spy;
+
+  const mockStory: Story = {
+    _id: 'mockId',
+    learnerId: 'mockLearnerId',
+    storyName: 'Mock Story',
+    font: 'Arial',
+    sentences: ['This is sentence 1', 'This is sentence 2', 'This is sentence 3'],
+  };
 
   beforeEach(async () => {
+    routeMock = {
+      paramMap: of({
+        get: (param: string) => {
+          if (param === 'storyName') {
+            return 'sampleStoryName';
+          }
+          if (param === 'storyId') {
+            return 'sampleStoryId';
+          }
+        },
+      }),
+    };
+
+    storyServiceMock = jasmine.createSpyObj('StoriesService', ['getLearnerStory']);
+    storyServiceMock.getLearnerStory.and.returnValue(of(mockStory));
+
     await TestBed.configureTestingModule({
       declarations: [StoryDetailsComponent],
       providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            paramMap: of({ get: (param: string) => 'storyId' } as ParamMap),
-          },
-        },
-        {
-          provide: StoriesService,
-          useValue: {
-            getLearnerStory: () => of({ _id?', 'learnerId', 'storyName', 'font?', 'sentences' }),
-          },
-        },
+        { provide: ActivatedRoute, useValue: routeMock },
+        { provide: StoriesService, useValue: storyServiceMock },
       ],
     }).compileComponents();
   });
 
+
   beforeEach(() => {
     fixture = TestBed.createComponent(StoryDetailsComponent);
     component = fixture.componentInstance;
-    activatedRoute = TestBed.inject(ActivatedRoute);
-    storiesService = TestBed.inject(StoriesService);
     fixture.detectChanges();
   });
 
-  it('should create the component', () => {
-    expect(component).toBeTruthy();
+  it('should retrieve story details on initialization', () => {
+    expect(component).toBeTruthy(); // Component should be created successfully
+
+    // The component properties should be assigned with the expected values from route parameters
+    expect(component.storyName).toBe('sampleStoryName');
+    expect(component.storyId).toBe('sampleStoryId');
+
+    // Trigger change detection and wait for the asynchronous operations to complete
+    fixture.detectChanges();
+
+    // The storyService.getLearnerStory method should be called with the expected parameters
+    expect(storyServiceMock.getLearnerStory).toHaveBeenCalledWith('sampleStoryName', 'sampleStoryId');
+
+    // The story details should be assigned to the component's 'theStory' property
+    expect(component.theStory).toEqual(mockStory);
   });
 
-  it('should set the storyName and storyId from the route parameters', () => {
-    expect(component.storyName).toBe('storyName');
-    expect(component.storyId).toBe('storyId');
-  });
+  /*it('should handle API call error', () => {
+    const errorMessage = 'API Error';
 
-  it('should call getLearnerStory and set theStory', () => {
-    spyOn(storiesService, 'getLearnerStory').and.callThrough();
+    // Mock an error in the storyService.getLearnerStory method
+    spyOn(storyServiceMock, 'getLearnerStory').and.returnValue(throwError(errorMessage));
 
-    component.ngOnInit();
+    // Trigger change detection and wait for the asynchronous operations to complete
+    fixture.detectChanges();
 
-    expect(storiesService.getLearnerStory).toHaveBeenCalledWith('storyId', 'storyId');
-   // expect(component.theStory).toEqual('_id', 'learnerId', 'storyName' );
-  });
-
-  it('should set theStory with the correct storyName', () => {
-    // Arrange
-    const expectedStoryName = 'Expected Story Name';
-    const expectedStory: Story = {
-      learnerId: 'learnerIdValue',
-      storyName: expectedStoryName,
-      sentences: []
-    };
-
-    // Act (assuming the assignment happens in the ngOnInit method)
-    component.ngOnInit();
-
-    // Assert
-    expect(component.theStory).toEqual(expectedStory);
-  });
-
+    // The error should be logged to the console
+    expect(console.log).toHaveBeenCalledWith(errorMessage);
+  });*/
 });
-
-*/
