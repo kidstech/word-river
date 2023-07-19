@@ -56,7 +56,9 @@ import { Word } from 'src/app/datatypes/word';
   });
   it('should import', () => {
     // eslint-disable-next-line max-len
-    const mockFile = new File(['{"name":"sad","enabled":true,"nouns":[],"verbs":[],"adjectives":[],"misc":[]}'], 'filename', { type: 'application/json' });
+    const mockFile = new File(
+      ['{"name":"sad","enabled":true,"nouns":[],"verbs":[],"adjectives":[],"misc":[]}'], 'filename', { type: 'application/json' }
+    );
     const mockEvt = { target: { files: [mockFile] } };
     spyOn(window as any, 'FileReader').and.callThrough();
     component.onFileAdded(mockEvt as any);
@@ -64,7 +66,9 @@ import { Word } from 'src/app/datatypes/word';
   });
   it('should fail import with array', () => {
     // eslint-disable-next-line max-len
-    const mockFile = new File(['[{"name":"sad","enabled":true,"nouns":[],"verbs":[],"adjectives":[],"misc":[]}]'], 'filename', { type: 'application/json' });
+    const mockFile = new File(
+      ['[{"name":"sad","enabled":true,"nouns":[],"verbs":[],"adjectives":[],"misc":[]}]'], 'filename', { type: 'application/json' }
+    );
     const mockEvt = { target: { files: [mockFile] } };
     spyOn(window as any, 'FileReader').and.callThrough();
     component.onFileAdded(mockEvt as any);
