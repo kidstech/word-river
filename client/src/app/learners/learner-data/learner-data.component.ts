@@ -11,6 +11,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/f
 import { StoriesService } from 'src/app/services/stories-service/stories.service';
 import { Story } from 'src/app/datatypes/story';
 import * as Highcharts from 'highcharts';
+//import { Word } from 'src/app/datatypes/word';
 
 
 // eslint-disable-next-line no-var
@@ -31,6 +32,7 @@ export class LearnerDataComponent implements OnInit{
   @ViewChild('sentencePaginator') sentencePaginator: MatPaginator;
   sentenceDataSource = new MatTableDataSource<Sentence>();
   wordCountDataSource = new MatTableDataSource<WordCounts>();
+ // wordDataSource = new MatTableDataSource<Word>();
   learnerData: LearnerData;
   learnerName: string;
   learnerId: string;
@@ -167,15 +169,22 @@ export class LearnerDataComponent implements OnInit{
         const c =  !filter.startsWith || data2.word.startsWith(filter.startsWith);
         const d =  !filter.minWordCount || data2.count >= filter.minWordCount;
         const e = !filter.maxWordCount || data2.count <= filter.maxWordCount;
-        return a && b && c && d && e;
+        const f = !filter.type || data2.type === filter.type;
+        return a && b && c && d && e && f;
       }) as (currentWord, aString) => boolean;
+
+      // this.wordDataSource.filterPredicate = ((data2, filter) => {
+      //   const f = !filter.type || data2.type === filter.type;
+      //   return f;
+      // }) as (currentWord, aString) => boolean;
 
       this.wordFormControl = this.formBuilder.group({
         word: '',
         endsWith: '',
         startsWith: '',
         minWordCount: '',
-        maxWordCount: ''
+        maxWordCount: '',
+        type: ''
       });
 
       console.log('Hello');
