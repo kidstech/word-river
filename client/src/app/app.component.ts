@@ -107,13 +107,13 @@ export class AppComponent implements OnInit {
   goBack() {
     const path = this.location.path();
     if ((/^\/?packs\/new\/?$/g).test(path) || // New Context Pack
-      (/^\/?packs\/.{24}\/?$/g).test(path)) { // Display wordlists
+      (/^\/?packs\/.{24}\/?$/g).test(path)) { // Display word lists
       this.router.navigate(['/home']);
     }
     else if (
-      (/^\/?packs\/.{24}\/import$/g).test(path) || // Import wordlist
-      (/^\/?packs\/.{24}\/new$/g).test(path) ||  // add wordlist
-      (/^\/?packs\/.{24}\/.{1,100}$/g).test(path) // view wordlist
+      (/^\/?packs\/.{24}\/import$/g).test(path) || // Import word list
+      (/^\/?packs\/.{24}\/new$/g).test(path) ||  // add word list
+      (/^\/?packs\/.{24}\/.{1,100}$/g).test(path) // view word list
     ) {
       this.router.navigate(['packs/' + path.split('/')[2]]);
     } else {
