@@ -1,28 +1,29 @@
 
 <div class="wordFilter">
-<form style="display: flex" [formGroup]="wordFormControl">
-  <mat-form-field>
-    <input matInput data-test="wordSearch" formControlName="word">
-    <mat-placeholder>Search for a Word</mat-placeholder>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput data-test="startsWith" formControlName="startsWith">
-    <mat-placeholder>Search for a Word that starts with</mat-placeholder>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput data-test="endsWith" formControlName="endsWith">
-    <mat-placeholder>Search for a Word that ends with</mat-placeholder>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput data-test="minWordCount" formControlName="minWordCount" type="number" min="1">
-    <mat-placeholder>Minimum Word Count</mat-placeholder>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput data-test="maxWordCount" formControlName="maxWordCount" type="number">
-    <mat-placeholder>Maximum Word Count</mat-placeholder>
-  </mat-form-field>
-</form>
+  <form style="display: flex" [formGroup]="wordFormControl">
+    <mat-form-field class="form-field-spacing">
+      <input matInput data-test="wordSearch" formControlName="word">
+      <mat-placeholder>Search for a Word</mat-placeholder>
+    </mat-form-field>
+    <mat-form-field class="form-field-spacing">
+      <input matInput data-test="startsWith" formControlName="startsWith">
+      <mat-placeholder>Search for a Word that starts with</mat-placeholder>
+    </mat-form-field>
+    <mat-form-field class="form-field-spacing">
+      <input matInput data-test="endsWith" formControlName="endsWith">
+      <mat-placeholder>Search for a Word that ends with</mat-placeholder>
+    </mat-form-field>
+    <mat-form-field class="form-field-spacing">
+      <input matInput data-test="minWordCount" formControlName="minWordCount" type="number" min="1">
+      <mat-placeholder>Minimum Word Count</mat-placeholder>
+    </mat-form-field>
+    <mat-form-field class="form-field-spacing">
+      <input matInput data-test="maxWordCount" formControlName="maxWordCount" type="number">
+      <mat-placeholder>Maximum Word Count</mat-placeholder>
+    </mat-form-field>
+  </form>
 </div>
+
 
 <div id="wordTable" class="mat-elevation-z8">
   <table mat-table  [dataSource]="wordCountDataSource">
