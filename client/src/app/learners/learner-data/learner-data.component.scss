@@ -15,5 +15,31 @@ margin-bottom: 5%;
   height: 1000px;
 }
 
+.bubble {
+  padding: 5px 10px 5px 10px;
+  color: white;
+  border-radius: 12px;
+  min-width: 50px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.116);
+  margin: 10px;
+}
+
+.noun {
+  border: 2px solid #429ce3;
+}
+
+.verb {
+  border: 2px solid #43e0ba;
+}
+
+.adjective {
+  border: 2px solid #e0486e;
+}
+
+.misc {
+  border: 2px solid #edbb32;
+}
+
 
 
