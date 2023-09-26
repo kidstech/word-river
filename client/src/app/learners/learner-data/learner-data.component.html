@@ -1,5 +1,5 @@
 
-<div class="wordFilter">
+<!-- <div class="wordFilter">
 <form style="display: flex" [formGroup]="wordFormControl">
   <mat-form-field class ="formfieldspacing">
     <input matInput data-test="wordSearch" formControlName="word">
@@ -22,20 +22,44 @@
     <mat-placeholder>Maximum Word Count</mat-placeholder>
   </mat-form-field>
 </form>
-</div>
+</div> -->
 
 <div id="wordTiles" class="mat-elevation-z8">
   <mat-grid-list [cols]="3" rowHeight="150px">
     <mat-grid-tile *ngFor="let word of wordCountArray" [colspan]="1" [rowspan]="1" data-test="wordTile">
-      <div class="word-tile">
+      <div class="bubble noun">
         <div class="word-tile-header">{{ word.word }}</div>
-        <div class="word-tile-content">Seen: {{ word.count }}</div>
+        <div class="word-tile-content">Times Seen: {{ word.count }}</div>
       </div>
     </mat-grid-tile>
   </mat-grid-list>
 
-  <mat-paginator #wordCountPaginator data-test="wordPaginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of words">
-  </mat-paginator>
+  <!-- <div id="wordTiles" class="mat-elevation-z8">
+    <mat-grid-list [cols]="3" rowHeight="150px">
+      <mat-grid-tile
+        *ngFor="let word of wordCountArray"
+        [colspan]="1"
+        [rowspan]="1"
+        data-test="wordTile"
+        [ngClass]="{
+          'bubble': true, // Always apply the 'bubble' class
+          'noun': word.type === 'noun',
+          'verb': word.type === 'verb',
+          'adjective': word.type === 'adjective',
+          'misc': word.type === 'misc'
+        }"
+      >
+        <div class="word-tile">
+          <div class="word-tile-header">{{ word.word }}</div>
+          <div class="word-tile-content">Seen: {{ word.count }}</div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+   -->
+
+  <!-- <mat-paginator #wordCountPaginator data-test="wordPaginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of words">
+  </mat-paginator> -->
 
   <mat-select class="wordSort">
     <mat-option value="alphabetic">Alphabetic</mat-option>
