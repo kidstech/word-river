@@ -56,6 +56,7 @@ import { LearnerDataComponent } from './learners/learner-data/learner-data.compo
 import { StoryCardComponent } from './learners/story-card/story-card.component';
 import { StoryDetailsComponent } from './story-details/story-details.component';
 import { NgxPrintModule } from 'ngx-print';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -120,6 +121,7 @@ const MATERIAL_MODULES: any[] = [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireAuthModule,
+    MatGridListModule,
   ],
   providers: [
     WordListService,

@@ -11,6 +11,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/f
 import { StoriesService } from 'src/app/services/stories-service/stories.service';
 import { Story } from 'src/app/datatypes/story';
 import * as Highcharts from 'highcharts';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 // eslint-disable-next-line no-var
@@ -202,6 +203,8 @@ export class LearnerDataComponent implements OnInit{
       }
       this.wordCountDataSource.data = this.wordCountArray;
     }
+
+
     // eslint-disable-next-line @typescript-eslint/ban-types
     convertLearnerWordsMapToArray2(): string[] {
       this.wordsArray= [];
@@ -216,6 +219,8 @@ export class LearnerDataComponent implements OnInit{
      }
      return this.wordsArray;
    }
+
+
 
   //   findWord(sentence: string, word: string) {
   //     const split: string[] = sentence.split(' ');
