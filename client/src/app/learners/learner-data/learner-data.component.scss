@@ -23,6 +23,9 @@ margin-bottom: 5%;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.116);
   margin: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center content vertically within the bubble */
 }
 
 .noun {
@@ -89,6 +92,12 @@ margin-bottom: 5%;
 .word-tile-content {
   font-size: 14px;
   color: black;
+}
+.word-count-badge {
+  background-color: #007bff; /* Customize badge background color */
+  color: white; /* Customize badge text color */
+  padding: 4px 8px; /* Adjust padding for badge */
+  border-radius: 12px; /* Add border radius for badge */
 }
 
 

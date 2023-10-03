@@ -28,8 +28,10 @@
   <mat-grid-list [cols]="3" rowHeight="150px">
     <mat-grid-tile *ngFor="let word of wordCountArray" [colspan]="1" [rowspan]="1" data-test="wordTile">
       <div class="bubble noun">
-        <div class="word-tile-header">{{ word.word }}</div>
-        <div class="word-tile-content">Times Seen: {{ word.count }}</div>
+        <div class="word-tile-content">
+          {{ word.word }}
+          <span class="word-count-badge">{{ word.count }}</span>
+        </div>
       </div>
     </mat-grid-tile>
   </mat-grid-list>
