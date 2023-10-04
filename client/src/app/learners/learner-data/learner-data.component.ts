@@ -45,10 +45,12 @@ export class LearnerDataComponent implements OnInit{
   wordFormControl: AbstractControl;
   learnerStories: Story[];
   highChartsLines: string[];
+  columnHeight = 3;
   public activity;
   public xData;
   public label;
   options: any;
+wordCountColumns: any;
   //below code sourced from https://stackblitz.com/edit/table-filtering-multiple-filters-example?file=app%2Ftable-filtering-example.ts
   constructor(
     private route: ActivatedRoute,
@@ -219,6 +221,18 @@ export class LearnerDataComponent implements OnInit{
      }
      return this.wordsArray;
    }
+
+   splitIntoColumns(columnHeight: number, array: WordCounts[]): WordCounts[][] {
+    const columns: WordCounts[][] = [];
+    for (let i = 0; i < array.length; i += columnHeight) {
+      columns.push(array.slice(i, i + columnHeight));
+    }
+    return columns;
+  }
+
+  getGridColumnStyle(): string {
+    return `repeat(${Math.ceil(this.wordCountArray.length / this.columnHeight)}, 1fr)`;
+  }
 
 
 

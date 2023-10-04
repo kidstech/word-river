@@ -24,17 +24,21 @@
 </form>
 </div> -->
 
+
+
 <div id="wordTiles" class="mat-elevation-z8">
-  <mat-grid-list [cols]="3" rowHeight="150px">
-    <mat-grid-tile *ngFor="let word of wordCountArray" [colspan]="1" [rowspan]="1" data-test="wordTile">
-      <div class="bubble noun">
-        <div class="word-tile-content">
-          {{ word.word }}
-          <span class="word-count-badge">{{ word.count }}</span>
+  <div class="word-tiles-container">
+    <mat-grid-list [cols]="3" rowHeight="150px">
+      <mat-grid-tile *ngFor="let word of wordCountArray" [colspan]="1" [rowspan]="1" data-test="wordTile">
+        <div class="bubble noun">
+          <div class="word-tile-content">
+            {{ word.word }}
+            <span class="word-count-badge">{{ word.count }}</span>
+          </div>
         </div>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
 
   <!-- <div id="wordTiles" class="mat-elevation-z8">
     <mat-grid-list [cols]="3" rowHeight="150px">
