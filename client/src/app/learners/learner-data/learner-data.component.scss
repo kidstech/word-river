@@ -77,11 +77,11 @@ margin-bottom: 5%;
 
 /* Center content within the tiles */
 .word-tile {
+  width: 100%; /* Make tiles 100% wide within grid cell */
+  height: 100%; /* Make tiles 100% tall within grid cell */
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
 /* Style header and content within the tile */

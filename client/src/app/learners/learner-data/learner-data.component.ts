@@ -12,6 +12,11 @@ import { StoriesService } from 'src/app/services/stories-service/stories.service
 import { Story } from 'src/app/datatypes/story';
 import * as Highcharts from 'highcharts';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
+import { ChangeDetectorRef } from '@angular/core';
+
+
 
 
 // eslint-disable-next-line no-var
@@ -46,6 +51,9 @@ export class LearnerDataComponent implements OnInit{
   learnerStories: Story[];
   highChartsLines: string[];
   columnHeight = 3;
+  // Define a variable to store the current sorting option
+  currentSortOption = 'alphabetic';
+
   public activity;
   public xData;
   public label;
@@ -57,10 +65,10 @@ wordCountColumns: any;
     private learnerDataService: LearnerDataService,
     private sentencesService: SentencesService,
     private formBuilder: FormBuilder,
-    private storyService: StoriesService
+    private storyService: StoriesService,
+    private cdRef: ChangeDetectorRef
   ) {
   }
-
 
 
   ngOnInit(): void {
@@ -187,6 +195,7 @@ wordCountColumns: any;
         const filter = {...value, word: value.word.trim().toLowerCase()} as string;
         this.wordCountDataSource.filter = filter;
       });
+
     }
 
 
@@ -234,11 +243,27 @@ wordCountColumns: any;
     return `repeat(${Math.ceil(this.wordCountArray.length / this.columnHeight)}, 1fr)`;
   }
 
+  sortWordTiles(option: string): void {
+    if (option === 'alphabetic') {
+      this.wordCountArray.sort((a, b) => (a.word > b.word ? 1 : -1));
+    } else if (option === 'highest') {
+      this.wordCountArray.sort((a, b) => b.count - a.count);
+    } else if (option === 'lowest') {
+      this.wordCountArray.sort((a, b) => a.count - b.count);
+    }
+
+    // Manually trigger change detection to update the view
+    this.cdRef.detectChanges();
+  }
+
+
+
 
 
   //   findWord(sentence: string, word: string) {
   //     const split: string[] = sentence.split(' ');
   //     return split.includes(word);
   //  }
+
 
   }

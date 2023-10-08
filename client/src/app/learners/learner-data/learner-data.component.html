@@ -26,53 +26,27 @@
 
 
 
-<div id="wordTiles" class="mat-elevation-z8">
-  <div class="word-tiles-container">
-    <mat-grid-list [cols]="6" rowHeight="75px">
-      <mat-grid-tile *ngFor="let word of wordCountArray" [colspan]="1" [rowspan]="1" data-test="wordTile">
-        <div class="bubble noun">
-          <div class="word-tile-content">
-            {{ word.word }}
-            <span class="word-count-badge">{{ word.count }}</span>
-          </div>
+<mat-select class="wordSort" (change)="sortWordTiles($event.value)">
+  <mat-option value="alphabetic">Alphabetic</mat-option>
+  <mat-option value="highest">Highest Word Count</mat-option>
+  <mat-option value="lowest">Lowest Word Count</mat-option>
+</mat-select>
+
+<!-- Render word tiles based on sorted wordCountArray -->
+<div class="word-tiles-container">
+  <mat-grid-list [cols]="8" rowHeight="50px">
+    <mat-grid-tile *ngFor="let word of wordCountArray" [colspan]="1" [rowspan]="1" data-test="wordTile" class="word-tile">
+      <div class="bubble noun">
+        <div class="word-tile-content">
+          {{ word.word }}
+          <span class="word-count-badge">{{ word.count }}</span>
         </div>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </div>
-
-  <!-- <div id="wordTiles" class="mat-elevation-z8">
-    <mat-grid-list [cols]="3" rowHeight="150px">
-      <mat-grid-tile
-        *ngFor="let word of wordCountArray"
-        [colspan]="1"
-        [rowspan]="1"
-        data-test="wordTile"
-        [ngClass]="{
-          'bubble': true, // Always apply the 'bubble' class
-          'noun': word.type === 'noun',
-          'verb': word.type === 'verb',
-          'adjective': word.type === 'adjective',
-          'misc': word.type === 'misc'
-        }"
-      >
-        <div class="word-tile">
-          <div class="word-tile-header">{{ word.word }}</div>
-          <div class="word-tile-content">Seen: {{ word.count }}</div>
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </div>
-   -->
-
-  <!-- <mat-paginator #wordCountPaginator data-test="wordPaginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of words">
-  </mat-paginator> -->
-
-  <mat-select class="wordSort">
-    <mat-option value="alphabetic">Alphabetic</mat-option>
-    <mat-option value="highest">Highest Word Count</mat-option>
-    <mat-option value="lowest">Lowest Word Count</mat-option>
-  </mat-select>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
+
+
 
 
 
