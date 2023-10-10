@@ -4,15 +4,15 @@
   <form style="display: flex" [formGroup]="gridListFormControl">
     <mat-form-field class="formfieldspacing">
       <input matInput data-test="wordSearch" formControlName="word" (change)="applyFilter()">
-      <mat-placeholder>Search for a Word</mat-placeholder>
+      <mat-placeholder>Search for a complete word</mat-placeholder>
     </mat-form-field>
     <mat-form-field class="formfieldspacing">
       <input matInput data-test="startsWith" formControlName="startsWith" (change)="applyFilter()">
-      <mat-placeholder>Search for a Word that starts with</mat-placeholder>
+      <mat-placeholder>Search for a word that starts with</mat-placeholder>
     </mat-form-field>
     <mat-form-field class="formfieldspacing">
       <input matInput data-test="endsWith" formControlName="endsWith" (change)="applyFilter()">
-      <mat-placeholder>Search for a Word that ends with</mat-placeholder>
+      <mat-placeholder>Search for a word that ends with</mat-placeholder>
     </mat-form-field>
     <mat-form-field class="formfieldspacing">
       <input matInput data-test="minWordCount" formControlName="minWordCount" type="number" min="1" (change)="applyFilter()">
