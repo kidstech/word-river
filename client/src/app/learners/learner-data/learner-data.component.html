@@ -38,7 +38,7 @@
 
 
 <!-- Render word tiles based on sorted wordCountArray -->
-<div class="word-tiles-container">
+<div class="grid-list-container" [ngClass]="{'expanded': isGridListExpanded}">
   <mat-grid-list [cols]="8" rowHeight="50px">
     <mat-grid-tile *ngFor="let word of filteredGridListData" [colspan]="1" [rowspan]="1" data-test="wordTile" class="word-tile">
       <div class="bubble noun">
@@ -52,6 +52,9 @@
 </div>
 
 
+<button mat-button (click)="toggleGridListExpansion()">
+  {{ isGridListExpanded ? 'Collapse' : 'Expand' }}
+</button>
 
 
 

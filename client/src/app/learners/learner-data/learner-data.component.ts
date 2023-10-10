@@ -40,6 +40,7 @@ export class LearnerDataComponent implements OnInit{
   learnerData: LearnerData;
   learnerName: string;
   learnerId: string;
+  isGridListExpanded = false;
   learnerWords: Map<string, number>;
   sentences: Sentence[];
   wordCountArray: WordCounts[];
@@ -305,6 +306,10 @@ export class LearnerDataComponent implements OnInit{
 
       return a && b && c && d && e;
     });
+  }
+  toggleGridListExpansion() {
+    this.isGridListExpanded = !this.isGridListExpanded;
+    this.applySort(); // Reapply sorting when expanding/collapsing
   }
 
 

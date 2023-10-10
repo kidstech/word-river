@@ -121,5 +121,16 @@ margin-bottom: 5%;
   min-width: calc(33.33% - 10px); /* Adjust the column width as needed */
 }
 
+.grid-list-container {
+  max-height: 150px; /* Set the desired maximum height */
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.grid-list-container.expanded {
+  max-height: none; /* Remove the maximum height when expanded */
+}
 
 
