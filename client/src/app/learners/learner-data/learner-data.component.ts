@@ -253,18 +253,21 @@ export class LearnerDataComponent implements OnInit{
     return `repeat(${Math.ceil(this.wordCountArray.length / this.columnHeight)}, 1fr)`;
   }
 
-  sortWordTiles(option: string): void {
-    if (option === 'alphabetic') {
+  sortWordTiles(sortOption: string): void {
+    this.currentSortOption = sortOption; // Update the current sorting option
+
+    if (sortOption === 'alphabetic') {
       this.wordCountArray.sort((a, b) => (a.word > b.word ? 1 : -1));
-    } else if (option === 'highest') {
+    } else if (sortOption === 'highest') {
       this.wordCountArray.sort((a, b) => b.count - a.count);
-    } else if (option === 'lowest') {
+    } else if (sortOption === 'lowest') {
       this.wordCountArray.sort((a, b) => a.count - b.count);
     }
 
     // Manually trigger change detection to update the view
     this.cdRef.detectChanges();
   }
+
 
   applyFilter() {
     const filter = this.gridListFormControl.value;

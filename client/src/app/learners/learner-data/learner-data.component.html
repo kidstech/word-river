@@ -26,11 +26,12 @@
 </div>
 
 
-<mat-select class="wordSort" (change)="sortWordTiles($event.value)">
+<mat-select class="wordSort" [(ngModel)]="currentSortOption" (ngModelChange)="sortWordTiles($event)">
   <mat-option value="alphabetic">Alphabetic</mat-option>
   <mat-option value="highest">Highest Word Count</mat-option>
   <mat-option value="lowest">Lowest Word Count</mat-option>
 </mat-select>
+
 
 <!-- Render word tiles based on sorted wordCountArray -->
 <div class="word-tiles-container">
