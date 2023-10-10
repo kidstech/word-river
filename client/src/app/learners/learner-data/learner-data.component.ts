@@ -43,6 +43,8 @@ export class LearnerDataComponent implements OnInit{
   learnerWords: Map<string, number>;
   sentences: Sentence[];
   wordCountArray: WordCounts[];
+  filteredGridListData: any[];
+  gridListFormControl: FormGroup;
   wordsArray: string[];
   sentenceTableColumns = ['timeSubmitted', 'sentenceText'];
   wordCountTableColums = ['word', 'timesSeen'];
@@ -58,7 +60,7 @@ export class LearnerDataComponent implements OnInit{
   public xData;
   public label;
   options: any;
-wordCountColumns: any;
+  wordCountColumns: any;
   //below code sourced from https://stackblitz.com/edit/table-filtering-multiple-filters-example?file=app%2Ftable-filtering-example.ts
   constructor(
     private route: ActivatedRoute,
@@ -68,10 +70,18 @@ wordCountColumns: any;
     private storyService: StoriesService,
     private cdRef: ChangeDetectorRef
   ) {
+    this.gridListFormControl = this.formBuilder.group({
+      word: '',
+      endsWith: '',
+      startsWith: '',
+      minWordCount: '',
+      maxWordCount: ''
+    });
   }
 
 
   ngOnInit(): void {
+    this.filteredGridListData = this.wordCountArray;
     this.route.paramMap.subscribe((pmap) => {
       console.log(pmap);
       console.log('This is ngOnInit');
@@ -256,7 +266,19 @@ wordCountColumns: any;
     this.cdRef.detectChanges();
   }
 
+  applyFilter() {
+    const filter = this.gridListFormControl.value;
 
+    this.filteredGridListData = this.wordCountArray.filter(data2 => {
+      const a = !filter.word || data2.word === filter.word;
+      const b = !filter.endsWith || data2.word.endsWith(filter.endsWith);
+      const c = !filter.startsWith || data2.word.startsWith(filter.startsWith);
+      const d = !filter.minWordCount || data2.count >= filter.minWordCount;
+      const e = !filter.maxWordCount || data2.count <= filter.maxWordCount;
+
+      return a && b && c && d && e;
+    });
+  }
 
 
 
