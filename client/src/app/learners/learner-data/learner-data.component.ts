@@ -54,7 +54,7 @@ export class LearnerDataComponent implements OnInit{
   highChartsLines: string[];
   columnHeight = 3;
   // Define a variable to store the current sorting option
-  currentSortOption = 'alphabetic';
+  currentSortOption = '';
 
   public activity;
   public xData;
