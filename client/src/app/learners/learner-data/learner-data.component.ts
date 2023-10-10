@@ -105,6 +105,7 @@ export class LearnerDataComponent implements OnInit{
       error => {
         console.log(error);
       });
+
       this.learnerDataService.getLearnerData(this.learnerId).subscribe(res=> {
         this.learnerData = res;
         this.learnerWords = res.wordCounts;
@@ -159,7 +160,14 @@ export class LearnerDataComponent implements OnInit{
       };
           Highcharts.chart('container', this.options);
       });
+    this.gridListFormControl.get('word').valueChanges.subscribe(() => this.applySort());
+    this.gridListFormControl.get('startsWith').valueChanges.subscribe(() => this.applySort());
+    this.gridListFormControl.get('endsWith').valueChanges.subscribe(() => this.applySort());
+    this.gridListFormControl.get('minWordCount').valueChanges.subscribe(() => this.applySort());
+    this.gridListFormControl.get('maxWordCount').valueChanges.subscribe(() => this.applySort());
 
+    // Initialize sorting
+    this.applySort();
 
     },
      error => {
@@ -205,6 +213,8 @@ export class LearnerDataComponent implements OnInit{
         const filter = {...value, word: value.word.trim().toLowerCase()} as string;
         this.wordCountDataSource.filter = filter;
       });
+
+
 
     }
 
@@ -254,18 +264,32 @@ export class LearnerDataComponent implements OnInit{
   }
 
   sortWordTiles(sortOption: string): void {
-    this.currentSortOption = sortOption; // Update the current sorting option
+    this.currentSortOption = sortOption;
 
     if (sortOption === 'alphabetic') {
-      this.wordCountArray.sort((a, b) => (a.word > b.word ? 1 : -1));
+      this.filteredGridListData.sort((a, b) => (a.word > b.word ? 1 : -1));
     } else if (sortOption === 'highest') {
-      this.wordCountArray.sort((a, b) => b.count - a.count);
+      this.filteredGridListData.sort((a, b) => b.count - a.count);
     } else if (sortOption === 'lowest') {
-      this.wordCountArray.sort((a, b) => a.count - b.count);
+      this.filteredGridListData.sort((a, b) => a.count - b.count);
     }
 
-    // Manually trigger change detection to update the view
-    this.cdRef.detectChanges();
+    this.cdRef.detectChanges(); // Trigger change detection to update the view
+  }
+  applySort(): void {
+    const sortOption = this.currentSortOption;
+    this.filteredGridListData = this.wordCountArray.filter(data2 => {
+      const filter = this.gridListFormControl.value;
+      const a = !filter.word || data2.word === filter.word;
+      const b = !filter.endsWith || data2.word.endsWith(filter.endsWith);
+      const c = !filter.startsWith || data2.word.startsWith(filter.startsWith);
+      const d = !filter.minWordCount || data2.count >= filter.minWordCount;
+      const e = !filter.maxWordCount || data2.count <= filter.maxWordCount;
+
+      return a && b && c && d && e;
+    });
+
+    this.sortWordTiles(sortOption);
   }
 
 
