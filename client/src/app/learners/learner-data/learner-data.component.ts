@@ -81,7 +81,6 @@ export class LearnerDataComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.filteredGridListData = this.wordCountArray;
     this.route.paramMap.subscribe((pmap) => {
       console.log(pmap);
       console.log('This is ngOnInit');
@@ -110,6 +109,7 @@ export class LearnerDataComponent implements OnInit{
         this.learnerData = res;
         this.learnerWords = res.wordCounts;
         this.convertLearnerWordsMapToArray();
+        this.filteredGridListData = this.wordCountArray;
         this.learnerName = res.learnerName;
         this.wordCountDataSource.paginator = this.wordCountPaginator;
 
