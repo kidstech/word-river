@@ -142,4 +142,18 @@ margin-bottom: 5%;
   max-height: none; /* Remove the maximum height when expanded */
 }
 
+.sort-container {
+  display: flex;
+  align-items: center;
+  margin: 16px;
+}
+
+.sort-container span {
+  margin-right: 16px; /* Add spacing between "Sort by:" and the dropdown */
+}
+
+.select {
+  margin-top: 16px;
+}
+
 

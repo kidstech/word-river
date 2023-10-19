@@ -26,13 +26,16 @@
 </div>
 
 
-<mat-form-field class="wordSort">
-  <mat-select [(ngModel)]="currentSortOption" (ngModelChange)="sortWordTiles($event)">
-    <mat-option value="" disabled>Select sorting option</mat-option>
+<mat-form-field class="sort-container">
+  <span>Sort by:</span>
+  <mat-divider></mat-divider>
+  <mat-select class="select"[(ngModel)]="currentSortOption" (ngModelChange)="sortWordTiles($event)">
+    <mat-option value="" disabled></mat-option>
     <mat-option value="alphabetic">Alphabetic</mat-option>
     <mat-option value="highest">Highest Word Count</mat-option>
     <mat-option value="lowest">Lowest Word Count</mat-option>
   </mat-select>
+
 </mat-form-field>
 
 <div class="total-word-count">
