@@ -35,7 +35,9 @@
   </mat-select>
 </mat-form-field>
 
-
+<div class="total-word-count">
+  Filtered Word Tile Count: {{ filteredGridListData.length }}
+</div>
 
 <!-- Render word tiles based on sorted wordCountArray -->
 <div class="grid-list-container" [ngClass]="{'expanded': isGridListExpanded}">

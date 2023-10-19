@@ -53,6 +53,7 @@ export class LearnerDataComponent implements OnInit{
   wordFormControl: AbstractControl;
   learnerStories: Story[];
   highChartsLines: string[];
+  totalWordCount = 0;
   columnHeight = 3;
   // Define a variable to store the current sorting option
   currentSortOption = '';
@@ -305,6 +306,8 @@ export class LearnerDataComponent implements OnInit{
       const e = !filter.maxWordCount || data2.count <= filter.maxWordCount;
 
       return a && b && c && d && e;
+
+      this.totalWordCount = this.filteredGridListData.length;
     });
   }
   toggleGridListExpansion() {
