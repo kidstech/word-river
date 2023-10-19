@@ -278,24 +278,7 @@ export class LearnerDataComponent implements OnInit{
 
     this.cdRef.detectChanges(); // Trigger change detection to update the view
   }
-  applySort(): void {
-    const sortOption = this.currentSortOption;
-    this.filteredGridListData = this.wordCountArray.filter(data2 => {
-      const filter = this.gridListFormControl.value;
-      const a = !filter.word || data2.word === filter.word;
-      const b = !filter.endsWith || data2.word.endsWith(filter.endsWith);
-      const c = !filter.startsWith || data2.word.startsWith(filter.startsWith);
-      const d = !filter.minWordCount || data2.count >= filter.minWordCount;
-      const e = !filter.maxWordCount || data2.count <= filter.maxWordCount;
-
-      return a && b && c && d && e;
-    });
-
-    this.sortWordTiles(sortOption);
-  }
-
-
-  applyFilter() {
+  applyFilterAndSort(): void {
     const filter = this.gridListFormControl.value;
 
     this.filteredGridListData = this.wordCountArray.filter(data2 => {
@@ -306,9 +289,21 @@ export class LearnerDataComponent implements OnInit{
       const e = !filter.maxWordCount || data2.count <= filter.maxWordCount;
 
       return a && b && c && d && e;
-
-      this.totalWordCount = this.filteredGridListData.length;
     });
+
+    // Apply sorting to the filtered data
+    this.sortWordTiles(this.currentSortOption);
+  }
+
+  // Modify the existing filter function to call applyFilterAndSort
+  applyFilter() {
+    this.applyFilterAndSort();
+  }
+
+  // Create a new function to apply sorting
+  applySort() {
+    // Apply sorting to the filtered data
+    this.sortWordTiles(this.currentSortOption);
   }
   toggleGridListExpansion() {
     this.isGridListExpanded = !this.isGridListExpanded;
