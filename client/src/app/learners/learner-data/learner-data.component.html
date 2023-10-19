@@ -41,7 +41,7 @@
 <div class="grid-list-container" [ngClass]="{'expanded': isGridListExpanded}">
   <mat-grid-list [cols]="8" rowHeight="50px">
     <mat-grid-tile *ngFor="let word of filteredGridListData" [colspan]="1" [rowspan]="1" data-test="wordTile" class="word-tile">
-      <div class="bubble noun">
+      <div class="bubble tileborder">
         <div class="word-tile-content">
           {{ word.word }}
           <span class="word-count-badge">{{ word.count }}</span>

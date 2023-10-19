@@ -36,6 +36,10 @@ margin-bottom: 5%;
   border: 2px solid #43e0ba;
 }
 
+.tileborder {
+  border: 2px solid #099fa1;
+}
+
 .adjective {
   border: 2px solid #e0486e;
 }
@@ -96,7 +100,7 @@ margin-bottom: 5%;
   text-align: center;
 }
 .word-count-badge {
-  background-color: #007bff; /* Customize badge background color */
+  background-color:  #099fa1; /* Customize badge background color */
   color: white; /* Customize badge text color */
   padding: 4px 8px; /* Adjust padding for badge */
   border-radius: 12px; /* Add border radius for badge */
