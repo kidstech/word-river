@@ -3,32 +3,35 @@
 <div class="wordFilter">
   <form style="display: flex" [formGroup]="gridListFormControl">
     <mat-form-field class="formfieldspacing">
-      <input matInput data-test="wordSearch" formControlName="word" (change)="applyFilter()">
+      <input matInput data-test="wordSearch" formControlName="word">
       <mat-placeholder>Search for a complete word</mat-placeholder>
     </mat-form-field>
     <mat-form-field class="formfieldspacing">
-      <input matInput data-test="startsWith" formControlName="startsWith" (change)="applyFilter()">
+      <input matInput data-test="startsWith" formControlName="startsWith">
       <mat-placeholder>Search for a word that starts with</mat-placeholder>
     </mat-form-field>
     <mat-form-field class="formfieldspacing">
-      <input matInput data-test="endsWith" formControlName="endsWith" (change)="applyFilter()">
+      <input matInput data-test="endsWith" formControlName="endsWith">
       <mat-placeholder>Search for a word that ends with</mat-placeholder>
     </mat-form-field>
     <mat-form-field class="formfieldspacing">
-      <input matInput data-test="minWordCount" formControlName="minWordCount" type="number" min="1" (change)="applyFilter()">
+      <input matInput data-test="minWordCount" formControlName="minWordCount" type="number" min="1">
       <mat-placeholder>Minimum Word Count</mat-placeholder>
     </mat-form-field>
     <mat-form-field class="formfieldspacing">
-      <input matInput data-test="maxWordCount" formControlName="maxWordCount" type="number" (change)="applyFilter()">
+      <input matInput data-test="maxWordCount" formControlName="maxWordCount" type="number">
       <mat-placeholder>Maximum Word Count</mat-placeholder>
     </mat-form-field>
   </form>
+  <button class="filterbuttons" mat-raised-button color="primary" (click)="applyFiltersAndSort()">See Results</button>
+  <button class="filterbuttons" mat-raised-button color="warn" (click)="clearFiltersAndSort()">Clear</button>
+  <mat-divider></mat-divider>
 </div>
+
 
 
 <mat-form-field class="sort-container">
   <span>Sort by:</span>
-  <mat-divider></mat-divider>
   <mat-select class="select"[(ngModel)]="currentSortOption" (ngModelChange)="sortWordTiles($event)">
     <mat-option value="" disabled></mat-option>
     <mat-option value="alphabetic">Alphabetic</mat-option>
@@ -36,10 +39,12 @@
     <mat-option value="lowest">Lowest Word Count</mat-option>
   </mat-select>
 
+
 </mat-form-field>
+<mat-divider></mat-divider>
 
 <div class="total-word-count">
-  Total Word Tile Count: {{ filteredGridListData.length }}
+  Resulting Unique Words: {{ filteredGridListData.length }}
 </div>
 
 <!-- Render word tiles based on sorted wordCountArray -->

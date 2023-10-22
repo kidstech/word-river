@@ -55,6 +55,13 @@ export class LearnerDataComponent implements OnInit{
   highChartsLines: string[];
   totalWordCount = 0;
   columnHeight = 3;
+  filterCriteria: any = {
+    word: '',
+    startsWith: '',
+    endsWith: '',
+    minWordCount: '',
+    maxWordCount: ''
+  };
   // Define a variable to store the current sorting option
   currentSortOption = '';
 
@@ -278,26 +285,41 @@ export class LearnerDataComponent implements OnInit{
 
     this.cdRef.detectChanges(); // Trigger change detection to update the view
   }
-  applyFilterAndSort(): void {
-    const filter = this.gridListFormControl.value;
+// Function to apply filters and sorting when "See Results" button is clicked
+applyFiltersAndSort(): void {
+  // Update the filter criteria with the input values
+  const filterCriteria = this.gridListFormControl.value;
+  this.filteredGridListData = this.wordCountArray.filter(data2 => {
+    const a = !filterCriteria.word || data2.word === filterCriteria.word;
+    const b = !filterCriteria.endsWith || data2.word.endsWith(filterCriteria.endsWith);
+    const c = !filterCriteria.startsWith || data2.word.startsWith(filterCriteria.startsWith);
+    const d = !filterCriteria.minWordCount || data2.count >= filterCriteria.minWordCount;
+    const e = !filterCriteria.maxWordCount || data2.count <= filterCriteria.maxWordCount;
 
-    this.filteredGridListData = this.wordCountArray.filter(data2 => {
-      const a = !filter.word || data2.word === filter.word;
-      const b = !filter.endsWith || data2.word.endsWith(filter.endsWith);
-      const c = !filter.startsWith || data2.word.startsWith(filter.startsWith);
-      const d = !filter.minWordCount || data2.count >= filter.minWordCount;
-      const e = !filter.maxWordCount || data2.count <= filter.maxWordCount;
+    return a && b && c && d && e;
+  });
 
-      return a && b && c && d && e;
-    });
+  // Apply sorting to the filtered data
+  this.sortWordTiles(this.currentSortOption);
+}
 
-    // Apply sorting to the filtered data
+  // Function to clear filters and sorting when "Clear" button is clicked
+  clearFiltersAndSort(): void {
+    // Clear filter criteria and reset form controls
+    this.gridListFormControl.reset();
+    this.filterCriteria = {}; // Reset the filter criteria object
+
+    // Reset sorting
+    this.currentSortOption = ''; // Set it to the default option, or you can define another default
     this.sortWordTiles(this.currentSortOption);
+
+    // Clear the filtered data (show all)
+    this.filteredGridListData = this.wordCountArray;
   }
 
   // Modify the existing filter function to call applyFilterAndSort
   applyFilter() {
-    this.applyFilterAndSort();
+    this.applyFiltersAndSort();
   }
 
   // Create a new function to apply sorting
