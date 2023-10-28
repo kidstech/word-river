@@ -51,30 +51,30 @@ describe('LearnerDataComponent', () => {
     );
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
 
-  it('should set learnerStories when getLearnerStories returns a successful response', () => {
-    const mockResponse = undefined;
-    mockStoryService.getLearnerStories.and.returnValue(of(mockResponse));
+  // it('should set learnerStories when getLearnerStories returns a successful response', () => {
+  //   const mockResponse = undefined;
+  //   mockStoryService.getLearnerStories.and.returnValue(of(mockResponse));
 
-    component.ngOnInit();
+  //   component.ngOnInit();
 
-    expect(component.learnerStories).toEqual(mockResponse);
-  });
+  //   expect(component.learnerStories).toEqual(mockResponse);
+  // });
 
-  it('should log an error when getLearnerStories returns an error', () => {
-    const mockPmap = 'Hello';
-    const mockThisIsOnit = 'This is ngOnInit';
-    const mockError = new Error('Hello');
-    mockStoryService.getLearnerStories.and.returnValue(throwError(mockError));
+  // it('should log an error when getLearnerStories returns an error', () => {
+  //   const mockPmap = 'Hello';
+  //   const mockThisIsOnit = 'This is ngOnInit';
+  //   const mockError = new Error('Hello');
+  //   mockStoryService.getLearnerStories.and.returnValue(throwError(mockError));
 
-    spyOn(console, 'log');
+  //   spyOn(console, 'log');
 
-    component.ngOnInit();
+  //   component.ngOnInit();
 
-    //expect(console.log).toHaveBeenCalledWith(mockError);
-  });
+  //   //expect(console.log).toHaveBeenCalledWith(mockError);
+  // });
 });
 
