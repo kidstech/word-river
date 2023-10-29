@@ -51,30 +51,70 @@ describe('LearnerDataComponent', () => {
     );
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-  // it('should set learnerStories when getLearnerStories returns a successful response', () => {
-  //   const mockResponse = undefined;
-  //   mockStoryService.getLearnerStories.and.returnValue(of(mockResponse));
+//   it('should set learnerStories when getLearnerStories returns a successful response', () => {
 
-  //   component.ngOnInit();
+//     class Story {
+//   _id?: string;
+//   learnerId: string;
+//   storyName: string;
+//   font?: string;
+//   sentences: Array<string>;
+// }
+//     const mockResponse: Story[] = [
+//       {
+//         learnerId: 'learner1',
+//         storyName: 'Sample Story 1',
+//         font: 'Arial',
+//         sentences: ['Once upon a time...', 'This is a sample story.']
+//       },
+//       {
+//         learnerId: 'learner1',
+//         storyName: 'Sample Story 2',
+//         font: 'Times New Roman',
+//         sentences: ['There was a great king...', 'This is another sample story.']
+//       },
+//       // Add more story objects if needed
+//     ];
 
-  //   expect(component.learnerStories).toEqual(mockResponse);
-  // });
+//     spyOn(mockStoryService, 'getLearnerStories').and.callFake(() => of(mockResponse));
 
-  // it('should log an error when getLearnerStories returns an error', () => {
-  //   const mockPmap = 'Hello';
-  //   const mockThisIsOnit = 'This is ngOnInit';
-  //   const mockError = new Error('Hello');
-  //   mockStoryService.getLearnerStories.and.returnValue(throwError(mockError));
+//     component.ngOnInit();
 
-  //   spyOn(console, 'log');
+//     expect(component.learnerStories).toEqual(mockResponse);
+//   });
 
-  //   component.ngOnInit();
+//   it('should log an error when getLearnerStories returns an error', () => {
+//     const mockError = new Error('Hello');
+//     spyOn(mockStoryService, 'getLearnerStories').and.callFake(() => throwError(mockError));
 
-  //   //expect(console.log).toHaveBeenCalledWith(mockError);
-  // });
+//     spyOn(console, 'error'); // Use console.error instead of console.log for errors
+
+//     component.ngOnInit();
+
+//     expect(console.error).toHaveBeenCalledWith(mockError);
+//   });
+
+it('should collapse grid list', () => {
+  component.isGridListExpanded = true;
+
+  component.toggleGridListExpansion();
+
+  // Assert that the grid list has been collapsed
+  expect(component.isGridListExpanded).toBeFalse();
+});
+
+it('should expand grid list', () => {
+  component.isGridListExpanded = false;
+
+  component.toggleGridListExpansion();
+
+  // Assert that the grid list has been expanded
+  expect(component.isGridListExpanded).toBeTrue();
+});
+
 });
 

@@ -7,7 +7,7 @@ import { LearnerDataService } from 'src/app/services/learnerData-service/learner
 import { SentencesService } from 'src/app/services/sentences-service/sentences.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { StoriesService } from 'src/app/services/stories-service/stories.service';
 import { Story } from 'src/app/datatypes/story';
 import * as Highcharts from 'highcharts';
@@ -49,7 +49,7 @@ export class LearnerDataComponent implements OnInit{
   wordsArray: string[];
   sentenceTableColumns = ['timeSubmitted', 'sentenceText'];
   wordCountTableColums = ['word', 'timesSeen'];
-  formControl: AbstractControl;
+  formControl: FormGroup;
   wordFormControl: AbstractControl;
   learnerStories: Story[];
   highChartsLines: string[];
@@ -85,6 +85,10 @@ export class LearnerDataComponent implements OnInit{
       startsWith: '',
       minWordCount: '',
       maxWordCount: ''
+    });
+    this.formControl = this.formBuilder.group({
+      sentenceText: '',
+      timeSubmitted: ''
     });
   }
 
@@ -208,20 +212,20 @@ export class LearnerDataComponent implements OnInit{
         return a && b && c && d && e;
       }) as (currentWord, aString) => boolean;
 
-      this.wordFormControl = this.formBuilder.group({
-        word: '',
-        endsWith: '',
-        startsWith: '',
-        minWordCount: '',
-        maxWordCount: ''
-      });
+      // this.wordFormControl = this.formBuilder.group({
+      //   word: '',
+      //   endsWith: '',
+      //   startsWith: '',
+      //   minWordCount: '',
+      //   maxWordCount: ''
+      // });
 
-      console.log('Hello');
-      this.wordFormControl.valueChanges.subscribe(value => {
-        console.log('Hello!');
-        const filter = {...value, word: value.word.trim().toLowerCase()} as string;
-        this.wordCountDataSource.filter = filter;
-      });
+      // console.log('Hello');
+      // this.wordFormControl.valueChanges.subscribe(value => {
+      //   console.log('Hello!');
+      //   const filter = {...value, word: value.word.trim().toLowerCase()} as string;
+      //   this.wordCountDataSource.filter = filter;
+      // });
 
 
 
@@ -329,8 +333,15 @@ applyFiltersAndSort(): void {
   }
   toggleGridListExpansion() {
     this.isGridListExpanded = !this.isGridListExpanded;
-    this.applySort(); // Reapply sorting when expanding/collapsing
+
+    // Check if gridListArray exists and has data
+    if (this.wordCountArray && this.wordCountArray.length) {
+      this.applySort(); // Reapply sorting when expanding/collapsing the grid
+    } else {
+      console.error('Word count array is empty or undefined.');
+    }
   }
+
 
 
 

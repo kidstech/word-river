@@ -32,7 +32,7 @@
 
 <mat-form-field class="sort-container">
   <span>Sort by:</span>
-  <mat-select class="select"[(ngModel)]="currentSortOption" (ngModelChange)="sortWordTiles($event)" data-test="sortSelect">
+  <mat-select class="select"[(ngModel)]="currentSortOption" (ngModelChange)="sortWordTiles($event)" data-test="sortSelect" name="sort" ngDefaultControl>
     <mat-option value="" disabled></mat-option>
     <mat-option value="alphabetic">Alphabetic</mat-option>
     <mat-option value="highest">Highest Word Count</mat-option>
