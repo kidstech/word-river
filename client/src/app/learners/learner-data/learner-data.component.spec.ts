@@ -116,5 +116,94 @@ it('should expand grid list', () => {
   expect(component.isGridListExpanded).toBeTrue();
 });
 
+
+
+it('should filter word count data based on filter criteria', () => {
+  // Simulate setting filter values
+  component.gridListFormControl.get('word').setValue('apple');
+  component.gridListFormControl.get('startsWith').setValue('a');
+  component.gridListFormControl.get('endsWith').setValue('e');
+  component.gridListFormControl.get('minWordCount').setValue(5);
+  component.gridListFormControl.get('maxWordCount').setValue(10);
+
+  // Manually set word count data for testing (sample data)
+  component.wordCountArray = [
+    { word: 'apple', count: 6 },
+    { word: 'orange', count: 8 },
+    { word: 'banana', count: 3 },
+    { word: 'avocado', count: 7 }
+  ];
+
+  // Trigger filtering
+
+  component.applyFilter();
+  component.applyFiltersAndSort();
+
+  // Get the filtered data after applying filters
+  const filteredData = component.filteredGridListData;
+
+  // Expectations based on the sample data and filter criteria
+  // Ensure that the filtered data matches the expected data after applying the specified filters
+  expect(filteredData.length).toBe(1); // Expecting 1 result after filtering
+
+  // Sample expected filtered results
+  const expectedResult = [
+    { word: 'apple', count: 6 }
+  ];
+
+  // Check if the filtered data matches the expected results
+  expect(filteredData).toEqual(expectedResult);
 });
+
+
+it('should sort word tiles alphabetically', () => {
+  // Set up test data
+  component.filteredGridListData = [
+    { word: 'Apple', count: 5 },
+    { word: 'Orange', count: 10 },
+    { word: 'Banana', count: 7 },
+  ];
+
+  // Call sorting function with 'alphabetic' option
+  component.sortWordTiles('alphabetic');
+
+  // Expected result after sorting
+  const expectedOrder = [
+    { word: 'Apple', count: 5 },
+    { word: 'Banana', count: 7 },
+    { word: 'Orange', count: 10 },
+  ];
+
+  // Check if the sorting is done alphabetically
+  expect(component.filteredGridListData).toEqual(expectedOrder);
+});
+
+it('should sort word tiles by count in descending order', () => {
+  // Set up test data
+  component.filteredGridListData = [
+    { word: 'Apple', count: 5 },
+    { word: 'Orange', count: 10 },
+    { word: 'Banana', count: 7 },
+  ];
+
+  // Call sorting function with 'highest' option
+  component.sortWordTiles('highest');
+
+  // Expected result after sorting by count in descending order
+  const expectedOrder = [
+    { word: 'Orange', count: 10 },
+    { word: 'Banana', count: 7 },
+    { word: 'Apple', count: 5 },
+  ];
+
+  // Check if the sorting is done by count in descending order
+  expect(component.filteredGridListData).toEqual(expectedOrder);
+});
+
+
+
+
+});
+
+
 
