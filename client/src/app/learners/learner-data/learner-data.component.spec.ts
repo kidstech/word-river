@@ -21,7 +21,7 @@ describe('LearnerDataComponent', () => {
   let mockStoryService: any;
   paramMap.set('id', '123');
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
   TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
@@ -37,19 +37,17 @@ describe('LearnerDataComponent', () => {
       {provide: ActivatedRoute, useValue: {
         paramMap: of(paramMap)
       }}]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
+    });
     mockStoryService = jasmine.createSpyObj('StoryService', ['getLearnerStories']);
-    fixture = TestBed.createComponent(LearnerDataComponent);
-    component = fixture.componentInstance;
-    fixture.whenStable().then(()=> {
-    fixture.detectChanges();
-    }
-    );
   });
+
+  beforeEach(waitForAsync(() => {
+    TestBed.compileComponents().then(() => {
+      fixture = TestBed.createComponent(LearnerDataComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
