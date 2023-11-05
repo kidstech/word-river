@@ -250,31 +250,31 @@ export class LearnerDataComponent implements OnInit{
 
 
     // eslint-disable-next-line @typescript-eslint/ban-types
-    convertLearnerWordsMapToArray2(): string[] {
-      this.wordsArray= [];
-      this.highChartsLines = [];
-     for (const [key, value] of Object.entries(this.learnerWords)) {
-       const word = new WordCounts();
-       word.word = key;
-       word.count = value;
-       for(let i = 0; i <= value - 1; i++) {
-        this.wordsArray.push(key);
-       }
-     }
-     return this.wordsArray;
-   }
+  //   convertLearnerWordsMapToArray2(): string[] {
+  //     this.wordsArray= [];
+  //     this.highChartsLines = [];
+  //    for (const [key, value] of Object.entries(this.learnerWords)) {
+  //      const word = new WordCounts();
+  //      word.word = key;
+  //      word.count = value;
+  //      for(let i = 0; i <= value - 1; i++) {
+  //       this.wordsArray.push(key);
+  //      }
+  //    }
+  //    return this.wordsArray;
+  //  }
 
-   splitIntoColumns(columnHeight: number, array: WordCounts[]): WordCounts[][] {
-    const columns: WordCounts[][] = [];
-    for (let i = 0; i < array.length; i += columnHeight) {
-      columns.push(array.slice(i, i + columnHeight));
-    }
-    return columns;
-  }
+  //  splitIntoColumns(columnHeight: number, array: WordCounts[]): WordCounts[][] {
+  //   const columns: WordCounts[][] = [];
+  //   for (let i = 0; i < array.length; i += columnHeight) {
+  //     columns.push(array.slice(i, i + columnHeight));
+  //   }
+  //   return columns;
+  // }
 
-  getGridColumnStyle(): string {
-    return `repeat(${Math.ceil(this.wordCountArray.length / this.columnHeight)}, 1fr)`;
-  }
+  // getGridColumnStyle(): string {
+  //   return `repeat(${Math.ceil(this.wordCountArray.length / this.columnHeight)}, 1fr)`;
+  // }
 
   sortWordTiles(sortOption: string): void {
     this.currentSortOption = sortOption;
