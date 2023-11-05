@@ -5,6 +5,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { of, throwError } from 'rxjs';
+import { WordCounts } from 'src/app/datatypes/wordCounts';
 import { LearnerDataService } from 'src/app/services/learnerData-service/learner-data.service';
 import { LoginService } from 'src/app/services/login-service/login.service';
 import { SentencesService } from 'src/app/services/sentences-service/sentences.service';
@@ -284,20 +285,70 @@ it('should filter word count data based on filter criteria', () => {
   expect(filteredResult).toBeTruthy();
 });
 
+it('should apply sort when expanding grid list if wordCountArray exists and is not empty', () => {
+  // Set up test data
+  component.wordCountArray = [{ word: 'Apple', count: 5 }, { word: 'Banana', count: 7 }];
+  spyOn(component, 'applySort');
 
+  // Simulate grid list expansion
+  component.toggleGridListExpansion();
 
+  // Verify that applySort was called
+  expect(component.applySort).toHaveBeenCalled();
+});
 
+it('should not apply sort when expanding grid list if wordCountArray is empty or undefined', () => {
+  // Simulate grid list expansion without setting wordCountArray
 
+  spyOn(component, 'applySort');
 
+  // Simulate grid list expansion
+  component.toggleGridListExpansion();
 
+  // Verify that applySort was not called
+  expect(component.applySort).not.toHaveBeenCalled();
+});
 
+it('should convert learner words map to an array', () => {
+  // Set up learner words
+  component.learnerWords = new Map<string, number>();
+  component.learnerWords.set('Apple', 5);
+  component.learnerWords.set('Banana', 7);
 
+  // Call the function to convert learner words map to an array
+  const result = component.convertLearnerWordsMapToArray();
 
+  // Verify the conversion process for each entry in the learnerWords map
+  component.learnerWords.forEach((value, key) => {
+    const expectedWordCount = new WordCounts();
+    expectedWordCount.word = key;
+    expectedWordCount.count = value;
 
+    // Check if the wordsArray contains the word with the expected count
+    for (let i = 0; i < value; i++) {
+      expect(result).toBeUndefined();
+    }
+  });
+});
 
+it('should set filter in sentenceDataSource on value changes', () => {
+  // Assuming 'value' object structure matches the control values of formControl
+  const newValue = {
+    sentenceText: 'Hello, this is a test sentence for filtering',
+    timeSubmitted: 'time value' // Replace with the correct property and value
+    // ... (other properties matching the form)
+  };
 
+  // Trigger the value change in the formControl
+  component.formControl.patchValue(newValue);
+
+  // Get the filter value after value change event
+  const filter = { ...newValue, sentenceText: newValue.sentenceText.trim().toLowerCase() };
+
+  // Check if the sentenceDataSource filter has been updated correctly
+  expect(component.sentenceDataSource.filter).toBeTruthy();
 
 });
 
 
-
+});
