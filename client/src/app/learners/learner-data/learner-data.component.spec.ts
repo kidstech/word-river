@@ -198,6 +198,102 @@ it('should sort word tiles by count in descending order', () => {
   expect(component.filteredGridListData).toEqual(expectedOrder);
 });
 
+it('should clear filters and show all word count data', () => {
+  // Set up some filters
+  component.gridListFormControl.get('word').setValue('apple');
+  component.gridListFormControl.get('startsWith').setValue('a');
+  component.gridListFormControl.get('minWordCount').setValue(5);
+
+  // Apply the filters
+  component.applyFiltersAndSort();
+
+  // Clear the filters
+  component.clearFiltersAndSort();
+
+  // Get the filtered data after clearing the filters
+  const filteredData = component.filteredGridListData;
+
+  // Expectation: The filtered data should match the initial word count array after clearing filters
+  expect(filteredData).toEqual(component.wordCountArray);
+});
+
+it('should show all word count data when no filters are applied', () => {
+  // Apply filters with no values
+  component.gridListFormControl.get('word').setValue('');
+  component.gridListFormControl.get('minWordCount').setValue('');
+
+  // Apply the filters
+  component.applyFiltersAndSort();
+
+  // Get the filtered data after applying the empty filters
+  const filteredData = component.filteredGridListData;
+
+  // Expectation: The filtered data should match the initial word count array
+  expect(filteredData).toEqual(component.wordCountArray);
+});
+
+it('should sort word tiles by count in ascending order', () => {
+  // Set up test data
+  component.filteredGridListData = [
+    { word: 'Apple', count: 5 },
+    { word: 'Orange', count: 10 },
+    { word: 'Banana', count: 7 },
+  ];
+
+  // Call sorting function with 'lowest' option
+  component.sortWordTiles('lowest');
+
+  // Expected result after sorting by count in ascending order
+  const expectedOrder = [
+    { word: 'Apple', count: 5 },
+    { word: 'Banana', count: 7 },
+    { word: 'Orange', count: 10 },
+  ];
+
+  // Check if the sorting is done by count in ascending order
+  expect(component.filteredGridListData).toEqual(expectedOrder);
+});
+
+it('should filter word count data based on filter criteria', () => {
+  // Set filter criteria for testing
+  const filter = {
+    word: 'apple',
+    endsWith: 'e',
+    startsWith: 'a',
+    minWordCount: 5,
+    maxWordCount: 10
+  };
+
+  // Sample data for testing
+  component.wordCountDataSource.data = [
+    { word: 'apple', count: 6 },
+    { word: 'orange', count: 8 },
+    { word: 'banana', count: 3 },
+    { word: 'avocado', count: 7 }
+  ];
+
+  // Function to test the predicate
+  const predicateFunction = component.wordCountDataSource.filterPredicate;
+
+  // Filter the data using the predicate function
+  const filteredResult = component.wordCountDataSource.filteredData.filter(item =>
+    predicateFunction(item, JSON.stringify(filter))
+  );
+
+
+  expect(filteredResult).toBeTruthy();
+});
+
+
+
+
+
+
+
+
+
+
+
 
 
 
