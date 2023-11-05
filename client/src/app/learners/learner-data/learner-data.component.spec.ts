@@ -141,8 +141,7 @@ it('should filter word count data based on filter criteria', () => {
   // Get the filtered data after applying filters
   const filteredData = component.filteredGridListData;
 
-  // Expectations based on the sample data and filter criteria
-  // Ensure that the filtered data matches the expected data after applying the specified filters
+
   expect(filteredData.length).toBe(1); // Expecting 1 result after filtering
 
   // Sample expected filtered results
