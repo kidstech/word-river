@@ -1,59 +1,72 @@
 
+
 <div class="wordFilter">
-<form style="display: flex" [formGroup]="wordFormControl">
-  <mat-form-field>
-    <input matInput data-test="wordSearch" formControlName="word">
-    <mat-placeholder>Search for a Word</mat-placeholder>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput data-test="startsWith" formControlName="startsWith">
-    <mat-placeholder>Search for a Word that starts with</mat-placeholder>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput data-test="endsWith" formControlName="endsWith">
-    <mat-placeholder>Search for a Word that ends with</mat-placeholder>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput data-test="minWordCount" formControlName="minWordCount" type="number" min="1">
-    <mat-placeholder>Minimum Word Count</mat-placeholder>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput data-test="maxWordCount" formControlName="maxWordCount" type="number">
-    <mat-placeholder>Maximum Word Count</mat-placeholder>
-  </mat-form-field>
-</form>
+  <form style="display: flex" [formGroup]="gridListFormControl">
+    <mat-form-field class="formfieldspacing">
+      <input matInput data-test="wordSearch" formControlName="word">
+      <mat-placeholder>Search for a complete word</mat-placeholder>
+    </mat-form-field>
+    <mat-form-field class="formfieldspacing">
+      <input matInput data-test="startsWith" formControlName="startsWith">
+      <mat-placeholder>Search for a word that starts with</mat-placeholder>
+    </mat-form-field>
+    <mat-form-field class="formfieldspacing">
+      <input matInput data-test="endsWith" formControlName="endsWith">
+      <mat-placeholder>Search for a word that ends with</mat-placeholder>
+    </mat-form-field>
+    <mat-form-field class="formfieldspacing">
+      <input matInput data-test="minWordCount" formControlName="minWordCount" type="number" min="1">
+      <mat-placeholder>Minimum Word Count</mat-placeholder>
+    </mat-form-field>
+    <mat-form-field class="formfieldspacing">
+      <input matInput data-test="maxWordCount" formControlName="maxWordCount" type="number">
+      <mat-placeholder>Maximum Word Count</mat-placeholder>
+    </mat-form-field>
+  </form>
+  <button class="filterbuttons" mat-raised-button color="primary" (click)="applyFiltersAndSort()">See Results</button>
+  <button class="filterbuttons" mat-raised-button color="warn" (click)="clearFiltersAndSort()">Clear</button>
+  <mat-divider></mat-divider>
 </div>
 
-<div id="wordTable" class="mat-elevation-z8">
-  <table mat-table  [dataSource]="wordCountDataSource">
 
-    <!-- Word Column -->
-    <ng-container matColumnDef="word">
-      <th mat-header-cell *matHeaderCellDef> Word </th>
-      <td mat-cell *matCellDef="let word" data-test = 'words'> {{word.word}} </td>
-    </ng-container>
 
-    <!-- Count Column -->
-    <ng-container matColumnDef="timesSeen">
-      <th mat-header-cell *matHeaderCellDef> Times Seen </th>
-      <td mat-cell *matCellDef="let word" data-test = 'counts'> {{word.count}} </td>
-    </ng-container>
+<mat-form-field class="sort-container">
+  <span>Sort by:</span>
+  <mat-select class="select"[(ngModel)]="currentSortOption" (ngModelChange)="sortWordTiles($event)" data-test="sortSelect" name="sort" ngDefaultControl>
+    <mat-option value="" disabled></mat-option>
+    <mat-option value="alphabetic">Alphabetic</mat-option>
+    <mat-option value="highest">Highest Word Count</mat-option>
+    <mat-option value="lowest">Lowest Word Count</mat-option>
+  </mat-select>
 
-    <tr mat-header-row *matHeaderRowDef="wordCountTableColums"></tr>
-    <tr mat-row *matRowDef="let row; columns: wordCountTableColums;"></tr>
-  </table>
 
-  <mat-paginator #wordCountPaginator data-test='wordPaginator' [pageSizeOptions]="[5, 10, 20]"
-                 showFirstLastButtons
-                 aria-label="Select page of words">
-  </mat-paginator>
+</mat-form-field>
+<mat-divider></mat-divider>
 
-<mat-select class="wordSort">
-  <mat-option value="alphabetic">Alphabetic</mat-option>
-  <mat-option value="highest">Highest Word Count</mat-option>
-  <mat-option value="lowest">Lowest Word Count</mat-option>
-</mat-select>
+<div class="total-word-count">
+  Resulting Unique Words: {{ filteredGridListData.length }}
 </div>
+
+<!-- Render word tiles based on sorted wordCountArray -->
+<div class="grid-list-container" [ngClass]="{'expanded': isGridListExpanded}">
+  <mat-grid-list [cols]="8" rowHeight="50px">
+    <mat-grid-tile *ngFor="let word of filteredGridListData" [colspan]="1" [rowspan]="1" data-test="wordTile" class="word-tile">
+      <div class="bubble tileborder">
+        <div class="word-tile-content">
+          {{ word.word }}
+          <span class="word-count-badge">{{ word.count }}</span>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+
+<button mat-button (click)="toggleGridListExpansion()">
+  {{ isGridListExpanded ? 'Collapse' : 'Expand' }}
+</button>
+
+
 
 
 <!-- <div class="sentenceSearchDate">

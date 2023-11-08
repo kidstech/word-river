@@ -15,5 +15,149 @@ margin-bottom: 5%;
   height: 1000px;
 }
 
+.bubble {
+  padding: 5px 10px 5px 10px;
+  color: rgb(0, 0, 0);
+  border-radius: 12px;
+  min-width: 50px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.116);
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center content vertically within the bubble */
+}
+
+.noun {
+  border: 2px solid #429ce3;
+}
+
+.verb {
+  border: 2px solid #43e0ba;
+}
+
+.tileborder {
+  border: 2px solid #099fa1;
+}
+
+.total-word-count {
+  margin-bottom: 20px; /* Add the desired amount of space below the element */
+}
+
+
+.adjective {
+  border: 2px solid #e0486e;
+}
+
+.misc {
+  border: 2px solid #edbb32;
+}
+
+/* Add styles for MatGridList */
+.mat-grid-list {
+  flex-grow: 1;
+  width: calc(100% / 3); /* Adjust width to create three rows */
+  box-sizing: border-box;
+  margin-right: 16px; /* Add some margin between items */
+  margin-bottom: 16px; /* Add margin at the bottom of each item */
+}
+
+/* Style individual grid tiles */
+.mat-grid-tile {
+  background-color: #fff; /* Set background color of each tile */
+  border: 1px solid #ccc; /* Add a border around each tile */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  transition: background-color 0.3s ease; /* Add a smooth transition for background color */
+}
+
+/* Hover effect for tiles */
+.mat-grid-tile:hover {
+  background-color: #e0e0e0; /* Change background color on hover */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Add spacing between tiles */
+.mat-grid-list-spacing {
+  margin: 16px; /* Adjust margin to control spacing */
+}
+.formfieldspacing {
+  margin: 4px;
+}
+
+/* Center content within the tiles */
+.word-tile {
+  width: 100%; /* Make tiles 100% wide within grid cell */
+  height: 100%; /* Make tiles 100% tall within grid cell */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+/* Style header and content within the tile */
+.word-tile-header {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: black;
+}
+
+.word-tile-content {
+  text-align: center;
+}
+.word-count-badge {
+  background-color:  #099fa1; /* Customize badge background color */
+  color: white; /* Customize badge text color */
+  padding: 4px 8px; /* Adjust padding for badge */
+  border-radius: 12px; /* Add border radius for badge */
+}
+
+.word-columns-container {
+  display: grid;
+  grid-gap: 10px; /* Adjust the gap between columns */
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.word-tiles-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  max-height: 450px; /* Set a max height for the container */
+}
+
+.column {
+  flex: 1;
+  min-width: calc(33.33% - 10px); /* Adjust the column width as needed */
+}
+
+.grid-list-container {
+  max-height: 150px; /* Set the desired maximum height */
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.grid-list-container.expanded {
+  max-height: none; /* Remove the maximum height when expanded */
+}
+
+.sort-container {
+  display: flex;
+  align-items: center;
+  margin: 16px;
+}
+
+.sort-container span {
+  margin-right: 16px; /* Add spacing between "Sort by:" and the dropdown */
+}
+
+.select {
+  margin-top: 16px;
+}
+
+.filterbuttons {
+  margin-right: 10px;
+}
 
 
