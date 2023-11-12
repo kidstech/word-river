@@ -66,6 +66,9 @@
   {{ isGridListExpanded ? 'Collapse' : 'Expand' }}
 </button>
 
+<div class="total-sentences">
+  Total Sentences: {{ totalSentences }}
+</div>
 
 
 
@@ -112,6 +115,7 @@
 </div>
 
 
+
 <div fxLayout="row">
   <div class="story-list" fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
     <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
@@ -126,4 +130,6 @@
 
   <h1 style="text-align:center">Word Cloud</h1>
 <div id="container"></div>
+
+
 

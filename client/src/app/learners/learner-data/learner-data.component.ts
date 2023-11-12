@@ -43,6 +43,7 @@ export class LearnerDataComponent implements OnInit{
   isGridListExpanded = false;
   learnerWords: Map<string, number>;
   sentences: Sentence[];
+  totalSentences = 0;
   wordCountArray: WordCounts[];
   filteredGridListData: any[];
   gridListFormControl: FormGroup;
@@ -182,6 +183,7 @@ export class LearnerDataComponent implements OnInit{
     // Initialize sorting
     this.applySort();
 
+
     },
      error => {
         console.log(error);
@@ -227,7 +229,7 @@ export class LearnerDataComponent implements OnInit{
       //   this.wordCountDataSource.filter = filter;
       // });
 
-
+      this.updateTotalSentences();
 
     }
 
@@ -340,6 +342,11 @@ applyFiltersAndSort(): void {
     } else {
       console.error('Word count array is empty or undefined.');
     }
+  }
+
+  updateTotalSentences() {
+    // Example: Count the sentences from the dataSource
+    this.totalSentences = this.sentenceDataSource.data.length;
   }
 
 
