@@ -110,6 +110,8 @@ export class LearnerDataComponent implements OnInit{
         this.sentences = res;
         this.sentenceDataSource.data = this.sentences;
         this.sentenceDataSource.paginator = this.sentencePaginator;
+
+        this.updateTotalSentences();
         // this.sentenceDataSource.filterPredicate = (data, filter) => {
         //   console.log(data.sentenceText);
         //   console.log(filter === data.sentenceText);
@@ -229,7 +231,7 @@ export class LearnerDataComponent implements OnInit{
       //   this.wordCountDataSource.filter = filter;
       // });
 
-      this.updateTotalSentences();
+
 
     }
 
