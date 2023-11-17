@@ -48,7 +48,7 @@ export class LearnerDataComponent implements OnInit{
   filteredGridListData: any[];
   gridListFormControl: FormGroup;
   wordsArray: string[];
-  sentenceTableColumns = ['timeSubmitted', 'sentenceText'];
+  sentenceTableColumns = ['timeSubmitted', 'sentenceText', 'wordCountPairs'];
   wordCountTableColums = ['word', 'timesSeen'];
   formControl: FormGroup;
   wordFormControl: AbstractControl;
@@ -106,21 +106,30 @@ export class LearnerDataComponent implements OnInit{
         console.log(error);
       });
 
-      this.sentencesService.getSentences(this.learnerId).subscribe(res=> {
-        this.sentences = res;
-        this.sentenceDataSource.data = this.sentences;
-        this.sentenceDataSource.paginator = this.sentencePaginator;
+      this.sentencesService.getSentences(this.learnerId).subscribe(
+        (res) => {
+          this.sentences = res;
 
-        this.updateTotalSentences();
-        // this.sentenceDataSource.filterPredicate = (data, filter) => {
-        //   console.log(data.sentenceText);
-        //   console.log(filter === data.sentenceText);
-        // return  data.sentenceText.toLowerCase().split(' ').includes(filter) || data.sentenceText.toLowerCase() === filter;
-        // };
-      },
-      error => {
-        console.log(error);
-      });
+          // Calculate word count pairs for each sentence
+          this.sentences.forEach((sentence: Sentence) => {
+            sentence.wordCountPairs = this.calculateWordCountPairs(sentence.sentenceText);
+          });
+
+          // Log the sentences array to the console
+          console.log('Sentences array:', this.sentences);
+
+
+          this.sentenceDataSource.data = this.sentences;
+          this.sentenceDataSource.paginator = this.sentencePaginator;
+
+          this.updateTotalSentences();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+
 
       this.learnerDataService.getLearnerData(this.learnerId).subscribe(res=> {
         this.learnerData = res;
@@ -351,6 +360,18 @@ applyFiltersAndSort(): void {
     this.totalSentences = this.sentenceDataSource.data.length;
   }
 
+  calculateWordCountPairs(sentenceText: string): { word: string; count: number }[] {
+    const wordCountMap = new Map<string, number>();
+    const words = sentenceText.toLowerCase().split(/\s+/);
+
+    // Count occurrences of each word
+    words.forEach((word) => {
+      wordCountMap.set(word, (wordCountMap.get(word) || 0) + 1);
+    });
+
+    // Convert map to array of word count pairs
+    return Array.from(wordCountMap.entries()).map(([word, count]) => ({ word, count }));
+  }
 
 
 

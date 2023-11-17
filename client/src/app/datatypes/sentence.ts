@@ -12,4 +12,8 @@ export class Sentence {
     // mongo object Id of associated user
     userId: string;
     contextPackIds: Array<string>;
+    wordCountPairs: { word: string; count: number }[];
+    constructor() {
+      this.wordCountPairs = [];
+    }
 }
