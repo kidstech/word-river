@@ -35,6 +35,7 @@ Wordcloud(Highcharts);
 export class LearnerDataComponent implements OnInit{
   @ViewChild('wordCountPaginator') wordCountPaginator: MatPaginator;
   @ViewChild('sentencePaginator') sentencePaginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   sentenceDataSource = new MatTableDataSource<Sentence>();
   wordCountDataSource = new MatTableDataSource<WordCounts>();
   learnerData: LearnerData;
@@ -121,8 +122,10 @@ export class LearnerDataComponent implements OnInit{
 
           this.sentenceDataSource.data = this.sentences;
           this.sentenceDataSource.paginator = this.sentencePaginator;
-
+          this.sentenceDataSource.sort = this.sort;
           this.updateTotalSentences();
+
+
         },
         (error) => {
           console.log(error);

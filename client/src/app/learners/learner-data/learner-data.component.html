@@ -87,13 +87,13 @@
   </form>
 
 <div id="sentenceTable" class="mat-elevation-z8">
-  <table mat-table [dataSource]="sentenceDataSource">
+  <table mat-table [dataSource]="sentenceDataSource" matSort>
 
     <!-- Time Submitted Column -->
-    <ng-container matColumnDef="timeSubmitted">
-      <th mat-header-cell *matHeaderCellDef> Time Submitted </th>
-      <td mat-cell *matCellDef="let sentences" data-test="timeSubmitted"> {{sentences.timeSubmitted}} </td>
-    </ng-container>
+<ng-container matColumnDef="timeSubmitted">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Time Submitted </th>
+  <td mat-cell *matCellDef="let sentences"> {{ sentences.timeSubmitted }} </td>
+</ng-container>
 
     <!-- Sentence Text Column -->
     <ng-container matColumnDef="sentenceText">
