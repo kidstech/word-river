@@ -12,7 +12,7 @@ import { StoriesService } from 'src/app/services/stories-service/stories.service
 import { Story } from 'src/app/datatypes/story';
 import * as Highcharts from 'highcharts';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatSortModule } from '@angular/material/sort';
+import { MatSortModule, Sort } from '@angular/material/sort';
 import { MatSort } from '@angular/material/sort';
 import { ChangeDetectorRef } from '@angular/core';
 
@@ -383,5 +383,32 @@ applyFiltersAndSort(): void {
   //     return split.includes(word);
   //  }
 
+  sortData(event: any): void {
+    // Assuming 'event' contains sorting information
+    const sort = event as Sort;
 
+    const data = this.sentences.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sentenceDataSource.data = data;
+      return;
+    }
+
+    this.sentenceDataSource.data = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'timeSubmitted':
+          return compare(a.timeSubmitted, b.timeSubmitted, isAsc);
+        case 'sentenceText':
+          return compare(a.sentenceText, b.sentenceText, isAsc);
+        // Add more cases if needed
+        default:
+          return 0;
+      }
+    });
   }
+  }
+
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
