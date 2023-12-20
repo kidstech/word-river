@@ -49,7 +49,7 @@ export class LearnerDataComponent implements OnInit{
   filteredGridListData: any[];
   gridListFormControl: FormGroup;
   wordsArray: string[];
-  sentenceTableColumns = ['timeSubmitted', 'sentenceText', 'repeatedWords'];
+  sentenceTableColumns = ['timeSubmitted', 'sentenceText', 'repeatedWords', 'sentenceLength'];
   wordCountTableColums = ['word', 'timesSeen'];
   formControl: FormGroup;
   wordFormControl: AbstractControl;
@@ -373,19 +373,20 @@ applyFiltersAndSort(): void {
       wordCountMap.set(word, currentCount + 1);
     });
 
-    // Log the wordCountMap for debugging
-    console.log('Word count map:', Array.from(wordCountMap.entries()).reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {}));
-
     // filter words with count greater than 1
     const repeatedWords = Array.from(wordCountMap.entries())
       .filter(([word, count]) => count > 1)
       .map(([word]) => word);
 
-    // Log the repeatedWords array for debugging
-    console.log('Repeated words:', repeatedWords);
-
     return repeatedWords;
   }
+
+  getSentenceLength(sentenceText: string): number {
+    // Use the length property to get the number of characters in the sentence
+    return sentenceText.length;
+  }
+
+
 
 
 
