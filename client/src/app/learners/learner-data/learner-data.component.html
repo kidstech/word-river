@@ -100,13 +100,11 @@
       <td mat-cell *matCellDef="let sentences" data-test="sentenceText"> {{sentences.sentenceText}} </td>
     </ng-container>
 
-    Word Count Pairs Column
     <!-- Word Count Pairs Column -->
     <ng-container matColumnDef="repeatedWords">
       <th mat-header-cell *matHeaderCellDef> Repeated Words </th>
       <td mat-cell *matCellDef="let sentence">
-        {{ sentence.repeatedWords ? sentence.repeatedWords.join(', ') : '' }}
-
+        {{sentence.repeatedWords.join(', ')}}
       </td>
     </ng-container>
 

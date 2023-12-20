@@ -369,11 +369,12 @@ applyFiltersAndSort(): void {
 
     // Count occurrences of each word
     words.forEach((word) => {
-      wordCountMap.set(word, (wordCountMap.get(word) || 0) + 1);
+      const currentCount = wordCountMap.get(word) || 0;
+      wordCountMap.set(word, currentCount + 1);
     });
 
     // Log the wordCountMap for debugging
-    console.log('Word count map:', wordCountMap);
+    console.log('Word count map:', Array.from(wordCountMap.entries()).reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {}));
 
     // filter words with count greater than 1
     const repeatedWords = Array.from(wordCountMap.entries())
@@ -385,6 +386,8 @@ applyFiltersAndSort(): void {
 
     return repeatedWords;
   }
+
+
 
 
 
