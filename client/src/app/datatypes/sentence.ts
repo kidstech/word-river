@@ -13,7 +13,9 @@ export class Sentence {
     userId: string;
     contextPackIds: Array<string>;
     wordCountPairs: { word: string; count: number }[];
+    repeatedWords: string[] = [];
     constructor() {
+      this.repeatedWords = [];
       this.wordCountPairs = [];
     }
 }

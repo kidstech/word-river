@@ -49,7 +49,7 @@ export class LearnerDataComponent implements OnInit{
   filteredGridListData: any[];
   gridListFormControl: FormGroup;
   wordsArray: string[];
-  sentenceTableColumns = ['timeSubmitted', 'sentenceText', 'wordCountPairs'];
+  sentenceTableColumns = ['timeSubmitted', 'sentenceText', 'repeatedWords'];
   wordCountTableColums = ['word', 'timesSeen'];
   formControl: FormGroup;
   wordFormControl: AbstractControl;
@@ -113,7 +113,7 @@ export class LearnerDataComponent implements OnInit{
 
           // Calculate word count pairs for each sentence
           this.sentences.forEach((sentence: Sentence) => {
-            sentence.wordCountPairs = this.calculateWordCountPairs(sentence.sentenceText);
+            sentence.repeatedWords = this.calculateRepeatedWords(sentence.sentenceText);
           });
 
           // Log the sentences array to the console
@@ -363,7 +363,7 @@ applyFiltersAndSort(): void {
     this.totalSentences = this.sentenceDataSource.data.length;
   }
 
-  calculateWordCountPairs(sentenceText: string): { word: string; count: number }[] {
+  calculateRepeatedWords(sentenceText: string): string[] {
     const wordCountMap = new Map<string, number>();
     const words = sentenceText.toLowerCase().split(/\s+/);
 
@@ -372,9 +372,20 @@ applyFiltersAndSort(): void {
       wordCountMap.set(word, (wordCountMap.get(word) || 0) + 1);
     });
 
-    // Convert map to array of word count pairs
-    return Array.from(wordCountMap.entries()).map(([word, count]) => ({ word, count }));
+    // Log the wordCountMap for debugging
+    console.log('Word count map:', wordCountMap);
+
+    // filter words with count greater than 1
+    const repeatedWords = Array.from(wordCountMap.entries())
+      .filter(([word, count]) => count > 1)
+      .map(([word]) => word);
+
+    // Log the repeatedWords array for debugging
+    console.log('Repeated words:', repeatedWords);
+
+    return repeatedWords;
   }
+
 
 
 
