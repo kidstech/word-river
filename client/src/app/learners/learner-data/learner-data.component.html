@@ -109,9 +109,9 @@
     </ng-container>
     <!-- Sentence Length Column-->
     <ng-container matColumnDef="sentenceLength">
-      <th mat-header-cell *matHeaderCellDef> Sentence Length </th>
+      <th mat-header-cell *matHeaderCellDef> Sentence Length (words)</th>
       <td mat-cell *matCellDef="let sentence">
-        {{ getSentenceLength(sentence.sentenceText) }}
+        {{ calculateWordCount(sentence.sentenceText) }}
       </td>
     </ng-container>
 

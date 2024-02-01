@@ -386,6 +386,12 @@ applyFiltersAndSort(): void {
     return sentenceText.length;
   }
 
+  calculateWordCount(sentenceText: string): number {
+    const words = sentenceText.toLowerCase().split(/\s+/);
+    return words.length;
+  }
+
+
 
 
 
