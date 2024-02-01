@@ -25,6 +25,11 @@ declare var require: any;
 const Wordcloud = require('highcharts/modules/wordcloud');
 Wordcloud(Highcharts);
 
+interface WordCount {
+  word: string;
+  count: number;
+}
+
 @Component({
   selector: 'app-learner-data',
   templateUrl: './learner-data.component.html',
@@ -363,7 +368,7 @@ applyFiltersAndSort(): void {
     this.totalSentences = this.sentenceDataSource.data.length;
   }
 
-  calculateRepeatedWords(sentenceText: string): string[] {
+  calculateRepeatedWords2(sentenceText: string): string[] {
     const wordCountMap = new Map<string, number>();
     const words = sentenceText.toLowerCase().split(/\s+/);
 
@@ -390,6 +395,46 @@ applyFiltersAndSort(): void {
     const words = sentenceText.toLowerCase().split(/\s+/);
     return words.length;
   }
+
+  calculateRepeatedWordsWithCount(sentenceText: string): WordCount[] {
+    const wordCountMap = new Map<string, number>();
+    const words = sentenceText.toLowerCase().split(/\s+/);
+
+    // Count occurrences of each word
+    words.forEach((word) => {
+      const currentCount = wordCountMap.get(word) || 0;
+      wordCountMap.set(word, currentCount + 1);
+    });
+
+    // Create an array of WordCount objects
+    const repeatedWords: WordCount[] = Array.from(wordCountMap.entries())
+      .filter(([word, count]) => count > 1)
+      .map(([word, count]) => ({ word, count }));
+
+    return repeatedWords;
+  }
+
+
+  calculateRepeatedWords(sentenceText: string): { word: string; count: number }[] {
+    const wordCountMap = new Map<string, number>();
+    const words = sentenceText.toLowerCase().split(/\s+/);
+
+    // Count occurrences of each word
+    words.forEach((word) => {
+      const currentCount = wordCountMap.get(word) || 0;
+      wordCountMap.set(word, currentCount + 1);
+    });
+
+    // Create an array of objects with word and count properties
+    const repeatedWords: { word: string; count: number }[] = Array.from(wordCountMap.entries())
+      .filter(([word, count]) => count > 1)
+      .map(([word, count]) => ({ word, count }));
+
+    return repeatedWords;
+  }
+
+
+
 
 
 
