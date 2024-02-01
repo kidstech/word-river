@@ -563,17 +563,11 @@
   "$oid": "622810ba8d1396111ab29c16"
   },
   "sentenceId": "17d88f6e-9f24-49a7-bd3f-e589bfc3f371",
-  "sentenceText": "an adventurous adventurous apple at the amusement",
+  "sentenceText": "apple adventurous adventurous apple at apple",
   "timeSubmitted": "3/8/2022 8:34:45 PM",
   "learnerId": "1623445120497",
   "deleted": false,
   "words": [
-  {
-  "word": "an",
-  "forms": [
-  "an"
-  ]
-  },
   {
   "word": "adventurous",
   "forms": [
@@ -594,19 +588,6 @@
   "word": "at",
   "forms": [
   "at"
-  ]
-  },
-  {
-  "word": "the",
-  "forms": [
-  "the"
-  ]
-  },
-  {
-  "word": "amusement",
-  "forms": [
-  "amusement",
-  "amusements"
   ]
   }
   ],
@@ -911,7 +892,7 @@
       "$oid": "622810ba8d1396111ab29c23"
     },
     "sentenceId": "4e3fc723-72fe-4f3d-9185-9a2a3b534c77",
-    "sentenceText": "Danny dances danny dance danny",
+    "sentenceText": "Danny dances danny dances danny dances",
     "timeSubmitted": "3/8/2022 9:32:45 PM",
     "learnerId": "1623445120497",
     "deleted": false,
