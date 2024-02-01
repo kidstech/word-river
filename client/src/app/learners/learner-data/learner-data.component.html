@@ -108,7 +108,7 @@
   <td mat-cell *matCellDef="let sentence">
     <ng-container *ngIf="sentence.repeatedWords && sentence.repeatedWords.length > 0">
       <ng-container *ngFor="let repeatedWord of sentence.repeatedWords">
-        {{ repeatedWord.word }} ({{ repeatedWord.count }} times)
+        {{ repeatedWord.word }} , {{ repeatedWord.count }} ;
         <br />
       </ng-container>
     </ng-container>
