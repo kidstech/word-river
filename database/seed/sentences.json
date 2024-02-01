@@ -556,5 +556,391 @@
     "610376992c96b6238f61bc1a",
     "60beabcbbbaa96763c50ae16"
   ]
-}
+},
+
+{
+  "_id": {
+  "$oid": "622810ba8d1396111ab29c16"
+  },
+  "sentenceId": "17d88f6e-9f24-49a7-bd3f-e589bfc3f371",
+  "sentenceText": "an adventurous adventurous apple at the amusement",
+  "timeSubmitted": "3/8/2022 8:34:45 PM",
+  "learnerId": "1623445120497",
+  "deleted": false,
+  "words": [
+  {
+  "word": "an",
+  "forms": [
+  "an"
+  ]
+  },
+  {
+  "word": "adventurous",
+  "forms": [
+  "adventurous",
+  "adventure",
+  "adventures",
+  "adventuring"
+  ]
+  },
+  {
+  "word": "apple",
+  "forms": [
+  "apple",
+  "apples"
+  ]
+  },
+  {
+  "word": "at",
+  "forms": [
+  "at"
+  ]
+  },
+  {
+  "word": "the",
+  "forms": [
+  "the"
+  ]
+  },
+  {
+  "word": "amusement",
+  "forms": [
+  "amusement",
+  "amusements"
+  ]
+  }
+  ],
+  "selectedWordForms": [
+  "an",
+  "adventurous",
+  "apple",
+  "at",
+  "the",
+  "amusement"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+  "60d7cfa7c02ced09b6750223",
+  "610376992c96b6238f61bc1a",
+  "60beabcbbbaa96763c50ae16"
+  ]
+  },
+
+  {
+  "_id": {
+  "$oid": "622810ba8d1396111ab29c17"
+  },
+  "sentenceId": "b94b9075-61b3-4a6d-a135-53ad6474f7c1",
+  "sentenceText": "an astonishing astonishing elephant at the aquarium",
+  "timeSubmitted": "3/8/2022 8:40:22 PM",
+  "learnerId": "1623445120497",
+  "deleted": false,
+  "words": [
+  {
+  "word": "an",
+  "forms": [
+  "an"
+  ]
+  },
+  {
+  "word": "astonishing",
+  "forms": [
+  "astonishing",
+  "astonish",
+  "astonished",
+  "astonishingly"
+  ]
+  },
+  {
+  "word": "elephant",
+  "forms": [
+  "elephant",
+  "elephants"
+  ]
+  },
+  {
+  "word": "at",
+  "forms": [
+  "at"
+  ]
+  },
+  {
+  "word": "the",
+  "forms": [
+  "the"
+  ]
+  },
+  {
+  "word": "aquarium",
+  "forms": [
+  "aquarium",
+  "aquariums"
+  ]
+  }
+  ],
+  "selectedWordForms": [
+  "an",
+  "astonishing",
+  "elephant",
+  "at",
+  "the",
+  "aquarium"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+  "60d7cfa7c02ced09b6750223",
+  "610376992c96b6238f61bc1a",
+  "60beabcbbbaa96763c50ae16"
+  ]
+  },
+
+  {
+  "_id": {
+  "$oid": "622810ba8d1396111ab29c18"
+  },
+  "sentenceId": "cfbaf1b9-01e9-4c66-8f55-85679816f828",
+  "sentenceText": "a busy busy butterfly at the bakery",
+  "timeSubmitted": "3/8/2022 8:46:57 PM",
+  "learnerId": "1623445120497",
+  "deleted": false,
+  "words": [
+  {
+  "word": "a",
+  "forms": [
+  "a"
+  ]
+  },
+  {
+  "word": "busy",
+  "forms": [
+  "busy",
+  "busier",
+  "busiest",
+  "busily"
+  ]
+  },
+  {
+  "word": "butterfly",
+  "forms": [
+  "butterfly",
+  "butterflies"
+  ]
+  },
+  {
+  "word": "at",
+  "forms": [
+  "at"
+  ]
+  },
+  {
+  "word": "the",
+  "forms": [
+  "the"
+  ]
+  },
+  {
+  "word": "bakery",
+  "forms": [
+  "bakery",
+  "bakeries"
+  ]
+  }
+  ],
+  "selectedWordForms": [
+  "a",
+  "busy",
+  "butterfly",
+  "at",
+  "the",
+  "bakery"
+  ],
+  "userId": "60c1a985926f9c1edcc3a6e8",
+  "contextPackIds": [
+  "60d7cfa7c02ced09b6750223",
+  "610376992c96b6238f61bc1a",
+  "60beabcbbbaa96763c50ae16"
+  ]
+  },
+  {
+    "_id": {
+      "$oid": "622810ba8d1396111ab29c19"
+    },
+    "sentenceId": "e7c13b9e-18f8-4dbd-bb10-20be2f0a0174",
+    "sentenceText": "Billy bounced billy billy balls billy bounce",
+    "timeSubmitted": "3/8/2022 9:03:12 PM",
+    "learnerId": "1623445120497",
+    "deleted": false,
+    "words": [
+      {
+        "word": "Billy",
+        "forms": [
+          "Billy"
+
+        ]
+      },
+      {
+        "word": "bounced",
+        "forms": [
+          "bounced",
+          "bounce",
+          "bounces",
+          "bouncing"
+        ]
+      },
+      {
+        "word": "balls",
+        "forms": [
+          "balls"
+        ]
+      }
+    ],
+    "selectedWordForms": [
+      "Billy",
+      "bounced",
+      "balls"
+    ],
+    "userId": "60c1a985926f9c1edcc3a6e8",
+    "contextPackIds": [
+      "60d7cfa7c02ced09b6750223",
+      "610376992c96b6238f61bc1a",
+      "60beabcbbbaa96763c50ae16"
+    ]
+  },
+
+  {
+    "_id": {
+      "$oid": "622810ba8d1396111ab29c20"
+    },
+    "sentenceId": "3f34b146-86a5-4b82-b196-810c66c61b3a",
+    "sentenceText": "Bella brings bella balloons by bella",
+    "timeSubmitted": "3/8/2022 9:10:35 PM",
+    "learnerId": "1623445120497",
+    "deleted": false,
+    "words": [
+      {
+        "word": "Bella",
+        "forms": [
+          "Bella"
+        ]
+      },
+      {
+        "word": "brings",
+        "forms": [
+          "brings",
+          "bring",
+          "brought",
+          "bringing"
+        ]
+      },
+      {
+        "word": "balloons",
+        "forms": [
+          "balloons"
+        ]
+      },
+      {
+        "word": "by",
+        "forms": [
+          "by"
+        ]
+      }
+    ],
+    "selectedWordForms": [
+      "Bella",
+      "brings",
+      "balloons",
+      "by"
+    ],
+    "userId": "60c1a985926f9c1edcc3a6e8",
+    "contextPackIds": [
+      "60d7cfa7c02ced09b6750223",
+      "610376992c96b6238f61bc1a",
+      "60beabcbbbaa96763c50ae16"
+    ]
+  },
+
+  {
+    "_id": {
+      "$oid": "622810ba8d1396111ab29c21"
+    },
+    "sentenceId": "88db8e96-44f4-49b5-9cc2-885097c0e3d9",
+    "sentenceText": "Batman brings batman bananas",
+    "timeSubmitted": "3/8/2022 9:17:59 PM",
+    "learnerId": "1623445120497",
+    "deleted": false,
+    "words": [
+      {
+        "word": "Batman",
+        "forms": [
+          "Batman"
+        ]
+      },
+      {
+        "word": "brings",
+        "forms": [
+          "brings",
+          "bring",
+          "brought",
+          "bringing"
+        ]
+      },
+      {
+        "word": "bananas",
+        "forms": [
+          "bananas"
+        ]
+      }
+    ],
+    "selectedWordForms": [
+      "Batman",
+      "brings",
+      "bananas"
+    ],
+    "userId": "60c1a985926f9c1edcc3a6e8",
+    "contextPackIds": [
+      "60d7cfa7c02ced09b6750223",
+      "610376992c96b6238f61bc1a",
+      "60beabcbbbaa96763c50ae16"
+    ]
+  },
+
+
+
+  {
+    "_id": {
+      "$oid": "622810ba8d1396111ab29c23"
+    },
+    "sentenceId": "4e3fc723-72fe-4f3d-9185-9a2a3b534c77",
+    "sentenceText": "Danny dances danny dance danny",
+    "timeSubmitted": "3/8/2022 9:32:45 PM",
+    "learnerId": "1623445120497",
+    "deleted": false,
+    "words": [
+      {
+        "word": "Danny",
+        "forms": [
+          "Danny"
+        ]
+      },
+      {
+        "word": "dances",
+        "forms": [
+          "dances",
+          "dance",
+          "danced",
+          "dancing"
+        ]
+      }
+    ],
+    "selectedWordForms": [
+      "Danny",
+      "dances"
+    ],
+    "userId": "60c1a985926f9c1edcc3a6e8",
+    "contextPackIds": [
+      "60d7cfa7c02ced09b6750223",
+      "610376992c96b6238f61bc1a",
+      "60beabcbbbaa96763c50ae16"
+    ]
+  }
 ]
