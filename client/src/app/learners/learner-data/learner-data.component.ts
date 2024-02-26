@@ -98,7 +98,10 @@ export class LearnerDataComponent implements OnInit{
     });
     this.formControl = this.formBuilder.group({
       sentenceText: '',
-      timeSubmitted: ''
+      timeSubmitted: '',
+      uniqueWords: ''
+
+
     });
   }
 
@@ -220,7 +223,9 @@ export class LearnerDataComponent implements OnInit{
 
       this.formControl = this.formBuilder.group({
         sentenceText: '',
-        timeSubmitted: ''
+        timeSubmitted: '',
+        uniqueWords: ''
+
       });
 
       this.formControl.valueChanges.subscribe(value => {
@@ -261,13 +266,10 @@ export class LearnerDataComponent implements OnInit{
     }
 
     applyUniqueWordsFilter(minUniqueWords: number): void {
+      // Filter sentences based on the minimum unique word count
       this.sentenceDataSource.filter = minUniqueWords.toString();
-
-      // Update paginator after applying filter
-      if (this.sentenceDataSource.paginator) {
-        this.sentenceDataSource.paginator.firstPage();
-      }
     }
+
 
      convertLearnerWordsMapToArray(): void {
        this.wordCountArray = [];
