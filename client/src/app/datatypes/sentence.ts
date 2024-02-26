@@ -10,11 +10,13 @@ export class Sentence {
   userId: string;
   contextPackIds: Array<string>;
   wordCountPairs: { word: string; count: number }[];
-  repeatedWords: { word: string; count: number }[] = [];
+  repeatedWords: { word: string; count: number }[];
+  uniqueWords: { word: string; count: number }[] = []; // New property for unique words
   wordCountMap: Record<string, number>;
 
   constructor() {
     this.repeatedWords = [];
     this.wordCountPairs = [];
+    this.uniqueWords = []; // Initialize uniqueWords array
   }
 }

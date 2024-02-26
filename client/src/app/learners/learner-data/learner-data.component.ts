@@ -119,6 +119,7 @@ export class LearnerDataComponent implements OnInit{
           // Calculate word count pairs for each sentence
           this.sentences.forEach((sentence: Sentence) => {
             sentence.repeatedWords = this.calculateRepeatedWords(sentence.sentenceText);
+            sentence.uniqueWords = this.calculateUniqueWords(sentence.sentenceText);
           });
 
           // Log the sentences array to the console
@@ -433,6 +434,24 @@ applyFiltersAndSort(): void {
     return repeatedWords;
   }
 
+   calculateUniqueWords(sentenceText: string): { word: string; count: number }[] {
+    const wordCountMap = new Map<string, number>();
+    const words = sentenceText.toLowerCase().split(/\s+/);
+
+    // Count occurrences of each word
+    words.forEach((word) => {
+        // If the word is not already counted, increment its count
+        if (!wordCountMap.has(word)) {
+            wordCountMap.set(word, 1);
+        }
+    });
+
+    // Create an array of objects with word and count properties
+    const uniqueWords: { word: string; count: number }[] = Array.from(wordCountMap.entries())
+        .map(([word, count]) => ({ word, count }));
+
+    return uniqueWords;
+}
 
 
 
