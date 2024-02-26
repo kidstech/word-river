@@ -11,6 +11,8 @@ export const mockSentence: Sentence = {
   contextPackIds: ['contextPack1'],
   wordCountPairs: [],
   repeatedWords: [{word: 'sample', count: 2 }],
+  uniqueWords: [{word: 'word', count: 1 }],
+  uniqueWordCount: 0,
   wordCountMap: {},
 
   // calculateRepeatedWordsWithCount: function (sentenceText: string) {
