@@ -84,6 +84,11 @@
       <input matInput data-test="time" formControlName="timeSubmitted">
       <mat-placeholder>Date</mat-placeholder>
     </mat-form-field>
+    <mat-form-field>
+      <input matInput data-test="uniqueWords" [formControl]="uniqueWordsFormControl">
+      <mat-placeholder>Unique Words (minimum length)</mat-placeholder>
+    </mat-form-field>
+
   </form>
 
 <div id="sentenceTable" class="mat-elevation-z8">
@@ -122,17 +127,15 @@
 <ng-container matColumnDef="uniqueWords">
   <th mat-header-cell *matHeaderCellDef> Unique Words </th>
   <td mat-cell *matCellDef="let sentence">
-    <ng-container *ngIf="sentence.uniqueWords && sentence.uniqueWords.length > 0">
-      <ng-container *ngFor="let uniqueWord of sentence.uniqueWords">
-        {{ uniqueWord.word }}, {{ uniqueWord.count }};
-        <br />
-      </ng-container>
-    </ng-container>
-    <ng-container *ngIf="!sentence.uniqueWords || sentence.uniqueWords.length === 0">
+    <span *ngIf="sentence.uniqueWordCount !== undefined && sentence.uniqueWordCount > 0">
+     {{ sentence.uniqueWordCount }}
+    </span>
+    <ng-container *ngIf="!sentence.uniqueWordCount || sentence.uniqueWordCount === 0">
       No unique words found.
     </ng-container>
   </td>
 </ng-container>
+
 
 
 

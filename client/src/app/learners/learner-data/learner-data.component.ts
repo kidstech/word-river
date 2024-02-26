@@ -19,6 +19,7 @@ import { ChangeDetectorRef } from '@angular/core';
 
 
 
+
 // eslint-disable-next-line no-var
 declare var require: any;
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -53,8 +54,10 @@ export class LearnerDataComponent implements OnInit{
   wordCountArray: WordCounts[];
   filteredGridListData: any[];
   gridListFormControl: FormGroup;
+  uniqueWordsFormControl: FormControl = new FormControl('');
+
   wordsArray: string[];
-  sentenceTableColumns = ['timeSubmitted', 'sentenceText', 'repeatedWords', 'sentenceLength'];
+  sentenceTableColumns = ['timeSubmitted', 'sentenceText', 'repeatedWords', 'sentenceLength', 'uniqueWords'];
   wordCountTableColums = ['word', 'timesSeen'];
   formControl: FormGroup;
   wordFormControl: AbstractControl;
@@ -119,7 +122,7 @@ export class LearnerDataComponent implements OnInit{
           // Calculate word count pairs for each sentence
           this.sentences.forEach((sentence: Sentence) => {
             sentence.repeatedWords = this.calculateRepeatedWords(sentence.sentenceText);
-            sentence.uniqueWords = this.calculateUniqueWords(sentence.sentenceText);
+            sentence.uniqueWordCount = this.calculateUniqueWordsCount(sentence.sentenceText);
           });
 
           // Log the sentences array to the console
@@ -225,6 +228,10 @@ export class LearnerDataComponent implements OnInit{
         this.sentenceDataSource.filter = filter;
       });
 
+      this.uniqueWordsFormControl.valueChanges.subscribe((value: number) => {
+        this.applyUniqueWordsFilter(value);
+      });
+
       this.wordCountDataSource.filterPredicate = ((data2, filter) => {
         const a =  !filter.word || data2.word === filter.word;
         const b =  !filter.endsWith || data2.word.endsWith(filter.endsWith);
@@ -253,7 +260,14 @@ export class LearnerDataComponent implements OnInit{
 
     }
 
+    applyUniqueWordsFilter(minUniqueWords: number): void {
+      this.sentenceDataSource.filter = minUniqueWords.toString();
 
+      // Update paginator after applying filter
+      if (this.sentenceDataSource.paginator) {
+        this.sentenceDataSource.paginator.firstPage();
+      }
+    }
 
      convertLearnerWordsMapToArray(): void {
        this.wordCountArray = [];
@@ -434,7 +448,7 @@ applyFiltersAndSort(): void {
     return repeatedWords;
   }
 
-   calculateUniqueWords(sentenceText: string): { word: string; count: number }[] {
+   calculateUniqueWordsCount(sentenceText: string): number {
     const wordCountMap = new Map<string, number>();
     const words = sentenceText.toLowerCase().split(/\s+/);
 
@@ -446,12 +460,15 @@ applyFiltersAndSort(): void {
         }
     });
 
-    // Create an array of objects with word and count properties
-    const uniqueWords: { word: string; count: number }[] = Array.from(wordCountMap.entries())
-        .map(([word, count]) => ({ word, count }));
+    // Sum up all the counts
+    let totalCount = 0;
+    wordCountMap.forEach((count) => {
+        totalCount += count;
+    });
 
-    return uniqueWords;
+    return totalCount;
 }
+
 
 
 
