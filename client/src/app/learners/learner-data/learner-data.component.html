@@ -76,15 +76,15 @@
   </div> -->
 
   <form style="display: flex" [formGroup]="formControl">
-    <mat-form-field>
+    <mat-form-field class="formfieldspacing">
       <input matInput data-test="sentenceTextField" formControlName="sentenceText">
       <mat-placeholder>Text</mat-placeholder>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="formfieldspacing">
       <input matInput data-test="time" formControlName="timeSubmitted">
       <mat-placeholder>Date</mat-placeholder>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="formfieldspacing">
       <input matInput data-test="uniqueWords" formControlName="uniqueWords">
       <mat-placeholder>Unique Words (minimum count)</mat-placeholder>
     </mat-form-field>
