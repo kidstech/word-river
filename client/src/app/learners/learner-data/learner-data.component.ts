@@ -211,7 +211,7 @@ export class LearnerDataComponent implements OnInit{
 
       this.sentenceDataSource.filterPredicate = ((data2, filter) => {
         const a = !filter.sentenceText || data2.sentenceText.toLowerCase().includes(filter.sentenceText);
-        const b = !filter.timeSubmitted || data2.timeSubmitted.split(' ').includes(filter.timeSubmitted);
+        const b = !filter.timeSubmitted || data2.timeSubmitted.includes(filter.timeSubmitted);
         const c = !filter.uniqueWords || data2.uniqueWordCount >= filter.uniqueWords;
         return a && b && c;
       }) as (currentSentence, aString) => boolean;
