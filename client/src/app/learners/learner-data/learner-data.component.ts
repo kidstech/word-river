@@ -99,7 +99,7 @@ export class LearnerDataComponent implements OnInit{
     this.formControl = this.formBuilder.group({
       sentenceText: '',
       timeSubmitted: '',
-      uniqueWords: ''
+      uniqueWordsFilter: ''
 
 
     });
@@ -218,13 +218,14 @@ export class LearnerDataComponent implements OnInit{
       this.sentenceDataSource.filterPredicate = ((data2, filter) => {
         const a = !filter.sentenceText || data2.sentenceText.toLowerCase().includes(filter.sentenceText);
         const b = !filter.timeSubmitted || data2.timeSubmitted.split(' ').includes(filter.timeSubmitted);
-        return a && b;
+        const c = !filter.uniqueWordsFilter || data2.uniqueWordCount >= filter.uniqueWords;
+        return a && b && c;
       }) as (currentSentence, aString) => boolean;
 
       this.formControl = this.formBuilder.group({
         sentenceText: '',
         timeSubmitted: '',
-        uniqueWords: ''
+        uniqueWordsFilter: ''
 
       });
 
@@ -269,6 +270,8 @@ export class LearnerDataComponent implements OnInit{
       // Filter sentences based on the minimum unique word count
       this.sentenceDataSource.filter = minUniqueWords.toString();
     }
+
+
 
 
      convertLearnerWordsMapToArray(): void {
@@ -516,3 +519,5 @@ applyFiltersAndSort(): void {
 function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
+
+
