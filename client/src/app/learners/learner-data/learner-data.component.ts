@@ -228,9 +228,9 @@ export class LearnerDataComponent implements OnInit{
         this.sentenceDataSource.filter = filter;
       });
 
-      this.uniqueWordsFormControl.valueChanges.subscribe((value: number) => {
-        this.applyUniqueWordsFilter(value);
-      });
+      // this.uniqueWordsFormControl.valueChanges.subscribe((value: number) => {
+      //   this.applyUniqueWordsFilter(value);
+      // });
 
       this.wordCountDataSource.filterPredicate = ((data2, filter) => {
         const a =  !filter.word || data2.word === filter.word;
@@ -260,10 +260,16 @@ export class LearnerDataComponent implements OnInit{
 
     }
 
-    applyUniqueWordsFilter(minUniqueWords: number): void {
-      // Filter sentences based on the minimum unique word count
-      this.sentenceDataSource.filter = minUniqueWords.toString();
-    }
+    // applyUniqueWordsFilter(minUniqueWords: number): void {
+    //   // Filter sentences based on the minimum unique word count
+    //   this.sentenceDataSource.filter = minUniqueWords.toString();
+    // }
+
+    // applyTimeSubmittedFilter(timeSubmitted: string): void {
+    //   // Filter sentences based on the specified timeSubmitted
+    //   this.sentenceDataSource.filter = timeSubmitted.trim().toLowerCase();
+    // }
+
 
 
 
