@@ -923,5 +923,43 @@
       "610376992c96b6238f61bc1a",
       "60beabcbbbaa96763c50ae16"
     ]
+  },
+
+  {
+    "_id": {
+      "$oid": "612810ba8d1396111ab29c29"
+    },
+    "sentenceId": "4e3fc723-72fe-4f3d-9185-9a2a3b534c78",
+    "sentenceText": "Danny dances danny dances danny dances",
+    "timeSubmitted": "3/8/2022 9:33:45 PM",
+    "learnerId": "1623445120497",
+    "deleted": false,
+    "words": [
+      {
+        "word": "Danny",
+        "forms": [
+          "Danny"
+        ]
+      },
+      {
+        "word": "dances",
+        "forms": [
+          "dances",
+          "dance",
+          "danced",
+          "dancing"
+        ]
+      }
+    ],
+    "selectedWordForms": [
+      "Danny",
+      "dances"
+    ],
+    "userId": "60c1a985926f9c1edcc3a6e8",
+    "contextPackIds": [
+      "60d7cfa7c02ced09b6750223",
+      "610376992c96b6238f61bc1a",
+      "60beabcbbbaa96763c50ae16"
+    ]
   }
 ]
