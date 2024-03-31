@@ -226,6 +226,7 @@ export class LearnerDataComponent implements OnInit{
       this.formControl.valueChanges.subscribe(value => {
         const filter = {...value, sentenceText: value.sentenceText.trim().toLowerCase()} as string;
         this.sentenceDataSource.filter = filter;
+        this.updateTotalSentences();
       });
 
       // this.uniqueWordsFormControl.valueChanges.subscribe((value: number) => {
@@ -384,9 +385,10 @@ applyFiltersAndSort(): void {
   }
 
   updateTotalSentences() {
-    // Example: Count the sentences from the dataSource
-    this.totalSentences = this.sentenceDataSource.data.length;
+    // Example: Count the sentences from the dataSource after filtering
+    this.totalSentences = this.sentenceDataSource.filteredData.length;
   }
+
 
   calculateRepeatedWords2(sentenceText: string): string[] {
     const wordCountMap = new Map<string, number>();
