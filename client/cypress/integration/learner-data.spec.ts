@@ -95,7 +95,7 @@ describe('Mat Grid List Filtering and Sorting', () => {
     cy.get('button[color="primary"]').contains('See Results').click();
 
     // check filtering worked
-    cy.get('.mat-grid-tile').should('have.length', 9); // Should display 9 words
+    cy.get('.mat-grid-tile').should('have.length', 10); // Should display 10 words
 
     // Click to open the mat-select dropdown
     cy.get('[data-test="sortSelect"]').click();
