@@ -15,6 +15,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { MatSort } from '@angular/material/sort';
 import { ChangeDetectorRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -95,6 +96,14 @@ export class LearnerDataComponent implements OnInit{
       startsWith: '',
       minWordCount: '',
       maxWordCount: ''
+    });
+
+    this.formControl = this.formBuilder.group({
+      sentenceText: '',
+      timeSubmitted: '',
+      uniqueWordsFilter: ''
+
+
     });
 
   }
