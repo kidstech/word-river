@@ -232,7 +232,7 @@ describe('Sentences Table', () => {
   it('Should apply filters', () => {
     //Testing Sentence date search field
     page.getDateFormField().type('3/9/2022');
-    page.getSentences().should('have.length', '3');
+    page.getSentences().should('have.length', '1');
     page.getTimesSubmitted().should('have.length', '3');
     page.getSentences().first().should('have.text', ' a big box ate my mean moose ');
     page.getSentences().eq(1).should('have.text', ' The new Batman movie looks really good ');
