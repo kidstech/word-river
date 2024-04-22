@@ -12,9 +12,11 @@ import { StoriesService } from 'src/app/services/stories-service/stories.service
 import { Story } from 'src/app/datatypes/story';
 import * as Highcharts from 'highcharts';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatSortModule } from '@angular/material/sort';
+import { MatSortModule, Sort } from '@angular/material/sort';
 import { MatSort } from '@angular/material/sort';
 import { ChangeDetectorRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -24,6 +26,11 @@ declare var require: any;
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const Wordcloud = require('highcharts/modules/wordcloud');
 Wordcloud(Highcharts);
+
+interface WordCount {
+  word: string;
+  count: number;
+}
 
 @Component({
   selector: 'app-learner-data',
@@ -35,6 +42,7 @@ Wordcloud(Highcharts);
 export class LearnerDataComponent implements OnInit{
   @ViewChild('wordCountPaginator') wordCountPaginator: MatPaginator;
   @ViewChild('sentencePaginator') sentencePaginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   sentenceDataSource = new MatTableDataSource<Sentence>();
   wordCountDataSource = new MatTableDataSource<WordCounts>();
   learnerData: LearnerData;
@@ -43,11 +51,14 @@ export class LearnerDataComponent implements OnInit{
   isGridListExpanded = false;
   learnerWords: Map<string, number>;
   sentences: Sentence[];
+  totalSentences = 0;
   wordCountArray: WordCounts[];
   filteredGridListData: any[];
   gridListFormControl: FormGroup;
+  uniqueWordsFormControl: FormControl = new FormControl('');
+
   wordsArray: string[];
-  sentenceTableColumns = ['timeSubmitted', 'sentenceText'];
+  sentenceTableColumns = ['timeSubmitted', 'sentenceText', 'repeatedWords', 'sentenceLength', 'uniqueWords'];
   wordCountTableColums = ['word', 'timesSeen'];
   formControl: FormGroup;
   wordFormControl: AbstractControl;
@@ -86,10 +97,15 @@ export class LearnerDataComponent implements OnInit{
       minWordCount: '',
       maxWordCount: ''
     });
+
     this.formControl = this.formBuilder.group({
       sentenceText: '',
-      timeSubmitted: ''
+      timeSubmitted: '',
+      uniqueWordsFilter: ''
+
+
     });
+
   }
 
 
@@ -105,19 +121,33 @@ export class LearnerDataComponent implements OnInit{
         console.log(error);
       });
 
-      this.sentencesService.getSentences(this.learnerId).subscribe(res=> {
-        this.sentences = res;
-        this.sentenceDataSource.data = this.sentences;
-        this.sentenceDataSource.paginator = this.sentencePaginator;
-        // this.sentenceDataSource.filterPredicate = (data, filter) => {
-        //   console.log(data.sentenceText);
-        //   console.log(filter === data.sentenceText);
-        // return  data.sentenceText.toLowerCase().split(' ').includes(filter) || data.sentenceText.toLowerCase() === filter;
-        // };
-      },
-      error => {
-        console.log(error);
-      });
+      this.sentencesService.getSentences(this.learnerId).subscribe(
+        (res) => {
+          this.sentences = res;
+
+          // Calculate word count pairs for each sentence
+          this.sentences.forEach((sentence: Sentence) => {
+            sentence.repeatedWords = this.calculateRepeatedWords(sentence.sentenceText);
+            sentence.uniqueWordCount = this.calculateUniqueWordsCount(sentence.sentenceText);
+          });
+
+          // Log the sentences array to the console
+          console.log('Sentences array:', this.sentences);
+
+
+          this.sentenceDataSource.data = this.sentences;
+          this.sentenceDataSource.paginator = this.sentencePaginator;
+          this.sentenceDataSource.sort = this.sort;
+          this.updateTotalSentences();
+
+
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+
 
       this.learnerDataService.getLearnerData(this.learnerId).subscribe(res=> {
         this.learnerData = res;
@@ -182,6 +212,7 @@ export class LearnerDataComponent implements OnInit{
     // Initialize sorting
     this.applySort();
 
+
     },
      error => {
         console.log(error);
@@ -189,19 +220,27 @@ export class LearnerDataComponent implements OnInit{
 
       this.sentenceDataSource.filterPredicate = ((data2, filter) => {
         const a = !filter.sentenceText || data2.sentenceText.toLowerCase().includes(filter.sentenceText);
-        const b = !filter.timeSubmitted || data2.timeSubmitted.split(' ').includes(filter.timeSubmitted);
-        return a && b;
+        const b = !filter.timeSubmitted || data2.timeSubmitted.includes(filter.timeSubmitted);
+        const c = !filter.uniqueWords || data2.uniqueWordCount >= filter.uniqueWords;
+        return a && b && c;
       }) as (currentSentence, aString) => boolean;
 
       this.formControl = this.formBuilder.group({
         sentenceText: '',
-        timeSubmitted: ''
+        timeSubmitted: '',
+        uniqueWords: ''
+
       });
 
       this.formControl.valueChanges.subscribe(value => {
         const filter = {...value, sentenceText: value.sentenceText.trim().toLowerCase()} as string;
         this.sentenceDataSource.filter = filter;
+        this.updateTotalSentences();
       });
+
+      // this.uniqueWordsFormControl.valueChanges.subscribe((value: number) => {
+      //   this.applyUniqueWordsFilter(value);
+      // });
 
       this.wordCountDataSource.filterPredicate = ((data2, filter) => {
         const a =  !filter.word || data2.word === filter.word;
@@ -230,6 +269,18 @@ export class LearnerDataComponent implements OnInit{
 
 
     }
+
+    // applyUniqueWordsFilter(minUniqueWords: number): void {
+    //   // Filter sentences based on the minimum unique word count
+    //   this.sentenceDataSource.filter = minUniqueWords.toString();
+    // }
+
+    // applyTimeSubmittedFilter(timeSubmitted: string): void {
+    //   // Filter sentences based on the specified timeSubmitted
+    //   this.sentenceDataSource.filter = timeSubmitted.trim().toLowerCase();
+    // }
+
+
 
 
 
@@ -342,6 +393,106 @@ applyFiltersAndSort(): void {
     }
   }
 
+  updateTotalSentences() {
+    // Example: Count the sentences from the dataSource after filtering
+    this.totalSentences = this.sentenceDataSource.filteredData.length;
+  }
+
+
+  calculateRepeatedWords2(sentenceText: string): string[] {
+    const wordCountMap = new Map<string, number>();
+    const words = sentenceText.toLowerCase().split(/\s+/);
+
+    // Count occurrences of each word
+    words.forEach((word) => {
+      const currentCount = wordCountMap.get(word) || 0;
+      wordCountMap.set(word, currentCount + 1);
+    });
+
+    // filter words with count greater than 1
+    const repeatedWords = Array.from(wordCountMap.entries())
+      .filter(([word, count]) => count > 1)
+      .map(([word]) => word);
+
+    return repeatedWords;
+  }
+
+  getSentenceLength(sentenceText: string): number {
+    // Use the length property to get the number of characters in the sentence
+    return sentenceText.length;
+  }
+
+  calculateWordCount(sentenceText: string): number {
+    const words = sentenceText.toLowerCase().split(/\s+/);
+    return words.length;
+  }
+
+  calculateRepeatedWordsWithCount(sentenceText: string): WordCount[] {
+    const wordCountMap = new Map<string, number>();
+    const words = sentenceText.toLowerCase().split(/\s+/);
+
+    // Count occurrences of each word
+    words.forEach((word) => {
+      const currentCount = wordCountMap.get(word) || 0;
+      wordCountMap.set(word, currentCount + 1);
+    });
+
+    // Create an array of WordCount objects
+    const repeatedWords: WordCount[] = Array.from(wordCountMap.entries())
+      .filter(([word, count]) => count > 1)
+      .map(([word, count]) => ({ word, count }));
+
+    return repeatedWords;
+  }
+
+
+  calculateRepeatedWords(sentenceText: string): { word: string; count: number }[] {
+    const wordCountMap = new Map<string, number>();
+    const words = sentenceText.toLowerCase().split(/\s+/);
+
+    // Count occurrences of each word
+    words.forEach((word) => {
+      const currentCount = wordCountMap.get(word) || 0;
+      wordCountMap.set(word, currentCount + 1);
+    });
+
+    // Create an array of objects with word and count properties
+    const repeatedWords: { word: string; count: number }[] = Array.from(wordCountMap.entries())
+      .filter(([word, count]) => count > 1)
+      .map(([word, count]) => ({ word, count }));
+
+    return repeatedWords;
+  }
+
+   calculateUniqueWordsCount(sentenceText: string): number {
+    const wordCountMap = new Map<string, number>();
+    const words = sentenceText.toLowerCase().split(/\s+/);
+
+    // Count occurrences of each word
+    words.forEach((word) => {
+        // If the word is not already counted, increment its count
+        if (!wordCountMap.has(word)) {
+            wordCountMap.set(word, 1);
+        }
+    });
+
+    // Sum up all the counts
+    let totalCount = 0;
+    wordCountMap.forEach((count) => {
+        totalCount += count;
+    });
+
+    return totalCount;
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -350,5 +501,34 @@ applyFiltersAndSort(): void {
   //     return split.includes(word);
   //  }
 
+  sortData(event: any): void {
+    // Assuming 'event' contains sorting information
+    const sort = event as Sort;
 
+    const data = this.sentences.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sentenceDataSource.data = data;
+      return;
+    }
+
+    this.sentenceDataSource.data = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'timeSubmitted':
+          return compare(a.timeSubmitted, b.timeSubmitted, isAsc);
+        case 'sentenceText':
+          return compare(a.sentenceText, b.sentenceText, isAsc);
+        // Add more cases if needed
+        default:
+          return 0;
+      }
+    });
   }
+  }
+
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
+
+

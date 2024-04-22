@@ -76,39 +76,91 @@
   </div> -->
 
   <form style="display: flex" [formGroup]="formControl">
-    <mat-form-field>
+    <mat-form-field class="formfieldspacing">
       <input matInput data-test="sentenceTextField" formControlName="sentenceText">
       <mat-placeholder>Text</mat-placeholder>
     </mat-form-field>
-    <mat-form-field>
-      <input matInput data-test="time" formControlName="timeSubmitted">
+    <mat-form-field class="formfieldspacing">
+      <input matInput data-test="timeSubmitted" formControlName="timeSubmitted">
       <mat-placeholder>Date</mat-placeholder>
     </mat-form-field>
+    <mat-form-field class="formfieldspacing">
+      <input matInput data-test="uniqueWords" formControlName="uniqueWordsFilter">
+      <mat-placeholder>Unique Words (minimum count)</mat-placeholder>
+    </mat-form-field>
+
+
   </form>
 
 <div id="sentenceTable" class="mat-elevation-z8">
-  <table mat-table [dataSource]="sentenceDataSource">
-
+  <table mat-table [dataSource]="sentenceDataSource" matSort (matSortChange)="sortData($event)">
     <!-- Time Submitted Column -->
     <ng-container matColumnDef="timeSubmitted">
-      <th mat-header-cell *matHeaderCellDef> Time Submitted </th>
-      <td mat-cell *matCellDef="let sentences" data-test="timeSubmitted"> {{sentences.timeSubmitted}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="time"> Time Submitted </th>
+      <td mat-cell *matCellDef="let sentences"> {{ sentences.timeSubmitted }} </td>
     </ng-container>
 
     <!-- Sentence Text Column -->
     <ng-container matColumnDef="sentenceText">
-      <th mat-header-cell *matHeaderCellDef> Sentence </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="sentenceText"> Sentence </th>
       <td mat-cell *matCellDef="let sentences" data-test="sentenceText"> {{sentences.sentenceText}} </td>
+    </ng-container>
+
+
+
+<!-- Repeated Words Column -->
+<ng-container matColumnDef="repeatedWords">
+  <th mat-header-cell *matHeaderCellDef> Repeated Words </th>
+  <td mat-cell *matCellDef="let sentence">
+    <ng-container *ngIf="sentence.repeatedWords && sentence.repeatedWords.length > 0">
+      <ng-container *ngFor="let repeatedWord of sentence.repeatedWords">
+        {{ repeatedWord.word }}, {{ repeatedWord.count }};
+        <br />
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="!sentence.repeatedWords || sentence.repeatedWords.length === 0">
+
+    </ng-container>
+  </td>
+</ng-container>
+
+<!-- Unique Words Column -->
+<ng-container matColumnDef="uniqueWords">
+  <th mat-header-cell *matHeaderCellDef> Unique Words </th>
+  <td mat-cell *matCellDef="let sentence">
+    <span *ngIf="sentence.uniqueWordCount !== undefined && sentence.uniqueWordCount > 0">
+     {{ sentence.uniqueWordCount }}
+    </span>
+    <ng-container *ngIf="!sentence.uniqueWordCount || sentence.uniqueWordCount === 0">
+      No unique words found.
+    </ng-container>
+  </td>
+</ng-container>
+
+
+
+
+    <!-- Sentence Length Column-->
+    <ng-container matColumnDef="sentenceLength">
+      <th mat-header-cell *matHeaderCellDef> Sentence Length (words)</th>
+      <td mat-cell *matCellDef="let sentence">
+        {{ calculateWordCount(sentence.sentenceText) }}
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="sentenceTableColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: sentenceTableColumns;"></tr>
   </table>
 
+
   <mat-paginator #sentencePaginator data-test="sentencePaginator" [pageSizeOptions]="[5, 10, 20]"
                  showFirstLastButtons
                  aria-label="Select page of sentences">
   </mat-paginator>
+</div>
+
+<div class="total-sentences">
+  Resulting Sentences: {{ totalSentences }}
 </div>
 
 
@@ -126,4 +178,6 @@
 
   <h1 style="text-align:center">Word Cloud</h1>
 <div id="container"></div>
+
+
 

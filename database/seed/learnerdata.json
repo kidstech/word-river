@@ -7,9 +7,59 @@
         "learnerName": "Carl",
         "wordCounts": {
             "away": 1,
-            "big": 1,
+            "big": 2,
             "find": 1,
-            "i": 1
+            "i": 1,
+            "a": 3,
+            "active": 2,
+            "ant": 1,
+            "at:": 4,
+            "the": 3,
+            "alphabet": 1,
+            "apple": 3,
+            "adventurous": 2,
+            "an": 1,
+            "astonishing": 2,
+            "elephant": 1,
+            "aquarium": 1,
+            "busy": 2,
+            "butterfly": 1,
+            "bakery": 1,
+            "billy": 4,
+            "bounced": 1,
+            "balls": 1,
+            "bounce": 1,
+            "Batman": 2,
+            "brings": 2,
+            "bananas": 1,
+            "Danny": 6,
+            "dances": 6,
+            "Bella" : 3,
+            "balloons": 1,
+            "by": 1,
+            "box": 1,
+            "ate": 1,
+            "mean": 1,
+            "moose": 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
     },
     {
@@ -72,7 +122,8 @@
             "okay": 7,
             "rich": 10,
             "poor": 9,
-            "word": 3
+            "word": 3,
+            "my": 1
         }
     }
 ]

@@ -95,7 +95,7 @@ describe('Mat Grid List Filtering and Sorting', () => {
     cy.get('button[color="primary"]').contains('See Results').click();
 
     // check filtering worked
-    cy.get('.mat-grid-tile').should('have.length', 9); // Should display 9 words
+    cy.get('.mat-grid-tile').should('have.length', 10); // Should display 10 words
 
     // Click to open the mat-select dropdown
     cy.get('[data-test="sortSelect"]').click();
@@ -109,6 +109,8 @@ describe('Mat Grid List Filtering and Sorting', () => {
   });
 });
 });
+
+
 
 //   it('Should have words and their counts', () => {
 //     cy.wait(1000);
@@ -184,61 +186,73 @@ describe('Mat Grid List Filtering and Sorting', () => {
 //   });
 // });
 
-// describe('Sentences Table', () => {
+describe('Sentences Table', () => {
 
-//   before(() => {
-//     cy.task('seed:database');
-//   });
+  before(() => {
+    cy.task('seed:database');
+  });
 
-//   beforeEach(() => {
-//     page.navigateTo();
-//   });
+  beforeEach(() => {
+    page.navigateTo();
+  });
 
-//   it('Should have sentences and their times', () => {
-//     cy.wait(1000);
-//     page.getTimesSubmitted().should('have.length', '5');
-//     page.getSentences().should('have.length', '5');
-//     page.getSentences().first().should('have.text', ' a active ant at the alphabet ');
-//     page.getTimesSubmitted().first().should('have.text', ' 3/8/2022 8:28:10 PM ');
-//   });
+  // it('Should have sentences and their times', () => {
+  //   cy.wait(1000);
+  //   page.getSentences().should('have.length', '6');
+  //   page.getSentences().first().should('have.text', ' a active ant at the alphabet ');
+  //   page.getTimesSubmitted().first().should('have.text', ' 3/8/2022 8:28:10 PM ');
+  // });
 
-//   it('Should paginate the data', () => {
-//     page.getSentences().should('have.length', '5');
-//     page.getTimesSubmitted().should('have.length', '5');
+  // it('Should get sentences and paginate the data', () => {
+  //   cy.wait(1000);
+  //   page.getSentences().should('have.length', '6');
+  //   page.getTimesSubmitted().should('have.length', '6');
+  //   page.getSentences().first().should('have.text', ' a active ant at the alphabet ');
+  //   page.getTimesSubmitted().first().should('have.text', ' 3/8/2022 8:28:10 PM ');
 
-//     page.getSentencePaginator().find('button.mat-paginator-navigation-next.mat-icon-button')
-//     .click();
-
-//     page.getSentences().should('have.length', '1');
-//     page.getTimesSubmitted().should('have.length', '1');
-//     page.getSentences().first().should('have.text', ' My Ti-84 calculator is very handy ');
-//     page.getTimesSubmitted().first().should('have.text', ' 3/9/2022 8:24:10 PM ');
-
-//     page.getSentencePaginator().find('button.mat-paginator-navigation-previous.mat-icon-button')
-//     .click();
-
-//     page.getSentences().should('have.length', '5');
-//     page.getTimesSubmitted().should('have.length', '5');
-
-//     page.getSentencePaginator().find('.mat-select')
-//     .click().get('mat-option').contains('10').click();
-
-//     page.getSentences().should('have.length', '6');
-//     page.getTimesSubmitted().should('have.length', '6');
-//   });
-
-//   it('Should apply filters', () => {
-//     //Testing Sentence date search field
-//     page.getDateFormField().type('3/9/2022');
-//     page.getSentences().should('have.length', '3');
-//     page.getTimesSubmitted().should('have.length', '3');
-//     page.getSentences().first().should('have.text', ' a big box ate my mean moose ');
-//     page.getSentences().eq(1).should('have.text', ' The new Batman movie looks really good ');
-//     page.getSentences().eq(2).should('have.text', ' My Ti-84 calculator is very handy ');
-
-//      //Testing Sentence text search
-//      page.getSentenceFormField().type('Batman');
-//      page.getSentences().first().should('have.text', ' The new Batman movie looks really good ');
-//   });
+  //   page.getSentencePaginator().find('button.mat-paginator-navigation-next.mat-icon-button')
+  //   .click();
 
 
+  //   page.getTimesSubmitted().should('have.length', '1');
+  //   page.getSentences().first().should('have.text', ' My Ti-84 calculator is very handy ');
+  //   page.getTimesSubmitted().first().should('have.text', ' 3/9/2022 8:24:10 PM ');
+
+  //   page.getSentencePaginator().find('button.mat-paginator-navigation-previous.mat-icon-button')
+  //   .click();
+
+  //   page.getSentences().should('have.length', '5');
+  //   page.getTimesSubmitted().should('have.length', '5');
+
+  //   page.getSentencePaginator().find('.mat-select')
+  //   .click().get('mat-option').contains('10').click();
+
+  //   page.getSentences().should('have.length', '6');
+  //   page.getTimesSubmitted().should('have.length', '6');
+  // });
+
+  it('Should get sentences and correctly apply filters', () => {
+
+
+    //Testing Sentence date search field
+    page.getTimesSubmitted().type('3/9/2022');
+    page.getSentences().should('have.length', '1');
+    page.getTimesSubmitted().should('have.length', '1');
+    page.getSentences().first().should('have.text', ' My Ti-84 calculator is very handy ');
+
+
+     //Testing Sentence text search
+     page.getSentenceFormField().type('My Ti-84');
+     page.getSentences().first().should('have.text', ' My Ti-84 calculator is very handy ');
+    // clear fields
+     page.getSentenceFormField().clear();
+     page.getTimesSubmitted().clear();
+
+
+
+  });
+
+
+
+})
+;
