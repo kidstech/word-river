@@ -24,7 +24,7 @@ Download and run the installer from [code.visualstudio.com](https://code.visuals
 
 We recommend enabling the two "Add "Open with Code" action to Windows Explorer..." options:
 
-![vgy.me](https://i.vgy.me/ivqONx.png)
+![image](https://i.vgy.me/ivqONx.png)
 
 ## Install Git
 
