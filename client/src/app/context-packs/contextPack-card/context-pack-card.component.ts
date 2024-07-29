@@ -37,7 +37,6 @@ export class ContextPackCardComponent implements OnInit {
     a.href = url;
     a.download = this.contextPack.name + ' pack' + '.json';
     a.click();
-    console.trace()
   }
 
   openContextPack() {

@@ -28,7 +28,6 @@ export class AddContextPackComponent implements OnInit {
   schema: string;
   wordlists: string[];
 
-  
   addCpValidationMessages = {
     name: [
       { type: 'required', message: 'A name is required' },
@@ -104,7 +103,7 @@ export class AddContextPackComponent implements OnInit {
         this.snackBar.open('Failed to add the context pack', 'OK', {
           duration: 5000,
         });
-      }); 
+    }); 
   }
 
   onJsonFileAdded(event: Event) {
