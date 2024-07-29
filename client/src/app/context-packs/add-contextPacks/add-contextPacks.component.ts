@@ -35,7 +35,7 @@ export class AddContextPackComponent implements OnInit {
       { type: 'existingName', message: 'This name has already been taken' }
     ]
   };
-  downloadURL ='';
+  downloadURL = '';
   uploaded = false;
 
   constructor(
@@ -60,10 +60,12 @@ export class AddContextPackComponent implements OnInit {
     this.createForms();
   }
 
-  submitAddForm() {
-    const {name} = this.addContextPackForm.value;
-    this.cpService.addNewContextPackToUser(this.login.user.authId, {name, icon: this.downloadURL,
-      enabled:this.enabled,wordlists:[]}).subscribe(newID => {
+  submitForm() {
+    const { name } = this.addContextPackForm.value;
+    this.cpService.addNewContextPackToUser(this.login.user.authId, {
+      name, icon: this.downloadURL,
+      enabled: this.enabled, wordlists: []
+    }).subscribe(newID => {
       this.snackBar.open('Added the ' + this.addContextPackForm.value.name + ' context pack successfully', null, {
         duration: 2000,
       });
@@ -76,7 +78,7 @@ export class AddContextPackComponent implements OnInit {
     });
   }
 
-  onImageFileAdded(event) {
+  onFileAdded(event) {
     this.files.onFileAdded(event, () => {
       this.uploading = true;
     }, (link) => {
@@ -92,18 +94,20 @@ export class AddContextPackComponent implements OnInit {
     const enabled = this.importEnabled;
     const wordlists = this.wordlists;
 
-    this.cpService.addNewContextPackToUser(this.login.user.authId, {name, icon,
-      enabled, wordlists}).subscribe(newID => {
-        this.snackBar.open('Added the ' + name + ' context pack successfully', null, {
-          duration: 2000,
-        });
-        this.router.navigate(['/packs/', newID]);
-      }, err => {
-        console.log(err);
-        this.snackBar.open('Failed to add the context pack', 'OK', {
-          duration: 5000,
-        });
-    }); 
+    this.cpService.addNewContextPackToUser(this.login.user.authId, {
+      name, icon,
+      enabled, wordlists
+    }).subscribe(newID => {
+      this.snackBar.open('Added the ' + name + ' context pack successfully', null, {
+        duration: 2000,
+      });
+      this.router.navigate(['/packs/', newID]);
+    }, err => {
+      console.log(err);
+      this.snackBar.open('Failed to add the context pack', 'OK', {
+        duration: 5000,
+      });
+    });
   }
 
   onJsonFileAdded(event: Event) {
@@ -113,7 +117,6 @@ export class AddContextPackComponent implements OnInit {
       reader.onload = (e) => {
         try {
           const json = JSON.parse(reader.result as string);
-          
           this.importEnabled = json.enabled;
           this.icon = json.icon;
           this.name = json.name;
