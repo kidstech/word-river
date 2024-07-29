@@ -12,9 +12,17 @@
   background-color: rgb(60, 60, 60);
   cursor: pointer;
 }
-.cp-card:hover .del {
+.cp-card:hover .del{
   font-size: medium;
   color:rgb(255, 255, 255);
+  opacity: 1;
+}
+
+.cp-card:hover .export{
+  font-size: large;
+  color:rgb(255, 255, 255);
+  height: 30px;
+  width: 100px;
   opacity: 1;
 }
 
@@ -60,7 +68,7 @@
 
 .cp-card {
   width: 350px;
-  height: 152px;
+  height: 200px;
   margin: 0px 20px 20px 0px;
   padding: 20px;
   border-radius: 15px;
@@ -180,7 +188,7 @@
 .del{
   font-size: medium;
   color:rgba(255, 255, 255, 0.438);
-  border-radius: 8px;
+  border-radius: 3px;
   opacity: 0;
   transition-duration: 200ms;
 }
@@ -188,3 +196,33 @@
   font-size: medium;
   color:rgb(255, 255, 255)
 }
+
+.export:hover{
+
+  font-size: large;
+  height: 40px;
+  width: 120px;
+  color: #fff;
+  background-color: #02abad;
+}
+.export{
+  font-size: large;
+  height: 0px;
+  width: 0px;
+  border:none;
+  color: #fff;
+  background-color: #24c1c457;
+  opacity: 0;
+  transition-duration: 200ms;
+}
+
+.export-holder{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
+

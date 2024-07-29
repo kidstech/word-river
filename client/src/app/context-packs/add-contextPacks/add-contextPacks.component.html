@@ -33,9 +33,9 @@
 
             <h3 style="opacity: 0.5; padding-top: 20px;">Optional</h3>
             <div class="icon-container">
-              <input type="file" id="file" (change)="!uploading ? onFileAdded($event) : {}"
+              <input type="file" id="imageFile" (change)="!uploading ? onImageFileAdded($event) : {}"
                 accept=".png,.jpg,.jpeg,.gif" />
-              <label for="file"
+              <label for="imageFile"
                 class="btn-2">{{!uploaded ? (!uploading ? 'Upload Contextpack Image': 'Uploading...') : 'Upload again'}}</label>
 
               <div class="preview-container" *ngIf="uploaded">
@@ -47,21 +47,42 @@
 
               <input *ngIf="!uploaded" class="icon-field" name="icon" [(ngModel)]="downloadURL" matInput
                 placeholder="Enter an icon link">
-
-
             </div>
 
       </mat-card-content>
       <mat-card-actions align="end">
-        <button type="button" color="accent" routerLink="/home" class="auth-btn" id="cancel" data-test="cancelCpButton">
-          Cancel
-        </button>
+        
         <button type="button" color="primary"
           [disabled]="!addContextPackForm.valid && !'.+\.(png|jpg|jpeg|gif)$'.match(downloadURL)" type="submit"
-          class="auth-btn" data-test="addCpButton" (click)="submitForm()">
+          class="auth-btn" data-test="addCpButton" (click)="submitAddForm()">
           ADD CONTEXT PACK
         </button>
       </mat-card-actions>
     </mat-card>
+  </div>
+
+    <div style="width: 100%; height: 40px; justify-content: center; display: flex">
+      <h3 style="width: 10; height: 10; margin: 10px;"> OR </h3>
+    </div>
+
+    <div class="container">
+      <mat-card class="add-cp-card">
+        <h1 class="add-cp-title">Import Context Pack</h1>
+        <div class="json-container">
+          <input type="file" id="jsonFile" (change)="onJsonFileAdded($event)" accept=".json" />
+          <label for="jsonFile"
+              class="btn-2">{{!uploaded ? (!uploading ? 'Upload JSON File': 'Uploading...') : 'Upload again'}}</label>
+            <button type="button" color="primary"
+            
+            class="auth-btn" data-test="addCpButton" (click)="submitImportForm()">
+            ADD CONTEXT PACK
+            </button>
+        </div>
+      </mat-card>
+   </div>
+   <div style="width: 100%; height: 50px; justify-content: center; display: flex;"> 
+    <button type="button" color="accent" routerLink="/home" class="auth-btn" id="cancel" data-test="cancelCpButton">
+      Cancel
+    </button>
   </div>
 </div>

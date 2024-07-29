@@ -22,6 +22,13 @@ export class AddContextPackComponent implements OnInit {
   enabled = true;
   selected = true;
 
+  importEnabled: boolean;
+  icon: string;
+  name: string;
+  schema: string;
+  wordlists: string[];
+
+  
   addCpValidationMessages = {
     name: [
       { type: 'required', message: 'A name is required' },
@@ -54,7 +61,7 @@ export class AddContextPackComponent implements OnInit {
     this.createForms();
   }
 
-  submitForm() {
+  submitAddForm() {
     const {name} = this.addContextPackForm.value;
     this.cpService.addNewContextPackToUser(this.login.user.authId, {name, icon: this.downloadURL,
       enabled:this.enabled,wordlists:[]}).subscribe(newID => {
@@ -70,7 +77,7 @@ export class AddContextPackComponent implements OnInit {
     });
   }
 
-  onFileAdded(event) {
+  onImageFileAdded(event) {
     this.files.onFileAdded(event, () => {
       this.uploading = true;
     }, (link) => {
@@ -78,5 +85,48 @@ export class AddContextPackComponent implements OnInit {
       this.uploaded = true;
       this.uploading = false;
     });
+  }
+
+  submitImportForm() {
+    const name = this.name;
+    const icon = this.icon;
+    const enabled = this.importEnabled;
+    const wordlists = this.wordlists;
+
+    this.cpService.addNewContextPackToUser(this.login.user.authId, {name, icon,
+      enabled, wordlists}).subscribe(newID => {
+        this.snackBar.open('Added the ' + name + ' context pack successfully', null, {
+          duration: 2000,
+        });
+        this.router.navigate(['/packs/', newID]);
+      }, err => {
+        console.log(err);
+        this.snackBar.open('Failed to add the context pack', 'OK', {
+          duration: 5000,
+        });
+      }); 
+  }
+
+  onJsonFileAdded(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const json = JSON.parse(reader.result as string);
+          
+          this.importEnabled = json.enabled;
+          this.icon = json.icon;
+          this.name = json.name;
+          this.wordlists = json.wordlists;
+
+          console.log(this.name);
+          console.log(json);
+        } catch (error) {
+          console.error('Invalid JSON file');
+        }
+      };
+      reader.readAsText(file);
+    }
   }
 }

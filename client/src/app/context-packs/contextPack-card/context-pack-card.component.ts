@@ -27,6 +27,19 @@ export class ContextPackCardComponent implements OnInit {
     this.delete.emit();
   }
 
+  export(event) {
+    event.stopPropagation();
+    const {schema,name,icon,wordlists,enabled} = this.contextPack;
+    const blob = new Blob([JSON.stringify({schema,name,icon,enabled,wordlists})], { type: 'text/csv' });
+    const a = document.createElement('a');
+    document.body.appendChild(a);
+    const url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = this.contextPack.name + ' pack' + '.json';
+    a.click();
+    console.trace()
+  }
+
   openContextPack() {
     this.router.navigate(['packs', this.contextPack._id]);
   }

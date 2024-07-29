@@ -22,7 +22,7 @@
   justify-content: center;
 }
 .add-cp-card {
-  padding: 40px;
+  padding: 30px;
   max-width: 1000px;
   min-width: 700px;
   border-radius: 15px;
@@ -82,9 +82,9 @@
   border: none;
   height: 50px;
   font-size: large;
-  margin-top: 30px;
+  // margin-top: 30px;
   font-family: 'ProductSans';
-  padding: 10px;
+  // padding: 10px;
   cursor: pointer;
   outline: none;
   transition-duration: 200ms;
@@ -102,7 +102,8 @@
 }
 #cancel{
   width:150px;
-  margin-right: 20px;
+  // margin-right: 20px;
+  margin-top: 20px;
 }
 
 .auth-btn:hover {
@@ -202,6 +203,12 @@
     }
   }
 }
+
+[type="file2"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
 .enabled-container{
   display: flex;
   gap: 10px;
@@ -235,4 +242,10 @@
 }
 .unselected{
   background-color: #8080806c;
+}
+
+.json-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

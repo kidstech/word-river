@@ -31,8 +31,14 @@
         <p>wordlists</p>
       </div> -->
     </div>
-
-
+    <div class = "export-holder">
+    <button mat-button class="export"
+    (click)="export($event)"
+    color="accent"
+    >
+    Export
+  </button>
+</div>  
 
   </div>
   <div class="confirmation" *ngIf="deleteClicked">
