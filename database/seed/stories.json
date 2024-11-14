@@ -3,14 +3,40 @@
     "_id": {
       "$oid": "622810d28d1396111ab29d04"
     },
-    "learnerId": 1623445120497,
-    "storyName": "Great Story",
-    "font": null,
-    "timeSubmitted": "7/20/2022 8:28:10 PM",
+    "learnerId": "1731604948791",
+    "storyName": "Pikachu runs around Ash",
+    "timeSubmitted": "11/14/2024 11:25:53 AM",
     "sentences": [
-      "Awesome sentence one",
-      "Awesome sentence two",
-      "Awesome sentence three"
+      "Pikachu runs around Ash",
+      "moo moo screamed Snorlax",
+      "Ash amazes Weedle"
     ]
+    },
+    {
+      "_id": {
+        "$oid": "67363e5bd8907d7ef8f27656"
+      },
+      "learnerId": "1731604948791",
+      "storyName": "Ash amazes Weedle",
+      "timeSubmitted": "11/14/2024 12:15:52 PM",
+      "sentences": [
+        "Ash amazes Weedle",
+        "Pikachu runs around Ash",
+        "amazing Anna runs around Agent Kakapo"
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "67363f5fd8907d7ef8f2765a"
+      },
+      "learnerId": "1731604948791",
+      "storyName": "walking wild",
+      "timeSubmitted": "11/14/2024 12:20:15 PM",
+      "sentences": [
+        "walking wild",
+        "Wally walks wild",
+        "Squirtle sleeps wild",
+        "moo moo screamed Snorlax"
+      ]
     }
-  ]
+]

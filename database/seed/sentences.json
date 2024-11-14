@@ -1,965 +1,394 @@
 [
-{
-  "_id": {
-    "$oid": "622810ba8d1396111ab29c15"
-  },
-  "sentenceId": "06748b8c-d080-4e72-bba1-274438449727",
-  "sentenceText": "a active active ant at the alphabet",
-  "timeSubmitted": "3/8/2022 8:28:10 PM",
-  "learnerId": "1623445120497",
-  "deleted": false,
-  "words": [
-    {
-      "word": "a",
-      "forms": [
-        "a"
-      ]
-    },
-    {
-      "word": "active",
-      "forms": [
-        "active",
-        "a",
-        "a's",
-        "as"
-      ]
-    },
-    {
-      "word": "ant",
-      "forms": [
-        "ant",
-        "ants"
-      ]
-    },
-    {
-      "word": "at",
-      "forms": [
-        "at"
-      ]
-    },
-    {
-      "word": "the",
-      "forms": [
-        "the"
-      ]
-    },
-    {
-      "word": "alphabet",
-      "forms": [
-        "alphabet",
-        "alphabets"
-      ]
-    }
-  ],
-  "selectedWordForms": [
-    "a",
-    "active",
-    "ant",
-    "at",
-    "the",
-    "alphabet"
-  ],
-  "userId": "60c1a985926f9c1edcc3a6e8",
-  "contextPackIds": [
-    "60d7cfa7c02ced09b6750223",
-    "610376992c96b6238f61bc1a",
-    "60beabcbbbaa96763c50ae16"
-  ]
-},
-{
-  "_id": {
-    "$oid": "622810d28d1396111ab29c16"
-  },
-  "sentenceId": "f9261efc-aeae-46d3-947a-a7adc644d89d",
-  "sentenceText": "a big box ate my mean moose",
-  "timeSubmitted": "12/10/2020 8:28:34 PM",
-  "learnerId": "1623445120497",
-  "deleted": false,
-  "words": [
-    {
-      "word": "a",
-      "forms": [
-        "a"
-      ]
-    },
-    {
-      "word": "big",
-      "forms": [
-        "big",
-        "bigger",
-        "biggest"
-      ]
-    },
-    {
-      "word": "box",
-      "forms": [
-        "box",
-        "boxes",
-        "boxful",
-        "boxfuls",
-        "boxlike"
-      ]
-    },
-    {
-      "word": "ate",
-      "forms": [
-        "ate",
-        "eat",
-        "eating"
-      ]
-    },
-    {
-      "word": "my",
-      "forms": [
-        "my"
-      ]
-    },
-    {
-      "word": "mean",
-      "forms": [
-        "mean",
-        "meaner",
-        "meaners",
-        "meaning",
-        "means",
-        "meant"
-      ]
-    },
-    {
-      "word": "moose",
-      "forms": [
-        "moose"
-      ]
-    }
-  ],
-  "selectedWordForms": [
-    "a",
-    "big",
-    "box",
-    "ate",
-    "my",
-    "mean",
-    "moose"
-  ],
-  "userId": "60c1a985926f9c1edcc3a6e8",
-  "contextPackIds": [
-    "610376992c96b6238f61bc1a",
-    "60d4c5dad073aa154239f3d5",
-    "60beabcbbbaa96763c50ae16"
-  ]
-},
-{
-  "_id": {
-    "$oid": "622810ba8d1396111ab29c54"
-  },
-  "sentenceId": "06748b8c-d080-4e72-bba1-274438449746",
-  "sentenceText": "a active ant at the alphabet",
-  "timeSubmitted": "8/28/2021 3:20:10 AM",
-  "learnerId": "1203842390",
-  "deleted": false,
-  "words": [
-    {
-      "word": "a",
-      "forms": [
-        "a"
-      ]
-    },
-    {
-      "word": "active",
-      "forms": [
-        "active",
-        "a",
-        "a's",
-        "as"
-      ]
-    },
-    {
-      "word": "ant",
-      "forms": [
-        "ant",
-        "ants"
-      ]
-    },
-    {
-      "word": "at",
-      "forms": [
-        "at"
-      ]
-    },
-    {
-      "word": "the",
-      "forms": [
-        "the"
-      ]
-    },
-    {
-      "word": "alphabet",
-      "forms": [
-        "alphabet",
-        "alphabets"
-      ]
-    }
-  ],
-  "selectedWordForms": [
-    "a",
-    "active",
-    "ant",
-    "at",
-    "the",
-    "alphabet"
-  ],
-  "userId": "60c1a985926f9c1edcc3a6e8",
-  "contextPackIds": [
-    "60d7cfa7c02ced09b6750223",
-    "610376992c96b6238f61bc1a",
-    "60beabcbbbaa96763c50ae16"
-  ]
-},
-{
-  "_id": {
-    "$oid": "622810d28d1396111ab29c00"
-  },
-  "sentenceId": "f9261efc-aeae-46d3-947a-a7adc644d89f",
-  "sentenceText": "a big box ate my mean moose",
-  "timeSubmitted": "9/9/2022 9:09:34 PM",
-  "learnerId": "1203842390",
-  "deleted": false,
-  "words": [
-    {
-      "word": "a",
-      "forms": [
-        "a"
-      ]
-    },
-    {
-      "word": "big",
-      "forms": [
-        "big",
-        "bigger",
-        "biggest"
-      ]
-    },
-    {
-      "word": "box",
-      "forms": [
-        "box",
-        "boxes",
-        "boxful",
-        "boxfuls",
-        "boxlike"
-      ]
-    },
-    {
-      "word": "ate",
-      "forms": [
-        "ate",
-        "eat",
-        "eating"
-      ]
-    },
-    {
-      "word": "my",
-      "forms": [
-        "my"
-      ]
-    },
-    {
-      "word": "mean",
-      "forms": [
-        "mean",
-        "meaner",
-        "meaners",
-        "meaning",
-        "means",
-        "meant"
-      ]
-    },
-    {
-      "word": "moose",
-      "forms": [
-        "moose"
-      ]
-    }
-  ],
-  "selectedWordForms": [
-    "a",
-    "big",
-    "box",
-    "ate",
-    "my",
-    "mean",
-    "moose"
-  ],
-  "userId": "60c1a985926f9c1edcc3a6e8",
-  "contextPackIds": [
-    "610376992c96b6238f61bc1a",
-    "60d4c5dad073aa154239f3d5",
-    "60beabcbbbaa96763c50ae16"
-  ]
-},
-{
-  "_id": {
-    "$oid": "622810ba8d1396111ab29c44"
-  },
-  "sentenceId": "06748b8c-d080-4e72-bba1-274438449721",
-  "sentenceText": "wow cypress testing is really cool",
-  "timeSubmitted": "7/20/2022 7:21:11 AM",
-  "learnerId": "1203842390",
-  "deleted": false,
-  "words": [
-    {
-      "word": "wow",
-      "forms": [
-        "wow",
-        "wowzers"
-      ]
-    },
-    {
-      "word": "cypress",
-      "forms": [
-        "cypress"
-      ]
-    },
-    {
-      "word": "testing",
-      "forms": [
-        "test",
-        "tests",
-        "testsing"
-      ]
-    },
-    {
-      "word": "is",
-      "forms": [
-        "is"
-      ]
-    },
-    {
-      "word": "really",
-      "forms": [
-        "really"
-      ]
-    },
-    {
-      "word": "cool",
-      "forms": [
-        "cool"
-      ]
-    }
-  ],
-  "selectedWordForms": [
-    "wow",
-    "cypress",
-    "testing",
-    "is",
-    "really",
-    "cool"
-  ],
-  "userId": "60c1a985926f9c1edcc3a6e8",
-  "contextPackIds": [
-    "60d7cfa7c02ced09b6750223",
-    "610376992c96b6238f61bc1a",
-    "60beabcbbbaa96763c50ae16"
-  ]
-},
-{
-  "_id": {
-    "$oid": "622810ba8d1396111ab29c33"
-  },
-  "sentenceId": "06748b8c-d080-4e72-bba1-274438449722",
-  "sentenceText": "I was born and raised in Morris",
-  "timeSubmitted": "3/3/2023 3:30:30 PM",
-  "learnerId": "1203842390",
-  "deleted": false,
-  "words": [
-    {
-      "word": "I",
-      "forms": [
-        "I",
-        "I"
-      ]
-    },
-    {
-      "word": "was",
-      "forms": [
-        "was"
-      ]
-    },
-    {
-      "word": "born",
-      "forms": [
-        "test",
-        "tests",
-        "testsing"
-      ]
-    },
-    {
-      "word": "is",
-      "forms": [
-        "is"
-      ]
-    },
-    {
-      "word": "really",
-      "forms": [
-        "really"
-      ]
-    },
-    {
-      "word": "cool",
-      "forms": [
-        "cool"
-      ]
-    }
-  ],
-  "selectedWordForms": [
-    "wow",
-    "cypress",
-    "testing",
-    "is",
-    "really",
-    "cool"
-  ],
-  "userId": "60c1a985926f9c1edcc3a6e8",
-  "contextPackIds": [
-    "60d7cfa7c02ced09b6750223",
-    "610376992c96b6238f61bc1a",
-    "60beabcbbbaa96763c50ae16"
-  ]
-},
-{
-  "_id": {
-    "$oid": "622810ba8d1396111ab29c22"
-  },
-  "sentenceId": "06748b8c-d080-4e72-bba1-274438449722",
-  "sentenceText": "The new Batman movie looks really good",
-  "timeSubmitted": "3/2/2022 2:21:13 PM",
-  "learnerId": "1203842390",
-  "deleted": false,
-  "words": [
-    {
-      "word": "I",
-      "forms": [
-        "I",
-        "I"
-      ]
-    },
-    {
-      "word": "was",
-      "forms": [
-        "was"
-      ]
-    },
-    {
-      "word": "born",
-      "forms": [
-        "test",
-        "tests",
-        "testsing"
-      ]
-    },
-    {
-      "word": "is",
-      "forms": [
-        "is"
-      ]
-    },
-    {
-      "word": "really",
-      "forms": [
-        "really"
-      ]
-    },
-    {
-      "word": "cool",
-      "forms": [
-        "cool"
-      ]
-    }
-  ],
-  "selectedWordForms": [
-    "wow",
-    "cypress",
-    "testing",
-    "is",
-    "really",
-    "cool"
-  ],
-  "userId": "60c1a985926f9c1edcc3a6e8",
-  "contextPackIds": [
-    "60d7cfa7c02ced09b6750223",
-    "610376992c96b6238f61bc1a",
-    "60beabcbbbaa96763c50ae16"
-  ]
-},
-{
-  "_id": {
-    "$oid": "622810ba8d1396111ab29c11"
-  },
-  "sentenceId": "06748b8c-d080-4e72-bba1-274438449722",
-  "sentenceText": "My Ti-84 calculator is very handy",
-  "timeSubmitted": "3/9/2022 8:24:10 PM",
-  "learnerId": "1203842390",
-  "deleted": false,
-  "words": [
-    {
-      "word": "I",
-      "forms": [
-        "I",
-        "I"
-      ]
-    },
-    {
-      "word": "was",
-      "forms": [
-        "was"
-      ]
-    },
-    {
-      "word": "born",
-      "forms": [
-        "test",
-        "tests",
-        "testsing"
-      ]
-    },
-    {
-      "word": "is",
-      "forms": [
-        "is"
-      ]
-    },
-    {
-      "word": "really",
-      "forms": [
-        "really"
-      ]
-    },
-    {
-      "word": "cool",
-      "forms": [
-        "cool"
-      ]
-    }
-  ],
-  "selectedWordForms": [
-    "wow",
-    "cypress",
-    "testing",
-    "is",
-    "really",
-    "cool"
-  ],
-  "userId": "60c1a985926f9c1edcc3a6e8",
-  "contextPackIds": [
-    "60d7cfa7c02ced09b6750223",
-    "610376992c96b6238f61bc1a",
-    "60beabcbbbaa96763c50ae16"
-  ]
-},
-
-{
-  "_id": {
-  "$oid": "622810ba8d1396111ab29c16"
-  },
-  "sentenceId": "17d88f6e-9f24-49a7-bd3f-e589bfc3f371",
-  "sentenceText": "apple adventurous adventurous apple at apple",
-  "timeSubmitted": "4/8/2022 7:35:45 PM",
-  "learnerId": "1623445120497",
-  "deleted": false,
-  "words": [
-  {
-  "word": "adventurous",
-  "forms": [
-  "adventurous",
-  "adventure",
-  "adventures",
-  "adventuring"
-  ]
-  },
-  {
-  "word": "apple",
-  "forms": [
-  "apple",
-  "apples"
-  ]
-  },
-  {
-  "word": "at",
-  "forms": [
-  "at"
-  ]
-  }
-  ],
-  "selectedWordForms": [
-  "an",
-  "adventurous",
-  "apple",
-  "at",
-  "the",
-  "amusement"
-  ],
-  "userId": "60c1a985926f9c1edcc3a6e8",
-  "contextPackIds": [
-  "60d7cfa7c02ced09b6750223",
-  "610376992c96b6238f61bc1a",
-  "60beabcbbbaa96763c50ae16"
-  ]
-  },
-
-  {
-  "_id": {
-  "$oid": "622810ba8d1396111ab29c17"
-  },
-  "sentenceId": "b94b9075-61b3-4a6d-a135-53ad6474f7c1",
-  "sentenceText": "an astonishing astonishing elephant at the aquarium",
-  "timeSubmitted": "1/10/2021 2:32:22 PM",
-  "learnerId": "1623445120497",
-  "deleted": false,
-  "words": [
-  {
-  "word": "an",
-  "forms": [
-  "an"
-  ]
-  },
-  {
-  "word": "astonishing",
-  "forms": [
-  "astonishing",
-  "astonish",
-  "astonished",
-  "astonishingly"
-  ]
-  },
-  {
-  "word": "elephant",
-  "forms": [
-  "elephant",
-  "elephants"
-  ]
-  },
-  {
-  "word": "at",
-  "forms": [
-  "at"
-  ]
-  },
-  {
-  "word": "the",
-  "forms": [
-  "the"
-  ]
-  },
-  {
-  "word": "aquarium",
-  "forms": [
-  "aquarium",
-  "aquariums"
-  ]
-  }
-  ],
-  "selectedWordForms": [
-  "an",
-  "astonishing",
-  "elephant",
-  "at",
-  "the",
-  "aquarium"
-  ],
-  "userId": "60c1a985926f9c1edcc3a6e8",
-  "contextPackIds": [
-  "60d7cfa7c02ced09b6750223",
-  "610376992c96b6238f61bc1a",
-  "60beabcbbbaa96763c50ae16"
-  ]
-  },
-
-  {
-  "_id": {
-  "$oid": "622810ba8d1396111ab29c18"
-  },
-  "sentenceId": "cfbaf1b9-01e9-4c66-8f55-85679816f828",
-  "sentenceText": "a busy busy butterfly at the bakery",
-  "timeSubmitted": "12/18/2022 9:21:53 PM",
-  "learnerId": "1623445120497",
-  "deleted": false,
-  "words": [
-  {
-  "word": "a",
-  "forms": [
-  "a"
-  ]
-  },
-  {
-  "word": "busy",
-  "forms": [
-  "busy",
-  "busier",
-  "busiest",
-  "busily"
-  ]
-  },
-  {
-  "word": "butterfly",
-  "forms": [
-  "butterfly",
-  "butterflies"
-  ]
-  },
-  {
-  "word": "at",
-  "forms": [
-  "at"
-  ]
-  },
-  {
-  "word": "the",
-  "forms": [
-  "the"
-  ]
-  },
-  {
-  "word": "bakery",
-  "forms": [
-  "bakery",
-  "bakeries"
-  ]
-  }
-  ],
-  "selectedWordForms": [
-  "a",
-  "busy",
-  "butterfly",
-  "at",
-  "the",
-  "bakery"
-  ],
-  "userId": "60c1a985926f9c1edcc3a6e8",
-  "contextPackIds": [
-  "60d7cfa7c02ced09b6750223",
-  "610376992c96b6238f61bc1a",
-  "60beabcbbbaa96763c50ae16"
-  ]
-  },
   {
     "_id": {
-      "$oid": "622810ba8d1396111ab29c19"
+      "$oid": "673632a391923772f938b7ea"
     },
-    "sentenceId": "e7c13b9e-18f8-4dbd-bb10-20be2f0a0174",
-    "sentenceText": "Billy bounced billy billy balls billy bounce",
-    "timeSubmitted": "2/14/2022 2:13:12 PM",
-    "learnerId": "1623445120497",
-    "deleted": false,
+    "sentenceId": "9c85046b-7df3-468d-a13b-dab019ee978f",
+    "sentenceText": "moo moo screamed Snorlax",
+    "timeSubmitted": "11/14/2024 11:25:53 AM",
+    "learnerId": "1731604948791",
     "words": [
       {
-        "word": "Billy",
+        "word": "moo",
         "forms": [
-          "Billy"
-
+          "moo"
         ]
       },
       {
-        "word": "bounced",
+        "word": "scream",
         "forms": [
-          "bounced",
-          "bounce",
-          "bounces",
-          "bouncing"
+          "scream",
+          "screams",
+          "screaming",
+          "screamed"
         ]
       },
       {
-        "word": "balls",
+        "word": "Snorlax",
         "forms": [
-          "balls"
+          "Snorlax"
         ]
       }
     ],
     "selectedWordForms": [
-      "Billy",
-      "bounced",
-      "balls"
+      "moo",
+      "moo",
+      "screamed",
+      "Snorlax"
     ],
     "userId": "60c1a985926f9c1edcc3a6e8",
-    "contextPackIds": [
-      "60d7cfa7c02ced09b6750223",
-      "610376992c96b6238f61bc1a",
-      "60beabcbbbaa96763c50ae16"
-    ]
+    "contextPackIds": [],
+    "deleted": false
   },
-
   {
     "_id": {
-      "$oid": "622810ba8d1396111ab29c20"
+      "$oid": "6736356091923772f938b7eb"
     },
-    "sentenceId": "3f34b146-86a5-4b82-b196-810c66c61b3a",
-    "sentenceText": "Bella brings bella balloons by bella",
-    "timeSubmitted": "6/8/2021 7:10:35 PM",
-    "learnerId": "1623445120497",
-    "deleted": false,
+    "sentenceId": "e8accd02-adf1-47e1-a7ed-f8f5d8e6589a",
+    "sentenceText": "Pikachu runs around Ash",
+    "timeSubmitted": "11/14/2024 11:37:35 AM",
+    "learnerId": "1731604948791",
     "words": [
       {
-        "word": "Bella",
+        "word": "Pikachu",
         "forms": [
-          "Bella"
+          "Pikachu"
         ]
       },
       {
-        "word": "brings",
+        "word": "run",
         "forms": [
-          "brings",
-          "bring",
-          "brought",
-          "bringing"
+          "run",
+          "ran",
+          "running",
+          "runs"
         ]
       },
       {
-        "word": "balloons",
+        "word": "around",
         "forms": [
-          "balloons"
+          "around"
         ]
       },
       {
-        "word": "by",
+        "word": "Ash",
         "forms": [
-          "by"
+          "Ash"
         ]
       }
     ],
     "selectedWordForms": [
-      "Bella",
-      "brings",
-      "balloons",
-      "by"
+      "Pikachu",
+      "runs",
+      "around",
+      "Ash"
     ],
     "userId": "60c1a985926f9c1edcc3a6e8",
-    "contextPackIds": [
-      "60d7cfa7c02ced09b6750223",
-      "610376992c96b6238f61bc1a",
-      "60beabcbbbaa96763c50ae16"
-    ]
+    "contextPackIds": [],
+    "deleted": false
   },
-
   {
     "_id": {
-      "$oid": "622810ba8d1396111ab29c21"
+      "$oid": "6736367a91923772f938b7ec"
     },
-    "sentenceId": "88db8e96-44f4-49b5-9cc2-885097c0e3d9",
-    "sentenceText": "Batman brings batman bananas",
-    "timeSubmitted": "5/5/2022 5:55:59 PM",
-    "learnerId": "1623445120497",
-    "deleted": false,
+    "sentenceId": "d9cbdb01-9e04-427e-90f3-db683e9b688e",
+    "sentenceText": "Ash amazes Weedle",
+    "timeSubmitted": "11/14/2024 11:42:17 AM",
+    "learnerId": "1731604948791",
     "words": [
       {
-        "word": "Batman",
+        "word": "Ash",
         "forms": [
-          "Batman"
+          "Ash"
         ]
       },
       {
-        "word": "brings",
+        "word": "amaze",
         "forms": [
-          "brings",
-          "bring",
-          "brought",
-          "bringing"
+          "amaze",
+          "amazed",
+          "amazes",
+          "amazing"
         ]
       },
       {
-        "word": "bananas",
+        "word": "Weedle",
         "forms": [
-          "bananas"
+          "Weedle"
         ]
       }
     ],
     "selectedWordForms": [
-      "Batman",
-      "brings",
-      "bananas"
+      "Ash",
+      "amazes",
+      "Weedle"
     ],
     "userId": "60c1a985926f9c1edcc3a6e8",
-    "contextPackIds": [
-      "60d7cfa7c02ced09b6750223",
-      "610376992c96b6238f61bc1a",
-      "60beabcbbbaa96763c50ae16"
-    ]
+    "contextPackIds": [],
+    "deleted": false
   },
-
-
-
   {
     "_id": {
-      "$oid": "622810ba8d1396111ab29c23"
+      "$oid": "6736397491923772f938b7ee"
     },
-    "sentenceId": "4e3fc723-72fe-4f3d-9185-9a2a3b534c77",
-    "sentenceText": "Danny dances danny dances danny dances",
-    "timeSubmitted": "3/9/2022 9:33:45 PM",
-    "learnerId": "1623445120497",
-    "deleted": false,
+    "sentenceId": "d6d65962-f2af-4763-b392-d79d137b7daa",
+    "sentenceText": "amazing Anna runs around Agent Kakapo",
+    "timeSubmitted": "11/14/2024 11:54:59 AM",
+    "learnerId": "1731604948791",
     "words": [
       {
-        "word": "Danny",
+        "word": "amazing",
         "forms": [
-          "Danny"
+          "amazing"
         ]
       },
       {
-        "word": "dances",
+        "word": "Anna",
         "forms": [
-          "dances",
-          "dance",
-          "danced",
-          "dancing"
+          "Anna",
+          "Anna's"
+        ]
+      },
+      {
+        "word": "run",
+        "forms": [
+          "run",
+          "ran",
+          "running",
+          "runs"
+        ]
+      },
+      {
+        "word": "around",
+        "forms": [
+          "around"
+        ]
+      },
+      {
+        "word": "Agent Kakapo",
+        "forms": [
+          "Agent Kakapo"
         ]
       }
     ],
     "selectedWordForms": [
-      "Danny",
-      "dances"
+      "amazing",
+      "Anna",
+      "runs",
+      "around",
+      "Agent Kakapo"
     ],
     "userId": "60c1a985926f9c1edcc3a6e8",
-    "contextPackIds": [
-      "60d7cfa7c02ced09b6750223",
-      "610376992c96b6238f61bc1a",
-      "60beabcbbbaa96763c50ae16"
-    ]
+    "contextPackIds": [],
+    "deleted": false
   },
-
   {
     "_id": {
-      "$oid": "612810ba8d1396111ab29c29"
+      "$oid": "67364620a8949536c5c54990"
     },
-    "sentenceId": "4e3fc723-72fe-4f3d-9185-9a2a3b534c78",
-    "sentenceText": "Danny dances danny dances danny dances",
-    "timeSubmitted": "3/8/2022 9:33:45 PM",
-    "learnerId": "1623445120497",
-    "deleted": false,
+    "sentenceId": "9bdafdc1-6d8a-4716-9b10-7fef011e64a6",
+    "sentenceText": "amazing avengers run around",
+    "timeSubmitted": "11/14/2024 12:49:04 PM",
+    "learnerId": "1731604948791",
     "words": [
       {
-        "word": "Danny",
+        "word": "amazing",
         "forms": [
-          "Danny"
+          "amazing"
         ]
       },
       {
-        "word": "dances",
+        "word": "avengers",
         "forms": [
-          "dances",
-          "dance",
-          "danced",
-          "dancing"
+          "avengers",
+          "avenger"
+        ]
+      },
+      {
+        "word": "run",
+        "forms": [
+          "run",
+          "ran",
+          "running",
+          "runs"
+        ]
+      },
+      {
+        "word": "around",
+        "forms": [
+          "around"
         ]
       }
     ],
     "selectedWordForms": [
-      "Danny",
-      "dances"
+      "amazing",
+      "avengers",
+      "run",
+      "around"
     ],
     "userId": "60c1a985926f9c1edcc3a6e8",
-    "contextPackIds": [
-      "60d7cfa7c02ced09b6750223",
-      "610376992c96b6238f61bc1a",
-      "60beabcbbbaa96763c50ae16"
-    ]
+    "contextPackIds": [],
+    "deleted": false
+  },
+  {
+    "_id": {
+      "$oid": "6736468aa8949536c5c54991"
+    },
+    "sentenceId": "f35dfc82-361d-46ac-ad68-ee797e20bbf0",
+    "sentenceText": "amazing amaze amazing amaze amazing amaze",
+    "timeSubmitted": "11/14/2024 12:50:50 PM",
+    "learnerId": "1731604948791",
+    "words": [
+      {
+        "word": "amazing",
+        "forms": [
+          "amazing"
+        ]
+      },
+      {
+        "word": "amaze",
+        "forms": [
+          "amaze",
+          "amazed",
+          "amazes",
+          "amazing"
+        ]
+      }
+    ],
+    "selectedWordForms": [
+      "amazing",
+      "amaze",
+      "amazing",
+      "amaze",
+      "amazing",
+      "amaze"
+    ],
+    "userId": "60c1a985926f9c1edcc3a6e8",
+    "contextPackIds": [],
+    "deleted": false
+  },
+  {
+    "_id": {
+      "$oid": "673644a6a8949536c5c5498c"
+    },
+    "sentenceId": "dc62322b-5d93-42c3-aac0-83044a45c42c",
+    "sentenceText": "Ash betrays Bingo",
+    "timeSubmitted": "11/14/2024 12:42:46 PM",
+    "learnerId": "1731609706390",
+    "words": [
+      {
+        "word": "Ash",
+        "forms": [
+          "Ash"
+        ]
+      },
+      {
+        "word": "betray",
+        "forms": [
+          "betray",
+          "betrayed",
+          "betraying",
+          "betrays"
+        ]
+      },
+      {
+        "word": "Bingo",
+        "forms": [
+          "Bingo",
+          "Bingo's"
+        ]
+      }
+    ],
+    "selectedWordForms": [
+      "Ash",
+      "betrays",
+      "Bingo"
+    ],
+    "userId": "60c1a985926f9c1edcc3a6e8",
+    "contextPackIds": [],
+    "deleted": false
+  },
+  {
+    "_id": {
+      "$oid": "673644d3a8949536c5c5498d"
+    },
+    "sentenceId": "249f9436-eb90-4768-93e1-2e2d55b6d3d6",
+    "sentenceText": "Snorlax saves Bingo",
+    "timeSubmitted": "11/14/2024 12:43:30 PM",
+    "learnerId": "1731609706390",
+    "words": [
+      {
+        "word": "Snorlax",
+        "forms": [
+          "Snorlax"
+        ]
+      },
+      {
+        "word": "save",
+        "forms": [
+          "save",
+          "saved",
+          "saves",
+          "saving"
+        ]
+      },
+      {
+        "word": "Bingo",
+        "forms": [
+          "Bingo",
+          "Bingo's"
+        ]
+      }
+    ],
+    "selectedWordForms": [
+      "Snorlax",
+      "saves",
+      "Bingo"
+    ],
+    "userId": "60c1a985926f9c1edcc3a6e8",
+    "contextPackIds": [],
+    "deleted": false
+  },
+  {
+    "_id": {
+      "$oid": "673644eba8949536c5c5498e"
+    },
+    "sentenceId": "438688ad-1823-4e76-8cb6-a1a4003c10c6",
+    "sentenceText": "Bluey bites Ash",
+    "timeSubmitted": "11/14/2024 12:43:51 PM",
+    "learnerId": "1731609706390",
+    "words": [
+      {
+        "word": "Bluey",
+        "forms": [
+          "Bluey",
+          "Bluey's"
+        ]
+      },
+      {
+        "word": "bite",
+        "forms": [
+          "bite",
+          "bit",
+          "bites",
+          "biting",
+          "bitten"
+        ]
+      },
+      {
+        "word": "Ash",
+        "forms": [
+          "Ash"
+        ]
+      }
+    ],
+    "selectedWordForms": [
+      "Bluey",
+      "bites",
+      "Ash"
+    ],
+    "userId": "60c1a985926f9c1edcc3a6e8",
+    "contextPackIds": [],
+    "deleted": false
   }
 ]

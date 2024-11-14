@@ -1,129 +1,76 @@
 [
-    {
-        "_id": {
-            "$oid": "60c6752204d2066d29d73a20"
-        },
-        "learnerId": "1623445120497",
-        "learnerName": "Carl",
-        "wordCounts": {
-            "away": 1,
-            "big": 2,
-            "find": 1,
-            "i": 1,
-            "a": 3,
-            "active": 2,
-            "ant": 1,
-            "at:": 4,
-            "the": 3,
-            "alphabet": 1,
-            "apple": 3,
-            "adventurous": 2,
-            "an": 1,
-            "astonishing": 2,
-            "elephant": 1,
-            "aquarium": 1,
-            "busy": 2,
-            "butterfly": 1,
-            "bakery": 1,
-            "billy": 4,
-            "bounced": 1,
-            "balls": 1,
-            "bounce": 1,
-            "Batman": 2,
-            "brings": 2,
-            "bananas": 1,
-            "Danny": 6,
-            "dances": 6,
-            "Bella" : 3,
-            "balloons": 1,
-            "by": 1,
-            "box": 1,
-            "ate": 1,
-            "mean": 1,
-            "moose": 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        }
+  {
+    "_id": {
+      "$oid": "673631ee91923772f938b7e9"
     },
-    {
-      "_id": {
-          "$oid": "60c6752204d2066d29d73a33"
-      },
-      "learnerId": "1203842390",
-      "learnerName": "Johnson Doe",
-      "wordCounts": {
-          "away": 1,
-          "big": 1,
-          "find": 1,
-          "i": 1,
-          "apple": 2,
-          "banana": 3,
-          "abby": 5,
-          "awesome": 4
-      }
-  },
-    {
-        "_id": {
-            "$oid": "60c6752204d2066d29d73a21"
-        },
-        "learnerId": "1623445108990",
-        "learnerName": "Bob",
-        "wordCounts": {
-            "for": 1,
-            "funny": 1,
-            "go": 1,
-            "it": 1,
-            "can": 1,
-            "blue": 1,
-            "big": 3,
-            "best": 5,
-            "not": 7,
-            "here": 2,
-            "always": 9,
-            "test": 3,
-            "data": 6,
-            "random": 8,
-            "so": 4,
-            "know": 1,
-            "now": 10,
-            "say": 8,
-            "what": 2,
-            "ok": 6,
-            "no": 5,
-            "yes": 1,
-            "huh": 4,
-            "lettuce": 7,
-            "bacon": 11,
-            "such": 3,
-            "right": 9,
-            "dot": 5,
-            "bot": 2,
-            "cot": 8,
-            "pop": 6,
-            "top": 4,
-            "nope": 1,
-            "okay": 7,
-            "rich": 10,
-            "poor": 9,
-            "word": 3,
-            "my": 1
-        }
+    "learnerId": "1731604948791",
+    "learnerName": "Kristin",
+    "wordCounts": {
+      "around": 6,
+      "ash": 3,
+      "amaze": 5,
+      "barbie": 2,
+      "battle": 1,
+      "anna": 2,
+      "monkey": 1,
+      "moo": 3,
+      "scream": 2,
+      "screamed": 2,
+      "snorlax": 2,
+      "Snorlax": 1,
+      "identity": 3,
+      "pikachu": 1,
+      "run": 6,
+      "ran": 1,
+      "runs": 11,
+      "Pikachu": 2,
+      "Ash": 4,
+      "amazes": 3,
+      "Weedle": 2,
+      "amazing": 9,
+      "agent kakapo": 1,
+      "Anna": 1,
+      "Agent Kakapo": 1,
+      "drive": 1,
+      "drives": 3,
+      "red": 3,
+      "recycling truck": 3,
+      "Barbie": 2,
+      "Rocky": 1,
+      "fast": 2,
+      "Flareon": 1,
+      "slow": 2,
+      "Rusty": 1,
+      "avengers": 1
+    },
+    "sessionTimes": {
+      "11/14/2024 11:22:55 AM": "",
+      "11/14/2024 11:54:15 AM": "",
+      "11/14/2024 12:26:02 PM": "00:16:32",
+      "11/14/2024 12:46:44 PM": "00:26:50"
     }
+  },
+  {
+    "_id": {
+      "$oid": "67364492a8949536c5c5498b"
+    },
+    "learnerId": "1731609706390",
+    "learnerName": "Josie",
+    "wordCounts": {
+      "betray": 2,
+      "betrays": 2,
+      "Ash": 2,
+      "Bingo": 2,
+      "saved": 1,
+      "saves": 2,
+      "Snorlax": 1,
+      "bite": 1,
+      "bites": 2,
+      "ash": 1,
+      "Bluey": 1
+    },
+    "sessionTimes": {
+      "11/14/2024 12:42:26 PM": "00:20:50"
+    }
+  }
 ]
