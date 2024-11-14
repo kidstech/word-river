@@ -73,10 +73,13 @@ public class SentenceController {
 
       // Get the most recent submitted story
       String mostRecentTime = storyController.getRecentStory(learnerId);
+      System.out.println(mostRecentTime.getClass());
+      System.out.println("most recent time was:" + mostRecentTime);
 
       // This is the date format that we are using for both word river and story builder
-      SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+      SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
       Date mostRecentStorySubmissionDate = dateFormat.parse(mostRecentTime);
+      System.out.println("Most recent story save:" + mostRecentStorySubmissionDate);
 
       // Find all the sentences created by the learner
       ArrayList<Sentence> sentences = new ArrayList<Sentence>();
@@ -85,6 +88,7 @@ public class SentenceController {
 
       for(Sentence sentence: sentenceIterator) {
         Date sentenceDate = dateFormat.parse(sentence.timeSubmitted);
+        System.out.println("This sentence is from:" + sentenceDate);
 
         // Check to see if the sentence was created after the most recently submitted story and if it hasn't been deleted by the user
         if(sentenceDate.after(mostRecentStorySubmissionDate) && !sentence.deleted) {

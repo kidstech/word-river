@@ -21,7 +21,7 @@ public class StoryController {
         storyCollection.insert(story);
         ctx.status(201);
         System.out.println("Story has been posted!");
-        System.out.println(story.font);
+        System.out.println("Story font is:" + story.font);
     }
 
     public void getLearnerStories(Context ctx) {
@@ -54,8 +54,8 @@ public class StoryController {
       Story recentStory = storyCollection.find(eq("learnerId", learnerId)).sort(new Document("_id", -1)).first();
       System.out.println(recentStory);
       if(recentStory == null) {
-        //This is necessary in the instance where the learner needs to get their sentences but has not constructed their first story
-        return "oops";
+        //oops This is necessary in the instance where the learner needs to get their sentences but has not constructed their first story
+        return "11/13/2024 01:00:00 PM";
       }
       //System.out.println("The most recent time was actually found " + recentStory.timeSubmitted);
       return recentStory.timeSubmitted;
